@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { PRODUCTS, CATEGORIES, ProductItem } from '../data/catalogue';
 import { Search, Plus, Minus, FileDown, LayoutGrid, List, Info, Sparkles, Snowflake, ArrowRight } from 'lucide-react';
 import { ProductSpecModal } from '../components/ProductSpecModal';
+import { assetUrl } from '../utils/assetUrl';
 
 interface ProductsPageProps {
   onAddToQuote: (product: ProductItem) => void;
@@ -110,7 +111,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 
           <div className="flex flex-wrap items-center gap-3">
             <a
-              href="/images/brochure.jpg"
+              href={assetUrl('/images/brochure.jpg')}
               download="RAIS-Agencies-Commercial-Brochure.jpg"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#0f1c3f] border border-cyan-400/30 hover:border-cyan-400 text-xs font-bold text-cyan-200 hover:text-white transition-all shadow-lg backdrop-blur-md"
             >
@@ -301,7 +302,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                   {/* Photo Container */}
                   <div className="relative overflow-hidden aspect-[4/3] bg-[#081026]">
                     <img
-                      src={product.image || '/images/products/chicken_momos.jpg'}
+                      src={product.image || assetUrl('/images/products/chicken_momos.jpg')}
                       alt={product.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       loading="lazy"

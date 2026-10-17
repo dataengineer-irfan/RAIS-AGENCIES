@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, Utensils, Pizza, Coffee, Store, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { assetUrl } from '../utils/assetUrl';
 
 interface WhoWeServeProps {
   onOpenQuote: () => void;
@@ -15,7 +16,7 @@ export const WhoWeServe: React.FC<WhoWeServeProps> = ({ onOpenQuote }) => {
       title: 'Quick-Service & Burger Hubs',
       subtitle: 'QSRs · Food Trucks · Fast-Food Counters',
       icon: Utensils,
-      image: '/images/burger_boxes.jpg',
+      image: assetUrl('/images/burger_boxes.jpg'),
       tag: 'Fryer & Griddle Staples',
       description:
         'Pre-portioned commercial frozen fries with high heat retention, paired with seasoned poultry patties, premium condiments, and heavy-gauge corrugated kraft clamshells. Standardises kitchen assembly during high-turnover peak hours.',
@@ -32,7 +33,7 @@ export const WhoWeServe: React.FC<WhoWeServeProps> = ({ onOpenQuote }) => {
       title: 'Pizzerias & Italian Bistros',
       subtitle: 'Deck Oven & Conveyor Pizzerias',
       icon: Pizza,
-      image: '/images/mozzarella_cheese.jpg',
+      image: assetUrl('/images/mozzarella_cheese.jpg'),
       tag: 'High-Stretch Pizza Melt',
       description:
         'High-performance mozzarella with uniform shred melt and stringy stretch. Paired with rich herb-infused pizza pasta sauces and durable corrugated takeaway boxes to protect crust integrity during transit.',
@@ -49,7 +50,7 @@ export const WhoWeServe: React.FC<WhoWeServeProps> = ({ onOpenQuote }) => {
       title: 'Cafés & Beverage Lounges',
       subtitle: 'Beverage Bars · Tea Lounges · Bakeries',
       icon: Coffee,
-      image: '/images/products/mojito_lime_mint.jpg',
+      image: assetUrl('/images/products/mojito_lime_mint.jpg'),
       tag: 'Bar Syrups & Finger Foods',
       description:
         'Concentrated mocktail syrup bases for speed-pour bar service, paired with quick-fry cheese appetisers and pliable commercial tortilla wraps for toasted paninis, rolls, and shawarmas.',
@@ -66,7 +67,7 @@ export const WhoWeServe: React.FC<WhoWeServeProps> = ({ onOpenQuote }) => {
       title: 'Cloud Kitchens & Caterers',
       subtitle: 'Multi-Brand Delivery & Banquets',
       icon: Store,
-      image: '/images/chicken_nuggets.jpg',
+      image: assetUrl('/images/chicken_nuggets.jpg'),
       tag: 'Bulk Staging & High-Volume IQF',
       description:
         'Institutional volume cases for centralized preparation. Predictable portion costs, single-vendor consolidated logistics, and sub-zero temperature integrity for zero batch wastage.',

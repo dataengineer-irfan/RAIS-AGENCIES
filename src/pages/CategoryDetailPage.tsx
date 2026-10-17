@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CATEGORIES, PRODUCTS, ProductItem } from '../data/catalogue';
 import { Snowflake, ArrowLeft, Plus, Minus, ShieldCheck, Thermometer, LayoutGrid, List, Info } from 'lucide-react';
 import { ProductSpecModal } from '../components/ProductSpecModal';
+import { assetUrl } from '../utils/assetUrl';
 
 interface CategoryDetailPageProps {
   categoryCode: string;
@@ -14,21 +15,21 @@ interface CategoryDetailPageProps {
 }
 
 const CATEGORY_PLINTH_IMAGES: Record<string, string> = {
-  CHICKEN: '/images/ref-assets/cat_chicken_ice.png',
-  CHK: '/images/ref-assets/cat_chicken_ice.png',
-  VEG: '/images/ref-assets/cat_veg_ice.png',
-  SAUCES: '/images/ref-assets/cat_sauces_ice.png',
-  SAU: '/images/ref-assets/cat_sauces_ice.png',
-  BREADING: '/images/ref-assets/cat_breadmix_ice.png',
-  BRD: '/images/ref-assets/cat_breadmix_ice.png',
-  CHEESE: '/images/ref-assets/cat_cheese_ice.png',
-  CHE: '/images/ref-assets/cat_cheese_ice.png',
-  SPICES: '/images/ref-assets/cat_spices_ice.png',
-  SPI: '/images/ref-assets/cat_spices_ice.png',
-  PACKAGING: '/images/ref-assets/cat_packaging_ice.png',
-  PKG: '/images/ref-assets/cat_packaging_ice.png',
-  MOJITOS: '/images/ref-assets/cat_mojitos_ice.png',
-  MOJ: '/images/ref-assets/cat_mojitos_ice.png'
+  CHICKEN: assetUrl('/images/ref-assets/cat_chicken_ice.png'),
+  CHK: assetUrl('/images/ref-assets/cat_chicken_ice.png'),
+  VEG: assetUrl('/images/ref-assets/cat_veg_ice.png'),
+  SAUCES: assetUrl('/images/ref-assets/cat_sauces_ice.png'),
+  SAU: assetUrl('/images/ref-assets/cat_sauces_ice.png'),
+  BREADING: assetUrl('/images/ref-assets/cat_breadmix_ice.png'),
+  BRD: assetUrl('/images/ref-assets/cat_breadmix_ice.png'),
+  CHEESE: assetUrl('/images/ref-assets/cat_cheese_ice.png'),
+  CHE: assetUrl('/images/ref-assets/cat_cheese_ice.png'),
+  SPICES: assetUrl('/images/ref-assets/cat_spices_ice.png'),
+  SPI: assetUrl('/images/ref-assets/cat_spices_ice.png'),
+  PACKAGING: assetUrl('/images/ref-assets/cat_packaging_ice.png'),
+  PKG: assetUrl('/images/ref-assets/cat_packaging_ice.png'),
+  MOJITOS: assetUrl('/images/ref-assets/cat_mojitos_ice.png'),
+  MOJ: assetUrl('/images/ref-assets/cat_mojitos_ice.png')
 };
 
 const BRAND_BADGES: Record<string, { bg: string; text: string; label: string }> = {
@@ -148,7 +149,7 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
   };
 
   const appGuide = getCategoryApplicationGuide(category.code);
-  const heroImage = CATEGORY_PLINTH_IMAGES[category.code] || category.image || '/images/products/chicken_momos.jpg';
+  const heroImage = CATEGORY_PLINTH_IMAGES[category.code] || category.image || assetUrl('/images/products/chicken_momos.jpg');
 
   return (
     <div className="py-10 sm:py-16 bg-[#081026] text-white min-h-screen relative overflow-hidden">

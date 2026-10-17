@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { Eye, Sparkles } from 'lucide-react';
+import { assetUrl } from '../utils/assetUrl';
 
 interface VerifiedSpotlight {
   id: string;
@@ -18,7 +19,7 @@ const VERIFIED_SPOTLIGHTS: VerifiedSpotlight[] = [
     brand: 'ITC Master Chef',
     pack: '1 kg Packet',
     sku: 'RAIS-VEG-07',
-    image: '/images/cheesy_triangle.jpg'
+    image: assetUrl('/images/cheesy_triangle.jpg')
   },
   {
     id: 'patty',
@@ -26,7 +27,7 @@ const VERIFIED_SPOTLIGHTS: VerifiedSpotlight[] = [
     brand: 'Nutrich',
     pack: '1 kg Packet',
     sku: 'RAIS-CHK-06',
-    image: '/images/chicken_patty.jpg'
+    image: assetUrl('/images/chicken_patty.jpg')
   },
   {
     id: 'cheese',
@@ -34,7 +35,7 @@ const VERIFIED_SPOTLIGHTS: VerifiedSpotlight[] = [
     brand: 'Milky Mist',
     pack: '2 kg Packet',
     sku: 'RAIS-CHS-01',
-    image: '/images/mozzarella_cheese.jpg'
+    image: assetUrl('/images/mozzarella_cheese.jpg')
   },
   {
     id: 'sauces',
@@ -42,7 +43,7 @@ const VERIFIED_SPOTLIGHTS: VerifiedSpotlight[] = [
     brand: 'Del Monte',
     pack: '1.1 kg Packet',
     sku: 'RAIS-SAU-01',
-    image: '/images/gourmet_sauces.jpg'
+    image: assetUrl('/images/gourmet_sauces.jpg')
   },
   {
     id: 'boxes',
@@ -50,7 +51,7 @@ const VERIFIED_SPOTLIGHTS: VerifiedSpotlight[] = [
     brand: 'Packaging Solutions',
     pack: '100 Nos Pack',
     sku: 'RAIS-BOX-01',
-    image: '/images/burger_boxes.jpg'
+    image: assetUrl('/images/burger_boxes.jpg')
   }
 ];
 

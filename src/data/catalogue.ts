@@ -1,3 +1,5 @@
+import { assetUrl } from '../utils/assetUrl';
+
 export interface ProductItem {
   sku: string;
   categoryCode: string;
@@ -21,7 +23,7 @@ export interface CategoryItem {
   image?: string;
 }
 
-export const CATEGORIES: CategoryItem[] = [
+const RAW_CATEGORIES: CategoryItem[] = [
   {
     code: 'CHICKEN',
     name: 'Chicken Items',
@@ -96,7 +98,7 @@ export const CATEGORIES: CategoryItem[] = [
   }
 ];
 
-export const PRODUCTS: ProductItem[] = [
+const RAW_PRODUCTS: ProductItem[] = [
   // ==========================================
   // 1. Chicken Items (8 SKUs)
   // ==========================================
@@ -853,6 +855,16 @@ export const PRODUCTS: ProductItem[] = [
     description: 'Strawberry beverage base syrup for milkshakes and cold drinks.'
   }
 ];
+
+export const CATEGORIES: CategoryItem[] = RAW_CATEGORIES.map((c) => ({
+  ...c,
+  image: c.image ? assetUrl(c.image) : undefined
+}));
+
+export const PRODUCTS: ProductItem[] = RAW_PRODUCTS.map((p) => ({
+  ...p,
+  image: p.image ? assetUrl(p.image) : undefined
+}));
 
 export const BUSINESS_INFO = {
   name: 'RAIS AGENCIES',

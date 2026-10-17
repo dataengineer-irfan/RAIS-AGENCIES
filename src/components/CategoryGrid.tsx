@@ -2,6 +2,7 @@ import React from 'react';
 import { CATEGORIES, PRODUCTS } from '../data/catalogue';
 import { ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { assetUrl } from '../utils/assetUrl';
 
 interface CategoryGridProps {
   selectedCategory: string;
@@ -9,14 +10,21 @@ interface CategoryGridProps {
 }
 
 const CATEGORY_PLINTH_IMAGES: Record<string, { image: string; isNew?: boolean }> = {
-  CHK: { image: '/images/ref-assets/cat_chicken_ice.png' },
-  VEG: { image: '/images/ref-assets/cat_veg_ice.png' },
-  SAU: { image: '/images/ref-assets/cat_sauces_ice.png' },
-  BRD: { image: '/images/ref-assets/cat_breadmix_ice.png' },
-  CHE: { image: '/images/ref-assets/cat_cheese_ice.png' },
-  SPI: { image: '/images/ref-assets/cat_spices_ice.png', isNew: true },
-  PKG: { image: '/images/ref-assets/cat_packaging_ice.png' },
-  MOJ: { image: '/images/ref-assets/cat_mojitos_ice.png' }
+  CHICKEN: { image: assetUrl('/images/ref-assets/cat_chicken_ice.png') },
+  CHK: { image: assetUrl('/images/ref-assets/cat_chicken_ice.png') },
+  VEG: { image: assetUrl('/images/ref-assets/cat_veg_ice.png') },
+  SAUCES: { image: assetUrl('/images/ref-assets/cat_sauces_ice.png') },
+  SAU: { image: assetUrl('/images/ref-assets/cat_sauces_ice.png') },
+  BREADING: { image: assetUrl('/images/ref-assets/cat_breadmix_ice.png') },
+  BRD: { image: assetUrl('/images/ref-assets/cat_breadmix_ice.png') },
+  CHEESE: { image: assetUrl('/images/ref-assets/cat_cheese_ice.png') },
+  CHE: { image: assetUrl('/images/ref-assets/cat_cheese_ice.png') },
+  SPICES: { image: assetUrl('/images/ref-assets/cat_spices_ice.png'), isNew: true },
+  SPI: { image: assetUrl('/images/ref-assets/cat_spices_ice.png'), isNew: true },
+  PACKAGING: { image: assetUrl('/images/ref-assets/cat_packaging_ice.png') },
+  PKG: { image: assetUrl('/images/ref-assets/cat_packaging_ice.png') },
+  MOJITOS: { image: assetUrl('/images/ref-assets/cat_mojitos_ice.png') },
+  MOJ: { image: assetUrl('/images/ref-assets/cat_mojitos_ice.png') }
 };
 
 export const CategoryGrid: React.FC<CategoryGridProps> = ({

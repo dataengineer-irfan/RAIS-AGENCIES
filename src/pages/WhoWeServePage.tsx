@@ -1,6 +1,7 @@
 import React from 'react';
 import { Utensils, Pizza, Coffee, Store, ShieldCheck, CheckCircle2, ArrowRight, MessageSquare, Phone, Snowflake, Truck } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/catalogue';
+import { assetUrl } from '../utils/assetUrl';
 
 interface WhoWeServePageProps {
   onOpenQuote: () => void;
@@ -12,7 +13,7 @@ export const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onOpenQuote }) =
       icon: Utensils,
       title: 'Fast-Food & Burger Hubs',
       subtitle: 'QSRs, Snack Counters & Food Trucks',
-      image: '/images/products/kraft_burger_box.jpg',
+      image: assetUrl('/images/products/kraft_burger_box.jpg'),
       tag: 'Fryer & Griddle Staples',
       challenge: 'High turnover during peak evening hours requires rapid cooking times, consistent patty size, and leak-proof packaging.',
       solution: 'Pre-portioned frozen 9mm/6mm French fries that fry crisp in 3 minutes, seasoned Nutrich chicken & veg patties, and heavy-gauge corrugated kraft clamshell burger boxes.',
@@ -28,7 +29,7 @@ export const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onOpenQuote }) =
       icon: Pizza,
       title: 'Pizzerias & Italian Bistros',
       subtitle: 'Wood-fired & Commercial Deck Pizzerias',
-      image: '/images/products/kraft_pizza_box.jpg',
+      image: assetUrl('/images/products/kraft_pizza_box.jpg'),
       tag: 'High-Stretch Pizza Melt',
       challenge: 'Consistent mozzarella melt, stretch, and browning without excess oil separation, plus heat-retaining delivery boxes.',
       solution: 'Milky Mist 100% Mozzarella Diced Cheese (1kg & 2kg) with high stretch tolerance, seasoned Del Monte pizza-pasta sauce, and heavy-duty 8"x8" plain/printed corrugated pizza boxes.',
@@ -44,7 +45,7 @@ export const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onOpenQuote }) =
       icon: Coffee,
       title: 'Cafés & Beverage Lounges',
       subtitle: 'Mocktail Bars, Tea Lounges & Cafés',
-      image: '/images/products/mojito_lime_mint.jpg',
+      image: assetUrl('/images/products/mojito_lime_mint.jpg'),
       tag: 'Speed-Pour Syrups & Finger Foods',
       challenge: 'High beverage margin requires standardized mocktail syrup ratios, plus grab-and-go finger snacks that require zero kitchen prep.',
       solution: 'High-concentration lime-mint and blue curacao syrups, commercial fruit crushes, pliable tortilla wraps for rolls, and ITC cheesy corn triangles.',
@@ -60,7 +61,7 @@ export const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onOpenQuote }) =
       icon: Store,
       title: 'Hotels, Banquets & Caterers',
       subtitle: 'Event Catering, Buffets & Institutional Messes',
-      image: '/images/products/chicken_momos.jpg',
+      image: assetUrl('/images/products/chicken_momos.jpg'),
       tag: 'Bulk Staging & High-Volume IQF',
       challenge: 'Serving 500+ guests simultaneously requires zero-prep appetizers, consistent paneer quality, and bulk condiments.',
       solution: 'ITC handcrafted frozen momos, Godrej paneer pops & tandoori nuggets, Milky Mist paneer cubes, and 8g single-serve condiment sachets for sanitized banquet service.',

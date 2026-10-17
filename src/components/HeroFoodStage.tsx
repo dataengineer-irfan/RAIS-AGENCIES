@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useAnimationFrame } from 'framer-motion';
+import { assetUrl } from '../utils/assetUrl';
 
 interface SatelliteItem {
   src: string;
@@ -11,28 +12,28 @@ interface SatelliteItem {
 
 const SATELLITE_ITEMS: SatelliteItem[] = [
   {
-    src: '/images/ref-assets/hero_momos_cutout.png',
+    src: assetUrl('/images/ref-assets/hero_momos_cutout.png'),
     alt: 'Steamed Momos',
     offset: 0,
     label: 'ITC Chicken Momos',
     badge: 'IQF -18°C'
   },
   {
-    src: '/images/ref-assets/hero_fries_cutout.png',
+    src: assetUrl('/images/ref-assets/hero_fries_cutout.png'),
     alt: 'French Fries',
     offset: Math.PI * 0.5,
     label: 'Shoestring Fries',
     badge: '9mm Grade-A'
   },
   {
-    src: '/images/ref-assets/hero_popcorn_cutout.png',
+    src: assetUrl('/images/ref-assets/hero_popcorn_cutout.png'),
     alt: 'Chicken Popcorn',
     offset: Math.PI,
     label: 'Crispy Nuggets & Pops',
     badge: 'High-Hold Crisp'
   },
   {
-    src: '/images/ref-assets/hero_cheese_cutout.png',
+    src: assetUrl('/images/ref-assets/hero_cheese_cutout.png'),
     alt: 'Mozzarella & Paneer',
     offset: Math.PI * 1.5,
     label: 'Malai Paneer Cubes',
@@ -112,7 +113,7 @@ export const HeroFoodStage: React.FC = () => {
           className="absolute left-1/2 top-[20%] z-20 w-[60%] -translate-x-1/2 drop-shadow-[0_25px_35px_rgba(0,0,0,0.65)]"
         >
           <motion.img
-            src="/images/ref-assets/hero_burger_stack.png"
+            src={assetUrl('/images/ref-assets/hero_burger_stack.png')}
             alt="RAIS Wholesale Frozen Food Portfolio"
             initial={{ rotateY: -80, scale: 0.5, opacity: 0 }}
             animate={{ rotateY: 0, scale: 1, opacity: 1 }}
