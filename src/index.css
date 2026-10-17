@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #081026;
+  --foreground: #f8fafc;
+  --card: #0f1c3f;
+  --card-foreground: #f8fafc;
+  --primary: #00d2ff;
+  --primary-foreground: #081026;
+  --secondary: #1e3a8a;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --border: rgba(56, 189, 248, 0.2);
+  --ring: #00d2ff;
+  --radius: 1rem;
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Manrope', system-ui, sans-serif;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #081026;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00d2ff;
+}
+
+/* Reference glowing effects */
+.ice-glow {
+  box-shadow: 0 0 40px -10px rgba(0, 210, 255, 0.35);
+}
+
+.gold-glow {
+  box-shadow: 0 0 35px -5px rgba(229, 184, 66, 0.2);
+}
+
+.card-ice-shadow {
+  box-shadow: 0 20px 60px -30px rgba(0, 210, 255, 0.25);
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-120%) skewX(-20deg); }
+  100% { transform: translateX(220%) skewX(-20deg); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2.6s ease-in-out infinite;
+}
