@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { Box, RotateCw, Layers, Sparkles, Sun, Snowflake, Eye, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Box, RotateCw, Layers, Sparkles, Sun, Snowflake, Eye, CheckCircle2, ArrowRight, ShieldCheck, ZoomIn, ZoomOut, Flame } from 'lucide-react';
+import { assetUrl } from '../utils/assetUrl';
 
 interface Interactive3DShowcaseProps {
   onOpenQuote?: () => void;
@@ -9,16 +10,68 @@ interface Interactive3DShowcaseProps {
 type ModelType = 'momo' | 'nugget' | 'fries' | 'carton' | 'burger_box' | 'cryo_pod';
 type LightingMode = 'studio' | 'cold_vault' | 'depot_warm';
 
+interface FoodShowcaseItem {
+  image: string;
+  name: string;
+  tag: string;
+  badge: string;
+  alt: string;
+  categoryLabel: string;
+}
+
+const FOOD_SHOWCASE_ITEMS: Record<'momo' | 'nugget' | 'fries', FoodShowcaseItem> = {
+  momo: {
+    image: assetUrl('/images/products/chicken_momos.jpg'),
+    name: 'ITC Handcrafted Pleated Momos',
+    tag: 'Traditional Bamboo Steamer Presentation with Red Schezwan Chutney',
+    badge: '12-Pleat IQF -18°C',
+    alt: 'Authentic Handcrafted Steamed Momos Dumplings in Bamboo Steamer',
+    categoryLabel: 'AUTHENTIC CULINARY REQUISITION · IQF DUMPLINGS'
+  },
+  nugget: {
+    image: assetUrl('/images/products/chicken_nuggets.jpg'),
+    name: 'ITC Master Chef Crunchy Chicken Nuggets',
+    tag: 'Cast Iron Skillet Presentation with Herb Mayonnaise Dip',
+    badge: 'Golden Panko Crusted',
+    alt: 'Crunchy Golden Chicken Nuggets and Popcorn in Cast Iron Skillet',
+    categoryLabel: 'FROZEN POULTRY · COMMERCIAL QSR STAPLE'
+  },
+  fries: {
+    image: assetUrl('/images/products/french_fries_basket.jpg'),
+    name: 'Grade-A Shoestring French Fries (9mm)',
+    tag: 'Commercial Stainless Steel Wire Frying Basket Presentation',
+    badge: '9mm High-Hold Crisp',
+    alt: 'Hot Golden Shoestring French Fries in Commercial Fryer Basket with Flaked Sea Salt',
+    categoryLabel: 'IQF POTATO LINE · COMMERCIAL FRYER STAPLE'
+  }
+};
+
 export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ onOpenQuote }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeModel, setActiveModel] = useState<ModelType>('momo');
   const [lightingMode, setLightingMode] = useState<LightingMode>('studio');
   const [autoRotate, setAutoRotate] = useState(true);
   const [isOpenState, setIsOpenState] = useState(false);
+  const [isMacroZoom, setIsMacroZoom] = useState(false);
+  const [foodTilt, setFoodTilt] = useState({ x: 0, y: 0 });
+
+  const isFoodModel = activeModel === 'momo' || activeModel === 'nugget' || activeModel === 'fries';
+
+  const handleFoodMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setFoodTilt({ x: -y * 10, y: x * 10 });
+  };
+
+  const handleFoodMouseLeave = () => {
+    setFoodTilt({ x: 0, y: 0 });
+  };
 
   // References for Three.js control outside useEffect
   const sceneRef = useRef<THREE.Scene | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const modelGroupRef = useRef<THREE.Group | null>(null);
   const lidFlapLeftRef = useRef<THREE.Group | null>(null);
   const lidFlapRightRef = useRef<THREE.Group | null>(null);
@@ -239,6 +292,7 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     container.appendChild(renderer.domElement);
+    rendererRef.current = renderer;
 
     // 4. Lighting System
     const ambient = new THREE.AmbientLight(0xffffff, 0.95);
@@ -277,162 +331,9 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
     modelGroupRef.current = modelGroup;
 
     // ==========================================
-    // MODEL 1: Steamed Pleated Momo Dumpling
+    // Three.js Packaging & Infrastructure Models
+    // (Food lines Momo, Nugget, Fries render in the high-definition culinary stage)
     // ==========================================
-    const momoGroup = new THREE.Group();
-    momoGroup.name = 'momo';
-
-    const momoGeo = new THREE.CylinderGeometry(0.14, 1.7, 1.9, 48, 24);
-    const mPos = momoGeo.attributes.position;
-    for (let i = 0; i < mPos.count; i++) {
-      const x = mPos.getX(i);
-      const y = mPos.getY(i);
-      const z = mPos.getZ(i);
-
-      const r = Math.sqrt(x * x + z * z);
-      const angle = Math.atan2(z, x);
-
-      // 12 pleat definition
-      const pleat = Math.sin(angle * 12) * 0.16 * Math.max(0, 1.0 - Math.abs(y) / 1.0);
-      const bulge = Math.sin((y + 0.95) / 1.9 * Math.PI) * 0.45;
-
-      const newR = Math.max(0.06, r + pleat + bulge);
-      mPos.setX(i, Math.cos(angle) * newR);
-      mPos.setZ(i, Math.sin(angle) * newR);
-
-      if (y > 0.55) {
-        const swirlAngle = angle + (y - 0.55) * 2.0;
-        mPos.setX(i, Math.cos(swirlAngle) * (newR * 0.55));
-        mPos.setZ(i, Math.sin(swirlAngle) * (newR * 0.55));
-      }
-    }
-    momoGeo.computeVertexNormals();
-
-    const doughMat = new THREE.MeshStandardMaterial({
-      color: 0xFDFBF7,
-      roughness: 0.32,
-      metalness: 0.04,
-    });
-    const momoMesh = new THREE.Mesh(momoGeo, doughMat);
-    momoMesh.position.y = -0.3;
-    momoMesh.castShadow = true;
-    momoGroup.add(momoMesh);
-
-    // Dark ceramic dipping ramekin with red schezwan chutney
-    const bowlGeo = new THREE.CylinderGeometry(0.85, 0.65, 0.5, 32);
-    const bowlMat = new THREE.MeshStandardMaterial({ color: 0x1C1410, roughness: 0.45 });
-    const bowlMesh = new THREE.Mesh(bowlGeo, bowlMat);
-    bowlMesh.position.set(2.2, -0.75, 0.5);
-    bowlMesh.castShadow = true;
-    momoGroup.add(bowlMesh);
-
-    const sauceGeo = new THREE.CylinderGeometry(0.78, 0.78, 0.05, 32);
-    const sauceMat = new THREE.MeshStandardMaterial({ color: 0x991B1B, roughness: 0.12, metalness: 0.1 });
-    const sauceMesh = new THREE.Mesh(sauceGeo, sauceMat);
-    sauceMesh.position.set(2.2, -0.5, 0.5);
-    momoGroup.add(sauceMesh);
-
-    // Bamboo steamer ring base
-    const ringGeo = new THREE.TorusGeometry(2.3, 0.15, 16, 64);
-    const bambooMat = new THREE.MeshStandardMaterial({ color: 0x855D36, roughness: 0.8 });
-    const bambooRing = new THREE.Mesh(ringGeo, bambooMat);
-    bambooRing.rotation.x = Math.PI / 2;
-    bambooRing.position.y = -1.2;
-    momoGroup.add(bambooRing);
-
-    modelGroup.add(momoGroup);
-
-    // ==========================================
-    // MODEL 2: Crispy Tempura Chicken Nugget
-    // ==========================================
-    const nuggetGroup = new THREE.Group();
-    nuggetGroup.name = 'nugget';
-    nuggetGroup.visible = false;
-
-    const nuggetGeo = new THREE.BoxGeometry(2.8, 1.4, 2.1, 24, 16, 20);
-    const nPos = nuggetGeo.attributes.position;
-    for (let i = 0; i < nPos.count; i++) {
-      const x = nPos.getX(i);
-      const y = nPos.getY(i);
-      const z = nPos.getZ(i);
-      const noise = Math.sin(x * 3.8) * Math.cos(y * 4.2) * Math.sin(z * 3.2) * 0.2;
-      nPos.setX(i, x + noise * 0.45);
-      nPos.setY(i, (y + noise) * 0.85);
-      nPos.setZ(i, z + noise * 0.45);
-    }
-    nuggetGeo.computeVertexNormals();
-
-    const nuggetCanvas = document.createElement('canvas');
-    nuggetCanvas.width = 512;
-    nuggetCanvas.height = 512;
-    const nctx = nuggetCanvas.getContext('2d')!;
-    nctx.fillStyle = '#D97706';
-    nctx.fillRect(0, 0, 512, 512);
-
-    for (let i = 0; i < 4000; i++) {
-      nctx.fillStyle = Math.random() > 0.4 ? '#92400E' : '#FBBF24';
-      nctx.fillRect(Math.random() * 512, Math.random() * 512, Math.random() * 4 + 1, Math.random() * 4 + 1);
-    }
-    const nuggetTex = new THREE.CanvasTexture(nuggetCanvas);
-
-    const nuggetMat = new THREE.MeshStandardMaterial({
-      map: nuggetTex,
-      roughness: 0.82,
-      metalness: 0.08,
-    });
-    const nuggetMesh = new THREE.Mesh(nuggetGeo, nuggetMat);
-    nuggetMesh.rotation.y = 0.35;
-    nuggetMesh.rotation.z = -0.08;
-    nuggetMesh.castShadow = true;
-    nuggetGroup.add(nuggetMesh);
-
-    modelGroup.add(nuggetGroup);
-
-    // ==========================================
-    // MODEL 3: Shoestring French Fries in Fryer Basket
-    // ==========================================
-    const friesGroup = new THREE.Group();
-    friesGroup.name = 'fries';
-    friesGroup.visible = false;
-
-    // Commercial wire fryer basket
-    const basketGeo = new THREE.BoxGeometry(3.4, 1.8, 2.4);
-    const wireMat = new THREE.MeshStandardMaterial({
-      color: 0xCBD5E1,
-      metalness: 0.95,
-      roughness: 0.2,
-      wireframe: true,
-    });
-    const basketMesh = new THREE.Mesh(basketGeo, wireMat);
-    basketMesh.position.y = -0.2;
-    friesGroup.add(basketMesh);
-
-    // Basket Handle
-    const handleGeo = new THREE.CylinderGeometry(0.08, 0.08, 3.4, 12);
-    const handleMat = new THREE.MeshStandardMaterial({ color: 0x64748B, metalness: 0.9, roughness: 0.2 });
-    const handleMesh = new THREE.Mesh(handleGeo, handleMat);
-    handleMesh.rotation.z = Math.PI / 3.2;
-    handleMesh.position.set(2.4, 0.8, 0);
-    friesGroup.add(handleMesh);
-
-    // 32 individual golden fries
-    const fryGeo = new THREE.BoxGeometry(0.18, 2.5, 0.18);
-    const fryMat = new THREE.MeshStandardMaterial({
-      color: 0xF59E0B,
-      roughness: 0.72,
-      metalness: 0.05,
-    });
-    for (let f = 0; f < 36; f++) {
-      const fry = new THREE.Mesh(fryGeo, fryMat);
-      const angle = (f / 36) * Math.PI * 2;
-      const radius = Math.random() * 1.1;
-      fry.position.set(Math.cos(angle) * radius, -0.1 + Math.random() * 0.45, Math.sin(angle) * (radius * 0.7));
-      fry.rotation.set((Math.random() - 0.5) * 0.4, Math.random() * Math.PI, (Math.random() - 0.5) * 0.4);
-      fry.castShadow = true;
-      friesGroup.add(fry);
-    }
-
-    modelGroup.add(friesGroup);
 
     // ==========================================
     // MODEL 4: 5-Ply Master Delivery Carton
@@ -611,9 +512,6 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
     modelGroup.add(cryoGroup);
 
     // Initial Active Model Visibility
-    momoGroup.visible = activeModel === 'momo';
-    nuggetGroup.visible = activeModel === 'nugget';
-    friesGroup.visible = activeModel === 'fries';
     cartonGroup.visible = activeModel === 'carton';
     burgerGroup.visible = activeModel === 'burger_box';
     cryoGroup.visible = activeModel === 'cryo_pod';
@@ -729,19 +627,30 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
         }
       });
       renderer.dispose();
+      rendererRef.current = null;
       if (domElement && container.contains(domElement)) {
         container.removeChild(domElement);
       }
     };
   }, []);
 
-  // Sync active model visibility
+  // Sync active model visibility & dimensions
   useEffect(() => {
     if (!modelGroupRef.current) return;
     modelGroupRef.current.children.forEach((child) => {
       child.visible = child.name === activeModel;
     });
-  }, [activeModel]);
+
+    if (!isFoodModel && containerRef.current && rendererRef.current && cameraRef.current) {
+      const w = containerRef.current.clientWidth;
+      const h = containerRef.current.clientHeight;
+      if (w > 0 && h > 0) {
+        cameraRef.current.aspect = w / h;
+        cameraRef.current.updateProjectionMatrix();
+        rendererRef.current.setSize(w, h);
+      }
+    }
+  }, [activeModel, isFoodModel]);
 
   // Sync lighting mode
   useEffect(() => {
@@ -777,13 +686,13 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
           <div>
             <div className="flex items-center gap-2 text-cyan-300 text-xs font-semibold tracking-wider uppercase mb-2">
               <span className="block w-6 h-px bg-cyan-400" />
-              <span>Three.js Interactive Culinary & Packaging Lab</span>
+              <span>Three.js & Commercial Foodservice Photography Lab</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
-              3D Frozen Food & Cold-Chain Inspector
+              Culinary Specifications & Packaging Inspector
             </h2>
             <p className="text-slate-300 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">
-              Drag to inspect 360° commercial frozen food lines, breading textures, pleat definitions, and heavy-gauge wholesale packaging engineered for Rayachoty commercial kitchens.
+              Inspect authentic commercial food photography with interactive 3D perspective tilt and explore structural 3D WebGL packaging models engineered for Rayachoty commercial kitchens.
             </p>
           </div>
 
@@ -798,7 +707,7 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              <span>🥟 Pleated Momo</span>
+              <span>🥟 Handcrafted Momos</span>
             </button>
             <button
               onClick={() => { setActiveModel('nugget'); setIsOpenState(false); }}
@@ -808,7 +717,7 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              <span>🍗 Crispy Nugget</span>
+              <span>🍗 Crunchy Nuggets</span>
             </button>
             <button
               onClick={() => { setActiveModel('fries'); setIsOpenState(false); }}
@@ -818,7 +727,7 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              <span>🍟 French Fries</span>
+              <span>🍟 Shoestring Fries</span>
             </button>
 
             <span className="text-cyan-500/40 px-1 hidden sm:inline">|</span>
@@ -833,7 +742,7 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
               }`}
             >
               <Box className="w-3.5 h-3.5 text-cyan-300" />
-              <span>Master Case</span>
+              <span>3D Master Case</span>
             </button>
             <button
               onClick={() => { setActiveModel('burger_box'); setIsOpenState(false); }}
@@ -844,7 +753,7 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
               }`}
             >
               <Layers className="w-3.5 h-3.5 text-cyan-300" />
-              <span>Burger Box</span>
+              <span>3D Burger Box</span>
             </button>
             <button
               onClick={() => { setActiveModel('cryo_pod'); setIsOpenState(false); }}
@@ -855,7 +764,7 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
               }`}
             >
               <Snowflake className="w-3.5 h-3.5 text-cyan-300" />
-              <span>Cryo Vault</span>
+              <span>3D Cryo Vault</span>
             </button>
           </div>
         </div>
@@ -863,20 +772,89 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
         {/* Main 3D Canvas Showcase Container */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
 
-          {/* Interactive WebGL 3D Canvas Box */}
+          {/* Interactive Showcase Box (Photo Stage for Food / Three.js for Packaging) */}
           <div className="lg:col-span-8 bg-gradient-to-b from-[#0f1c3f] to-[#081026] border-2 border-cyan-500/30 rounded-2xl shadow-2xl relative min-h-[460px] sm:min-h-[540px] flex flex-col justify-between overflow-hidden">
 
-            {/* 3D Canvas Mount Point */}
+            {/* 3D WebGL Canvas Mount Point (Active for packaging models) */}
             <div
               ref={containerRef}
-              className="absolute inset-0 cursor-grab active:cursor-grabbing w-full h-full"
+              className={`absolute inset-0 cursor-grab active:cursor-grabbing w-full h-full transition-opacity duration-300 ${
+                isFoodModel ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto z-10'
+              }`}
             />
+
+            {/* Photorealistic Commercial Food Presentation Stage */}
+            {isFoodModel && (
+              <div
+                onMouseMove={handleFoodMouseMove}
+                onMouseLeave={handleFoodMouseLeave}
+                className="absolute inset-0 flex items-center justify-center p-4 sm:p-8 select-none overflow-hidden cursor-crosshair z-10"
+              >
+                {/* Ambience glow based on lightingMode */}
+                <div
+                  className={`absolute inset-0 transition-opacity duration-700 pointer-events-none ${
+                    lightingMode === 'cold_vault'
+                      ? 'bg-gradient-to-tr from-cyan-900/40 via-sky-600/10 to-transparent'
+                      : lightingMode === 'depot_warm'
+                      ? 'bg-gradient-to-tr from-amber-900/40 via-orange-600/10 to-transparent'
+                      : 'bg-gradient-to-tr from-cyan-950/40 via-slate-900/20 to-transparent'
+                  }`}
+                />
+
+                {/* 3D Tilted Photo Stage */}
+                <div
+                  style={{
+                    transform: `perspective(1000px) rotateX(${foodTilt.x}deg) rotateY(${foodTilt.y}deg) scale(${isMacroZoom ? 1.25 : 1.0})`,
+                    transition: 'transform 0.15s ease-out',
+                  }}
+                  className="relative max-w-xl w-full rounded-2xl overflow-hidden shadow-2xl border-2 border-cyan-400/40 bg-slate-950 group"
+                >
+                  <img
+                    src={FOOD_SHOWCASE_ITEMS[activeModel as 'momo' | 'nugget' | 'fries'].image}
+                    alt={FOOD_SHOWCASE_ITEMS[activeModel as 'momo' | 'nugget' | 'fries'].alt}
+                    className={`w-full h-[320px] sm:h-[400px] object-cover transition-all duration-500 ${
+                      lightingMode === 'cold_vault'
+                        ? 'brightness-95 contrast-105 saturate-95 hue-rotate-15'
+                        : lightingMode === 'depot_warm'
+                        ? 'brightness-105 saturate-110'
+                        : 'brightness-100 saturate-100'
+                    }`}
+                  />
+
+                  {/* Floating Badges */}
+                  <div className="absolute top-3 left-3 right-3 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
+                    <span className="bg-slate-950/90 backdrop-blur-md text-cyan-300 text-[11px] font-bold px-3 py-1 rounded-full border border-cyan-400/40 shadow-lg flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+                      {FOOD_SHOWCASE_ITEMS[activeModel as 'momo' | 'nugget' | 'fries'].badge}
+                    </span>
+                    <span className="bg-emerald-950/90 backdrop-blur-md text-emerald-300 text-[11px] font-bold px-3 py-1 rounded-full border border-emerald-400/40 shadow-lg flex items-center gap-1.5">
+                      <Flame className="w-3.5 h-3.5 text-emerald-400" />
+                      Authentic Studio Shot
+                    </span>
+                  </div>
+
+                  {/* Bottom Card Caption */}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/95 via-slate-950/75 to-transparent p-4 sm:p-5 text-left pointer-events-none">
+                    <div className="text-[10px] sm:text-[11px] font-mono text-cyan-300 uppercase tracking-wider font-bold">
+                      {FOOD_SHOWCASE_ITEMS[activeModel as 'momo' | 'nugget' | 'fries'].categoryLabel}
+                    </div>
+                    <div className="text-white font-bold text-sm sm:text-base mt-1">
+                      {FOOD_SHOWCASE_ITEMS[activeModel as 'momo' | 'nugget' | 'fries'].tag}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Top Toolbar Overlay */}
             <div className="relative z-10 p-4 flex flex-wrap items-center justify-between gap-3 pointer-events-none">
               <div className="pointer-events-auto flex items-center gap-2 bg-[#081026]/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-cyan-400/40 shadow-lg text-xs font-bold text-white">
                 <Sparkles className="w-3.5 h-3.5 text-cyan-300 animate-pulse" />
-                <span>Drag to Rotate 360° · Scroll to Zoom</span>
+                <span>
+                  {isFoodModel
+                    ? 'Move Mouse for 3D Perspective Tilt · Toggle Macro Zoom'
+                    : 'Drag to Rotate 360° · Scroll to Zoom'}
+                </span>
               </div>
 
               {/* Lighting Switcher */}
@@ -911,36 +889,54 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
               </div>
             </div>
 
-            {/* Bottom 3D Action Controls */}
+            {/* Bottom Action Controls */}
             <div className="relative z-10 p-4 flex flex-wrap items-center justify-between gap-3 pointer-events-none">
               <div className="pointer-events-auto flex items-center gap-2">
-                {(activeModel === 'carton' || activeModel === 'burger_box') && (
+                {isFoodModel ? (
                   <button
-                    onClick={() => setIsOpenState(!isOpenState)}
+                    onClick={() => setIsMacroZoom(!isMacroZoom)}
                     className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-md flex items-center gap-2 ${
-                      isOpenState
+                      isMacroZoom
                         ? 'bg-cyan-400 text-slate-950'
                         : 'bg-[#081026]/90 text-white hover:bg-[#0f1c3f] border border-cyan-400/40'
                     }`}
                   >
-                    <Eye className="w-3.5 h-3.5 text-cyan-300" />
-                    <span>{isOpenState ? 'Close Packaging Lid' : 'Unbox & Open Lid in 3D'}</span>
+                    {isMacroZoom ? <ZoomOut className="w-3.5 h-3.5" /> : <ZoomIn className="w-3.5 h-3.5 text-cyan-300" />}
+                    <span>{isMacroZoom ? 'Reset View (1.0x)' : 'Macro Texture Zoom (1.25x)'}</span>
                   </button>
-                )}
+                ) : (
+                  <>
+                    {(activeModel === 'carton' || activeModel === 'burger_box') && (
+                      <button
+                        onClick={() => setIsOpenState(!isOpenState)}
+                        className={`px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-md flex items-center gap-2 ${
+                          isOpenState
+                            ? 'bg-cyan-400 text-slate-950'
+                            : 'bg-[#081026]/90 text-white hover:bg-[#0f1c3f] border border-cyan-400/40'
+                        }`}
+                      >
+                        <Eye className="w-3.5 h-3.5 text-cyan-300" />
+                        <span>{isOpenState ? 'Close Packaging Lid' : 'Unbox & Open Lid in 3D'}</span>
+                      </button>
+                    )}
 
-                <button
-                  onClick={() => setAutoRotate(!autoRotate)}
-                  className={`p-2 rounded-xl text-xs font-bold transition-all shadow border border-cyan-400/40 ${
-                    autoRotate ? 'bg-cyan-400 text-slate-950' : 'bg-[#081026]/90 text-slate-300 hover:text-white'
-                  }`}
-                  title="Toggle Auto Rotation"
-                >
-                  <RotateCw className="w-3.5 h-3.5" />
-                </button>
+                    <button
+                      onClick={() => setAutoRotate(!autoRotate)}
+                      className={`p-2 rounded-xl text-xs font-bold transition-all shadow border border-cyan-400/40 ${
+                        autoRotate ? 'bg-cyan-400 text-slate-950' : 'bg-[#081026]/90 text-slate-300 hover:text-white'
+                      }`}
+                      title="Toggle Auto Rotation"
+                    >
+                      <RotateCw className="w-3.5 h-3.5" />
+                    </button>
+                  </>
+                )}
               </div>
 
               <div className="pointer-events-auto bg-[#081026]/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-cyan-400/40 text-[11px] text-cyan-300 font-mono font-bold shadow-md">
-                FPS: 60 · Three.js WebGL2 Shaders Active
+                {isFoodModel
+                  ? 'Authentic Studio Photography · 3D Tilt Active'
+                  : 'FPS: 60 · Three.js WebGL2 Shaders Active'}
               </div>
             </div>
 
