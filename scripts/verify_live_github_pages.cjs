@@ -56,6 +56,26 @@ async function testLive() {
   await page.waitForTimeout(1000);
   await page.screenshot({ path: path.join(OUT_DIR, 'live_github_pages_03_products.png') });
 
+  // Scroll through entire page to check all lazy-loaded images
+  await page.evaluate(async () => {
+    await new Promise((resolve) => {
+      let totalHeight = 0;
+      const distance = 400;
+      const timer = setInterval(() => {
+        const scrollHeight = document.body.scrollHeight;
+        window.scrollBy(0, distance);
+        totalHeight += distance;
+
+        if (totalHeight >= scrollHeight) {
+          clearInterval(timer);
+          resolve();
+        }
+      }, 100);
+    });
+  });
+
+  await page.waitForTimeout(2000);
+
   // Check broken images in DOM
   const imageAudit = await page.evaluate(() => {
     const imgs = Array.from(document.querySelectorAll('img'));
