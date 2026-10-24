@@ -34,13 +34,14 @@ export interface ReelCalendarItem {
   ctaKeyword: string; // e.g. 'CATALOGUE', 'PRICE', 'FRIES'
   
   // Visual & Audio Specs (9:16 Vertical)
-  videoSpecs: {
+    videoSpecs: {
     aspectRatio: '9:16';
     resolution: '1080x1920';
     durationSeconds: number; // 15 to 45s
     presenterName: string; // "Ananya"
     presenterAttire: string; // "Modest Pochampally Silk Saree"
     audioMood: string; // "Professional commercial, upbeat Rayalaseema rhythm"
+    mediaUrl?: string; // Compiled MP4 video URL
   };
   
   // Publishing Tracking

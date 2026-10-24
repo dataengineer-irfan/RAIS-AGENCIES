@@ -24,10 +24,11 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
     videoSpecs: {
       aspectRatio: '9:16',
       resolution: '1080x1920',
-      durationSeconds: 28,
+      durationSeconds: 25,
       presenterName: 'Ananya',
       presenterAttire: 'Modest Maroon & Gold Pochampally Silk Saree',
-      audioMood: 'Welcoming, crisp Andhra commercial tone'
+      audioMood: 'Cinematic Monsoon & Upbeat Food Commercial',
+      mediaUrl: assetUrl('/videos/campaign_01_monsoon_crispy.mp4')
     },
     status: 'approved',
     approvedBy: 'Wholesale Depot Lead',

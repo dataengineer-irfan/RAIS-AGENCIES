@@ -7,7 +7,7 @@ console.log('  RAIS AGENCIES — INSTAGRAM REELS & ENQUIRY AUTOMATION QA SUITE '
 console.log('================================================================\n');
 
 let passedTests = 0;
-let totalTests = 8;
+let totalTests = 9;
 
 function runTest(name, fn) {
   try {
@@ -158,6 +158,36 @@ runTest('8. Permission Checks & Immutable Audit Logging', () => {
   assert(storageContent.includes('addAuditLog('), 'System must record audit log entries.');
   assert(storageContent.includes('getAuditLogs()'), 'System must expose audit history.');
   assert(storageContent.includes('category: \'CONTENT\'') || storageContent.includes('category: \'SECURITY\'') || storageContent.includes('category: \'PUBLISHING\''), 'Audit logs must be categorized.');
+});
+
+// -----------------------------------------------------------------------------
+// TEST 9: Compiled 1080x1920 MP4 Video & Multi-track Audio Pipeline
+// -----------------------------------------------------------------------------
+runTest('9. Compiled 1080x1920 MP4 Video & Audio Pipeline', () => {
+  const videoPath = path.join(__dirname, '../public/videos/campaign_01_monsoon_crispy.mp4');
+  assert(fs.existsSync(videoPath), 'Master compiled MP4 video must exist at public/videos/campaign_01_monsoon_crispy.mp4');
+  
+  const videoStat = fs.statSync(videoPath);
+  assert(videoStat.size > 2000000, `Video file size must be > 2MB for high quality 1080x1920 render, found ${videoStat.size} bytes`);
+
+  const narrationPath = path.join(__dirname, '../public/audio/campaign_01_narration.mp3');
+  assert(fs.existsSync(narrationPath), 'Telugu female narration audio must exist at public/audio/campaign_01_narration.mp3');
+
+  const bgmPath = path.join(__dirname, '../public/audio/campaign_01_bgm.mp3');
+  assert(fs.existsSync(bgmPath), 'Monsoon rain & chord audio bed must exist at public/audio/campaign_01_bgm.mp3');
+
+  // Verify scene visual plates
+  const scenePaths = [
+    '../public/images/3d_presenter_ananya_rain.jpg',
+    '../public/images/products/chicken_momos.jpg',
+    '../public/images/3d_presenter_serving_family.jpg',
+    '../public/images/3d_presenter_product_showcase.jpg',
+    '../public/images/scene_05_brand_cta.png'
+  ];
+  for (const sp of scenePaths) {
+    const full = path.join(__dirname, sp);
+    assert(fs.existsSync(full), `Scene visual plate must exist: ${sp}`);
+  }
 });
 
 console.log('\n----------------------------------------------------------------');
