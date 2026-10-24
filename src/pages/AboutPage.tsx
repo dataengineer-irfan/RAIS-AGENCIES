@@ -16,7 +16,7 @@ export const AboutPage: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 text-cyan-300 text-xs font-bold uppercase tracking-[0.2em] mb-3">
             <Award className="size-4 text-cyan-400" />
-            <span>Commercial Distribution Hub</span>
+            <span>Wholesale Agency & Cold Storage Depot</span>
           </div>
           <h1 className="font-serif text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
             About{' '}
@@ -25,7 +25,7 @@ export const AboutPage: React.FC = () => {
             </span>
           </h1>
           <p className="text-sm sm:text-base text-slate-300 mt-3 leading-relaxed">
-            The authorised B2B foodservice wholesale partner for commercial kitchens across Rayachoty and the surrounding Annamayya territory.
+            Rayachoty's direct wholesale agency for frozen foods, fast food ingredients, and takeaway packaging for hotels, fast food centers, cafes, and bakeries across Rayachoty (516269) and Annamayya district.
           </p>
         </div>
 
@@ -34,17 +34,17 @@ export const AboutPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-cyan-500/20">
             <RaisLogo size="lg" />
             <div className="text-xs text-slate-400 sm:text-right font-mono">
-              <span className="text-cyan-300 font-bold block uppercase tracking-wider">Operational Cold-Chain Hub</span>
+              <span className="text-cyan-300 font-bold block uppercase tracking-wider">Depot & Cold Storage</span>
               Near Reddies Colony, Rayachoty - 516269, A.P.
             </div>
           </div>
 
           <div className="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
             <p>
-              <strong className="text-white font-semibold">RAIS Agencies</strong> is a specialised commercial food distributor engineered to bridge institutional food manufacturers with regional food service operators. Based in Rayachoty, Andhra Pradesh, we supply quick-service restaurants, pizzerias, burger counters, cafés, and banquet caterers with continuous allocations of verified foodservice inventory.
+              <strong className="text-white font-semibold">RAIS Agencies</strong> is Rayachoty's dedicated wholesale agency supplying frozen foods, bakery ingredients, pizza & burger items, sauces, and restaurant packaging materials. Located near Reddies Colony, Rayachoty (516269), we supply local fast food centers, hotels, dhabas, cafes, bakeries, shawarma counters, and event caterers with fresh, brand-certified stock at direct depot wholesale rates.
             </p>
             <p>
-              Unlike general grocery wholesalers who treat frozen items as secondary shelf stock, RAIS Agencies operates with dedicated <strong className="text-cyan-300 font-semibold">-18°C sub-zero cold-chain discipline</strong>. Our vault preserves the moisture, texture, and crispness of products from nationally recognised brands like <strong className="text-white font-semibold">ITC Master Chef</strong>, <strong className="text-white font-semibold">Milky Mist</strong>, <strong className="text-white font-semibold">Del Monte</strong>, <strong className="text-white font-semibold">McCain</strong>, <strong className="text-white font-semibold">Foodrite</strong>, and <strong className="text-white font-semibold">Godrej</strong>.
+              Unlike ordinary shops, RAIS Agencies operates dedicated <strong className="text-cyan-300 font-semibold">-18°C deep freezers</strong> so your french fries, chicken nuggets, momos, burger patties, and pizza cheese never melt, spoil, or lose their taste. We bring genuine stock directly from India's trusted brands like <strong className="text-white font-semibold">ITC Master Chef</strong>, <strong className="text-white font-semibold">Milky Mist</strong>, <strong className="text-white font-semibold">Del Monte</strong>, <strong className="text-white font-semibold">McCain</strong>, <strong className="text-white font-semibold">Foodrite</strong>, and <strong className="text-white font-semibold">Godrej</strong>.
             </p>
           </div>
 
@@ -52,7 +52,7 @@ export const AboutPage: React.FC = () => {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-cyan-500/20">
             <div className="p-4 rounded-2xl bg-[#081026]/80 border border-cyan-500/20 text-center">
               <div className="font-serif text-3xl font-black text-cyan-300">{PRODUCTS.length}+</div>
-              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-1">Verified SKUs</div>
+              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-1">Wholesale Items</div>
             </div>
             <div className="p-4 rounded-2xl bg-[#081026]/80 border border-cyan-500/20 text-center">
               <div className="font-serif text-3xl font-black text-cyan-300">8+</div>
@@ -60,11 +60,11 @@ export const AboutPage: React.FC = () => {
             </div>
             <div className="p-4 rounded-2xl bg-[#081026]/80 border border-cyan-500/20 text-center">
               <div className="font-serif text-3xl font-black text-cyan-300">-18°C</div>
-              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-1">Cold-Chain Vault</div>
+              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-1">Deep Freezers</div>
             </div>
             <div className="p-4 rounded-2xl bg-[#081026]/80 border border-cyan-500/20 text-center">
               <div className="font-serif text-3xl font-black text-cyan-300">100%</div>
-              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-1">B2B Tax Invoiced</div>
+              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-1">Original Brand Stock</div>
             </div>
           </div>
         </div>
@@ -75,9 +75,9 @@ export const AboutPage: React.FC = () => {
             <div className="size-12 rounded-2xl bg-cyan-400/15 border border-cyan-400/30 flex items-center justify-center text-cyan-300">
               <Snowflake className="size-6" />
             </div>
-            <h3 className="font-serif font-bold text-xl text-white">Sub-Zero Cold Chain Discipline</h3>
+            <h3 className="font-serif font-bold text-xl text-white">Continuous -18°C Deep Freezing</h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              All frozen French fries, chicken nuggets, momos, burger patties, and mozzarella cheese are stored at strictly monitored -18°C deep freeze conditions to prevent ice recrystallisation and culinary texture degradation.
+              French fries, chicken nuggets, momos, burger patties, and mozzarella cheese stay at strictly maintained -18°C so your food fries up crisp with zero soggy ice buildup.
             </p>
           </div>
 
@@ -85,9 +85,9 @@ export const AboutPage: React.FC = () => {
             <div className="size-12 rounded-2xl bg-cyan-400/15 border border-cyan-400/30 flex items-center justify-center text-emerald-400">
               <ShieldCheck className="size-6" />
             </div>
-            <h3 className="font-serif font-bold text-xl text-white">Genuine Brand Allocations</h3>
+            <h3 className="font-serif font-bold text-xl text-white">100% Genuine Brand Cartons</h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              We stock directly sourced, original factory-sealed commercial cartons from established manufacturers. No repackaging, unbranded substitutes, or compromise on food hygiene standards.
+              Directly sourced, factory-sealed master cartons from India's top brands. No loose repacking, no low-grade duplicates, only 100% genuine quality.
             </p>
           </div>
 
@@ -95,9 +95,9 @@ export const AboutPage: React.FC = () => {
             <div className="size-12 rounded-2xl bg-cyan-400/15 border border-cyan-400/30 flex items-center justify-center text-cyan-300">
               <Truck className="size-6" />
             </div>
-            <h3 className="font-serif font-bold text-xl text-white">Local Rayachoty Distribution</h3>
+            <h3 className="font-serif font-bold text-xl text-white">Same-Day Delivery & Counter Pickup</h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Direct counter pick-ups and scheduled delivery dispatches across the Rayachoty territory ensure chefs and restaurant managers never run out of critical menu items during busy weekend services.
+              Instant pickup from our Rayachoty depot or same-day town delivery right to your shop or hotel counter so you never run out during evening rush hours.
             </p>
           </div>
 
@@ -105,9 +105,9 @@ export const AboutPage: React.FC = () => {
             <div className="size-12 rounded-2xl bg-cyan-400/15 border border-cyan-400/30 flex items-center justify-center text-cyan-300">
               <Users className="size-6" />
             </div>
-            <h3 className="font-serif font-bold text-xl text-white">Statutory GST Commercial Billing</h3>
+            <h3 className="font-serif font-bold text-xl text-white">Clear Wholesale Billing & GST Invoices</h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Itemised commercial tax invoices detailing statutory GST classifications (5% frozen food, 12% dairy & sauces, 18% packaging) with buyer GSTIN recording for transparent commercial accounting.
+              Proper wholesale tax bills with clear rates and GST classification. Complete transparency with no hidden charges for Rayachoty business owners.
             </p>
           </div>
         </div>
@@ -119,7 +119,7 @@ export const AboutPage: React.FC = () => {
               <MapPin className="size-6" />
             </div>
             <div>
-              <h4 className="font-serif text-lg font-bold text-white">Visit Our Physical Distribution Hub</h4>
+              <h4 className="font-serif text-lg font-bold text-white">Visit Our Rayachoty Wholesale Depot</h4>
               <p className="text-xs sm:text-sm text-slate-300 mt-1">{BUSINESS_INFO.address}</p>
             </div>
           </div>

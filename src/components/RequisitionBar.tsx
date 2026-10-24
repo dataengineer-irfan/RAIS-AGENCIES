@@ -28,7 +28,7 @@ export const RequisitionBar: React.FC<RequisitionBarProps> = ({
       })
       .join('\n');
 
-    const message = `Hello RAIS Agencies, I would like to request wholesale quotation and supply availability for our commercial kitchen:\n\n${itemsList}\n\nTotal Items: ${quoteCount} units across ${distinctProductCount} products.\nPlease share wholesale terms and delivery schedule for Rayachoty.`;
+    const message = `Hello RAIS Agencies, I want to order the following wholesale items for my shop/hotel in Rayachoty:\n\n${itemsList}\n\nTotal: ${quoteCount} units (${distinctProductCount} items).\nPlease share current wholesale rates and delivery time.`;
 
     return `https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encodeURIComponent(message)}`;
   };
@@ -41,7 +41,7 @@ export const RequisitionBar: React.FC<RequisitionBarProps> = ({
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 120, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 260, damping: 26 }}
-          aria-label="Active Wholesale Requisition Dock"
+          aria-label="Active Wholesale Order Dock"
           className="fixed inset-x-0 bottom-4 z-50 px-4 pointer-events-none"
         >
           <div className="mx-auto flex max-w-2xl items-center gap-3 rounded-2xl border border-cyan-400/40 bg-[#0f1c3f]/95 p-3 sm:p-3.5 shadow-2xl shadow-black/80 backdrop-blur-xl pointer-events-auto">
@@ -57,14 +57,14 @@ export const RequisitionBar: React.FC<RequisitionBarProps> = ({
                 <span className="font-bold text-white">{distinctProductCount}</span> product{distinctProductCount > 1 ? 's' : ''} ({quoteCount} total units)
               </div>
               <div className="font-serif text-sm sm:text-base font-bold text-cyan-300 truncate">
-                Wholesale Requisition Ready
+                Wholesale Order Ready
               </div>
             </div>
 
             {/* Clear Button */}
             <button
               onClick={onClearQuote}
-              title="Clear Requisition"
+              title="Clear Order"
               className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-white/5 transition-colors"
             >
               <X className="w-5 h-5" />
@@ -75,7 +75,7 @@ export const RequisitionBar: React.FC<RequisitionBarProps> = ({
               onClick={onOpenQuote}
               className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold text-slate-200 transition-colors"
             >
-              <span>Review Sheet</span>
+              <span>View Order</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
 

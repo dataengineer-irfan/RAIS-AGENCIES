@@ -176,7 +176,7 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
               <div className="space-y-3">
                 <div className="inline-flex items-center gap-2 text-cyan-300 text-xs font-bold tracking-wider uppercase">
                   <Snowflake className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>{products.length} Commercial SKUs · Verified Wholesale Allocation</span>
+                  <span>{products.length} Products · Direct Wholesale Supply</span>
                 </div>
 
                 <h1 className="font-serif text-3xl sm:text-5xl font-black text-white tracking-tight">
@@ -194,22 +194,22 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
                   <div className="flex items-center gap-2 mb-1">
                     <Thermometer className="w-4 h-4 text-cyan-400" />
                     <span className="text-[10px] font-bold text-cyan-300 uppercase tracking-wider">
-                      Storage Protocol
+                      Storage Temperature
                     </span>
                   </div>
                   <span className="text-xs font-bold text-white block">{appGuide.storage}</span>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Rayachoty central cold hub staged.</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">Stored in Rayachoty deep freezer depot.</p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-[#081026]/80 border border-cyan-400/20">
                   <div className="flex items-center gap-2 mb-1">
                     <ShieldCheck className="w-4 h-4 text-emerald-400" />
                     <span className="text-[10px] font-bold text-emerald-300 uppercase tracking-wider">
-                      Fulfilment Origin
+                      Stock Quality
                     </span>
                   </div>
                   <span className="text-xs font-bold text-white block">Original Factory-Sealed Packs</span>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Authorised distributor allocations.</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">100% genuine brand stock.</p>
                 </div>
               </div>
             </div>
@@ -231,10 +231,10 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
         <div className="flex items-center justify-between mb-6 pb-4 border-b border-cyan-500/20">
           <div>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-white">
-              Available SKUs ({products.length})
+              Available Items ({products.length})
             </h2>
             <p className="text-xs text-slate-400 pt-0.5">
-              Wholesale trade requisitions directly dispatched to Rayachoty kitchens.
+              Wholesale supply directly dispatched to Rayachoty shops, hotels & kitchens.
             </p>
           </div>
 
@@ -377,7 +377,7 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
                   <th className="py-3.5 px-4 font-semibold">Brand</th>
                   <th className="py-3.5 px-4 font-semibold">Pack Size</th>
                   <th className="py-3.5 px-4 font-mono font-semibold">HSN</th>
-                  <th className="py-3.5 px-4 font-semibold text-right">Requisition</th>
+                  <th className="py-3.5 px-4 font-semibold text-right">Wholesale Order</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-cyan-500/15 text-slate-300">
@@ -425,7 +425,7 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
         {/* Other Categories Explorer */}
         <div className="mt-16 pt-10 border-t border-cyan-500/20">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300 mb-4 text-center">
-            Explore Other Commercial Categories
+            Explore Other Wholesale Categories
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             {CATEGORIES.map((cat) => (

@@ -6,26 +6,26 @@ const WORKFLOW_STEPS = [
   {
     step: '01',
     icon: ListChecks,
-    title: 'Pick your products',
-    description: 'Browse the live commercial catalogue and add items to your wholesale requisition sheet.'
+    title: 'Pick your items',
+    description: 'Browse our product list and select the frozen foods and packaging items you need.'
   },
   {
     step: '02',
     icon: MessageSquare,
     title: 'Send on WhatsApp',
-    description: 'Your requisition is sent directly to our Rayachoty desk with exact SKU names and pack quantities.'
+    description: 'Send your order list directly to our Rayachoty WhatsApp desk with your required quantities.'
   },
   {
     step: '03',
     icon: Snowflake,
-    title: 'Packed frozen',
-    description: 'We pick from our sub-zero -18°C cold chain vault, packed with insulated protection to eliminate thaw.'
+    title: 'Packed fresh & frozen',
+    description: 'Packed straight from our -18°C deep freezer so items stay 100% frozen with zero thawing.'
   },
   {
     step: '04',
     icon: Truck,
-    title: 'Delivered fast',
-    description: 'Same-day scheduled delivery across Rayachoty and Rayalaseema so your kitchen never runs out of stock.'
+    title: 'Delivered or pickup',
+    description: 'Same-day delivery across Rayachoty town or instant counter pickup at Reddies Colony depot.'
   }
 ];
 
@@ -49,7 +49,7 @@ export const OrderingWorkflow: React.FC = () => {
             </span>
           </h2>
           <p className="text-slate-300 text-sm sm:text-base mt-3 leading-relaxed">
-            Engineered for high-turnover QSRs, pizzerias, and cloud kitchens requiring immediate stock turnaround.
+            Simple, fast wholesale supply for hotels, fast food centers, cafes, and bakeries in Rayachoty.
           </p>
         </div>
 

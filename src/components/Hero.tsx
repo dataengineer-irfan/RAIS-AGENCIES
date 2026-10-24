@@ -11,11 +11,11 @@ interface HeroProps {
 }
 
 const SECTOR_WORDS = [
-  'Fast food outlets',
-  'Quick-service restaurants',
-  'Pizzerias & Burger bars',
-  'Cafés & Juice hubs',
-  'Banquet caterers & Cloud kitchens'
+  'Fast food centers & burger points',
+  'Hotels, restaurants & dhabas',
+  'Pizzerias & bakeries',
+  'Cafés, tea & juice bars',
+  'Caterers, shawarma points & kitchens'
 ];
 
 export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
@@ -60,7 +60,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
                 <Sparkles className="w-3 h-3 fill-current" />
                 No.1
               </span>
-              <span>Frozen Food Distributor in Rayachoty</span>
+              <span>Frozen Food & Packaging Wholesale in Rayachoty</span>
             </motion.div>
 
             {/* Display Headline */}
@@ -84,7 +84,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="flex flex-wrap items-center gap-x-2.5 text-base sm:text-lg text-slate-300 font-medium"
             >
-              <span className="text-slate-400">Wholesale commercial supply for</span>
+              <span className="text-slate-400">Direct wholesale supply for</span>
               <div className="relative inline-flex h-8 overflow-hidden items-center">
                 <AnimatePresence mode="wait">
                   <motion.span
@@ -108,7 +108,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
               transition={{ duration: 0.6, delay: 0.25 }}
               className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl"
             >
-              Premium frozen appetizers, momos, french fries, burger patties, dairy cheese, sauces, spices and heavy-duty packaging. Kept at continuous -18°C cold chain from our Rayachoty depot straight to your kitchen.
+              Rayachoty&apos;s direct wholesale agency for frozen snacks, french fries, momos, burger patties, mozzarella cheese, sauces, syrups, and takeaway packaging. Direct factory wholesale rates, 100% frozen quality, and daily supply for hotels, fast food centers &amp; cafes in Rayachoty (516269).
             </motion.p>
 
             {/* CTA Button Row with Shimmer Sheen */}
@@ -125,13 +125,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
               >
                 {/* Continuous Shimmer Light Sheen */}
                 <span className="absolute inset-y-0 w-1/3 skew-x-[-20deg] bg-white/60 blur-xs animate-shimmer pointer-events-none" />
-                <span className="relative z-10">Explore Product Catalogue</span>
+                <span className="relative z-10">View Wholesale Products</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 relative z-10" />
               </a>
 
               {/* Secondary WhatsApp Green Pill */}
               <a
-                href={`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encodeURIComponent('Hello RAIS Agencies, I would like to request wholesale product quotation and terms.')}`}
+                href={`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encodeURIComponent('Hello RAIS Agencies, I want to inquire about wholesale rates for my shop in Rayachoty.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-white text-sm font-bold transition-all shadow-[0_10px_30px_-10px_rgba(37,211,102,0.6)] hover:scale-[1.02]"
@@ -145,7 +145,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
                 onClick={onOpenQuote}
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-slate-700 hover:border-cyan-400/60 bg-white/5 hover:bg-white/10 text-xs sm:text-sm font-bold text-slate-200 transition-colors"
               >
-                Request Custom Quote
+                Get Wholesale Price List
               </button>
             </motion.div>
 

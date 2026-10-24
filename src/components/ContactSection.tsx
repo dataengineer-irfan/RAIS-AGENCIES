@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, MapPin, MessageSquare, Navigation, ExternalLink } from 'lucide-react';
+import { Phone, MapPin, MessageSquare, Navigation, ExternalLink, Instagram } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/catalogue';
 
 export const ContactSection: React.FC = () => {
@@ -23,7 +23,7 @@ export const ContactSection: React.FC = () => {
                 </span>
               </h2>
               <p className="text-slate-300 text-sm mt-2 leading-relaxed">
-                Direct wholesale inquiries, trade terms, and daily kitchen replenishment for Rayachoty and Rayalaseema.
+                Direct wholesale inquiries, best trade prices, and daily stock supply for Rayachoty hotels, fast food centers, cafes &amp; dhabas.
               </p>
 
               {/* Contact Entries */}
@@ -69,7 +69,7 @@ export const ContactSection: React.FC = () => {
                   <div className="p-2.5 rounded-xl bg-[#081026]/70 border border-cyan-500/20">
                     <div className="text-[10px] font-bold uppercase tracking-wider text-cyan-300">Daily Operations</div>
                     <div className="text-white font-semibold text-[11px] pt-0.5">6:00 AM – 9:00 PM</div>
-                    <div className="text-slate-400 text-[10px]">Commercial Delivery Routes</div>
+                    <div className="text-slate-400 text-[10px]">Rayachoty Town Supply</div>
                   </div>
                   <div className="p-2.5 rounded-xl bg-[#081026]/70 border border-cyan-500/20">
                     <div className="text-[10px] font-bold uppercase tracking-wider text-cyan-300">Direct Settlement</div>
@@ -83,7 +83,7 @@ export const ContactSection: React.FC = () => {
             {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-cyan-500/15">
               <a
-                href={`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encodeURIComponent('Hello RAIS Agencies, I would like to enquire about wholesale supplies.')}`}
+                href={`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encodeURIComponent('Hello RAIS Agencies, I want to inquire about wholesale frozen food and packaging supplies for my shop in Rayachoty.')}`}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#1ebe5b] text-white font-bold text-sm shadow-lg shadow-emerald-950/50 transition-all hover:scale-[1.02]"
@@ -93,13 +93,23 @@ export const ContactSection: React.FC = () => {
               </a>
 
               <a
+                href="https://instagram.com/raisfrozenfoods"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-pink-500/40 bg-pink-500/10 hover:bg-pink-500/20 text-pink-300 font-bold text-sm transition-all hover:scale-[1.02]"
+              >
+                <Instagram className="w-4 h-4 text-pink-400" />
+                <span>Instagram</span>
+              </a>
+
+              <a
                 href="https://www.google.com/maps/search/?api=1&query=Reddies+Colony+Rayachoty+516269"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-cyan-400/40 bg-cyan-400/10 hover:bg-cyan-400/20 text-cyan-200 font-bold text-sm transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-cyan-400/40 bg-cyan-400/10 hover:bg-cyan-400/20 text-cyan-200 font-bold text-sm transition-all hover:scale-[1.02]"
               >
                 <Navigation className="w-4 h-4 text-cyan-300" />
-                <span>Get directions</span>
+                <span>Directions</span>
               </a>
             </div>
           </div>

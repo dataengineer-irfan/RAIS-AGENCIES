@@ -212,11 +212,11 @@ export const ProductSpecModal: React.FC<ProductSpecModalProps> = ({
 
           </div>
 
-          {/* Trade Requisition Note */}
+          {/* Trade Wholesale Note */}
           <div className="p-3 rounded-xl bg-amber-400/5 border border-amber-400/15 flex items-start gap-2.5">
             <CheckCircle2 className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
             <div className="text-[11px] text-slate-300 leading-relaxed">
-              <strong className="text-white">Commercial Trade Quotation:</strong> Select your required quantity and submit to receive customized wholesale trade terms without obligation. Pricing is based on commercial volume and order frequency.
+              <strong className="text-white">Direct Wholesale Rates:</strong> Select your required quantity and send via WhatsApp to get today&apos;s wholesale bill. Best bulk rates for Rayachoty business owners.
             </div>
           </div>
 
@@ -227,7 +227,7 @@ export const ProductSpecModal: React.FC<ProductSpecModalProps> = ({
           
           {/* Quantity Stepper */}
           <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
-            <span className="text-xs font-semibold text-slate-400">Requisition Units:</span>
+            <span className="text-xs font-semibold text-slate-400">Order Quantity:</span>
             <div className="flex items-center rounded-xl bg-slate-900 border border-slate-800 p-1">
               <button
                 onClick={() => onUpdateQty?.(product.sku, -1)}

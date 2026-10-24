@@ -26,7 +26,7 @@ const FOOD_SHOWCASE_ITEMS: Record<'momo' | 'nugget' | 'fries', FoodShowcaseItem>
     tag: 'Traditional Bamboo Steamer Presentation with Red Schezwan Chutney',
     badge: '12-Pleat IQF -18°C',
     alt: 'Authentic Handcrafted Steamed Momos Dumplings in Bamboo Steamer',
-    categoryLabel: 'AUTHENTIC CULINARY REQUISITION · IQF DUMPLINGS'
+    categoryLabel: 'FROZEN SNACKS · WHOLESALE BULK SUPPLY'
   },
   nugget: {
     image: assetUrl('/images/products/chicken_nuggets.jpg'),
@@ -34,7 +34,7 @@ const FOOD_SHOWCASE_ITEMS: Record<'momo' | 'nugget' | 'fries', FoodShowcaseItem>
     tag: 'Cast Iron Skillet Presentation with Herb Mayonnaise Dip',
     badge: 'Golden Panko Crusted',
     alt: 'Crunchy Golden Chicken Nuggets and Popcorn in Cast Iron Skillet',
-    categoryLabel: 'FROZEN POULTRY · COMMERCIAL QSR STAPLE'
+    categoryLabel: 'CHICKEN SNACKS · FAST FOOD STAPLE'
   },
   fries: {
     image: assetUrl('/images/products/french_fries_basket.jpg'),
@@ -42,7 +42,7 @@ const FOOD_SHOWCASE_ITEMS: Record<'momo' | 'nugget' | 'fries', FoodShowcaseItem>
     tag: 'Commercial Stainless Steel Wire Frying Basket Presentation',
     badge: '9mm High-Hold Crisp',
     alt: 'Hot Golden Shoestring French Fries in Commercial Fryer Basket with Flaked Sea Salt',
-    categoryLabel: 'IQF POTATO LINE · COMMERCIAL FRYER STAPLE'
+    categoryLabel: 'FRENCH FRIES · FAST FOOD MUST-HAVE'
   }
 };
 
@@ -686,13 +686,13 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
           <div>
             <div className="flex items-center gap-2 text-cyan-300 text-xs font-semibold tracking-wider uppercase mb-2">
               <span className="block w-6 h-px bg-cyan-400" />
-              <span>Three.js & Commercial Foodservice Photography Lab</span>
+              <span>Rayachoty Wholesale Depot · Product & Packaging Showcase</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
-              Culinary Specifications & Packaging Inspector
+              Wholesale Products & Packaging Inspection
             </h2>
             <p className="text-slate-300 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">
-              Inspect authentic commercial food photography with interactive 3D perspective tilt and explore structural 3D WebGL packaging models engineered for Rayachoty commercial kitchens.
+              Inspect genuine product photos and commercial packaging boxes available at direct wholesale rates from our Rayachoty depot near Reddies Colony.
             </p>
           </div>
 
@@ -764,7 +764,7 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
               }`}
             >
               <Snowflake className="w-3.5 h-3.5 text-cyan-300" />
-              <span>3D Cryo Vault</span>
+              <span>3D Cold Storage</span>
             </button>
           </div>
         </div>
@@ -948,12 +948,12 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
               {/* Active Asset Badge */}
               <div className="flex items-center justify-between border-b border-cyan-500/20 pb-3 mb-4">
                 <span className="text-[11px] font-mono font-bold text-cyan-300 uppercase tracking-wider">
-                  {activeModel === 'momo' && 'FROZEN FOOD LINE · CULINARY REQUISITION'}
-                  {activeModel === 'nugget' && 'FROZEN POULTRY · COMMERCIAL QSR'}
-                  {activeModel === 'fries' && 'IQF POTATO LINE · FRYER STAPLE'}
-                  {activeModel === 'carton' && 'MASTER CASE SPECIFICATION'}
-                  {activeModel === 'burger_box' && 'COMMERCIAL FOOD PACKAGING'}
-                  {activeModel === 'cryo_pod' && 'COLD-CHAIN INFRASTRUCTURE'}
+                  {activeModel === 'momo' && 'FROZEN MOMOS · BULK WHOLESALE'}
+                  {activeModel === 'nugget' && 'CHICKEN NUGGETS · FAST FOOD STAPLE'}
+                  {activeModel === 'fries' && 'FRENCH FRIES · FAST FOOD MUST-HAVE'}
+                  {activeModel === 'carton' && '5-PLY WHOLESALE MASTER CARTON'}
+                  {activeModel === 'burger_box' && 'KRAFT BURGER TAKEAWAY BOX'}
+                  {activeModel === 'cryo_pod' && 'DEPOT DEEP FREEZER (-18°C)'}
                 </span>
                 <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold px-2 py-0.5 rounded-full">
                   FSSAI Certified
@@ -964,24 +964,24 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                 {activeModel === 'momo' && 'ITC Handcrafted Pleated Momos'}
                 {activeModel === 'nugget' && 'ITC Master Chef Crunchy Chicken Nuggets'}
                 {activeModel === 'fries' && 'Grade-A Shoestring French Fries (9mm)'}
-                {activeModel === 'carton' && '5-Ply Heavy Moisture-Barrier Carton'}
-                {activeModel === 'burger_box' && '4"×4" Kraft Takeaway Clamshell'}
-                {activeModel === 'cryo_pod' && 'Rayachoty -18°C Insulated Buffer Pod'}
+                {activeModel === 'carton' && '5-Ply Heavy Delivery Carton'}
+                {activeModel === 'burger_box' && '4"×4" Kraft Takeaway Clamshell Box'}
+                {activeModel === 'cryo_pod' && 'Rayachoty -18°C Cold Storage Room'}
               </h3>
 
               <p className="text-xs text-slate-300 mt-2 leading-relaxed">
                 {activeModel === 'momo' &&
-                  'Handcrafted 12-pleat wheat starch dumplings with spiced poultry filling. Individually quick frozen (IQF) at -18°C to retain moisture and ensure delicate pleats never tear during commercial steaming or frying.'}
+                  'Authentic ITC handcrafted chicken & veg momos. Flash-frozen at -18°C so pleats stay intact and never break during steaming or deep frying. Highest seller for Rayachoty fast food stalls, cafes & dhabas.'}
                 {activeModel === 'nugget' &&
-                  'Minced poultry nuggets in golden tempura batter. Engineered for commercial quick-service fryers with high fry-hold retention (retains exterior crispness up to 45 minutes in holding chutes).'}
+                  'Crispy golden tempura chicken nuggets and popcorn. Stays hot and super crunchy after frying. Perfect portion control and high profit margins for fast food centers and cafes.'}
                 {activeModel === 'fries' &&
-                  'Straight-cut Grade-A Russet Burbank potatoes, par-fried in trans-fat-free vegetable oil and flash frozen. Low oil uptake (<6%) and superior crisp retention for high-turnover QSR menus.'}
+                  'Grade-A 9mm shoestring french fries. Absorbs very little oil, fries in under 3 minutes, and stays crispy. Best wholesale case rates in Rayachoty.'}
                 {activeModel === 'carton' &&
-                  'Engineered for sub-zero frozen poultry and dairy cartons. Heavy-gauge flute board prevents crushing during multi-tier warehouse palletizing and refrigerated transport.'}
+                  'Heavy-duty 5-ply corrugated delivery cartons. Protects packets during transport and deep freezer storage without breaking, softening or moisture damage.'}
                 {activeModel === 'burger_box' &&
-                  'Rigid micro-corrugated virgin kraft paperboard. Laser die-cut steam vents preserve exterior crispness while retaining thermal core heat for commercial delivery.'}
+                  'Heavy virgin kraft clamshell box with built-in laser steam vents. Keeps burgers hot and fresh without making buns soggy. 100% food grade.'}
                 {activeModel === 'cryo_pod' &&
-                  'Cold-chain staging chamber maintaining continuous sub-zero thermal equilibrium prior to route dispatch across Rayalaseema commercial kitchen corridors.'}
+                  'Commercial deep freezer cold storage right at our Rayachoty depot. Every product stays completely frozen and fresh with zero melting before reaching your kitchen.'}
               </p>
 
               {/* Technical Specifications Matrix */}
@@ -992,12 +992,12 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                     <span>Kitchen Preparation Standard:</span>
                   </div>
                   <div className="text-xs text-slate-300 mt-0.5 pl-5">
-                    {activeModel === 'momo' && 'Steam for 6–8 mins at 100°C or Deep Fry for 3 mins at 175°C without thawing'}
-                    {activeModel === 'nugget' && 'Deep fry straight from freezer in 180°C oil for 3.5 mins until golden brown'}
+                    {activeModel === 'momo' && 'Steam for 6–8 mins or Deep Fry for 3 mins directly without thawing'}
+                    {activeModel === 'nugget' && 'Deep fry straight from freezer in hot oil (180°C) for 3.5 mins until golden brown'}
                     {activeModel === 'fries' && 'Deep fry directly from frozen at 175°C–180°C for 2.5–3 minutes'}
-                    {activeModel === 'carton' && '5-Ply Corrugated Kraft (180 GSM Outer / 140 GSM Fluting)'}
+                    {activeModel === 'carton' && '5-Ply Corrugated Kraft (Heavy 180 GSM Outer / 140 GSM Fluting)'}
                     {activeModel === 'burger_box' && '320 GSM Virgin Food-Grade Kraft Paperboard'}
-                    {activeModel === 'cryo_pod' && 'Polyurethane Double-Wall Core with Stainless Liner'}
+                    {activeModel === 'cryo_pod' && 'Continuous -18°C to -22°C commercial deep freezer holding'}
                   </div>
                 </div>
 
@@ -1007,12 +1007,12 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                     <span>Cold Chain & Storage Protocol:</span>
                   </div>
                   <div className="text-xs text-slate-300 mt-0.5 pl-5">
-                    {activeModel === 'momo' && 'Continuous -18°C storage. Zero ice crystallization. Shelf life 12 months.'}
-                    {activeModel === 'nugget' && 'Sub-zero IQF holding at -18°C. Do not refreeze once thawed.'}
-                    {activeModel === 'fries' && 'Maintain at -18°C or below. Rapid cooking directly from freezer state.'}
+                    {activeModel === 'momo' && 'Store at continuous -18°C deep freezer. 100% fresh, zero ice crystals. 12 months shelf life.'}
+                    {activeModel === 'nugget' && 'Sub-zero IQF holding at -18°C. Cook directly from frozen state.'}
+                    {activeModel === 'fries' && 'Maintain at -18°C or below in deep freezer. Fast cooking directly from frozen.'}
                     {activeModel === 'carton' && 'Tested stable down to -25°C without fiber softening'}
                     {activeModel === 'burger_box' && 'Heat tolerant up to 105°C; oil & grease resistant'}
-                    {activeModel === 'cryo_pod' && 'Certified -18°C to -22°C continuous holding'}
+                    {activeModel === 'cryo_pod' && 'Zero cold-chain break from factory to Rayachoty depot'}
                   </div>
                 </div>
 
@@ -1027,7 +1027,7 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                     {activeModel === 'fries' && '2.5kg commercial foodservice bags · 4 bags (10kg) per wholesale case'}
                     {activeModel === 'carton' && 'Master cases containing 10 or 12 individual 1kg retail bags'}
                     {activeModel === 'burger_box' && 'Bundled in packs of 100 Nos / Master bundle 600 Nos'}
-                    {activeModel === 'cryo_pod' && 'Depot staging buffer; daily kitchen replenishment routes'}
+                    {activeModel === 'cryo_pod' && 'Daily dispatch to Rayachoty hotels & shops or instant counter pickup'}
                   </div>
                 </div>
               </div>
@@ -1039,11 +1039,11 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                 onClick={onOpenQuote}
                 className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-full bg-gradient-to-r from-cyan-400 to-sky-400 hover:from-cyan-300 hover:to-sky-300 text-slate-950 text-xs sm:text-sm font-black transition-all shadow-lg shadow-cyan-400/25 active:scale-95"
               >
-                <span>Request Commercial Requisition Terms</span>
+                <span>Get Today&apos;s Wholesale Price List</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
               <p className="text-[11px] text-center text-slate-400 mt-2">
-                Factory allocations direct from Rayachoty depot. Zero retail markup.
+                Direct wholesale depot rates for Rayachoty business owners. Best margin guaranteed.
               </p>
             </div>
 

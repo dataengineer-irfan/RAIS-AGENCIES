@@ -17,39 +17,39 @@ interface StorageZone {
 const STORAGE_ZONES: StorageZone[] = [
   {
     id: 'frozen',
-    name: 'Sub-Zero Deep Freeze Vault',
+    name: 'Deep Freezer Unit (-18°C)',
     temp: '-18.4°C',
     targetRange: '-18°C to -22°C',
     status: 'Optimal',
     color: 'from-cyan-500/20 via-blue-500/10 to-transparent',
     badgeColor: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30',
     categories: ['Chicken Items', 'Veg Snacks', 'French Fries', 'Momos'],
-    protocol: 'Continuous cryogenic compression cycle with backup diesel generator synchronization.',
-    monitoring: 'Dual digital NTC temperature telemetry logged at 15-minute intervals.'
+    protocol: 'Continuous commercial deep freezer cooling with diesel generator power backup.',
+    monitoring: 'Digital temperature monitoring every 15 minutes to prevent any thawing.'
   },
   {
     id: 'chilled',
-    name: 'Chilled Dairy & Cheese Chamber',
+    name: 'Chilled Dairy Storage (2°C to 4°C)',
     temp: '+2.8°C',
     targetRange: '0°C to +4°C',
     status: 'Optimal',
     color: 'from-amber-500/20 via-yellow-500/10 to-transparent',
     badgeColor: 'text-amber-400 bg-amber-500/10 border-amber-500/30',
     categories: ['Mozzarella Diced', 'Cheese Slices', 'Table Butter', 'Fresh Paneer'],
-    protocol: 'Micro-climate air circulation preventing moisture condensation on dairy packaging.',
-    monitoring: 'Constant dew-point monitoring to safeguard melt characteristics and shelf-life.'
+    protocol: 'Dedicated cooling to keep mozzarella cheese, paneer, and butter fresh and ready to melt.',
+    monitoring: 'Daily temperature checks to preserve freshness and stretch quality.'
   },
   {
     id: 'ambient',
-    name: 'Controlled Ambient Warehouse',
+    name: 'Clean Dry Storage Area',
     temp: '+21.5°C',
     targetRange: '+18°C to +25°C',
     status: 'Active',
     color: 'from-emerald-500/20 via-teal-500/10 to-transparent',
     badgeColor: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30',
     categories: ['Ketchup & Sauces', 'Kraft Pizza Boxes', 'Breading Mix', 'Spices'],
-    protocol: 'Relative humidity below 65% preserving carton flute compression strength and powder dryness.',
-    monitoring: 'Hygrometer logging protecting corrugated cardboard structural integrity.'
+    protocol: 'Dry, moisture-free storage keeping kraft pizza boxes strong and sauces, syrups & spices fresh.',
+    monitoring: 'Protected packaging storage ensuring boxes never get damp or lose strength.'
   }
 ];
 
@@ -68,10 +68,10 @@ export const ColdChainHUD: React.FC = () => {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-amber-500/10 border border-amber-500/30 text-amber-400 mb-3">
               <Activity className="w-3.5 h-3.5 animate-pulse text-amber-400" />
-              <span>Depot Telemetry & Logistics Discipline</span>
+              <span>Rayachoty Depot Cold Storage Standards</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-serif text-white tracking-tight">
-              Operational Cold-Chain Standards & Storage Regimes
+              How We Keep Your Stock 100% Fresh in Rayachoty
             </h2>
           </div>
           <div className="mt-4 md:mt-0 flex items-center gap-3 text-xs text-stone-400">
@@ -134,20 +134,20 @@ export const ColdChainHUD: React.FC = () => {
               );
             })}
 
-            {/* Regional Transport Corridor Strip */}
+            {/* Regional Delivery Areas Strip */}
             <div className="p-4 rounded-xl bg-stone-950/40 border border-stone-800/60 mt-2">
               <div className="flex items-center gap-2 text-xs font-semibold text-stone-300 mb-2">
                 <Truck className="w-4 h-4 text-amber-400" />
-                <span>Daily Consolidated Delivery Corridors</span>
+                <span>Daily Wholesale Supply & Delivery Areas</span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {['Rayachoty Hub', 'Kadapa Route', 'Rajampet Corridor', 'Madanapalle Line', 'Kalakada Store'].map((corridor, idx) => (
+                {['Rayachoty Town Hub', 'Kadapa Road', 'Rajampet Road', 'Madanapalle Road', 'Galiveedu & Nearby'].map((area, idx) => (
                   <span
                     key={idx}
                     className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-stone-900 text-[11px] font-mono text-stone-400 border border-stone-800"
                   >
                     <MapPin className="w-3 h-3 text-amber-500/70" />
-                    {corridor}
+                    {area}
                   </span>
                 ))}
               </div>
@@ -167,7 +167,7 @@ export const ColdChainHUD: React.FC = () => {
                 <div className="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-stone-800">
                   <div>
                     <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400/90">
-                      Operational Zone Specification
+                      Depot Storage Standard
                     </span>
                     <h3 className="text-xl sm:text-2xl font-serif text-white mt-0.5">
                       {activeZone.name}
@@ -201,7 +201,7 @@ export const ColdChainHUD: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                   <div className="p-4 rounded-xl bg-stone-950/60 border border-stone-800/60">
                     <div className="text-[11px] font-mono uppercase tracking-wider text-stone-400 mb-1">
-                      Handling Protocol
+                      Depot Storage Protocol
                     </div>
                     <p className="text-xs text-stone-300 leading-relaxed">
                       {activeZone.protocol}
@@ -210,7 +210,7 @@ export const ColdChainHUD: React.FC = () => {
 
                   <div className="p-4 rounded-xl bg-stone-950/60 border border-stone-800/60">
                     <div className="text-[11px] font-mono uppercase tracking-wider text-stone-400 mb-1">
-                      Sensor Telemetry Log
+                      Temperature Monitoring
                     </div>
                     <p className="text-xs text-stone-300 leading-relaxed">
                       {activeZone.monitoring}
@@ -223,13 +223,13 @@ export const ColdChainHUD: React.FC = () => {
               <div className="mt-8 pt-5 border-t border-stone-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs text-stone-400">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-amber-400" />
-                  <span>Protected transit via insulated PUF containers & eutectic cooling.</span>
+                  <span>Insulated thermal boxes ensure stock arrives ice-cold at your door.</span>
                 </div>
                 <a
                   href="#/who-we-serve"
                   className="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 transition-colors font-semibold"
                 >
-                  <span>View Delivery Schedules</span>
+                  <span>Check Delivery Areas</span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </a>
               </div>

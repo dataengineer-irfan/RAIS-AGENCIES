@@ -1,6 +1,6 @@
 import React from 'react';
 import { RaisLogo } from './RaisLogo';
-import { MapPin, Phone, MessageSquare, ShieldCheck, Snowflake } from 'lucide-react';
+import { MapPin, Phone, MessageSquare, ShieldCheck, Snowflake, Instagram } from 'lucide-react';
 import { BUSINESS_INFO, CATEGORIES } from '../data/catalogue';
 import { NavPage } from './Header';
 import { assetUrl } from '../utils/assetUrl';
@@ -22,7 +22,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <RaisLogo size="lg" />
             </button>
             <p className="text-slate-400 text-xs leading-relaxed max-w-sm mt-3">
-              Authoritative commercial distributor of wholesale frozen food products, institutional dairy, gourmet condiments, and food packaging for restaurants and food businesses in Rayachoty & surrounding territories.
+              Rayachoty&apos;s leading wholesale agency for frozen foods, fast food ingredients, sauces, dairy, and takeaway packaging. Direct wholesale supply for hotels, fast food centers, cafes &amp; bakeries in Rayachoty (516269) and nearby areas.
             </p>
 
             <div className="pt-2 space-y-2">
@@ -96,6 +96,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   className="text-emerald-400 hover:text-emerald-300 font-bold"
                 >
                   WhatsApp: +91 {BUSINESS_INFO.phones[0]}
+                </a>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <Instagram className="w-4 h-4 text-pink-400 flex-shrink-0" />
+                <a
+                  href="https://instagram.com/raisfrozenfoods"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-pink-400 hover:text-pink-300 font-bold"
+                >
+                  Instagram: @raisfrozenfoods
                 </a>
               </div>
 

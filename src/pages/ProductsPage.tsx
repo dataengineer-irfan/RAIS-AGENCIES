@@ -96,16 +96,16 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           <div>
             <div className="inline-flex items-center gap-2 text-cyan-300 text-xs font-bold uppercase tracking-[0.2em] mb-2">
               <span className="block w-6 h-px bg-cyan-400" />
-              <span>Complete Commercial Wholesale Inventory</span>
+              <span>Rayachoty Wholesale Catalogue</span>
             </div>
             <h1 className="font-serif text-3xl sm:text-5xl font-black text-white tracking-tight">
-              Commercial{' '}
+              Wholesale Products &{' '}
               <span className="bg-gradient-to-r from-cyan-300 to-sky-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,210,255,0.4)]">
-                Product Directory
+                Price List
               </span>
             </h1>
             <p className="text-sm text-slate-300 mt-2 max-w-2xl leading-relaxed">
-              Wholesale inventory specifications for Rayachoty and regional food operators. Showing {filtered.length} of {PRODUCTS.length} verified commercial products across 8 categories.
+              Wholesale products and bulk packs for Rayachoty hotels, fast food centers, cafes, and bakeries. Showing {filtered.length} of {PRODUCTS.length} products across 8 categories.
             </p>
           </div>
 
@@ -116,14 +116,14 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#0f1c3f] border border-cyan-400/30 hover:border-cyan-400 text-xs font-bold text-cyan-200 hover:text-white transition-all shadow-lg backdrop-blur-md"
             >
               <FileDown className="w-4 h-4 text-cyan-300" />
-              <span>Commercial Brochure (JPG)</span>
+              <span>Wholesale Brochure (JPG)</span>
             </a>
 
             <button
               onClick={() => onOpenFullQuote && onOpenFullQuote()}
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-sky-500 text-slate-950 text-xs font-black transition-all shadow-[0_4px_20px_rgba(0,210,255,0.35)] hover:scale-[1.02]"
             >
-              <span>View Requisition Sheet</span>
+              <span>View Wholesale Order</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -410,7 +410,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
             })}
           </div>
         ) : (
-          /* Institutional Requisition Order Sheet Table */
+          /* Wholesale Products Order Sheet Table */
           <div className="overflow-x-auto rounded-2xl border border-cyan-500/25 bg-[#0f1c3f]/90 shadow-xl backdrop-blur-md">
             <table className="w-full text-left text-xs">
               <thead className="bg-[#081026] border-b border-cyan-500/20 text-cyan-300 uppercase tracking-wider text-[11px]">
@@ -421,7 +421,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                   <th className="py-3.5 px-4 font-semibold">Category</th>
                   <th className="py-3.5 px-4 font-semibold">Pack Size</th>
                   <th className="py-3.5 px-4 font-mono font-semibold">HSN</th>
-                  <th className="py-3.5 px-4 font-semibold text-right">Requisition</th>
+                  <th className="py-3.5 px-4 font-semibold text-right">Wholesale Order</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-cyan-500/15 text-slate-300">

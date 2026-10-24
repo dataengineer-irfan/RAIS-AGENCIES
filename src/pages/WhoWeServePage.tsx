@@ -59,12 +59,12 @@ export const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onOpenQuote }) =
     },
     {
       icon: Store,
-      title: 'Hotels, Banquets & Caterers',
-      subtitle: 'Event Catering, Buffets & Institutional Messes',
+      title: 'Hotels, Dhabas, Biryani Points & Caterers',
+      subtitle: 'Hotels, Fast Food & Function Catering',
       image: assetUrl('/images/products/chicken_momos.jpg'),
       tag: 'Bulk Staging & High-Volume IQF',
-      challenge: 'Serving 500+ guests simultaneously requires zero-prep appetizers, consistent paneer quality, and bulk condiments.',
-      solution: 'ITC handcrafted frozen momos, Godrej paneer pops & tandoori nuggets, Milky Mist paneer cubes, and 8g single-serve condiment sachets for sanitized banquet service.',
+      challenge: 'Serving high-volume lunch and dinner rushes requires quick-cook appetizers, consistent malai paneer, and bulk sauces.',
+      solution: 'ITC frozen momos, Godrej paneer pops & nuggets, Milky Mist fresh paneer cubes, and 1kg/sachet bulk condiments.',
       recommended: [
         'I.T.C Veg & Chicken Momos (1 Packet / 500g)',
         'Godrej Paneer Pops (1kg)',
@@ -87,16 +87,16 @@ export const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onOpenQuote }) =
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 text-cyan-300 text-xs font-bold uppercase tracking-[0.2em] mb-3">
             <ShieldCheck className="w-4 h-4 text-cyan-400" />
-            <span>Dedicated Commercial Foodservice Partnerships</span>
+            <span>Supplying Rayachoty Businesses Directly</span>
           </div>
           <h1 className="font-serif text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-            Commercial Wholesale Solutions Built for{' '}
+            Wholesale Supply Built for{' '}
             <span className="bg-gradient-to-r from-cyan-300 to-sky-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,210,255,0.4)]">
-              Your Kitchen
+              Rayachoty Food Businesses
             </span>
           </h1>
           <p className="text-sm sm:text-base text-slate-300 mt-3 leading-relaxed">
-            From single-counter street cafés to high-volume banquet halls across Rayachoty and Rayalaseema, we support commercial kitchens with dedicated cold-storage inventory and direct wholesale terms.
+            From busy street fast food stalls and shawarma points to top hotels and caterers across Rayachoty (516269), we provide direct depot rates, deep freezer freshness, and reliable daily supply.
           </p>
         </div>
 

@@ -14,16 +14,16 @@ export const LegalPage: React.FC = () => {
         <div>
           <div className="inline-flex items-center gap-2 text-cyan-300 text-xs font-bold uppercase tracking-[0.2em] mb-3">
             <FileText className="size-4 text-cyan-400" />
-            <span>Commercial Operating Policies</span>
+            <span>Wholesale Operating Policies</span>
           </div>
           <h1 className="font-serif text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
             Terms of Wholesale{' '}
             <span className="bg-gradient-to-r from-cyan-300 to-sky-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,210,255,0.4)]">
-              Supply & Policies
+              Supply & Orders
             </span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 mt-2">
-            Standard operating conditions for commercial B2B transactions with RAIS Agencies, Rayachoty.
+            Simple, transparent wholesale rules for businesses buying from RAIS Agencies, Rayachoty (516269).
           </p>
         </div>
 
@@ -31,10 +31,10 @@ export const LegalPage: React.FC = () => {
         <div className="p-6 sm:p-8 rounded-3xl bg-[#0f1c3f]/85 border border-cyan-500/25 space-y-3 shadow-xl backdrop-blur-xl">
           <h2 className="text-lg font-bold font-serif text-white flex items-center gap-2.5">
             <CheckCircle2 className="size-5 text-cyan-400 shrink-0" />
-            <span>1. Wholesale Terms & Settlement</span>
+            <span>1. Wholesale Orders & Payment Terms</span>
           </h2>
           <p className="text-xs sm:text-sm leading-relaxed text-slate-300">
-            RAIS Agencies distributes exclusively to verified foodservice operators, restaurants, cafés, quick-service food outlets, and institutional caterers. All transactions are settled on a <strong className="text-white font-semibold">Cash on Delivery (COD)</strong> or <strong className="text-white font-semibold">Immediate Digital UPI</strong> basis (<code className="text-cyan-300 font-mono text-xs">{BUSINESS_INFO.upiId}</code>). Invoice date equals due date unless prior written commercial credit terms have been formally executed.
+            RAIS Agencies supplies hotels, fast food centers, bakeries, cafes, and caterers in Rayachoty. Payment is settled via <strong className="text-white font-semibold">Cash on Delivery (COD)</strong> or instant digital <strong className="text-white font-semibold">UPI</strong> (Google Pay, PhonePe, Paytm to <code className="text-cyan-300 font-mono text-xs">{BUSINESS_INFO.upiId}</code>). Credit terms are available only for verified regular business accounts after mutual agreement.
           </p>
         </div>
 
@@ -42,10 +42,10 @@ export const LegalPage: React.FC = () => {
         <div className="p-6 sm:p-8 rounded-3xl bg-[#0f1c3f]/85 border border-cyan-500/25 space-y-3 shadow-xl backdrop-blur-xl">
           <h2 className="text-lg font-bold font-serif text-white flex items-center gap-2.5">
             <ShieldAlert className="size-5 text-amber-400 shrink-0" />
-            <span>2. Cold-Chain Handover & Product Acceptance</span>
+            <span>2. Cold Storage & Quality Handover</span>
           </h2>
           <p className="text-xs sm:text-sm leading-relaxed text-slate-300">
-            Frozen food inventory (French fries, nuggets, patties, momos, mozzarella cheese) leaves our Rayachoty hub at continuous <strong className="text-cyan-300 font-semibold">-18°C deep freeze</strong>. Buyers are strictly advised to inspect product temperature and carton seals at the time of delivery or counter handover. Once accepted, products must be immediately transferred to commercial deep freezers. Due to food safety standards, frozen items cannot be returned or refunded once thawed.
+            All frozen items (French fries, nuggets, momos, burger patties, mozzarella cheese) leave our Rayachoty depot frozen solid at <strong className="text-cyan-300 font-semibold">-18°C deep freeze</strong>. Please inspect cartons and packets at the time of counter pickup or town delivery and shift them immediately into your deep freezer. Due to food hygiene and safety standards, frozen items cannot be returned or replaced once thawed.
           </p>
         </div>
 
@@ -53,10 +53,10 @@ export const LegalPage: React.FC = () => {
         <div className="p-6 sm:p-8 rounded-3xl bg-[#0f1c3f]/85 border border-cyan-500/25 space-y-3 shadow-xl backdrop-blur-xl">
           <h2 className="text-lg font-bold font-serif text-white flex items-center gap-2.5">
             <ShieldCheck className="size-5 text-emerald-400 shrink-0" />
-            <span>3. GST & Tax Invoicing</span>
+            <span>3. GST & Wholesale Billing</span>
           </h2>
           <p className="text-xs sm:text-sm leading-relaxed text-slate-300">
-            In accordance with B2B wholesale distribution standards, official wholesale quotations and volume trade terms are provided directly to verified commercial food-service establishments upon quotation request. Formal commercial tax invoices detailing statutory Goods and Services Tax (GST) according to approved HSN classifications (5% on frozen food staples, 12% on dairy and gourmet sauces, 18% on packaging materials) and buyer GSTIN are generated upon order execution.
+            We provide official wholesale tax invoices with statutory GST as per government HSN codes (5% on frozen snacks, 12% on dairy and culinary sauces, 18% on takeaway packaging). If your business is GST registered, your GSTIN will be printed on the invoice for tax credit claims.
           </p>
         </div>
 
@@ -64,10 +64,10 @@ export const LegalPage: React.FC = () => {
         <div className="p-6 sm:p-8 rounded-3xl bg-[#0f1c3f]/85 border border-cyan-500/25 space-y-3 shadow-xl backdrop-blur-xl">
           <h2 className="text-lg font-bold font-serif text-white flex items-center gap-2.5">
             <CheckCircle2 className="size-5 text-cyan-400 shrink-0" />
-            <span>4. Commercial Communications</span>
+            <span>4. Direct Business Communication</span>
           </h2>
           <p className="text-xs sm:text-sm leading-relaxed text-slate-300">
-            Direct communications via WhatsApp, telephone, or digital requisition forms are strictly utilised for operational fulfillment, dispatch notifications, and price list updates. Contact details are never shared with third parties or external marketing agencies.
+            Your phone number and WhatsApp details are used only to send order updates, dispatch notes, and updated wholesale rate sheets. We do not share your contact information with any third-party marketing companies.
           </p>
         </div>
 

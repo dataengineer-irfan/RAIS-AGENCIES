@@ -6,23 +6,23 @@ import { motion } from 'framer-motion';
 const VALUE_PILLARS = [
   {
     icon: ShieldCheck,
-    title: '100% Quality Assured',
-    description: 'Only genuine products sourced directly from authorized manufacturer distribution depots.'
+    title: '100% Genuine Brand Stock',
+    description: 'Direct allocations from ITC Master Chef, McCain, Godrej, Del Monte, Milky Mist & Amul.'
   },
   {
     icon: Snowflake,
-    title: 'Frozen & Fresh',
-    description: 'Continuous -18°C sub-zero storage and thermal logistics to ensure zero ice crystallization.'
+    title: 'Deep Freezer -18°C Fresh',
+    description: 'Maintained at continuous -18°C in Rayachoty depot so food stays 100% frozen with zero thawing.'
   },
   {
     icon: Truck,
-    title: 'On Time Delivery',
-    description: 'Consistent, predictable route delivery schedules so your commercial fryers never run dry.'
+    title: 'Same-Day Town Delivery',
+    description: 'Fast delivery across Rayachoty town or direct counter pickup at Reddies Colony depot.'
   },
   {
     icon: Award,
     title: 'Best Wholesale Rates',
-    description: 'Direct institutional trade pricing and credit terms tailored for high-volume foodservice operations.'
+    description: 'Direct wholesale pricing for hotels, fast food centers, and bakeries. No retail commission.'
   }
 ];
 
@@ -34,7 +34,7 @@ export const BrandMarquee: React.FC = () => {
         {/* Section Kicker & Brand Marquee */}
         <div className="text-center mb-10">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300 mb-4">
-            Authorised Institutional Distribution Partners
+            Authorised Brand Distribution & Wholesale Agency
           </p>
 
           <div className="relative overflow-hidden w-full max-w-6xl mx-auto py-2">

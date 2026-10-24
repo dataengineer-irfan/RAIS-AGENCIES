@@ -40,24 +40,24 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
   const totalUnits = itemsInQuote.reduce((acc, curr) => acc + curr.qty, 0);
 
   const handleWhatsAppSend = () => {
-    let message = `*WHOLESALE REQUISITION — RAIS AGENCIES RAYACHOTY*\n`;
+    let message = `*WHOLESALE ORDER — RAIS AGENCIES RAYACHOTY (516269)*\n`;
     message += `──────────────────\n`;
-    if (customerName) message += `👤 *Contact Person:* ${customerName}\n`;
-    if (businessName) message += `🏢 *Business / Outlet:* ${businessName}\n`;
+    if (customerName) message += `👤 *Name:* ${customerName}\n`;
+    if (businessName) message += `🏢 *Shop / Hotel:* ${businessName}\n`;
     if (phone) message += `📞 *Phone / WhatsApp:* ${phone}\n`;
-    message += `📍 *Delivery Hub:* ${deliveryArea || 'Rayachoty'}\n`;
+    message += `📍 *Delivery Area:* ${deliveryArea || 'Rayachoty town'}\n`;
     message += `──────────────────\n`;
-    message += `*ORDERED SKUS & QUANTITIES (${itemsInQuote.length} SKUs / ${totalUnits} units):*\n`;
+    message += `*ORDERED ITEMS (${itemsInQuote.length} items / ${totalUnits} units):*\n`;
 
     itemsInQuote.forEach(({ product, qty }, idx) => {
-      message += `${idx + 1}. [${product.sku}] ${product.name}\n`;
-      message += `   Brand: ${product.brand} | Pack: ${product.pack} | Units: *${qty}*\n`;
+      message += `${idx + 1}. ${product.name}\n`;
+      message += `   Brand: ${product.brand} | Pack: ${product.pack} | Qty: *${qty}*\n`;
     });
 
     message += `──────────────────\n`;
     if (notes) message += `📝 *Notes:* ${notes}\n`;
     message += `──────────────────\n`;
-    message += `Please provide your formal B2B invoice, wholesale volume slabs, and delivery schedule.`;
+    message += `Please send today's wholesale bill and confirm delivery/pickup time.`;
 
     const encoded = encodeURI(message);
     window.open(`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encoded}`, '_blank');
@@ -80,10 +80,10 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
             </div>
             <div>
               <h2 className="font-serif text-base sm:text-lg font-bold text-white leading-tight">
-                Wholesale Requisition Sheet
+                Wholesale Order &amp; Price List
               </h2>
               <p className="text-xs text-slate-400">
-                Direct B2B Commercial Enquiry • RAIS Agencies Rayachoty
+                Direct Wholesale Rates · RAIS Agencies Rayachoty (516269)
               </p>
             </div>
           </div>
@@ -103,9 +103,9 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               <div className="size-16 rounded-full bg-cyan-400/20 border border-cyan-400/40 text-cyan-300 mx-auto flex items-center justify-center">
                 <CheckCircle className="size-8" />
               </div>
-              <h3 className="font-serif text-xl font-bold text-white">Quotation Request Logged!</h3>
+              <h3 className="font-serif text-xl font-bold text-white">Wholesale Order Ready!</h3>
               <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-                Thank you, <strong>{customerName || 'Partner'}</strong>. For instant dispatch confirmation and scheduled delivery, transmit this requisition sheet directly to our Rayachoty WhatsApp desk.
+                Thank you, <strong>{customerName || 'Sir'}</strong>. Click below to send this order directly to our Rayachoty WhatsApp desk for today&apos;s wholesale bill and fast dispatch.
               </p>
 
               <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -114,7 +114,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/40"
                 >
                   <MessageSquare className="size-4 fill-current" />
-                  <span>Transmit to WhatsApp Desk</span>
+                  <span>Send Order to WhatsApp Desk</span>
                 </button>
                 <button
                   onClick={() => {
@@ -218,11 +218,11 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
               {itemsInQuote.length > 0 && (
                 <div className="p-4 rounded-2xl bg-[#081026] border border-cyan-500/20 space-y-1.5 text-xs">
                   <div className="flex justify-between text-slate-300 font-semibold">
-                    <span>Requisition Scope:</span>
-                    <span className="text-cyan-300 font-bold">{itemsInQuote.length} Products ({totalUnits} Requested Units)</span>
+                    <span>Order Summary:</span>
+                    <span className="text-cyan-300 font-bold">{itemsInQuote.length} Products ({totalUnits} Selected Units)</span>
                   </div>
                   <p className="text-[11px] text-slate-400 leading-relaxed pt-1.5 border-t border-cyan-500/15">
-                    Official wholesale quotation with volume discount tiers will be generated directly based on your delivery destination and ordering cycle. Zero retail markup.
+                    Wholesale bill with best bulk rates will be shared directly on WhatsApp based on your order. Best wholesale rates guaranteed.
                   </p>
                 </div>
               )}
@@ -313,7 +313,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                     className="w-full sm:flex-1 py-3.5 px-5 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] disabled:opacity-40 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/40 transition-all hover:scale-[1.01]"
                   >
                     <MessageSquare className="size-4 fill-current" />
-                    <span>Send Requisition via WhatsApp</span>
+                    <span>Send Order via WhatsApp</span>
                   </button>
 
                   <button
@@ -322,7 +322,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                     className="w-full sm:w-auto py-3.5 px-6 rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 hover:from-cyan-300 hover:to-sky-400 disabled:opacity-40 text-slate-950 font-black text-xs flex items-center justify-center gap-1.5 transition-all shadow-md hover:scale-[1.01]"
                   >
                     <Send className="size-3.5" />
-                    <span>Submit Sheet</span>
+                    <span>Request Wholesale Bill</span>
                   </button>
                 </div>
               </form>

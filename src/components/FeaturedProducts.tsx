@@ -257,7 +257,7 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300 mb-2">
-              Price List & Product Requisitions
+              Direct Wholesale Products & Rates
             </p>
             <h2 className="font-serif text-3xl sm:text-5xl font-black tracking-tight text-white">
               Our{' '}
@@ -266,7 +266,7 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
               </span>
             </h2>
             <p className="text-slate-300 text-sm mt-2 max-w-xl leading-relaxed">
-              Tap &quot;+ Add&quot; to build your wholesale order or requisition sheet, then transmit it directly to our Rayachoty desk via WhatsApp.
+              Tap &quot;+ Add&quot; to build your wholesale order list, then send it directly to our Rayachoty WhatsApp desk for today&apos;s best rates.
             </p>
           </div>
 
