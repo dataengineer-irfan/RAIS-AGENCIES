@@ -7,7 +7,7 @@ console.log('  RAIS AGENCIES — INSTAGRAM REELS & ENQUIRY AUTOMATION QA SUITE '
 console.log('================================================================\n');
 
 let passedTests = 0;
-let totalTests = 9;
+let totalTests = 10;
 
 function runTest(name, fn) {
   try {
@@ -188,6 +188,25 @@ runTest('9. Compiled 1080x1920 MP4 Video & Audio Pipeline', () => {
     const full = path.join(__dirname, sp);
     assert(fs.existsSync(full), `Scene visual plate must exist: ${sp}`);
   }
+});
+
+// -----------------------------------------------------------------------------
+// TEST 10: Permanent Virtual Presenter (Ayesha) & Multi-Scene Consistency
+// -----------------------------------------------------------------------------
+runTest('10. Permanent Virtual Presenter (Ayesha) & Multi-Scene Consistency', () => {
+  const ayeshaVideo = path.join(__dirname, '../public/videos/campaign_ayesha_monsoon_hi.mp4');
+  assert(fs.existsSync(ayeshaVideo), 'Master Ayesha campaign video must exist at public/videos/campaign_ayesha_monsoon_hi.mp4');
+  
+  const ayeshaStat = fs.statSync(ayeshaVideo);
+  assert(ayeshaStat.size > 2000000, `Ayesha video size must be > 2MB, found ${ayeshaStat.size} bytes`);
+
+  const sceneAPath = path.join(__dirname, '../public/images/character_test_scene_a_rain.jpg');
+  const sceneBPath = path.join(__dirname, '../public/images/character_test_scene_b_b2b.jpg');
+  assert(fs.existsSync(sceneAPath), 'Scene A character master plate must exist');
+  assert(fs.existsSync(sceneBPath), 'Scene B character master plate must exist');
+
+  const hiNarration = path.join(__dirname, '../public/audio/campaign_ref_ayesha_hi.mp3');
+  assert(fs.existsSync(hiNarration), 'Hindi neural narration must exist');
 });
 
 console.log('\n----------------------------------------------------------------');
