@@ -7,6 +7,7 @@ import { WhoWeServePage } from './pages/WhoWeServePage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { LegalPage } from './pages/LegalPage';
+import { AutomationDashboardPage } from './pages/AutomationDashboardPage';
 import { Footer } from './components/Footer';
 import { QuoteModal } from './components/QuoteModal';
 import { MobileQuickBar } from './components/MobileQuickBar';
@@ -44,6 +45,9 @@ export const App: React.FC = () => {
         setSelectedCategoryCode(null);
       } else if (hash === 'legal' || hash === 'terms') {
         setCurrentPage('legal');
+        setSelectedCategoryCode(null);
+      } else if (hash === 'automation' || hash === 'dashboard' || hash === 'reels') {
+        setCurrentPage('automation');
         setSelectedCategoryCode(null);
       }
     };
@@ -144,6 +148,8 @@ export const App: React.FC = () => {
           <ContactPage />
         ) : currentPage === 'legal' ? (
           <LegalPage />
+        ) : currentPage === 'automation' ? (
+          <AutomationDashboardPage />
         ) : (
           <HomePage
             onOpenQuote={() => setIsQuoteOpen(true)}

@@ -3,7 +3,7 @@ import { RaisLogo } from './RaisLogo';
 import { Phone, MessageSquare, FileText, Menu, X, MapPin, ChevronRight } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/catalogue';
 
-export type NavPage = 'home' | 'products' | 'who-we-serve' | 'about' | 'contact' | 'legal';
+export type NavPage = 'home' | 'products' | 'who-we-serve' | 'about' | 'contact' | 'legal' | 'automation';
 
 interface HeaderProps {
   currentPage: NavPage;
@@ -20,12 +20,13 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navLinks: { label: string; page: NavPage }[] = [
+  const navLinks: { label: string; page: NavPage; badge?: string }[] = [
     { label: 'Home', page: 'home' },
     { label: 'Products & Catalogue', page: 'products' },
     { label: 'Who We Serve', page: 'who-we-serve' },
     { label: 'About RAIS', page: 'about' },
     { label: 'Contact & Hub', page: 'contact' },
+    { label: 'AI Reels & Leads', page: 'automation', badge: 'AI' },
   ];
 
   const handleNavClick = (page: NavPage) => {
@@ -79,13 +80,18 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               key={link.label}
               onClick={() => handleNavClick(link.page)}
-              className={`text-sm font-semibold transition-colors py-1 focus:outline-none focus:ring-1 focus:ring-cyan-400 rounded ${
+              className={`text-sm font-semibold transition-colors py-1 flex items-center gap-1.5 focus:outline-none focus:ring-1 focus:ring-cyan-400 rounded ${
                 currentPage === link.page
                   ? 'text-cyan-300 border-b-2 border-cyan-400 font-bold'
                   : 'text-slate-300 hover:text-cyan-300'
               }`}
             >
-              {link.label}
+              <span>{link.label}</span>
+              {link.badge && (
+                <span className="px-1.5 py-0.2 rounded bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 text-[9px] font-black uppercase tracking-wider">
+                  {link.badge}
+                </span>
+              )}
             </button>
           ))}
         </nav>
