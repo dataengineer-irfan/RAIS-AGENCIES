@@ -7,10 +7,14 @@ import { ReelVideoPreview } from '../components/automation/ReelVideoPreview';
 import { 
   Film, Users, AlertTriangle, Clock, RefreshCw, Send,
   ShieldCheck, Key, Phone, MessageSquare, Download,
-  ExternalLink, Sparkles, Check
+  ExternalLink, Sparkles, Check, LogOut
 } from 'lucide-react';
 
-export const AutomationDashboardPage: React.FC = () => {
+interface AutomationDashboardPageProps {
+  onLogout?: () => void;
+}
+
+export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = ({ onLogout }) => {
   const [activeTab, setActiveTab] = useState<'calendar' | 'publishing' | 'enquiries' | 'settings'>('calendar');
   const [reels, setReels] = useState<ReelCalendarItem[]>(() => AutomationStorage.getReels());
   const [leads, setLeads] = useState<CustomerLead[]>(() => AutomationStorage.getLeads());
@@ -171,6 +175,16 @@ export const AutomationDashboardPage: React.FC = () => {
               <span>@raisfrozenfoods</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
+            {onLogout && (
+              <button
+                onClick={onLogout}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-red-500/15 border border-red-500/30 hover:border-red-500/60 text-xs font-bold text-red-300 hover:text-white transition-all shadow"
+                title="Sign out of Admin Portal"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span>Logout</span>
+              </button>
+            )}
           </div>
         </div>
 

@@ -8,6 +8,8 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { LegalPage } from './pages/LegalPage';
 import { AutomationDashboardPage } from './pages/AutomationDashboardPage';
+import { AdminLoginPage } from './pages/AdminLoginPage';
+import { AuthService } from './services/authService';
 import { Footer } from './components/Footer';
 import { QuoteModal } from './components/QuoteModal';
 import { MobileQuickBar } from './components/MobileQuickBar';
@@ -20,6 +22,7 @@ export const App: React.FC = () => {
   const [homeCategoryFilter, setHomeCategoryFilter] = useState<string>('ALL');
   const [isQuoteOpen, setIsQuoteOpen] = useState<boolean>(false);
   const [quoteItems, setQuoteItems] = useState<{ [sku: string]: number }>({});
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(() => AuthService.checkAuth());
 
   // Hash-based URL routing synchronization
   useEffect(() => {
@@ -149,7 +152,19 @@ export const App: React.FC = () => {
         ) : currentPage === 'legal' ? (
           <LegalPage />
         ) : currentPage === 'automation' ? (
-          <AutomationDashboardPage />
+          isAdminAuthenticated ? (
+            <AutomationDashboardPage 
+              onLogout={() => {
+                AuthService.logout();
+                setIsAdminAuthenticated(false);
+              }}
+            />
+          ) : (
+            <AdminLoginPage
+              onLoginSuccess={() => setIsAdminAuthenticated(true)}
+              onBackToHome={() => handleNavigate('home')}
+            />
+          )
         ) : (
           <HomePage
             onOpenQuote={() => setIsQuoteOpen(true)}
