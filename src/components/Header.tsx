@@ -26,7 +26,6 @@ export const Header: React.FC<HeaderProps> = ({
     { label: 'Who We Serve', page: 'who-we-serve' },
     { label: 'About RAIS', page: 'about' },
     { label: 'Contact & Hub', page: 'contact' },
-    { label: 'AI Reels & Leads', page: 'automation', badge: 'AI' },
   ];
 
   const handleNavClick = (page: NavPage) => {

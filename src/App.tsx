@@ -46,7 +46,7 @@ export const App: React.FC = () => {
       } else if (hash === 'legal' || hash === 'terms') {
         setCurrentPage('legal');
         setSelectedCategoryCode(null);
-      } else if (hash === 'automation' || hash === 'dashboard' || hash === 'reels') {
+      } else if (hash === 'automation' || hash === 'dashboard' || hash === 'reels' || hash === 'admin') {
         setCurrentPage('automation');
         setSelectedCategoryCode(null);
       }
