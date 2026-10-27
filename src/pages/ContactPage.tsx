@@ -106,6 +106,65 @@ export const ContactPage: React.FC = () => {
               </div>
             </div>
 
+            {/* Instagram DM Card */}
+            <div className="p-6 rounded-3xl bg-[#0f1c3f]/85 border border-pink-500/25 shadow-xl backdrop-blur-xl flex items-start gap-4">
+              <div className="size-12 rounded-2xl bg-gradient-to-tr from-amber-500/20 via-pink-500/20 to-purple-500/20 border border-pink-500/40 text-pink-400 flex items-center justify-center shrink-0">
+                <Send className="size-5" />
+              </div>
+              <div>
+                <h3 className="text-xs font-bold text-pink-400 uppercase tracking-wider">
+                  Instagram Direct Message (DM)
+                </h3>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Message @raisfrozenfoods for instant catalogue & wholesale rates:
+                </p>
+                <div className="flex flex-wrap items-center gap-3 mt-2">
+                  <a
+                    href="https://ig.me/m/raisfrozenfoods"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-pink-300 hover:text-white transition-colors"
+                  >
+                    <span>Send Instagram DM</span>
+                    <ExternalLink className="size-3.5" />
+                  </a>
+                  <span className="text-slate-600">•</span>
+                  <a
+                    href="https://instagram.com/raisfrozenfoods"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-bold text-slate-300 hover:text-pink-300 transition-colors"
+                  >
+                    @raisfrozenfoods
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Digital Catalogue Card */}
+            <div className="p-6 rounded-3xl bg-[#0f1c3f]/85 border border-amber-500/25 shadow-xl backdrop-blur-xl flex items-start gap-4">
+              <div className="size-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-300 flex items-center justify-center shrink-0">
+                <ExternalLink className="size-5" />
+              </div>
+              <div>
+                <h3 className="text-xs font-bold text-amber-300 uppercase tracking-wider">
+                  Official 66-SKU Catalogue
+                </h3>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  View complete product list, pack sizes & specifications online:
+                </p>
+                <a
+                  href="/RAIS-AGENCIES/catalogue.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 mt-2 text-xs font-bold text-amber-300 hover:text-white transition-colors"
+                >
+                  <span>Open Full Digital Catalogue (HTML)</span>
+                  <ExternalLink className="size-3.5" />
+                </a>
+              </div>
+            </div>
+
             {/* Warehouse Location Card */}
             <div className="p-6 rounded-3xl bg-[#0f1c3f]/85 border border-cyan-500/25 shadow-xl backdrop-blur-xl flex items-start gap-4">
               <div className="size-12 rounded-2xl bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 flex items-center justify-center shrink-0">

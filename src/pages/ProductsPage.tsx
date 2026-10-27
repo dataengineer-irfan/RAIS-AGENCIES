@@ -111,12 +111,22 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 
           <div className="flex flex-wrap items-center gap-3">
             <a
+              href={assetUrl('/catalogue.html')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-400/50 hover:border-amber-400 text-xs font-bold text-amber-200 hover:text-white transition-all shadow-lg backdrop-blur-md"
+            >
+              <Sparkles className="w-4 h-4 text-amber-300" />
+              <span>Full 66-SKU Catalogue (HTML)</span>
+            </a>
+
+            <a
               href={assetUrl('/images/brochure.jpg')}
               download="RAIS-Agencies-Commercial-Brochure.jpg"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#0f1c3f] border border-cyan-400/30 hover:border-cyan-400 text-xs font-bold text-cyan-200 hover:text-white transition-all shadow-lg backdrop-blur-md"
             >
               <FileDown className="w-4 h-4 text-cyan-300" />
-              <span>Wholesale Brochure (JPG)</span>
+              <span>Brochure (JPG)</span>
             </a>
 
             <button

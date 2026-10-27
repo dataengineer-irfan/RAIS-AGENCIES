@@ -33,3 +33,8 @@ dist-ssr
 # Temporary / test output
 screenshots
 scripts/temp_*
+render_work_backup/
+*.zip
+qc_frames/
+audit_frames/
+test_*

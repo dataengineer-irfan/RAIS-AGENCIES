@@ -874,6 +874,11 @@ export const BUSINESS_INFO = {
   phones: ['9347453135', '9573261696'],
   primaryPhone: '9347453135',
   whatsappNumber: '919347453135',
+  whatsappUrl: 'https://wa.me/919347453135',
+  websiteUrl: 'https://dataengineer-irfan.github.io/RAIS-AGENCIES/',
+  catalogueUrl: 'https://dataengineer-irfan.github.io/RAIS-AGENCIES/catalogue.html',
+  instagramUrl: 'https://instagram.com/raisfrozenfoods',
+  instagramDmUrl: 'https://ig.me/m/raisfrozenfoods',
   upiId: '9347453135@ybl',
   partnerBrands: [
     'McCain',

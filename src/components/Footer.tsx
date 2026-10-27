@@ -1,6 +1,6 @@
 import React from 'react';
 import { RaisLogo } from './RaisLogo';
-import { MapPin, Phone, MessageSquare, ShieldCheck, Snowflake, Instagram } from 'lucide-react';
+import { MapPin, Phone, MessageSquare, ShieldCheck, Snowflake, Instagram, FileText } from 'lucide-react';
 import { BUSINESS_INFO, CATEGORIES } from '../data/catalogue';
 import { NavPage } from './Header';
 import { assetUrl } from '../utils/assetUrl';
@@ -101,13 +101,35 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
               <div className="flex items-center gap-2.5">
                 <Instagram className="w-4 h-4 text-pink-400 flex-shrink-0" />
+                <div className="flex flex-col text-xs">
+                  <a
+                    href="https://instagram.com/raisfrozenfoods"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-pink-400 hover:text-pink-300 font-bold"
+                  >
+                    Instagram: @raisfrozenfoods
+                  </a>
+                  <a
+                    href="https://ig.me/m/raisfrozenfoods"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-400 hover:text-pink-300 text-[11px]"
+                  >
+                    💬 Direct Message (DM)
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <FileText className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 <a
-                  href="https://instagram.com/raisfrozenfoods"
+                  href="/RAIS-AGENCIES/catalogue.html"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-pink-400 hover:text-pink-300 font-bold"
+                  className="text-amber-400 hover:text-amber-300 font-bold text-xs"
                 >
-                  Instagram: @raisfrozenfoods
+                  Digital Catalogue (HTML)
                 </a>
               </div>
 
