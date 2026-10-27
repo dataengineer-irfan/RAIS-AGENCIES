@@ -38,8 +38,8 @@ export interface ReelCalendarItem {
     aspectRatio: '9:16';
     resolution: '1080x1920';
     durationSeconds: number; // 15 to 45s
-    presenterName: string; // "Ananya"
-    presenterAttire: string; // "Modest Pochampally Silk Saree"
+    presenterName: string; // "Ayesha"
+    presenterAttire: string; // "Modest Turquoise/Mint Hijab & Pastel Attire"
     audioMood: string; // "Professional commercial, upbeat Rayalaseema rhythm"
     mediaUrl?: string; // Compiled MP4 video URL
   };
@@ -59,7 +59,7 @@ export interface ReelCalendarItem {
 export interface CustomerLead {
   id: string;
   createdAt: string;
-  source: 'instagram_comment' | 'instagram_dm' | 'whatsapp_direct';
+  source: 'instagram_comment' | 'instagram_dm' | 'whatsapp_direct' | 'website_quote' | 'whatsapp';
   instagramUsername?: string;
   customerName: string;
   businessName?: string;
@@ -79,7 +79,7 @@ export interface CustomerLead {
 }
 
 export interface IntegrationStatus {
-  service: 'instagram_graph_api' | 'manychat' | 'heygen_presenter';
+  service: 'instagram_graph_api' | 'whatsapp_order_desk' | 'cold_storage_depot' | 'manychat' | 'heygen_presenter';
   name: string;
   connectionState: 'NOT_CONNECTED' | 'AWAITING_AUTHORIZATION' | 'SIMULATED_TEST_MODE' | 'LIVE_CONNECTED';
   accountName?: string;

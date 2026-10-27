@@ -39,10 +39,10 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onLoginSuccess, 
         {/* Back Link */}
         <button
           onClick={onBackToHome}
-          className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-cyan-300 transition-colors mb-6 group"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#0f1c3f] border border-cyan-500/30 text-xs font-bold text-cyan-300 hover:text-white hover:bg-cyan-500/20 transition-all mb-6 group shadow-lg"
         >
-          <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
-          <span>Return to Public Website</span>
+          <ArrowLeft className="w-4 h-4 text-cyan-400 group-hover:-translate-x-1 transition-transform" />
+          <span>← Return to Public Website</span>
         </button>
 
         {/* Login Card */}

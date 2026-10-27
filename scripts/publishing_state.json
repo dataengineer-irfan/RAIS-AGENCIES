@@ -1,0 +1,26 @@
+{
+  "mode": "MANUAL_UPLOAD",
+  "automated_scheduling": "DISABLED",
+  "published_slots": [
+    "sc01_te",
+    "sc01_hi"
+  ],
+  "history": [
+    {
+      "scenario": 1,
+      "lang": "te",
+      "post_id": "18149436067564831",
+      "permalink": "https://www.instagram.com/reel/De_pjGMCSOw/",
+      "published_at": "2026-10-27T16:02:25.409831",
+      "status": "SUCCESS"
+    },
+    {
+      "scenario": 1,
+      "lang": "hi",
+      "post_id": "18129191809865321",
+      "permalink": "https://www.instagram.com/reel/De_prsIDBRA/",
+      "published_at": "2026-10-27T16:03:34.795106",
+      "status": "SUCCESS"
+    }
+  ]
+}

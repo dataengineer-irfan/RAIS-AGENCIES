@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Trash2, Plus, Minus, MessageSquare, CheckCircle, FileText, Send, Sparkles } from 'lucide-react';
 import { PRODUCTS, BUSINESS_INFO, ProductItem } from '../data/catalogue';
+import { AutomationStorage } from '../services/automationStorage';
 
 interface QuoteModalProps {
   isOpen: boolean;
@@ -39,7 +40,30 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
   const totalUnits = itemsInQuote.reduce((acc, curr) => acc + curr.qty, 0);
 
+  const captureLeadInCRM = (channel: 'whatsapp_direct' | 'website_quote') => {
+    try {
+      const leadProducts = itemsInQuote.map(i => `${i.product.name} (${i.product.brand}) x ${i.qty}`).join('; ');
+      AutomationStorage.addLead({
+        source: channel,
+        customerName: customerName.trim() || 'Storefront Buyer',
+        businessName: businessName.trim() || 'Rayachoty Business',
+        businessType: 'Hotel / Restaurant',
+        productInterest: leadProducts || 'Wholesale Catalogue Order',
+        requiredQuantity: `${totalUnits} Units (${itemsInQuote.length} Items)`,
+        deliveryLocation: deliveryArea.trim() || 'Rayachoty (516269)',
+        phone: phone.trim() || BUSINESS_INFO.whatsappNumber,
+        status: 'Quote Pending',
+        lastMessageSnippet: notes ? `Notes: ${notes} | Items: ${leadProducts}` : `Order: ${leadProducts}`,
+        humanHandoffRequired: true,
+        notes: `Submitted via Storefront Requisition Modal (${channel === 'whatsapp_direct' ? 'WhatsApp' : 'Wholesale Bill Request'}).`
+      });
+    } catch (e) {
+      console.warn('Lead capture notice:', e);
+    }
+  };
+
   const handleWhatsAppSend = () => {
+    captureLeadInCRM('whatsapp_direct');
     let message = `*WHOLESALE ORDER — RAIS AGENCIES RAYACHOTY (516269)*\n`;
     message += `──────────────────\n`;
     if (customerName) message += `👤 *Name:* ${customerName}\n`;
@@ -65,6 +89,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    captureLeadInCRM('website_quote');
     setSubmitted(true);
   };
 

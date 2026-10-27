@@ -280,8 +280,8 @@ export const ReelVideoPreview: React.FC<ReelVideoPreviewProps> = ({
                 <div className="flex items-center gap-2.5 bg-slate-900/90 border border-amber-500/30 p-2 rounded-xl backdrop-blur-md">
                   <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-amber-400 shrink-0">
                     <img
-                      src={assetUrl('/images/presenter_ananya.png')}
-                      alt="Ananya - Fictional Presenter"
+                      src={assetUrl('/images/characters/ayesha_midnight.jpg')}
+                      alt="Ayesha - 3D Animated Presenter"
                       className="w-full h-full object-cover"
                     />
                     {isPlaying && (
@@ -290,8 +290,8 @@ export const ReelVideoPreview: React.FC<ReelVideoPreviewProps> = ({
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-bold text-amber-300">Ananya</span>
-                      <span className="text-[9px] text-slate-400 font-mono">Telugu Audio</span>
+                      <span className="text-[11px] font-bold text-amber-300">Ayesha</span>
+                      <span className="text-[9px] text-slate-400 font-mono">3D Presenter</span>
                     </div>
                     <div className="text-[10px] text-slate-300 truncate font-medium">
                       {reel.hookTelugu}
@@ -390,7 +390,7 @@ export const ReelVideoPreview: React.FC<ReelVideoPreviewProps> = ({
           <div>
             <h4 className="text-xs font-bold text-amber-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>Full Telugu Reel Script (Ananya)</span>
+              <span>Commercial Reel Script & Audio (Ayesha)</span>
             </h4>
             <div className="p-3.5 rounded-xl bg-[#081026] border border-cyan-500/20 text-sm text-slate-200 leading-relaxed font-sans">
               {reel.scriptTelugu}

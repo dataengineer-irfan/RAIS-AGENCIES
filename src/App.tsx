@@ -154,9 +154,11 @@ export const App: React.FC = () => {
         ) : currentPage === 'automation' ? (
           isAdminAuthenticated ? (
             <AutomationDashboardPage 
+              onBackToHome={() => handleNavigate('home')}
               onLogout={() => {
                 AuthService.logout();
                 setIsAdminAuthenticated(false);
+                handleNavigate('home');
               }}
             />
           ) : (
