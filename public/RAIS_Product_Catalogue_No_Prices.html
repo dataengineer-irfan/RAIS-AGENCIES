@@ -4248,6 +4248,14 @@
         }
       });
     }
+
+    // Silent Multi-Device Cloud Hit Counter for Catalogue
+    try {
+      if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        var ping = new Image();
+        ping.src = 'https://hits.sh/dataengineer-irfan.github.io/RAIS-AGENCIES/catalogue_html.svg?style=flat&r=' + Date.now();
+      }
+    } catch (err) {}
   </script>
 </body>
 </html>

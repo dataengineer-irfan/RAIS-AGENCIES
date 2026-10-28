@@ -3,6 +3,7 @@ import { PRODUCTS, CATEGORIES, ProductItem } from '../data/catalogue';
 import { Search, Plus, Minus, FileDown, LayoutGrid, List, Info, Sparkles, Snowflake, ArrowRight } from 'lucide-react';
 import { ProductSpecModal } from '../components/ProductSpecModal';
 import { assetUrl } from '../utils/assetUrl';
+import { AnalyticsService } from '../services/analyticsService';
 
 interface ProductsPageProps {
   onAddToQuote: (product: ProductItem) => void;
@@ -120,6 +121,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               href={assetUrl('/catalogue.html')}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => AnalyticsService.trackCatalogueOpen()}
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-400/50 hover:border-amber-400 text-xs font-bold text-amber-200 hover:text-white transition-all shadow-lg backdrop-blur-md"
             >
               <Sparkles className="w-4 h-4 text-amber-300" />
@@ -312,7 +314,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               return (
                 <div
                   key={product.sku}
-                  onClick={() => setSpecProduct(product)}
+                  onClick={() => {
+                    setSpecProduct(product);
+                    AnalyticsService.trackProductView(product.sku, product.name);
+                  }}
                   className="group relative flex flex-col justify-between rounded-2xl bg-[#0f1c3f]/85 border border-cyan-500/25 hover:border-cyan-400 hover:shadow-[0_15px_35px_-10px_rgba(0,210,255,0.3)] cursor-pointer transition-all duration-200 overflow-hidden backdrop-blur-md"
                 >
                   {/* Photo Container */}

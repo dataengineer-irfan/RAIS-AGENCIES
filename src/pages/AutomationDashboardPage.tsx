@@ -4,10 +4,11 @@ import { AutomationStorage } from '../services/automationStorage';
 import { InstagramPublisher } from '../services/instagramPublisher';
 import { EnquiryBot } from '../services/enquiryBot';
 import { ReelVideoPreview } from '../components/automation/ReelVideoPreview';
+import { TrafficAnalyticsTab } from '../components/automation/TrafficAnalyticsTab';
 import { 
   Film, Users, Clock, RefreshCw, Send,
   ShieldCheck, Key, Phone, MessageSquare, Download,
-  ExternalLink, Sparkles, Check, LogOut, ArrowLeft
+  ExternalLink, Sparkles, Check, LogOut, ArrowLeft, BarChart3
 } from 'lucide-react';
 
 interface AutomationDashboardPageProps {
@@ -16,7 +17,7 @@ interface AutomationDashboardPageProps {
 }
 
 export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = ({ onLogout, onBackToHome }) => {
-  const [activeTab, setActiveTab] = useState<'calendar' | 'publishing' | 'enquiries' | 'settings'>('calendar');
+  const [activeTab, setActiveTab] = useState<'analytics' | 'calendar' | 'publishing' | 'enquiries' | 'settings'>('analytics');
   const [reels, setReels] = useState<ReelCalendarItem[]>(() => AutomationStorage.getReels());
   const [leads, setLeads] = useState<CustomerLead[]>(() => AutomationStorage.getLeads());
   const [integrations, setIntegrations] = useState<IntegrationStatus[]>(() => AutomationStorage.getIntegrations());
@@ -252,6 +253,18 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
         {/* 2. TAB NAVIGATION */}
         <div className="flex border-b border-cyan-500/20 gap-2 overflow-x-auto pb-1">
           <button
+            onClick={() => setActiveTab('analytics')}
+            className={`flex items-center gap-2 px-5 py-3 rounded-t-xl text-xs font-bold transition-colors whitespace-nowrap ${
+              activeTab === 'analytics'
+                ? 'bg-[#0f1c3f] border-t-2 border-cyan-400 text-white'
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <BarChart3 className="w-4 h-4 text-cyan-400" />
+            <span>Traffic & Views Analytics</span>
+          </button>
+
+          <button
             onClick={() => setActiveTab('calendar')}
             className={`flex items-center gap-2 px-5 py-3 rounded-t-xl text-xs font-bold transition-colors whitespace-nowrap ${
               activeTab === 'calendar'
@@ -303,7 +316,12 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
           </button>
         </div>
 
-        {/* 3. TAB 1: 30-DAY REELS CALENDAR & PRODUCTION STUDIO */}
+        {/* 3. TAB: TRAFFIC & REACH ANALYTICS */}
+        {activeTab === 'analytics' && (
+          <TrafficAnalyticsTab />
+        )}
+
+        {/* 4. TAB 1: 30-DAY REELS CALENDAR & PRODUCTION STUDIO */}
         {activeTab === 'calendar' && (
           <div className="space-y-8">
             

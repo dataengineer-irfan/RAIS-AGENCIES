@@ -15,6 +15,7 @@ import { QuoteModal } from './components/QuoteModal';
 import { MobileQuickBar } from './components/MobileQuickBar';
 import { RequisitionBar } from './components/RequisitionBar';
 import { ProductItem } from './data/catalogue';
+import { AnalyticsService } from './services/analyticsService';
 
 export const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<NavPage>('home');
@@ -23,6 +24,10 @@ export const App: React.FC = () => {
   const [isQuoteOpen, setIsQuoteOpen] = useState<boolean>(false);
   const [quoteItems, setQuoteItems] = useState<{ [sku: string]: number }>({});
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(() => AuthService.checkAuth());
+
+  useEffect(() => {
+    AnalyticsService.init();
+  }, []);
 
   // Hash-based URL routing synchronization
   useEffect(() => {
@@ -53,6 +58,7 @@ export const App: React.FC = () => {
         setCurrentPage('automation');
         setSelectedCategoryCode(null);
       }
+      AnalyticsService.trackPageView(window.location.hash || '#/');
     };
 
     window.addEventListener('hashchange', handleHashChange);
@@ -74,6 +80,7 @@ export const App: React.FC = () => {
   };
 
   const handleAddToQuote = (product: ProductItem) => {
+    AnalyticsService.trackAddToQuote(product.sku, product.name);
     setQuoteItems((prev) => ({
       ...prev,
       [product.sku]: (prev[product.sku] || 0) + 1
