@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { RaisLogo } from './RaisLogo';
-import { Phone, MessageSquare, FileText, Menu, X, MapPin, ChevronRight } from 'lucide-react';
+import { Phone, MessageSquare, FileText, Menu, X, MapPin, ChevronRight, Lock } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/catalogue';
 
 export type NavPage = 'home' | 'products' | 'who-we-serve' | 'about' | 'contact' | 'legal' | 'automation';
@@ -60,6 +60,14 @@ export const Header: React.FC<HeaderProps> = ({
             <MessageSquare className="w-3.5 h-3.5" />
             <span>WhatsApp Ordering</span>
           </a>
+          <span className="text-slate-600">•</span>
+          <button
+            onClick={() => handleNavClick('automation')}
+            className="text-amber-400 hover:text-amber-300 flex items-center gap-1.5 font-bold transition-all bg-amber-500/15 hover:bg-amber-500/25 px-2.5 py-0.5 rounded-full border border-amber-500/40 cursor-pointer"
+          >
+            <Lock className="w-3 h-3 text-amber-400" />
+            <span>Admin Portal</span>
+          </button>
         </div>
       </div>
 
@@ -126,6 +134,19 @@ export const Header: React.FC<HeaderProps> = ({
                 {quoteCount}
               </span>
             )}
+          </button>
+
+          <button
+            onClick={() => handleNavClick('automation')}
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-bold transition-all border ${
+              currentPage === 'automation'
+                ? 'bg-amber-400 text-slate-950 border-amber-400 font-black shadow-lg shadow-amber-400/25'
+                : 'text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border-amber-500/40 hover:border-amber-400'
+            }`}
+            title="Authorized Wholesale Admin & Analytics Portal"
+          >
+            <Lock className="w-3.5 h-3.5 text-amber-400" />
+            <span>Admin Login</span>
           </button>
         </div>
 
@@ -195,6 +216,14 @@ export const Header: React.FC<HeaderProps> = ({
               <MessageSquare className="w-4 h-4" />
               <span>Order via WhatsApp ({BUSINESS_INFO.primaryPhone})</span>
             </a>
+
+            <button
+              onClick={() => handleNavClick('automation')}
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-slate-900 border border-amber-500/40 text-amber-300 font-bold text-sm shadow-md"
+            >
+              <Lock className="w-4 h-4 text-amber-400" />
+              <span>Admin & Analytics Portal Login</span>
+            </button>
 
             <div className="text-center text-xs text-slate-400 pt-2">
               <MapPin className="w-3.5 h-3.5 inline text-amber-400 mr-1" />
