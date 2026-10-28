@@ -311,7 +311,7 @@ export class AnalyticsService {
   // --- GOOGLE ANALYTICS 4 (GA4) INTEGRATION ---
 
   static getGA4MeasurementId(): string {
-    return localStorage.getItem(STORAGE_KEYS.GA4_ID) || '';
+    return localStorage.getItem(STORAGE_KEYS.GA4_ID) || 'G-LX7011WRHR';
   }
 
   static setGA4MeasurementId(id: string): void {
