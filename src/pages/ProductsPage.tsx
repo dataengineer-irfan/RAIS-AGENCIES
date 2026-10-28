@@ -16,14 +16,20 @@ const BRAND_BADGES: Record<string, { bg: string; text: string; label: string }> 
   'Milky Mist': { bg: '#065f46', text: '#6ee7b7', label: 'MM' },
   'Del Monte': { bg: '#831843', text: '#fbcfe8', label: 'DM' },
   'Amul': { bg: '#9a3412', text: '#fed7aa', label: 'AM' },
-  'McCain': { bg: '#78350f', text: '#fde68a', label: 'MC' },
   'Foodrite': { bg: '#b91c1c', text: '#fecaca', label: 'FR' },
   'VKL': { bg: '#581c87', text: '#e9d5ff', label: 'VKL' },
   'Nutrich': { bg: '#991b1b', text: '#fca5a5', label: 'NU' },
   'Signature': { bg: '#0f766e', text: '#99f6e4', label: 'SG' },
   'Hup Hup': { bg: '#c2410c', text: '#fed7aa', label: 'HH' },
   'Godrej': { bg: '#15803d', text: '#bbf7d0', label: 'GY' },
-  'Chilli Fill': { bg: '#be123c', text: '#fecdd3', label: 'CF' }
+  'Chilli Fill': { bg: '#be123c', text: '#fecdd3', label: 'CF' },
+  'Triken': { bg: '#ea580c', text: '#ffedd5', label: 'TK' },
+  'Mayank Gold': { bg: '#854d0e', text: '#fef08a', label: 'MG' },
+  'Packaging Solutions': { bg: '#334155', text: '#cbd5e1', label: 'PK' },
+  'RAIS Select': { bg: '#0369a1', text: '#bae6fd', label: 'RS' },
+  'RAIS Spices': { bg: '#b45309', text: '#fde68a', label: 'SP' },
+  'RAIS Beverages': { bg: '#0284c7', text: '#e0f2fe', label: 'BV' },
+  'RAIS Fresh': { bg: '#047857', text: '#a7f3d0', label: 'RF' }
 };
 
 export const ProductsPage: React.FC<ProductsPageProps> = ({
@@ -45,7 +51,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   }, []);
 
   const popularBrands = useMemo(() => {
-    return ['ITC Master Chef', 'Milky Mist', 'Del Monte', 'Amul', 'McCain', 'Foodrite', 'VKL', 'Nutrich', 'Signature', 'Hup Hup'];
+    return ['ITC Master Chef', 'Milky Mist', 'Del Monte', 'Amul', 'Triken', 'Foodrite', 'VKL', 'Nutrich', 'Signature', 'Hup Hup'];
   }, []);
 
   const filtered = useMemo(() => {

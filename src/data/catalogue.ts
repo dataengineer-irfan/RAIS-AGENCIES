@@ -8,7 +8,7 @@ export interface ProductItem {
   brand: string;
   pack: string;
   hsn: string;
-  image?: string; // ONLY provided when verified authentic studio photography exists
+  image?: string; // Verified authentic packaging photography
   isFeatured?: boolean;
   description: string;
 }
@@ -28,10 +28,10 @@ const RAW_CATEGORIES: CategoryItem[] = [
     code: 'CHICKEN',
     name: 'Chicken Items',
     description: 'Frozen chicken patties, nuggets, momos, popcorn & tortillas',
-    itemCount: 8,
+    itemCount: 7,
     accent: 'from-amber-500/20 to-orange-500/20',
     iconName: 'Flame',
-    image: '/images/chicken_patty.jpg'
+    image: '/assets/products/triken_chicken_momos.jpg'
   },
   {
     code: 'VEG',
@@ -40,16 +40,16 @@ const RAW_CATEGORIES: CategoryItem[] = [
     itemCount: 16,
     accent: 'from-emerald-500/20 to-teal-500/20',
     iconName: 'Leaf',
-    image: '/images/cheesy_triangle.jpg'
+    image: '/assets/products/amul_french_fries_6mm.jpg'
   },
   {
     code: 'SAUCES',
     name: 'Ketchup & Sauces',
     description: 'Mayonnaise, tomato ketchup, pizza pasta sauces, dips & bulk packs',
-    itemCount: 12,
+    itemCount: 17,
     accent: 'from-red-500/20 to-rose-500/20',
     iconName: 'Droplets',
-    image: '/images/gourmet_sauces.jpg'
+    image: '/assets/products/delmonte_ketchup_bottle.jpg'
   },
   {
     code: 'BREADING',
@@ -58,16 +58,16 @@ const RAW_CATEGORIES: CategoryItem[] = [
     itemCount: 5,
     accent: 'from-yellow-500/20 to-amber-500/20',
     iconName: 'Sparkles',
-    image: '/images/products/spices_blend.jpg'
+    image: '/assets/products/vkl_crispy_cajun_breading.jpg'
   },
   {
     code: 'CHEESE',
     name: 'Cheese & Slices',
     description: 'Mozzarella diced cheese, cheese slices, butter & fresh paneer cubes',
-    itemCount: 6,
+    itemCount: 5,
     accent: 'from-yellow-400/20 to-amber-600/20',
     iconName: 'Layers',
-    image: '/images/mozzarella_cheese.jpg'
+    image: '/assets/products/milky_mist_mozzarella_1kg.jpg'
   },
   {
     code: 'PACKAGING',
@@ -76,16 +76,16 @@ const RAW_CATEGORIES: CategoryItem[] = [
     itemCount: 9,
     accent: 'from-stone-500/20 to-amber-700/20',
     iconName: 'Box',
-    image: '/images/burger_boxes.jpg'
+    image: '/assets/products/burger_box_printed.jpg'
   },
   {
     code: 'SPICES',
     name: 'Culinary Spices',
     description: 'Chilly powder, turmeric powder, coriander powder & cumin',
-    itemCount: 5,
+    itemCount: 4,
     accent: 'from-orange-500/20 to-amber-700/20',
     iconName: 'Flame',
-    image: '/images/products/chilli_powder.jpg'
+    image: '/assets/products/chilly_powder.jpg'
   },
   {
     code: 'MOJITOS',
@@ -94,70 +94,45 @@ const RAW_CATEGORIES: CategoryItem[] = [
     itemCount: 3,
     accent: 'from-cyan-500/20 to-blue-500/20',
     iconName: 'Wine',
-    image: '/images/products/mojito_lime_mint.jpg'
+    image: '/assets/products/manama_syrups_trio.jpg'
   }
 ];
 
 const RAW_PRODUCTS: ProductItem[] = [
-  // ==========================================
-  // 1. Chicken Items (8 SKUs)
-  // ==========================================
-  {
-    sku: 'RAIS-CHK-01',
-    categoryCode: 'CHICKEN',
-    categoryName: 'Chicken Items',
-    name: 'Signature Tortillah 8 Inches Frozen',
-    brand: 'Signature',
-    pack: '1 Packet',
-    hsn: '1905',
-    image: '/images/products/tortilla_wraps.jpg',
-    isFeatured: true,
-    description: 'Thin-crust wheat flour tortillas for commercial wraps and shawarmas.'
-  },
-  {
-    sku: 'RAIS-CHK-02',
-    categoryCode: 'CHICKEN',
-    categoryName: 'Chicken Items',
-    name: 'Signature Tortillah 8.5 Inches',
-    brand: 'Signature',
-    pack: '1 Packet (10 Nos)',
-    hsn: '1905',
-    image: '/images/products/tortilla_wraps.jpg',
-    description: 'Pliable 8.5-inch tortillas for high-heat grill press rolling.'
-  },
-  {
-    sku: 'RAIS-CHK-03',
-    categoryCode: 'CHICKEN',
-    categoryName: 'Chicken Items',
-    name: 'Nutrich Chicken Popcorn Ball',
-    brand: 'Nutrich',
-    pack: '1 kg Packet',
-    hsn: '1602',
-    image: '/images/products/itc_chicken_popcorn.webp',
-    description: 'Bite-sized seasoned chicken bites with crisp crumb coating for fryers.'
-  },
   {
     sku: 'RAIS-CHK-04',
     categoryCode: 'CHICKEN',
     categoryName: 'Chicken Items',
-    name: 'I.T.C Chicken Momos',
-    brand: 'ITC Master Chef',
-    pack: '1 Packet (500g)',
-    hsn: '1902',
-    image: '/images/products/chicken_momos.jpg',
-    description: 'Steamed or fried chicken dumplings with spiced poultry filling.'
+    name: 'Chicken Momos',
+    brand: 'Triken',
+    pack: '1 PACKET',
+    hsn: '1602',
+    image: '/assets/products/triken_chicken_momos.jpg',
+    isFeatured: true,
+    description: 'Authentic Triken Chicken Momos in commercial 1 PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-CHK-05',
     categoryCode: 'CHICKEN',
     categoryName: 'Chicken Items',
-    name: 'ITC Chicken Nuggets',
+    name: 'Chicken Nuggets',
     brand: 'ITC Master Chef',
-    pack: '1 kg Packet',
+    pack: '1 KG PACKET',
     hsn: '1602',
-    image: '/images/products/itc_chicken_nuggets.webp',
+    image: '/assets/products/itc_crunchy_chicken_nuggets.jpg',
     isFeatured: true,
-    description: 'Minced poultry nuggets in golden tempura-style breading.'
+    description: 'Authentic ITC Master Chef Chicken Nuggets in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-CHI-FING',
+    categoryCode: 'CHICKEN',
+    categoryName: 'Chicken Items',
+    name: 'Fingers Chicken',
+    brand: 'RAIS Select',
+    pack: '1 KG PACKET',
+    hsn: '1602',
+    image: '/assets/products/chicken_fingers.jpg',
+    description: 'Authentic RAIS Select Fingers Chicken in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-CHK-06',
@@ -165,72 +140,66 @@ const RAW_PRODUCTS: ProductItem[] = [
     categoryName: 'Chicken Items',
     name: 'Nutrich Chicken Burger Patty',
     brand: 'Nutrich',
-    pack: '1 kg Packet',
+    pack: '1 KG PACKET',
     hsn: '1602',
-    image: '/images/products/itc_chicken_patty.webp',
-    isFeatured: true,
-    description: 'Seasoned commercial chicken patties calibrated for hamburger buns.'
+    image: '/assets/products/chicken_patty.jpg',
+    description: 'Authentic Nutrich Nutrich Chicken Burger Patty in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-CHK-07',
+    sku: 'RAIS-CHK-03',
+    categoryCode: 'CHICKEN',
+    categoryName: 'Chicken Items',
+    name: 'Nutrich Chicken Popcorn Ball',
+    brand: 'Nutrich',
+    pack: '1 KG PACKET',
+    hsn: '1602',
+    image: '/assets/products/hero_popcorn.png',
+    description: 'Authentic Nutrich Nutrich Chicken Popcorn Ball in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-CHK-01',
     categoryCode: 'CHICKEN',
     categoryName: 'Chicken Items',
     name: 'Signature Tortillah 10 Inches',
     brand: 'Signature',
-    pack: '1 Packet (10 Nos)',
-    hsn: '1905',
-    image: '/images/products/tortilla_wraps.jpg',
-    description: 'Large 10-inch tortillas designed for jumbo burritos and commercial rolls.'
+    pack: '1 PACKET',
+    hsn: '1602',
+    image: '/assets/products/fresh2go_tortilla_10.jpg',
+    description: 'Authentic Signature Signature Tortillah 10 Inches in commercial 1 PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-CHK-08',
+    sku: 'RAIS-CHK-02',
     categoryCode: 'CHICKEN',
     categoryName: 'Chicken Items',
-    name: 'Crispy Chicken Fingers',
-    brand: 'Venky\'s',
-    pack: '1 kg Packet',
+    name: 'Signature Tortillah 8.5 Inches',
+    brand: 'Signature',
+    pack: '1 PACKET',
     hsn: '1602',
-    image: '/images/products/itc_chicken_fingers.webp',
-    description: 'Whole chicken tender finger strips with herb breading.'
+    image: '/assets/products/fresh2go_tortilla_8_5.jpg',
+    description: 'Authentic Signature Signature Tortillah 8.5 Inches in commercial 1 PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
-
-  // ==========================================
-  // 2. Veg Items (16 SKUs)
-  // ==========================================
   {
     sku: 'RAIS-VEG-01',
     categoryCode: 'VEG',
     categoryName: 'Veg Items',
-    name: 'Hup Hup French Fries 9mm',
-    brand: 'Hup Hup',
-    pack: '2.5 kg Packet',
+    name: 'Amul French Fries 6MM',
+    brand: 'Amul',
+    pack: '2.5 KG PACKET',
     hsn: '2004',
-    image: '/images/products/itc_french_fries.webp',
+    image: '/assets/products/amul_french_fries_6mm.jpg',
     isFeatured: true,
-    description: 'Straight-cut 9mm potato fries for restaurant deep fryers.'
+    description: 'Authentic Amul Amul French Fries 6MM in commercial 2.5 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-VEG-02',
+    sku: 'RAIS-VEG-BURG',
     categoryCode: 'VEG',
     categoryName: 'Veg Items',
-    name: 'Hup Hup French Fries 6mm (Shoestring)',
-    brand: 'Hup Hup',
-    pack: '2.5 kg Packet',
+    name: 'Burger Bun',
+    brand: 'RAIS Select',
+    pack: '1 Pack',
     hsn: '2004',
-    image: '/images/products/french_fries_basket.jpg',
-    description: 'Thin 6mm shoestring cut fries with quick preparation time.'
-  },
-  {
-    sku: 'RAIS-VEG-03',
-    categoryCode: 'VEG',
-    categoryName: 'Veg Items',
-    name: 'I.T.C Veg Momos',
-    brand: 'ITC Master Chef',
-    pack: '1 Packet (500g)',
-    hsn: '1902',
-    image: '/images/products/veg_momos.jpg',
-    isFeatured: true,
-    description: 'Cabbage, carrot, and onion stuffed dumplings for steaming or frying.'
+    image: '/assets/products/burger_buns.jpg',
+    description: 'Authentic RAIS Select Burger Bun in commercial 1 wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-VEG-04',
@@ -238,21 +207,10 @@ const RAW_PRODUCTS: ProductItem[] = [
     categoryName: 'Veg Items',
     name: 'Chilli Fill Veg Burger Patty',
     brand: 'Chilli Fill',
-    pack: '1.2 kg Packet',
+    pack: '1.2 KG PACKET',
     hsn: '2004',
-    image: '/images/products/mccain_veggie_burger_patty.webp',
-    description: 'Herb-seasoned mixed vegetable patty for burgers and sandwiches.'
-  },
-  {
-    sku: 'RAIS-VEG-05',
-    categoryCode: 'VEG',
-    categoryName: 'Veg Items',
-    name: 'ITC Paneer Patty',
-    brand: 'ITC Master Chef',
-    pack: '1.02 kg Packet',
-    hsn: '0406',
-    image: '/images/products/paneer_pops.png',
-    description: 'Cottage cheese patty in crisp breadcrumbs for café menus.'
+    image: '/assets/products/chill_fill_veg_patty.jpg',
+    description: 'Authentic Chilli Fill Chilli Fill Veg Burger Patty in commercial 1.2 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-VEG-06',
@@ -260,33 +218,10 @@ const RAW_PRODUCTS: ProductItem[] = [
     categoryName: 'Veg Items',
     name: 'Godrej Paneer Pops',
     brand: 'Godrej',
-    pack: '1 kg Packet',
-    hsn: '0406',
-    image: '/images/products/paneer_pops.png',
-    description: 'Diced paneer poppers coated in seasoned crunchy batter.'
-  },
-  {
-    sku: 'RAIS-VEG-07',
-    categoryCode: 'VEG',
-    categoryName: 'Veg Items',
-    name: 'ITC Cheesy Corn Triangle',
-    brand: 'ITC Master Chef',
-    pack: '1 kg Packet',
+    pack: '1 KG PACKET',
     hsn: '2004',
-    image: '/images/products/itc_cheesy_corn_triangles.webp',
-    isFeatured: true,
-    description: 'Mozzarella and sweet American corn enclosed in crisp triangular crust.'
-  },
-  {
-    sku: 'RAIS-VEG-08',
-    categoryCode: 'VEG',
-    categoryName: 'Veg Items',
-    name: 'Sweet Corn Frozen Kernels',
-    brand: 'RAIS Fresh',
-    pack: '1 kg Packet',
-    hsn: '0710',
-    image: '/images/products/sweet_corn.jpg',
-    description: 'Individually Quick Frozen (IQF) sweet corn kernels.'
+    image: '/assets/products/cheesy_triangle.jpg',
+    description: 'Authentic Godrej Godrej Paneer Pops in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-VEG-09',
@@ -294,138 +229,153 @@ const RAW_PRODUCTS: ProductItem[] = [
     categoryName: 'Veg Items',
     name: 'Godrej Tandoori Paneer Nuggets',
     brand: 'Godrej',
-    pack: '1 kg Packet',
-    hsn: '0406',
-    image: '/images/products/paneer_pops.png',
-    description: 'Tandoori spiced paneer cubes in crunchy crumb coating.'
-  },
-  {
-    sku: 'RAIS-VEG-10',
-    categoryCode: 'VEG',
-    categoryName: 'Veg Items',
-    name: 'Amul French Fries 6mm',
-    brand: 'Amul',
-    pack: '2.5 kg Packet',
+    pack: '1 KG PACKET',
     hsn: '2004',
-    image: '/images/products/french_fries_basket.jpg',
-    description: 'Commercial grade potato fries produced by Amul processing.'
+    image: '/assets/products/cheesy_triangle.jpg',
+    description: 'Authentic Godrej Godrej Tandoori Paneer Nuggets in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-VEG-11',
+    sku: 'RAIS-VEG-02',
     categoryCode: 'VEG',
     categoryName: 'Veg Items',
-    name: 'McCain Smiles Potato Faces',
-    brand: 'McCain',
-    pack: '1.5 kg Packet',
+    name: 'Hup Hup French Fries 6MM',
+    brand: 'Hup Hup',
+    pack: '2.5 KG PACKET',
     hsn: '2004',
-    image: '/images/products/mccain_smiles.png',
-    isFeatured: true,
-    description: 'Smiley-face seasoned mashed potato shapes for quick-service menus.'
+    image: '/assets/products/hup_hup_french_fries.jpg',
+    description: 'Authentic Hup Hup Hup Hup French Fries 6MM in commercial 2.5 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-VEG-12',
+    sku: 'RAIS-VEG-03',
     categoryCode: 'VEG',
     categoryName: 'Veg Items',
-    name: 'ITC Crispy Veg Burger Patty',
+    name: 'I.t.c Veg Momos',
     brand: 'ITC Master Chef',
-    pack: '1 kg Packet',
+    pack: '1 PACKET',
     hsn: '2004',
-    image: '/images/products/itc_veg_burger_patty.webp',
-    description: 'Vegetable blend patty with potatoes, peas, and green herbs.'
+    image: '/assets/products/veg_momos.jpg',
+    description: 'Authentic ITC Master Chef I.t.c Veg Momos in commercial 1 PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-VEG-13',
+    sku: 'RAIS-VEG-07',
     categoryCode: 'VEG',
     categoryName: 'Veg Items',
-    name: 'Crispy Veg Spring Rolls',
+    name: 'ITC Cheesy Corn Triangle',
     brand: 'ITC Master Chef',
-    pack: '1 Packet (10 Nos)',
-    hsn: '2106',
-    image: '/images/products/itc_veggie_pizza_pocket.webp',
-    description: 'Pastry rolls filled with seasoned shredded vegetables.'
-  },
-  {
-    sku: 'RAIS-VEG-14',
-    categoryCode: 'VEG',
-    categoryName: 'Veg Items',
-    name: 'Crunchy Veggie Balls',
-    brand: 'McCain',
-    pack: '1 kg Packet',
+    pack: '1 KG PACKET',
     hsn: '2004',
-    image: '/images/products/mccain_veggie_nuggets.png',
-    description: 'Vegetable spheres crafted for quick appetizers and Manchurian dishes.'
+    image: '/assets/products/cheesy_triangle.jpg',
+    description: 'Authentic ITC Master Chef ITC Cheesy Corn Triangle in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-VEG-15',
+    sku: 'RAIS-VEG-ITCC',
     categoryCode: 'VEG',
     categoryName: 'Veg Items',
-    name: 'Pizza Base 8 Inch Par-Baked',
-    brand: 'Fresh Bakery',
-    pack: '1 Packet (2 Nos)',
-    hsn: '1905',
-    image: '/images/products/pizza_base.jpg',
-    description: 'Pre-fermented stone-baked thin crust pizza bases for deck ovens.'
+    name: 'ITC Crispy Veg Burger Patty 1.2 KG',
+    brand: 'ITC Master Chef',
+    pack: '1.2 KG PACKET',
+    hsn: '2004',
+    image: '/assets/products/chill_fill_veg_patty.jpg',
+    description: 'Authentic ITC Master Chef ITC Crispy Veg Burger Patty 1.2 KG in commercial 1.2 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-VEG-16',
+    sku: 'RAIS-VEG-05',
     categoryCode: 'VEG',
     categoryName: 'Veg Items',
-    name: 'Pizza Base 9 Inch Par-Baked',
-    brand: 'Fresh Bakery',
-    pack: '1 Packet (2 Nos)',
-    hsn: '1905',
-    image: '/images/products/pizza_base.jpg',
-    description: 'Standard 9-inch medium pizza crusts for commercial kitchens.'
-  },
-
-  // ==========================================
-  // 3. Ketchup & Sauces (12 SKUs)
-  // ==========================================
-  {
-    sku: 'RAIS-SAU-01',
-    categoryCode: 'SAUCES',
-    categoryName: 'Ketchup & Sauces',
-    name: 'Del Monte Tomato Ketchup 1.1kg',
-    brand: 'Del Monte',
-    pack: '1 Packet (1.1kg)',
-    hsn: '2103',
-    image: '/images/products/delmonte_tomato_ketchup.png',
-    isFeatured: true,
-    description: 'Tangy tomato ketchup for commercial dispenser squeeze bottles.'
+    name: 'ITC Paneer Patty',
+    brand: 'ITC Master Chef',
+    pack: '1.02KG PACKET',
+    hsn: '2004',
+    image: '/assets/products/itc_spicy_paneer_patty.jpg',
+    description: 'Authentic ITC Master Chef ITC Paneer Patty in commercial 1.02KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-SAU-02',
-    categoryCode: 'SAUCES',
-    categoryName: 'Ketchup & Sauces',
-    name: 'Foodrite Tomato Ketchup 1kg',
-    brand: 'Foodrite',
-    pack: '1 kg Packet',
-    hsn: '2103',
-    image: '/images/products/foodrite_tomato_ketchup.jpg',
-    description: 'Commercial grade tomato ketchup tailored for fast-food operations.'
+    sku: 'RAIS-VEG-MCCA',
+    categoryCode: 'VEG',
+    categoryName: 'Veg Items',
+    name: 'Mccain Smiles',
+    brand: 'RAIS Select',
+    pack: '1.5 kg',
+    hsn: '2004',
+    image: '/assets/products/mccain_smiles.jpg',
+    description: 'Authentic RAIS Select Mccain Smiles in commercial 1.5 kg wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-SAU-03',
-    categoryCode: 'SAUCES',
-    categoryName: 'Ketchup & Sauces',
-    name: 'Del Monte Ketchup (8g Sachets)',
-    brand: 'Del Monte',
-    pack: '1 Packet (100 Sachets)',
-    hsn: '2103',
-    image: '/images/products/delmonte_ketchup_sachet.png',
-    description: 'Single-serve portion control tomato ketchup sachets for takeaway packs.'
+    sku: 'RAIS-VEG-PIZZ',
+    categoryCode: 'VEG',
+    categoryName: 'Veg Items',
+    name: 'Pizza Base 8 Inch',
+    brand: 'RAIS Select',
+    pack: '1 PACKET',
+    hsn: '2004',
+    image: '/assets/products/pizza_base.jpg',
+    description: 'Authentic RAIS Select Pizza Base 8 Inch in commercial 1 PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-SAU-04',
+    sku: 'RAIS-VEG-PIZB',
+    categoryCode: 'VEG',
+    categoryName: 'Veg Items',
+    name: 'Pizza Base 9 Inch',
+    brand: 'RAIS Select',
+    pack: '5 PEICES Pack',
+    hsn: '2004',
+    image: '/assets/products/pizza_base.jpg',
+    description: 'Authentic RAIS Select Pizza Base 9 Inch in commercial 5 PEICES wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-VEG-08',
+    categoryCode: 'VEG',
+    categoryName: 'Veg Items',
+    name: 'Sweet Corn',
+    brand: 'RAIS Fresh',
+    pack: '1 KG PACKET',
+    hsn: '2004',
+    image: '/assets/products/sweet_corn_pack.jpg',
+    description: 'Authentic RAIS Fresh Sweet Corn in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-VEG-VEGS',
+    categoryCode: 'VEG',
+    categoryName: 'Veg Items',
+    name: 'Veg Spring Rolls',
+    brand: 'RAIS Select',
+    pack: '500GR  PACKET Pack',
+    hsn: '2004',
+    image: '/assets/products/spring_rolls.jpg',
+    description: 'Authentic RAIS Select Veg Spring Rolls in commercial 500GR  PACKET wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-VEG-VEGG',
+    categoryCode: 'VEG',
+    categoryName: 'Veg Items',
+    name: 'Veggie Balls',
+    brand: 'RAIS Select',
+    pack: '1 KG PACKET',
+    hsn: '2004',
+    image: '/assets/products/veggie_balls.jpg',
+    description: 'Authentic RAIS Select Veggie Balls in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-VEG-CULI',
     categoryCode: 'SAUCES',
     categoryName: 'Ketchup & Sauces',
-    name: 'Del Monte Tandoori Mayo',
-    brand: 'Del Monte',
-    pack: '1 kg Packet',
+    name: 'Culinary Sauce',
+    brand: 'RAIS Select',
+    pack: '1 KG PACKET',
     hsn: '2103',
-    image: '/images/products/delmonte_tandoori_mayo.png',
-    isFeatured: true,
-    description: 'Tandoori spiced mayonnaise for rolls, burgers, and dipping.'
+    image: '/assets/products/culinary_sauce_5kg.jpg',
+    description: 'Authentic RAIS Select Culinary Sauce in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-SAU-BARB',
+    categoryCode: 'SAUCES',
+    categoryName: 'Ketchup & Sauces',
+    name: 'Del Monte Barbique Sauce',
+    brand: 'RAIS Select',
+    pack: '1 KG PACKET',
+    hsn: '2103',
+    image: '/assets/products/delmonte_barbeque_sauce.jpg',
+    description: 'Authentic RAIS Select Del Monte Barbique Sauce in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-SAU-05',
@@ -433,10 +383,32 @@ const RAW_PRODUCTS: ProductItem[] = [
     categoryName: 'Ketchup & Sauces',
     name: 'Del Monte Creamy Cheese Sauce',
     brand: 'Del Monte',
-    pack: '1 kg Packet',
+    pack: '1 KG PACKET',
     hsn: '2103',
-    image: '/images/gourmet_sauces.jpg',
-    description: 'Smooth pouring cheese sauce for nachos, loaded fries and burgers.'
+    image: '/assets/products/delmonte_creamy_cheese.jpg',
+    description: 'Authentic Del Monte Del Monte Creamy Cheese Sauce in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-SAU-03',
+    categoryCode: 'SAUCES',
+    categoryName: 'Ketchup & Sauces',
+    name: 'Del Monte Ketchup (8 Gram Pkt)',
+    brand: 'Del Monte',
+    pack: '1 PACKET',
+    hsn: '2103',
+    image: '/assets/products/ketchup_sachets.jpg',
+    description: 'Authentic Del Monte Del Monte Ketchup (8 Gram Pkt) in commercial 1 PACKET wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-VEG-DELM',
+    categoryCode: 'SAUCES',
+    categoryName: 'Ketchup & Sauces',
+    name: 'Del Monte Mayonnaise 1kg',
+    brand: 'RAIS Select',
+    pack: '1 KG PACKET',
+    hsn: '2103',
+    image: '/assets/products/mealtime_veg_mayo.jpg',
+    description: 'Authentic RAIS Select Del Monte Mayonnaise 1kg in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-SAU-06',
@@ -444,93 +416,154 @@ const RAW_PRODUCTS: ProductItem[] = [
     categoryName: 'Ketchup & Sauces',
     name: 'Del Monte Pizza Pasta Sauce',
     brand: 'Del Monte',
-    pack: '1 kg Packet',
+    pack: '1 KG PACKET',
     hsn: '2103',
-    image: '/images/products/delmonte_pizza_pasta_sauce.png',
-    description: 'Seasoned tomato herb paste for pizza bases and pasta prep.'
+    image: '/assets/products/delmonte_pizza_pasta_sauce.jpg',
+    description: 'Authentic Del Monte Del Monte Pizza Pasta Sauce in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-SAU-07',
+    sku: 'RAIS-SAU-04',
     categoryCode: 'SAUCES',
     categoryName: 'Ketchup & Sauces',
-    name: 'Mayank Gold Ketchup (9g Sachets)',
-    brand: 'Mayank Gold',
-    pack: '1 Packet',
+    name: 'Del Monte Tandoori Mayo',
+    brand: 'Del Monte',
+    pack: '1 KG PACKET',
     hsn: '2103',
-    image: '/images/products/delmonte_ketchup_sachet.png',
-    description: 'Single-serve tomato ketchup sachets for parcels and deliveries.'
+    image: '/assets/products/delmonte_tandoori_mayo.jpg',
+    description: 'Authentic Del Monte Del Monte Tandoori Mayo in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-SAU-08',
+    sku: 'RAIS-SAU-01',
     categoryCode: 'SAUCES',
     categoryName: 'Ketchup & Sauces',
-    name: 'Foodrite Salad Mayonnaise 1kg',
-    brand: 'Foodrite',
-    pack: '1 kg Packet',
+    name: 'Del Monte Tomato Ketchup 1.1kg',
+    brand: 'Del Monte',
+    pack: '1 PACKET',
     hsn: '2103',
-    image: '/images/products/foodrite_mayonnaise.jpg',
+    image: '/assets/products/delmonte_ketchup_bottle.jpg',
     isFeatured: true,
-    description: 'Eggless white mayonnaise formulated for sandwiches and rolls.'
+    description: 'Authentic Del Monte Del Monte Tomato Ketchup 1.1kg in commercial 1 PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-SAU-09',
     categoryCode: 'SAUCES',
     categoryName: 'Ketchup & Sauces',
-    name: 'Foodrite Mayonnaise (8g Sachets)',
+    name: 'Foodrite Mayonnaise (8 Gram Pkt)',
     brand: 'Foodrite',
-    pack: '1 Packet',
+    pack: '1 PACKET',
     hsn: '2103',
-    image: '/images/products/foodrite_mayonnaise.jpg',
-    description: 'Single-use mayonnaise sachets for delivery parcel inserts.'
+    image: '/assets/products/foodrite_mayo_sachets.jpg',
+    description: 'Authentic Foodrite Foodrite Mayonnaise (8 Gram Pkt) in commercial 1 PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-SAU-10',
+    sku: 'RAIS-SAU-08',
     categoryCode: 'SAUCES',
     categoryName: 'Ketchup & Sauces',
-    name: 'Del Monte BBQ Barbecue Sauce 1kg',
-    brand: 'Del Monte',
-    pack: '1 kg Packet',
+    name: 'Foodrite Salad Mayonnaise',
+    brand: 'Foodrite',
+    pack: '1 KG PACKET',
     hsn: '2103',
-    image: '/images/products/delmonte_bbq_sauce.png',
-    description: 'Smoky barbecue sauce for grilled chicken, burgers and wings.'
+    image: '/assets/products/mealtime_veg_mayo.jpg',
+    description: 'Authentic Foodrite Foodrite Salad Mayonnaise in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-SAU-11',
+    sku: 'RAIS-SAU-02',
     categoryCode: 'SAUCES',
     categoryName: 'Ketchup & Sauces',
-    name: 'Foodrite Bulk Tomato Ketchup 5kg',
+    name: 'Foodrite Tomato Ketchup',
     brand: 'Foodrite',
-    pack: '5 kg Dispenser Can',
+    pack: '1 KG PACKET',
     hsn: '2103',
-    image: '/images/products/foodrite_tomato_ketchup.jpg',
-    description: 'Large volume bulk ketchup container for high-throughput restaurant kitchens.'
+    image: '/assets/products/foodrite_tomato_ketchup_pouch.jpg',
+    description: 'Authentic Foodrite Foodrite Tomato Ketchup in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-SAU-12',
+    sku: 'RAIS-SAU-KECH',
     categoryCode: 'SAUCES',
     categoryName: 'Ketchup & Sauces',
-    name: 'Foodrite Sweet Chilli Garlic Dip',
-    brand: 'Foodrite',
-    pack: '1 kg Bottle',
+    name: 'Ketchup FDR 5kg Tomato',
+    brand: 'RAIS Select',
+    pack: '5 KG CAN',
     hsn: '2103',
-    image: '/images/gourmet_sauces.jpg',
-    description: 'Sweet garlic dip sauce for momos, spring rolls, and nuggets.'
+    image: '/assets/products/red_sauce_can_5kg.jpg',
+    description: 'Authentic RAIS Select Ketchup FDR 5kg Tomato in commercial 5 KG CAN wholesale packing for QSRs, hotels, and cafes.'
   },
-
-  // ==========================================
-  // 4. Bread Mix & Powders (5 SKUs)
-  // ==========================================
   {
-    sku: 'RAIS-BRD-01',
+    sku: 'RAIS-SAU-07',
+    categoryCode: 'SAUCES',
+    categoryName: 'Ketchup & Sauces',
+    name: 'Mayank Gold Ketchup (9 Gram Pkt)',
+    brand: 'Mayank Gold',
+    pack: '1 PACKET',
+    hsn: '2103',
+    image: '/assets/products/ketchup_sachets.jpg',
+    description: 'Authentic Mayank Gold Mayank Gold Ketchup (9 Gram Pkt) in commercial 1 PACKET wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-PAC-MAYO',
+    categoryCode: 'SAUCES',
+    categoryName: 'Ketchup & Sauces',
+    name: 'Mayonnaise Cups 35 MM',
+    brand: 'RAIS Select',
+    pack: '1 packet',
+    hsn: '2103',
+    image: '/assets/products/mayo_portion_cups.jpg',
+    description: 'Authentic RAIS Select Mayonnaise Cups 35 MM in commercial 1 packet wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-SAU-MRFO',
+    categoryCode: 'SAUCES',
+    categoryName: 'Ketchup & Sauces',
+    name: 'Mr Foodrite Thick Chocolate Dressing',
+    brand: 'RAIS Select',
+    pack: '1 KG',
+    hsn: '2103',
+    image: '/assets/products/foodrite_chocolate_dressing.jpg',
+    description: 'Authentic RAIS Select Mr Foodrite Thick Chocolate Dressing in commercial 1 KG wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-SAU-TOMA',
+    categoryCode: 'SAUCES',
+    categoryName: 'Ketchup & Sauces',
+    name: 'Tomato Sauce 5kg',
+    brand: 'RAIS Select',
+    pack: '5 KG  CAN',
+    hsn: '2103',
+    image: '/assets/products/red_sauce_can_5kg.jpg',
+    description: 'Authentic RAIS Select Tomato Sauce 5kg in commercial 5 KG  CAN wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-VEG-VENI',
+    categoryCode: 'SAUCES',
+    categoryName: 'Ketchup & Sauces',
+    name: 'Vinegar',
+    brand: 'RAIS Select',
+    pack: '1 ltr',
+    hsn: '2103',
+    image: '/assets/products/cooking_vinegar.jpg',
+    description: 'Authentic RAIS Select Vinegar in commercial 1 ltr wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-VEG-CHIL',
     categoryCode: 'BREADING',
     categoryName: 'Bread Mix & Powders',
-    name: 'VKL Extra Hot & Spicy Marinade',
-    brand: 'VKL',
-    pack: '1 kg Packet',
-    hsn: '2103',
-    image: '/images/products/chilli_powder.jpg',
-    isFeatured: true,
-    description: 'Seasoning marinade blend for commercial fried chicken.'
+    name: 'Chilli Flakes VKL',
+    brand: 'RAIS Select',
+    pack: '500 grams',
+    hsn: '1901',
+    image: '/assets/products/chilly_powder.jpg',
+    description: 'Authentic RAIS Select Chilli Flakes VKL in commercial 500 grams wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-BRD-04',
+    categoryCode: 'BREADING',
+    categoryName: 'Bread Mix & Powders',
+    name: 'Oregano',
+    brand: 'RAIS Select',
+    pack: '1 KG PACKET',
+    hsn: '1901',
+    image: '/assets/products/big_bell_oregano.jpg',
+    description: 'Authentic RAIS Select Oregano in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-BRD-02',
@@ -538,61 +571,55 @@ const RAW_PRODUCTS: ProductItem[] = [
     categoryName: 'Bread Mix & Powders',
     name: 'VKL Crispy Cajun Breading Mix',
     brand: 'VKL',
-    pack: '1 kg Packet',
+    pack: '1 KG PACKET',
     hsn: '1901',
-    image: '/images/products/spices_blend.jpg',
+    image: '/assets/products/vkl_crispy_cajun_breading.jpg',
     isFeatured: true,
-    description: 'Flour breader mix producing crisp ripple crusts on fried foods.'
+    description: 'Authentic VKL VKL Crispy Cajun Breading Mix in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-BRD-01',
+    categoryCode: 'BREADING',
+    categoryName: 'Bread Mix & Powders',
+    name: 'VKL Extra H & S Marinade',
+    brand: 'VKL',
+    pack: '1 KG PACKET',
+    hsn: '1901',
+    image: '/assets/products/vkl_extra_hs_marinade.jpg',
+    description: 'Authentic VKL VKL Extra H & S Marinade in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-BRD-03',
     categoryCode: 'BREADING',
     categoryName: 'Bread Mix & Powders',
-    name: 'VKL Peri Peri Sprinkler Powder',
+    name: 'VKL Peri Peri Powder',
     brand: 'VKL',
-    pack: '250 g Packet',
-    hsn: '0910',
-    image: '/images/products/chilli_powder.jpg',
-    description: 'Zesty chilli seasoning sprinkler for shaker fries and popcorn.'
+    pack: '250 GRAMS PACKET Pack',
+    hsn: '1901',
+    image: '/assets/products/vkl_peri_peri_sprinkler.jpg',
+    description: 'Authentic VKL VKL Peri Peri Powder in commercial 250 GRAMS PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-BRD-04',
-    categoryCode: 'BREADING',
-    categoryName: 'Bread Mix & Powders',
-    name: 'Oregano Mediterranean Herb Seasoning',
-    brand: 'RAIS Select',
-    pack: '1 kg Packet',
-    hsn: '1211',
-    image: '/images/products/spices_blend.jpg',
-    isFeatured: true,
-    description: 'Crushed oregano herb blend for pizza and pasta finishing.'
-  },
-  {
-    sku: 'RAIS-BRD-05',
-    categoryCode: 'BREADING',
-    categoryName: 'Bread Mix & Powders',
-    name: 'VKL Crushed Chilli Flakes Premium',
-    brand: 'VKL',
-    pack: '500 g Packet',
-    hsn: '0904',
-    image: '/images/products/chilli_powder.jpg',
-    description: 'Dried crushed red pepper flakes with seeds for pizza condiments.'
-  },
-
-  // ==========================================
-  // 5. Cheese & Slices (6 SKUs)
-  // ==========================================
-  {
-    sku: 'RAIS-CHS-01',
+    sku: 'RAIS-CHE-BUTT',
     categoryCode: 'CHEESE',
     categoryName: 'Cheese & Slices',
-    name: 'Milky Mist Mozzarella Diced Cheese (2kg)',
-    brand: 'Milky Mist',
-    pack: '2 kg Packet',
+    name: 'Butter Nutrilite',
+    brand: 'RAIS Select',
+    pack: '500 GRAMS PACKET Pack',
     hsn: '0406',
-    image: '/images/mozzarella_cheese.jpg',
-    isFeatured: true,
-    description: 'Pre-diced mozzarella cheese delivering stretch and browning on pizzas.'
+    image: '/assets/products/nutrilite_butter.jpg',
+    description: 'Authentic RAIS Select Butter Nutrilite in commercial 500 GRAMS PACKET wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-CHS-03',
+    categoryCode: 'CHEESE',
+    categoryName: 'Cheese & Slices',
+    name: 'Milky Mist Cheese Slice',
+    brand: 'Milky Mist',
+    pack: '765 GRAMS PACKET Pack',
+    hsn: '0406',
+    image: '/assets/products/milky_mist_cheese_slices.jpg',
+    description: 'Authentic Milky Mist Milky Mist Cheese Slice in commercial 765 GRAMS PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-CHS-02',
@@ -600,260 +627,212 @@ const RAW_PRODUCTS: ProductItem[] = [
     categoryName: 'Cheese & Slices',
     name: 'Milky Mist Mozzarella Diced Cheese (1kg)',
     brand: 'Milky Mist',
-    pack: '1 kg Packet',
+    pack: '1 KG PACKET',
     hsn: '0406',
-    image: '/images/mozzarella_cheese.jpg',
-    description: '1kg catering pack of free-flowing diced mozzarella cheese.'
+    image: '/assets/products/milky_mist_mozzarella_1kg.jpg',
+    description: 'Authentic Milky Mist Milky Mist Mozzarella Diced Cheese (1kg) in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-CHS-03',
+    sku: 'RAIS-CHS-01',
     categoryCode: 'CHEESE',
     categoryName: 'Cheese & Slices',
-    name: 'Milky Mist Processed Cheese Slices',
+    name: 'Milky Mist Mozzarella Diced Cheese (2kg)',
     brand: 'Milky Mist',
-    pack: '765 g Packet (48 Slices)',
+    pack: '2 KG PACKET',
     hsn: '0406',
-    image: '/images/mozzarella_cheese.jpg',
+    image: '/assets/products/milky_mist_mozzarella_2kg.jpg',
     isFeatured: true,
-    description: 'Wrapped melting cheese slices tailored for burgers and sandwiches.'
+    description: 'Authentic Milky Mist Milky Mist Mozzarella Diced Cheese (2kg) in commercial 2 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-CHS-04',
     categoryCode: 'CHEESE',
     categoryName: 'Cheese & Slices',
-    name: 'Milky Mist Fresh Paneer Diced Cubes',
+    name: 'Milky Mist Paneer (diced Cubes)',
     brand: 'Milky Mist',
-    pack: '1 kg Packet',
+    pack: '1 KG PACKET',
     hsn: '0406',
-    image: '/images/mozzarella_cheese.jpg',
-    description: 'Diced fresh paneer cubes ready for curries, pizzas, and starters.'
-  },
-  {
-    sku: 'RAIS-CHS-05',
-    categoryCode: 'CHEESE',
-    categoryName: 'Cheese & Slices',
-    name: 'Nutrilite Commercial Table Butter',
-    brand: 'Nutrilite',
-    pack: '500 g Pack',
-    hsn: '0405',
-    image: '/images/mozzarella_cheese.jpg',
-    description: 'Salted commercial butter for toasting buns and kitchen cooking.'
-  },
-  {
-    sku: 'RAIS-CHS-06',
-    categoryCode: 'CHEESE',
-    categoryName: 'Cheese & Slices',
-    name: 'Milky Mist Processed Cheese Diced',
-    brand: 'Milky Mist',
-    pack: '1 kg Packet',
-    hsn: '0406',
-    image: '/images/mozzarella_cheese.jpg',
-    description: 'Melting processed cheese blend for garlic bread and sandwiches.'
-  },
-
-  // ==========================================
-  // 6. Pizza & Burger Boxes (9 SKUs)
-  // ==========================================
-  {
-    sku: 'RAIS-BOX-01',
-    categoryCode: 'PACKAGING',
-    categoryName: 'Pizza & Burger Boxes',
-    name: 'Pizza Box 8"x8" Plain Kraft',
-    brand: 'Packaging Solutions',
-    pack: '100 Nos',
-    hsn: '4819',
-    image: '/images/products/kraft_pizza_box.jpg',
-    isFeatured: true,
-    description: 'Corrugated Kraft fluted cardboard box preserving pizza temperature.'
-  },
-  {
-    sku: 'RAIS-BOX-02',
-    categoryCode: 'PACKAGING',
-    categoryName: 'Pizza & Burger Boxes',
-    name: 'Burger Box 4"x4" Plain Kraft',
-    brand: 'Packaging Solutions',
-    pack: '100 Nos',
-    hsn: '4819',
-    image: '/images/products/kraft_burger_box.jpg',
-    description: 'Single burger clamshell container preventing food crushing in delivery.'
-  },
-  {
-    sku: 'RAIS-BOX-03',
-    categoryCode: 'PACKAGING',
-    categoryName: 'Pizza & Burger Boxes',
-    name: 'Pizza Box 8"x8" Printed Laminated',
-    brand: 'Packaging Solutions',
-    pack: '100 Nos',
-    hsn: '4819',
-    image: '/images/products/kraft_pizza_box.jpg',
-    isFeatured: true,
-    description: 'Printed pizza packaging box with internal greaseproof lining.'
+    image: '/assets/products/paneer_diced_cubes.jpg',
+    description: 'Authentic Milky Mist Milky Mist Paneer (diced Cubes) in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-BOX-04',
     categoryCode: 'PACKAGING',
     categoryName: 'Pizza & Burger Boxes',
-    name: 'Burger Box 4"x4" Printed Gloss',
+    name: 'Burger Box 4',
     brand: 'Packaging Solutions',
-    pack: '100 Nos',
+    pack: '100 NOS Pack',
     hsn: '4819',
-    image: '/images/products/kraft_burger_box.jpg',
-    description: 'Printed graphic burger box for restaurant delivery and takeaway.'
+    image: '/assets/products/burger_box_printed.jpg',
+    isFeatured: true,
+    description: 'Authentic Packaging Solutions Burger Box 4 in commercial 100 NOS wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-BOX-05',
     categoryCode: 'PACKAGING',
     categoryName: 'Pizza & Burger Boxes',
-    name: 'Burger Box 5"x5" Printed (Large)',
+    name: 'Burger Box 5',
     brand: 'Packaging Solutions',
-    pack: '100 Nos',
+    pack: '100 NOS Pack',
     hsn: '4819',
-    image: '/images/products/kraft_burger_box.jpg',
-    description: 'Large burger container for double patty stackers and loaded burgers.'
+    image: '/assets/products/burger_box_printed.jpg',
+    description: 'Authentic Packaging Solutions Burger Box 5 in commercial 100 NOS wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-BOX-06',
+    sku: 'RAIS-VEG-BUTT',
     categoryCode: 'PACKAGING',
     categoryName: 'Pizza & Burger Boxes',
-    name: 'Pizza Box 9"x9" Plain Kraft',
-    brand: 'Packaging Solutions',
-    pack: '100 Nos',
+    name: 'Butter Paper',
+    brand: 'RAIS Select',
+    pack: '1 KG PACKET',
     hsn: '4819',
-    image: '/images/products/kraft_pizza_box.jpg',
-    description: 'Medium 9-inch corrugated takeaway pizza box.'
+    image: '/assets/products/butter_paper_pack.jpg',
+    description: 'Authentic RAIS Select Butter Paper in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-BOX-07',
+    sku: 'RAIS-BOX-02',
     categoryCode: 'PACKAGING',
     categoryName: 'Pizza & Burger Boxes',
-    name: 'Fried Chicken Bucket with Lid',
+    name: 'Chicken Box 4',
     brand: 'Packaging Solutions',
-    pack: '100 Nos',
+    pack: '100 NOS Pack',
     hsn: '4819',
-    image: '/images/products/chicken_bucket.jpg',
-    description: 'Round greaseproof paper bucket with lid for crispy fried chicken.'
+    image: '/assets/products/pizza_burger_boxes_pile.jpg',
+    description: 'Authentic Packaging Solutions Chicken Box 4 in commercial 100 NOS wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-BOX-08',
+    sku: 'RAIS-PAC-BUKE',
     categoryCode: 'PACKAGING',
     categoryName: 'Pizza & Burger Boxes',
-    name: 'Mayonnaise Portion Cups 35mm with Lids',
-    brand: 'Packaging Solutions',
-    pack: '500 Nos',
-    hsn: '3923',
-    image: '/images/products/kraft_burger_box.jpg',
-    description: 'Clear portion cups with lids for dips, garlic sauce, and mayo.'
+    name: 'Chicken Buckets',
+    brand: 'RAIS Select',
+    pack: '34 Pack',
+    hsn: '4819',
+    image: '/assets/products/kfc_bucket.jpg',
+    description: 'Authentic RAIS Select Chicken Buckets in commercial 34 wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-BOX-09',
+    sku: 'RAIS-PAC-KFCB',
     categoryCode: 'PACKAGING',
     categoryName: 'Pizza & Burger Boxes',
-    name: 'Commercial Table Tissue Paper Pack',
-    brand: 'Packaging Solutions',
-    pack: '1000 Sheets Pack',
-    hsn: '4818',
-    image: '/images/products/kraft_pizza_box.jpg',
-    description: 'Embossed table napkins for restaurant dining tables.'
+    name: 'KFC Bucket',
+    brand: 'RAIS Select',
+    pack: '34 PEICES Pack',
+    hsn: '4819',
+    image: '/assets/products/kfc_bucket.jpg',
+    description: 'Authentic RAIS Select KFC Bucket in commercial 34 PEICES wholesale packing for QSRs, hotels, and cafes.'
   },
-
-  // ==========================================
-  // 7. Spices (5 SKUs)
-  // ==========================================
   {
-    sku: 'RAIS-SPC-01',
-    categoryCode: 'SPICES',
-    categoryName: 'Culinary Spices',
-    name: 'Chilly Powder No. 1 (Pickle Grade)',
-    brand: 'RAIS Spices',
-    pack: '1 kg Packet',
-    hsn: '0904',
-    image: '/images/products/chilli_powder.jpg',
-    isFeatured: true,
-    description: 'Natural red spice ground from selected Andhra chillies.'
+    sku: 'RAIS-BOX-03',
+    categoryCode: 'PACKAGING',
+    categoryName: 'Pizza & Burger Boxes',
+    name: 'Pizza Box 8',
+    brand: 'Packaging Solutions',
+    pack: '1.2 KG PACKET',
+    hsn: '4819',
+    image: '/assets/products/boxes_pizza_burger_display2.jpg',
+    description: 'Authentic Packaging Solutions Pizza Box 8 in commercial 1.2 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-BOX-01',
+    categoryCode: 'PACKAGING',
+    categoryName: 'Pizza & Burger Boxes',
+    name: 'Pizza Box 9×9 Plain',
+    brand: 'Packaging Solutions',
+    pack: '100 NOS Pack',
+    hsn: '4819',
+    image: '/assets/products/boxes_display_pizza_burger.jpg',
+    description: 'Authentic Packaging Solutions Pizza Box 9×9 Plain in commercial 100 NOS wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-PAC-TISS',
+    categoryCode: 'PACKAGING',
+    categoryName: 'Pizza & Burger Boxes',
+    name: 'Tissue Papers',
+    brand: 'RAIS Select',
+    pack: '1 KG PACKET',
+    hsn: '4819',
+    image: '/assets/products/tissue_papers_pack.jpg',
+    description: 'Authentic RAIS Select Tissue Papers in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-SPC-02',
     categoryCode: 'SPICES',
     categoryName: 'Culinary Spices',
-    name: 'Chilly Powder Regular Commercial',
+    name: 'Chilly Powder',
     brand: 'RAIS Spices',
-    pack: '1 kg Packet',
-    hsn: '0904',
-    image: '/images/products/chilli_powder.jpg',
-    description: 'Hot commercial chilli powder for kitchen gravies and batters.'
+    pack: '1 KG PACKET',
+    hsn: '0910',
+    image: '/assets/products/chilly_powder.jpg',
+    description: 'Authentic RAIS Spices Chilly Powder in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-SPC-03',
+    sku: 'RAIS-SPC-01',
     categoryCode: 'SPICES',
     categoryName: 'Culinary Spices',
-    name: 'Turmeric Powder (Pure)',
+    name: 'Chilly Powder NO 1 (pickle)',
     brand: 'RAIS Spices',
-    pack: '1 kg Packet',
+    pack: '1 KG PACKET',
     hsn: '0910',
-    image: '/images/products/turmeric_powder.jpg',
-    description: 'Golden turmeric powder without artificial colouring agents.'
+    image: '/assets/products/chilly_powder.jpg',
+    description: 'Authentic RAIS Spices Chilly Powder NO 1 (pickle) in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-SPC-04',
     categoryCode: 'SPICES',
     categoryName: 'Culinary Spices',
-    name: 'Coriander Powder (Dhania)',
+    name: 'Coriander Powder',
     brand: 'RAIS Spices',
-    pack: '1 kg Packet',
-    hsn: '0909',
-    image: '/images/products/spices_blend.jpg',
-    description: 'Freshly milled roasted coriander seeds offering earthy aroma.'
+    pack: '1 KG PACKET',
+    hsn: '0910',
+    image: '/assets/products/coriander_powder.jpg',
+    description: 'Authentic RAIS Spices Coriander Powder in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-SPC-05',
+    sku: 'RAIS-SPC-03',
     categoryCode: 'SPICES',
     categoryName: 'Culinary Spices',
-    name: 'Commercial Cumin Powder (Jeera)',
+    name: 'Turmeric Powder',
     brand: 'RAIS Spices',
-    pack: '1 kg Packet',
-    hsn: '0909',
-    image: '/images/products/spices_blend.jpg',
-    description: 'Roasted cumin powder for North and South Indian cooking.'
-  },
-
-  // ==========================================
-  // 8. Mojitos & Syrups (3 SKUs)
-  // ==========================================
-  {
-    sku: 'RAIS-MOJ-01',
-    categoryCode: 'MOJITOS',
-    categoryName: 'Mojitos & Syrups',
-    name: 'Lime and Mint Mojito Syrup',
-    brand: 'RAIS Beverages',
-    pack: '1 Bottle (750ml)',
-    hsn: '2106',
-    image: '/images/products/mojito_lime_mint.jpg',
-    isFeatured: true,
-    description: 'Citrus lime and garden mint concentrated syrup for beverages.'
+    pack: '1 KG PACKET',
+    hsn: '0910',
+    image: '/assets/products/turmeric_powder.jpg',
+    description: 'Authentic RAIS Spices Turmeric Powder in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
   },
   {
     sku: 'RAIS-MOJ-02',
     categoryCode: 'MOJITOS',
     categoryName: 'Mojitos & Syrups',
-    name: 'Bluecurco (Blue Curaçao Syrup)',
+    name: 'Blue Curacao Syrup',
     brand: 'RAIS Beverages',
-    pack: '1 Bottle (750ml)',
+    pack: '1 BOTTLE',
     hsn: '2106',
-    image: '/images/products/mojito_blue_curacao.jpg',
-    isFeatured: true,
-    description: 'Cobalt blue citrus mocktail syrup for café coolers.'
+    image: '/assets/products/manama_syrups_trio.jpg',
+    description: 'Authentic RAIS Beverages Blue Curacao Syrup in commercial 1 BOTTLE wholesale packing for QSRs, hotels, and cafes.'
   },
   {
-    sku: 'RAIS-MOJ-03',
+    sku: 'RAIS-MOJ-01',
     categoryCode: 'MOJITOS',
     categoryName: 'Mojitos & Syrups',
-    name: 'Strawberry Mojito Fruit Crush',
+    name: 'Lime and Mint',
     brand: 'RAIS Beverages',
-    pack: '1 Bottle (750ml)',
+    pack: '1 BOTTLE',
     hsn: '2106',
-    image: '/images/products/mojito_lime_mint.jpg',
-    description: 'Strawberry beverage base syrup for milkshakes and cold drinks.'
-  }
+    image: '/assets/products/manama_syrups_trio.jpg',
+    description: 'Authentic RAIS Beverages Lime and Mint in commercial 1 BOTTLE wholesale packing for QSRs, hotels, and cafes.'
+  },
+  {
+    sku: 'RAIS-MOJ-STRA',
+    categoryCode: 'MOJITOS',
+    categoryName: 'Mojitos & Syrups',
+    name: 'Strawberry Mojito Syrup',
+    brand: 'RAIS Select',
+    pack: '1 KG PACKET',
+    hsn: '2106',
+    image: '/assets/products/manama_strawberry_mojito.jpg',
+    description: 'Authentic RAIS Select Strawberry Mojito Syrup in commercial 1 KG PACKET wholesale packing for QSRs, hotels, and cafes.'
+  },
+
 ];
 
 export const CATEGORIES: CategoryItem[] = RAW_CATEGORIES.map((c) => ({
@@ -881,19 +860,20 @@ export const BUSINESS_INFO = {
   instagramDmUrl: 'https://ig.me/m/raisfrozenfoods',
   upiId: '9347453135@ybl',
   partnerBrands: [
-    'McCain',
     'ITC Master Chef',
     'Milky Mist',
     'Del Monte',
-    'Venky\'s',
-    'Godrej',
-    'VKL Seasonings',
-    'Foodrite',
-    'Hup Hup',
-    'Signature',
-    'Nutrich',
     'Amul',
-    'Fresh Bakery',
+    'Nutrich',
+    'Triken',
+    'Hup Hup',
+    'Chilli Fill',
+    'Godrej',
+    'Signature',
+    'Foodrite',
+    'Mayank Gold',
+    'VKL',
+    'RAIS Select',
     'Packaging Solutions'
   ]
 };
