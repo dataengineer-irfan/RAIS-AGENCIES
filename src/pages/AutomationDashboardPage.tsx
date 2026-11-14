@@ -201,55 +201,86 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
           </div>
         </div>
 
-        {/* 1. TOP HEADER & METRICS BAR */}
-        <div className="pb-4 border-b border-cyan-500/20">
-          <div className="inline-flex items-center gap-2 text-cyan-300 text-xs font-bold uppercase tracking-[0.2em] mb-2">
-            <Sparkles className="w-4 h-4 text-amber-400" />
-            <span>RAIS Agencies · Rayachoty (516269)</span>
-          </div>
-          <h1 className="font-serif text-3xl sm:text-4xl font-black text-white tracking-tight">
-            Instagram Reels &amp; Wholesale Enquiry{' '}
-            <span className="bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">
-              Automation Hub
-            </span>
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl leading-relaxed">
-            18.0s Catalogue-Accurate Campaign with Ayesha (3D Stylized Animated Presenter) in Telugu &amp; Hindi · Capturing Rayachoty Wholesale Orders &amp; Enquiries.
-          </p>
-        </div>
+        {/* 1. TOP HEADER & METRICS BAR (Streamlined per Active Tab) */}
+        {activeTab === 'google_growth' ? (
+          <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#0d1a3a] via-[#10234a] to-[#0a1530] border border-emerald-500/30 shadow-lg">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <div className="inline-flex items-center gap-1.5 text-emerald-300 text-[11px] font-bold uppercase tracking-wider mb-1">
+                  <Globe className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Google Business Profile &amp; Local SEO Center</span>
+                </div>
+                <h1 className="font-serif text-xl sm:text-2xl font-black text-white tracking-tight">
+                  RAIS Agencies — Rayachoty Google Maps Hub
+                </h1>
+                <p className="text-xs text-slate-300 mt-0.5 max-w-2xl">
+                  Bilingual customer reviews with mandatory 1-click human approval and local commercial buyer outreach.
+                </p>
+              </div>
 
-        {/* KPI CARDS (Real Live Data) */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3.5">
-          <div className="p-4 rounded-2xl bg-[#0f1c3f]/85 border border-cyan-500/20 text-center">
-            <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Next in Queue</div>
-            <div className="font-serif text-2xl font-black text-amber-300 mt-1">Day {nextInQueueReel?.dayNumber ?? 2}</div>
-            <div className="text-[10px] text-cyan-300 truncate mt-0.5">{nextInQueueReel?.productName ?? 'Chicken Nuggets'}</div>
-          </div>
-          <div className="p-4 rounded-2xl bg-[#0f1c3f]/85 border border-cyan-500/20 text-center">
-            <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Published Live</div>
-            <div className="font-serif text-2xl font-black text-emerald-400 mt-1">{publishedCount}</div>
-            <div className="text-[10px] text-emerald-300/80 mt-0.5">Live on @raisfrozenfoods</div>
-          </div>
-          <div className="p-4 rounded-2xl bg-[#0f1c3f]/85 border border-cyan-500/20 text-center">
-            <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Ready in Queue</div>
-            <div className="font-serif text-2xl font-black text-cyan-300 mt-1">{readyCount}</div>
-            <div className="text-[10px] text-slate-400 mt-0.5">30 Total Approved Reels</div>
-          </div>
-          <div className="p-4 rounded-2xl bg-[#0f1c3f]/85 border border-cyan-500/20 text-center">
-            <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Quotes Pending</div>
-            <div className="font-serif text-2xl font-black text-amber-400 mt-1">{quotePendingLeadsCount}</div>
-            <div className="text-[10px] text-amber-300 mt-0.5">
-              {quotePendingLeadsCount > 0 ? 'Requires Wholesale Desk' : 'All Quotes Processed'}
+              <div className="flex items-center gap-2 flex-wrap">
+                <div className="px-3 py-1.5 rounded-xl bg-[#081026] border border-cyan-500/30 text-[11px] flex items-center gap-1.5">
+                  <span className="text-slate-400">Order Desk:</span>
+                  <span className="font-mono font-bold text-amber-300">9347453135</span>
+                </div>
+                <div className="px-3 py-1.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[11px] font-semibold">
+                  <span>Hub: Beside Indel Bank</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="p-4 rounded-2xl bg-[#0f1c3f]/85 border border-cyan-500/20 text-center col-span-2 sm:col-span-1">
-            <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Customer Enquiries</div>
-            <div className="font-serif text-2xl font-black text-white mt-1">{totalLeadsCount}</div>
-            <div className="text-[10px] text-slate-400 mt-0.5">
-              {totalLeadsCount > 0 ? 'Active Buyer Leads' : 'Awaiting New Orders'}
+        ) : (
+          <>
+            <div className="pb-4 border-b border-cyan-500/20">
+              <div className="inline-flex items-center gap-2 text-cyan-300 text-xs font-bold uppercase tracking-[0.2em] mb-2">
+                <Sparkles className="w-4 h-4 text-amber-400" />
+                <span>RAIS Agencies · Rayachoty (516269)</span>
+              </div>
+              <h1 className="font-serif text-3xl sm:text-4xl font-black text-white tracking-tight">
+                Instagram Reels &amp; Wholesale Enquiry{' '}
+                <span className="bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">
+                  Automation Hub
+                </span>
+              </h1>
+              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl leading-relaxed">
+                18.0s Catalogue-Accurate Campaign with Ayesha (3D Stylized Animated Presenter) in Telugu &amp; Hindi · Capturing Rayachoty Wholesale Orders &amp; Enquiries.
+              </p>
             </div>
-          </div>
-        </div>
+
+            {/* KPI CARDS (Real Live Data) */}
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3.5">
+              <div className="p-4 rounded-2xl bg-[#0f1c3f]/85 border border-cyan-500/20 text-center">
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Next in Queue</div>
+                <div className="font-serif text-2xl font-black text-amber-300 mt-1">Day {nextInQueueReel?.dayNumber ?? 2}</div>
+                <div className="text-[10px] text-cyan-300 truncate mt-0.5">{nextInQueueReel?.productName ?? 'Chicken Nuggets'}</div>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#0f1c3f]/85 border border-cyan-500/20 text-center">
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Published Live</div>
+                <div className="font-serif text-2xl font-black text-emerald-400 mt-1">{publishedCount}</div>
+                <div className="text-[10px] text-emerald-300/80 mt-0.5">Live on @raisfrozenfoods</div>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#0f1c3f]/85 border border-cyan-500/20 text-center">
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Ready in Queue</div>
+                <div className="font-serif text-2xl font-black text-cyan-300 mt-1">{readyCount}</div>
+                <div className="text-[10px] text-slate-400 mt-0.5">30 Total Approved Reels</div>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#0f1c3f]/85 border border-cyan-500/20 text-center">
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Quotes Pending</div>
+                <div className="font-serif text-2xl font-black text-amber-400 mt-1">{quotePendingLeadsCount}</div>
+                <div className="text-[10px] text-amber-300 mt-0.5">
+                  {quotePendingLeadsCount > 0 ? 'Requires Wholesale Desk' : 'All Quotes Processed'}
+                </div>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#0f1c3f]/85 border border-cyan-500/20 text-center col-span-2 sm:col-span-1">
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Customer Enquiries</div>
+                <div className="font-serif text-2xl font-black text-white mt-1">{totalLeadsCount}</div>
+                <div className="text-[10px] text-slate-400 mt-0.5">
+                  {totalLeadsCount > 0 ? 'Active Buyer Leads' : 'Awaiting New Orders'}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
 
         {/* 2. TAB NAVIGATION */}
         <div className="flex border-b border-cyan-500/20 gap-2 overflow-x-auto pb-1">
