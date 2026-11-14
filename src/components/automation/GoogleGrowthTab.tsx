@@ -85,7 +85,7 @@ export const GoogleGrowthTab: React.FC = () => {
                 </span>
               </div>
               <div className="text-xs text-slate-300 mt-0.5">
-                Official Google Case ID: <span className="font-mono text-amber-300 font-bold">1-5219000042311</span> • Project ID: <span className="font-mono text-slate-200">rais-growth-engine</span>
+                Official Allowlist Case ID: <span className="font-mono text-amber-300 font-bold">9-3922000041344</span> • Project ID: <span className="font-mono text-slate-200">rais-growth-engine</span>
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@ export const GoogleGrowthTab: React.FC = () => {
         <div className="mt-3 pt-3 border-t border-cyan-500/15 flex items-start gap-2 text-xs text-slate-300 bg-cyan-950/20 p-2.5 rounded-lg">
           <Info className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
           <div>
-            <strong className="text-cyan-200">Why are you seeing draft templates below?</strong> Google restricts live customer review synchronization until Case <span className="text-amber-300 font-mono">1-5219000042311</span> is approved by Google (~3 to 14 days). Once approved, real customer reviews from Google Maps will stream into this dashboard automatically.
+            <strong className="text-cyan-200">Why are you seeing draft templates below?</strong> Google restricts live customer review synchronization until Allowlist Case <span className="text-amber-300 font-mono">9-3922000041344</span> is approved by Google (~7 to 10 business days). Once approved, real customer reviews from Google Maps will stream into this dashboard automatically.
           </div>
         </div>
       </div>
