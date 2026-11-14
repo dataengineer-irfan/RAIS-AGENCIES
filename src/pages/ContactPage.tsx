@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BUSINESS_INFO } from '../data/catalogue';
+import { assetUrl } from '../utils/assetUrl';
 import { MapPin, Phone, MessageSquare, Clock, Send, CheckCircle2, ExternalLink } from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
@@ -181,6 +182,36 @@ export const ContactPage: React.FC = () => {
                   <span>UPI Payment ID: </span>
                   <strong className="text-white">{BUSINESS_INFO.upiId}</strong>
                 </div>
+              </div>
+            </div>
+
+            {/* Official Google Business Profile QR */}
+            <div className="p-6 rounded-3xl bg-[#0f1c3f]/85 border border-cyan-500/25 shadow-xl backdrop-blur-xl flex flex-col sm:flex-row items-center gap-5">
+              <div className="size-28 sm:size-32 rounded-2xl bg-white p-2 shrink-0 shadow-lg flex items-center justify-center">
+                <img
+                  src={assetUrl('/images/google_qr_sticker_official.png')}
+                  alt="RAIS Agencies Official Google QR Code"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="space-y-1 text-center sm:text-left">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-[10px] font-bold text-cyan-300 uppercase tracking-wider">
+                  <span>Official Google QR</span>
+                </div>
+                <h3 className="text-sm font-bold text-white">
+                  Scan on Google Maps
+                </h3>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Scan outside our hub or directly on your phone to open reviews, directions, and verified Google Business details.
+                </p>
+                <a
+                  href={assetUrl('/images/google_qr_sticker_official.png')}
+                  download="RAIS-Agencies-Google-QR-Sticker.png"
+                  className="inline-flex items-center gap-1.5 mt-2 text-xs font-bold text-cyan-300 hover:text-white transition-colors"
+                >
+                  <span>Download High-Res Sticker</span>
+                  <ExternalLink className="size-3.5" />
+                </a>
               </div>
             </div>
 
