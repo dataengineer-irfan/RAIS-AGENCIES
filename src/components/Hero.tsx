@@ -108,7 +108,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
               transition={{ duration: 0.6, delay: 0.25 }}
               className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl"
             >
-              Rayachoty&apos;s direct wholesale agency for frozen snacks, french fries, momos, burger patties, mozzarella cheese, sauces, syrups, and takeaway packaging. Direct factory wholesale rates, 100% frozen quality, and daily supply for hotels, fast food centers &amp; cafes in Rayachoty (516269).
+              Rayachoty&apos;s wholesale supplier of frozen snacks, french fries, momos, burger patties, mozzarella cheese, sauces, syrups, and takeaway packaging for hotels, fast food centers &amp; cafes in Rayachoty (516269).
             </motion.p>
 
             {/* CTA Button Row with Shimmer Sheen */}
