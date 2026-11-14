@@ -148,7 +148,7 @@ export const ContactPage: React.FC = () => {
               </div>
               <div>
                 <h3 className="text-xs font-bold text-amber-300 uppercase tracking-wider">
-                  Official 66-SKU Catalogue
+                  Official 90-SKU Master Catalogue
                 </h3>
                 <p className="text-xs text-slate-400 mt-0.5">
                   View complete product list, pack sizes & specifications online:

@@ -157,17 +157,17 @@ export class AnalyticsService {
   }
 
   /**
-   * Tracks opening of the full 66-SKU HTML catalogue.
+   * Tracks opening of the full 90-SKU HTML catalogue.
    */
   static trackCatalogueOpen(): void {
     this.logEvent({
       type: 'CATALOGUE_OPEN',
       path: '/catalogue.html',
       source: this.detectSource(),
-      details: 'Opened Full 66-SKU Wholesale Product Catalogue'
+      details: 'Opened Full 90-SKU Wholesale Product Catalogue'
     });
 
-    this.sendGA4Event('view_catalogue', { catalogue_type: '66_SKU_HTML' });
+    this.sendGA4Event('view_catalogue', { catalogue_type: '90_SKU_HTML' });
   }
 
   /**

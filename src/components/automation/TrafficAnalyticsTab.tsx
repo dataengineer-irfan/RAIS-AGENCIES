@@ -150,7 +150,7 @@ export const TrafficAnalyticsTab: React.FC = () => {
             {cloudHits.catalogueHits > 0 ? cloudHits.catalogueHits.toLocaleString() : (catalogueOpens > 0 ? catalogueOpens : 1)}
           </div>
           <p className="text-[11px] text-amber-300/80 mt-1 font-semibold">
-            66-SKU Digital Price List Views
+            90-SKU Digital Price List Views
           </p>
         </div>
 

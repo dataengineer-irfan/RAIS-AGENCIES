@@ -27,6 +27,11 @@ const BRAND_BADGES: Record<string, { bg: string; text: string; label: string }> 
   'Triken': { bg: '#ea580c', text: '#ffedd5', label: 'TK' },
   'Mayank Gold': { bg: '#854d0e', text: '#fef08a', label: 'MG' },
   'Packaging Solutions': { bg: '#334155', text: '#cbd5e1', label: 'PK' },
+  'MANAMA': { bg: '#0284c7', text: '#e0f2fe', label: 'MN' },
+  'Bake Fresh': { bg: '#d97706', text: '#fef3c7', label: 'BF' },
+  'McCain': { bg: '#b45309', text: '#fef3c7', label: 'MC' },
+  'Pure Spices': { bg: '#b91c1c', text: '#fee2e2', label: 'PS' },
+  'Fresh Agro': { bg: '#15803d', text: '#dcfce7', label: 'FA' },
   'RAIS Select': { bg: '#0369a1', text: '#bae6fd', label: 'RS' },
   'RAIS Spices': { bg: '#b45309', text: '#fde68a', label: 'SP' },
   'RAIS Beverages': { bg: '#0284c7', text: '#e0f2fe', label: 'BV' },
@@ -52,7 +57,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   }, []);
 
   const popularBrands = useMemo(() => {
-    return ['ITC Master Chef', 'Milky Mist', 'Del Monte', 'Amul', 'Triken', 'Foodrite', 'VKL', 'Nutrich', 'Signature', 'Hup Hup'];
+    return ['ITC Master Chef', 'Milky Mist', 'Del Monte', 'Amul', 'Triken', 'Foodrite', 'MANAMA', 'VKL', 'Bake Fresh', 'Signature'];
   }, []);
 
   const filtered = useMemo(() => {
@@ -125,7 +130,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-400/50 hover:border-amber-400 text-xs font-bold text-amber-200 hover:text-white transition-all shadow-lg backdrop-blur-md"
             >
               <Sparkles className="w-4 h-4 text-amber-300" />
-              <span>Full 66-SKU Catalogue (HTML)</span>
+              <span>Full 90-SKU Catalogue (HTML)</span>
             </a>
 
             <a
