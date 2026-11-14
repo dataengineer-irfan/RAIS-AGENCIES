@@ -5,10 +5,11 @@ import { InstagramPublisher } from '../services/instagramPublisher';
 import { EnquiryBot } from '../services/enquiryBot';
 import { ReelVideoPreview } from '../components/automation/ReelVideoPreview';
 import { TrafficAnalyticsTab } from '../components/automation/TrafficAnalyticsTab';
+import { GoogleGrowthTab } from '../components/automation/GoogleGrowthTab';
 import { 
   Film, Users, Clock, RefreshCw, Send,
   ShieldCheck, Key, Phone, MessageSquare, Download,
-  ExternalLink, Sparkles, Check, LogOut, ArrowLeft, BarChart3
+  ExternalLink, Sparkles, Check, LogOut, ArrowLeft, BarChart3, Globe
 } from 'lucide-react';
 
 interface AutomationDashboardPageProps {
@@ -17,7 +18,7 @@ interface AutomationDashboardPageProps {
 }
 
 export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = ({ onLogout, onBackToHome }) => {
-  const [activeTab, setActiveTab] = useState<'analytics' | 'calendar' | 'publishing' | 'enquiries' | 'settings'>('analytics');
+  const [activeTab, setActiveTab] = useState<'analytics' | 'google_growth' | 'calendar' | 'publishing' | 'enquiries' | 'settings'>('analytics');
   const [reels, setReels] = useState<ReelCalendarItem[]>(() => AutomationStorage.getReels());
   const [leads, setLeads] = useState<CustomerLead[]>(() => AutomationStorage.getLeads());
   const [integrations, setIntegrations] = useState<IntegrationStatus[]>(() => AutomationStorage.getIntegrations());
@@ -265,6 +266,18 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
           </button>
 
           <button
+            onClick={() => setActiveTab('google_growth')}
+            className={`flex items-center gap-2 px-5 py-3 rounded-t-xl text-xs font-bold transition-colors whitespace-nowrap ${
+              activeTab === 'google_growth'
+                ? 'bg-[#0f1c3f] border-t-2 border-emerald-400 text-white'
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            <Globe className="w-4 h-4 text-emerald-400" />
+            <span>Google Business Profile &amp; Reviews</span>
+          </button>
+
+          <button
             onClick={() => setActiveTab('calendar')}
             className={`flex items-center gap-2 px-5 py-3 rounded-t-xl text-xs font-bold transition-colors whitespace-nowrap ${
               activeTab === 'calendar'
@@ -319,6 +332,11 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
         {/* 3. TAB: TRAFFIC & REACH ANALYTICS */}
         {activeTab === 'analytics' && (
           <TrafficAnalyticsTab />
+        )}
+
+        {/* 4. TAB: GOOGLE BUSINESS PROFILE & LOCAL SEO */}
+        {activeTab === 'google_growth' && (
+          <GoogleGrowthTab />
         )}
 
         {/* 4. TAB 1: 30-DAY REELS CALENDAR & PRODUCTION STUDIO */}
