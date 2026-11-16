@@ -18,7 +18,18 @@ export const AnalyticsView: React.FC = () => {
   const loadPerformance = async () => {
     try {
       setLoading(true);
-      const res = await api.getGooglePerformance();
+      const [perfRes, statusRes] = await Promise.allSettled([
+        api.getGooglePerformance(),
+        api.getGoogleStatus()
+      ]);
+
+      let res = perfRes.status === 'fulfilled' ? perfRes.value : null;
+      const googleStatus = statusRes.status === 'fulfilled' ? statusRes.value : null;
+
+      if ((!res || res.status === 'NOT_CONNECTED') && (googleStatus?.connected || googleStatus?.status === 'CONNECTED')) {
+        res = await api.getGooglePerformance('LIVE_DATA_AVAILABLE');
+      }
+
       setData(res);
     } catch (err: any) {
       console.error('Failed to load performance metrics', err);
