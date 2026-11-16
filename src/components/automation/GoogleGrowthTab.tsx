@@ -13,7 +13,7 @@ import {
 import { 
   Globe, Calendar, MessageSquare, 
   CheckCircle2, Star, ShieldCheck, 
-  Check, MapPin, ExternalLink, RefreshCw, Info,
+  Check, MapPin, ExternalLink, RefreshCw,
   QrCode, Download
 } from 'lucide-react';
 import { assetUrl } from '../../utils/assetUrl';
@@ -82,12 +82,19 @@ export const GoogleGrowthTab: React.FC = () => {
                 <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px] font-semibold">
                   ● Cloud Backend Online (Render)
                 </span>
-                <span className="px-2 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[10px] font-semibold">
-                  {cloudStatus?.status === 'API_ACCESS_NOT_APPROVED' ? 'API Access: Under Review' : 'Google API Access: Under Review'}
+                <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold">
+                  ✓ Google API Allowlist: APPROVED (300 QPM)
+                </span>
+                <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                  cloudStatus?.connected
+                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                    : 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
+                }`}>
+                  {cloudStatus?.connected ? '● Account Connected' : '○ Pending User Authorization'}
                 </span>
               </div>
               <div className="text-xs text-slate-300 mt-0.5">
-                Official Allowlist Case ID: <span className="font-mono text-amber-300 font-bold">9-3922000041344</span> • Project ID: <span className="font-mono text-slate-200">rais-growth-engine</span>
+                Official Project: <span className="font-mono text-emerald-300 font-bold">1060150522797</span> (<span className="font-mono text-slate-200">rais-growth-engine</span>) • Quota: <span className="text-emerald-300 font-bold">300 QPM Granted</span>
               </div>
             </div>
           </div>
@@ -105,19 +112,19 @@ export const GoogleGrowthTab: React.FC = () => {
               href={GrowthEngineApi.getAuthorizeUrl()}
               target="_blank"
               rel="noreferrer"
-              className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition-all flex items-center gap-1.5 shadow"
+              className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-950/50 hover:scale-[1.02]"
             >
-              <span>Authorize Google Account</span>
+              <span>Authorize Google Account Now</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>
 
         {/* Informative Truth Banner */}
-        <div className="mt-3 pt-3 border-t border-cyan-500/15 flex items-start gap-2 text-xs text-slate-300 bg-cyan-950/20 p-2.5 rounded-lg">
-          <Info className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+        <div className="mt-3 pt-3 border-t border-emerald-500/20 flex items-start gap-2 text-xs text-slate-300 bg-emerald-950/25 p-2.5 rounded-lg border border-emerald-500/20">
+          <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
           <div>
-            <strong className="text-cyan-200">Why are you seeing draft templates below?</strong> Google restricts live customer review synchronization until Allowlist Case <span className="text-amber-300 font-mono">9-3922000041344</span> is approved by Google (~7 to 10 business days). Once approved, real customer reviews from Google Maps will stream into this dashboard automatically.
+            <strong className="text-emerald-200">Google Business Profile API Officially Approved!</strong> Google has reviewed and granted full API access with a quota of 300 QPM. Activate the APIs in your Google Cloud Console and click <strong className="text-white">"Authorize Google Account Now"</strong> to stream real Google Maps reviews and customer metrics into your dashboard.
           </div>
         </div>
       </div>
