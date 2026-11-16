@@ -1,0 +1,195 @@
+<USER_REQUEST>
+"C:\Users\affra\Documents\RAIS\RAIS_Product_Catalogue_No_Prices.html" analyze this file then act on below prompt# RAIS AGENCIES — CATALOGUE-ACCURATE 30-REEL CAMPAIGN REBUILD
+
+## ROLE
+
+Act as a senior AI video-production engineer, video editor, creative director, and quality-assurance engineer. Work directly inside the existing RAIS project repository. Inspect the actual files, implement the required changes, render the videos, and verify the exported MP4s.
+
+Do not stop after producing a plan, storyboard, report, mockup, or prompt. The deliverable is the actual corrected video campaign.
+
+## 1. SOURCE OF TRUTH
+
+Use this catalogue as the authoritative reference:
+
+`frontend/public/RAIS_Product_Catalogue_No_Prices.html`
+
+The catalogue contains 66 SKUs across 8 categories. Extract the exact product names, brands, image paths, category assignments, and available descriptions directly from the file.
+
+Inspect the associated product assets, including:
+- `assets/products/`
+- `assets/hercules/`
+- Other asset directories referenced by the HTML or existing campaign code.
+
+Resolve the actual paths in the repository. Do not assume the files exist without checking them.
+
+**Never substitute generic internet images or invented packaging for a real catalogue product when the actual product image is available.** Do not use unrelated global brand logos or claim RAIS stocks a product unless the catalogue supports that claim.
+
+## 2. CAMPAIGN DELIVERABLE
+
+Produce 30 separate Instagram Reels:
+- 15 distinct scenarios.
+- 15 Hindi versions.
+- 15 Telugu versions.
+- Each approximately 15–22 seconds.
+- Vertical 9:16, preferably 1080 × 1920, 30 fps.
+- MP4, H.264 video, AAC audio.
+- Natural-sounding language-specific narration, correctly synchronized with the visuals.
+- Distinct scenarios, product selections, shot sequences, and openings.
+- No visible pricing or rates anywhere.
+
+Use the existing campaign and rendering infrastructure where practical. Preserve working components instead of unnecessarily rebuilding the entire application.
+
+## 3. OFFICIAL RAIS BRAND DETAILS
+
+Business: RAIS Agencies  
+Business descriptor: FROZEN FOOD PRODUCTS  
+Location: Near Reddies Colony, Rayachoty, Andhra Pradesh – 516269  
+Official WhatsApp: **9347453135**
+
+Use the black-and-gold RAIS brand identity and the official logo already in the repository.
+
+The contact number must be exactly `9347453135` in every relevant end card and contact screen. Remove outdated contact numbers from the videos, overlays, captions, and generated end cards.
+
+Do not display prices, rate lists, wholesale rates, cost labels, or pricing tables.
+
+## 4. PRODUCT ACCURACY
+
+Build a deterministic product-to-video asset manifest from the catalogue.
+
+Each featured SKU must map to:
+- Exact catalogue product name.
+- Actual catalogue brand, if specified.
+- Actual image path.
+- Correct category.
+- Hindi and Telugu display text where required.
+- Scenarios in which it is permitted to appear.
+
+Prefer the actual product pack image, with its brand and packaging intact. Avoid regenerating or altering brand logos with AI.
+
+If a product image is missing, mark the SKU as missing and report it. Do not silently replace it with a visually similar product.
+
+Create a validation step that checks all image paths and detects broken references before rendering.
+
+## 5. FIX THE FIRST SIX SECONDS
+
+The current opening is unacceptable if a single static image remains visible for several seconds.
+
+Use this retention-focused opening structure:
+
+- **0.0–0.7 sec:** Immediate visual hook: food action, product movement, a character reaction, or a compelling scene already in motion.
+- **0.7–2.0 sec:** A distinct reaction or action shot.
+- **2.0–4.0 sec:** Actual catalogue product reveal.
+- **4.0–6.0 sec:** Scenario-specific product benefit or business context.
+
+Use multiple purposeful cuts during the first six seconds. No long logo intro, black frame, static catalogue screenshot, or generic food stock footage as the default opening.
+
+A slow zoom on a still image does not count as actual character or food animation. Use genuine motion assets where available. If only still images are available, use polished motion graphics and transitions, but report that limitation honestly.
+
+Each scenario must have its own opening. Do not reuse one generic montage across all 30 videos.
+
+## 6. KEEP THE EXISTING 15 SCENARIOS DISTINCT
+
+Retain the existing scenario concepts where they work, including:
+1. Rainy-Day Cravings
+2. Midnight Hunger
+3. Cricket Fever
+4. After-School Rush
+5. Family Gathering
+6. QSR Kitchen
+7. Birthday Party
+8. Street Food
+9. Office Pantry
+10. Balcony Rain
+11. Movie Night
+12. Road Trip Café
+13. Fitness Reward
+14. Late-Night QSR
+15. Cold-Chain Logistics
+
+Select relevant products from the real catalogue for each scene. Do not show cheese in a chicken-only product demonstration unless it is intentionally relevant; do not invent product use cases or claims.
+
+Keep the established character assets where they exist and are licensed for use. Verify that character scenes, product visuals, and narration fit the same scenario.
+
+## 7. AUDIO AND LANGUAGE
+
+Produce one Hindi and one Telugu version of each scenario.
+
+Requirements:
+- Natural, clear voice suitable for a professional food-business advertisement.
+- Prefer a natural female voice if an appropriate licensed voice is available.
+- Do not use robotic offline narration as the final output without approval.
+- Pronounce English product and brand names clearly within the Hindi or Telugu narration.
+- Align narration with the product currently on screen.
+- Maintain consistent loudness without sudden volume drops.
+- Add subtle, licensed or royalty-free background music and appropriate sound effects.
+- Never use copyrighted music without permission.
+- No dialogue subtitle bars or auto-generated captions unless explicitly requested.
+
+If no suitable free voice is available locally, identify legitimate free options and continue with the best permitted production method. Do not bypass paid service restrictions or fabricate audio-quality verification.
+
+## 8. REPOSITORY IMPLEMENTATION
+
+Before changing files:
+1. Inspect the repository structure, current campaign assets, render scripts, manifests, and delivery report.
+2. Locate all 30 source and rendered videos.
+3. Identify generic, incorrect, missing, or mismatched product images and brand names.
+4. Identify outdated contact numbers and price-related overlays.
+5. Determine the existing rendering pipeline and required dependencies.
+
+Then:
+- Update the catalogue-to-SKU mapping.
+- Update each scenario's asset manifest and timeline.
+- Replace incorrect product imagery with the corresponding real catalogue images.
+- Correct the WhatsApp number everywhere.
+- Preserve scenario diversity and approved branding.
+- Render the revised videos to a clearly named output directory.
+- Avoid overwriting the only copies of the previous renders; keep a backup or versioned output.
+
+Do not claim that background workers or subagents have completed unless their actual outputs exist and have been checked.
+
+## 9. MANDATORY VISUAL AND TECHNICAL QA
+
+Inspect the actual exported MP4 files, not just source code or configuration.
+
+For every one of the 30 videos:
+- Confirm the file exists and has a nonzero size.
+- Check duration, resolution, frame rate, video codec, audio codec, and audio stream.
+- Generate a contact sheet from the opening at 0.0, 0.5, 1, 2, 3, 4, 5, and 6 seconds.
+- Check for static openings, frozen frames, broken images, abrupt transitions, and unreadable text.
+- Verify correct catalogue products and brands against the SKU manifest.
+- Confirm the correct Hindi or Telugu audio plays and matches the scene.
+- Check text safe areas and ensure content fits a mobile screen.
+- Verify the WhatsApp number is `9347453135`.
+- Search rendered overlays and timelines for accidental pricing.
+- Review every opening visually. A successful FFmpeg command alone is not sufficient QA.
+
+Run automated checks for all videos and report any failures honestly. Re-render and retest failed videos.
+
+## 10. FINAL DELIVERY
+
+Create:
+- 30 individual final MP4 files.
+- An organized folder structure grouped by scenario and language.
+- A downloadable ZIP of the final campaign if practical.
+- A product-to-video manifest documenting which catalogue SKUs appear in each Reel.
+- A QA report with real file paths, durations, technical checks, missing assets, and exceptions.
+- Opening contact sheets for visual review.
+
+At completion, provide the exact output directory and actual downloadable file paths.
+
+Do not mark the task complete if videos have not been rendered. Do not report 30/30 QA success without checking all 30 exported files.
+
+## PRIORITY
+
+1. Catalogue accuracy.
+2. Correct brand images and packaging.
+3. Immediate motion and strong first-six-second retention.
+4. Natural Hindi and Telugu voice-over.
+5. Correct RAIS branding and contact details.
+6. Actual exported MP4s and verifiable QA.
+
+Begin by inspecting the repository and catalogue. Then implement, render, and verify the campaign. Do not respond with another plan in place of the deliverables.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-10-26T18:04:56+05:30.
+</ADDITIONAL_METADATA>

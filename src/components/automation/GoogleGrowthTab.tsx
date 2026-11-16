@@ -108,25 +108,41 @@ export const GoogleGrowthTab: React.FC = () => {
               <span>Refresh Status</span>
             </button>
 
-            <a
-              href={GrowthEngineApi.getAuthorizeUrl()}
-              target="_blank"
-              rel="noreferrer"
-              className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-950/50 hover:scale-[1.02]"
-            >
-              <span>Authorize Google Account Now</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+            {cloudStatus?.connected ? (
+              <div className="px-3.5 py-1.5 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold text-xs flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <span>Google Profile Authenticated</span>
+              </div>
+            ) : (
+              <a
+                href={GrowthEngineApi.getAuthorizeUrl()}
+                target="_blank"
+                rel="noreferrer"
+                className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-950/50 hover:scale-[1.02]"
+              >
+                <span>Authorize Google Account Now</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
           </div>
         </div>
 
         {/* Informative Truth Banner */}
-        <div className="mt-3 pt-3 border-t border-emerald-500/20 flex items-start gap-2 text-xs text-slate-300 bg-emerald-950/25 p-2.5 rounded-lg border border-emerald-500/20">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-          <div>
-            <strong className="text-emerald-200">Google Business Profile API Officially Approved!</strong> Google has reviewed and granted full API access with a quota of 300 QPM. Activate the APIs in your Google Cloud Console and click <strong className="text-white">"Authorize Google Account Now"</strong> to stream real Google Maps reviews and customer metrics into your dashboard.
+        {cloudStatus?.connected ? (
+          <div className="mt-3 pt-3 border-t border-emerald-500/20 flex items-start gap-2 text-xs text-slate-300 bg-emerald-950/25 p-2.5 rounded-lg border border-emerald-500/20">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+            <div>
+              <strong className="text-emerald-300">Live Google Business Profile Connected!</strong> Authenticated location: <span className="text-white font-bold">{cloudStatus.location_name || 'RAIS Agencies'}</span> ({cloudStatus.location_id || 'Rayachoty'}) • Category: <span className="text-cyan-300 font-semibold">{cloudStatus.primary_category || 'Wholesale food store'}</span> • Quota: <span className="text-emerald-300 font-bold">300 QPM Granted</span>.
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="mt-3 pt-3 border-t border-emerald-500/20 flex items-start gap-2 text-xs text-slate-300 bg-emerald-950/25 p-2.5 rounded-lg border border-emerald-500/20">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+            <div>
+              <strong className="text-emerald-200">Google Business Profile API Officially Approved!</strong> Google has reviewed and granted full API access with a quota of 300 QPM. Click <strong className="text-white">"Authorize Google Account Now"</strong> to stream real Google Maps reviews and customer metrics into your dashboard.
+            </div>
+          </div>
+        )}
       </div>
 
       {/* 2. THREE CLEAN SUB-TABS */}

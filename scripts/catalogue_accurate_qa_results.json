@@ -1,0 +1,2972 @@
+[
+  {
+    "sc_id": 1,
+    "title": "Rainy-Day Crispy Cravings",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_01_monsoon_cravings/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc01_hindi_01_monsoon_cravings.mp4",
+    "file_size_mb": 7.63,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-chk-04",
+    "hero_product": "CHICKEN MOMOS",
+    "hero_brand": "triken",
+    "paired_sku": "rais-veg-01",
+    "paired_product": "AMUL FRENCH FRIES",
+    "luminance_0s": 174.3,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        50.06
+      ],
+      [
+        0.5,
+        1.0,
+        94.94
+      ],
+      [
+        1.0,
+        2.0,
+        31.73
+      ],
+      [
+        2.0,
+        3.0,
+        31.81
+      ],
+      [
+        3.0,
+        4.0,
+        93.11
+      ],
+      [
+        4.0,
+        5.0,
+        19.27
+      ],
+      [
+        5.0,
+        5.95,
+        18.74
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.8,
+    "i_lufs": -21.4,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc01_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc01_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc01_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc01_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc01_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc01_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc01_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc01_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc01_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 1,
+    "title": "Rainy-Day Crispy Cravings",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_01_monsoon_cravings/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc01_telugu_01_monsoon_cravings.mp4",
+    "file_size_mb": 7.6,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-chk-04",
+    "hero_product": "CHICKEN MOMOS",
+    "hero_brand": "triken",
+    "paired_sku": "rais-veg-01",
+    "paired_product": "AMUL FRENCH FRIES",
+    "luminance_0s": 174.3,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        50.06
+      ],
+      [
+        0.5,
+        1.0,
+        94.94
+      ],
+      [
+        1.0,
+        2.0,
+        31.73
+      ],
+      [
+        2.0,
+        3.0,
+        31.81
+      ],
+      [
+        3.0,
+        4.0,
+        93.11
+      ],
+      [
+        4.0,
+        5.0,
+        19.27
+      ],
+      [
+        5.0,
+        5.95,
+        18.74
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -21.0,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc01_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc01_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc01_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc01_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc01_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc01_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc01_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc01_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc01_te_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 2,
+    "title": "Midnight Hunger Attack",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_02_midnight_hunger/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc02_hindi_02_midnight_hunger.mp4",
+    "file_size_mb": 5.82,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-chk-05",
+    "hero_product": "CHICKEN NUGGETS",
+    "hero_brand": "master chef",
+    "paired_sku": "rais-veg-02",
+    "paired_product": "HUP HUP FRENCH FRIES",
+    "luminance_0s": 141.9,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        56.44
+      ],
+      [
+        0.5,
+        1.0,
+        81.22
+      ],
+      [
+        1.0,
+        2.0,
+        23.53
+      ],
+      [
+        2.0,
+        3.0,
+        22.72
+      ],
+      [
+        3.0,
+        4.0,
+        71.68
+      ],
+      [
+        4.0,
+        5.0,
+        28.92
+      ],
+      [
+        5.0,
+        5.95,
+        28.8
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.7,
+    "i_lufs": -21.3,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc02_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc02_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc02_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc02_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc02_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc02_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc02_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc02_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc02_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 2,
+    "title": "Midnight Hunger Attack",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_02_midnight_hunger/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc02_telugu_02_midnight_hunger.mp4",
+    "file_size_mb": 5.79,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-chk-05",
+    "hero_product": "CHICKEN NUGGETS",
+    "hero_brand": "master chef",
+    "paired_sku": "rais-veg-02",
+    "paired_product": "HUP HUP FRENCH FRIES",
+    "luminance_0s": 141.9,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        56.44
+      ],
+      [
+        0.5,
+        1.0,
+        81.22
+      ],
+      [
+        1.0,
+        2.0,
+        23.53
+      ],
+      [
+        2.0,
+        3.0,
+        22.72
+      ],
+      [
+        3.0,
+        4.0,
+        71.68
+      ],
+      [
+        4.0,
+        5.0,
+        28.92
+      ],
+      [
+        5.0,
+        5.95,
+        28.8
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -21.1,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc02_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc02_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc02_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc02_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc02_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc02_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc02_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc02_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc02_te_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 3,
+    "title": "Cricket Match Snack Attack",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_03_cricket_match/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc03_hindi_03_cricket_match.mp4",
+    "file_size_mb": 7.66,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-chk-03",
+    "hero_product": "CHICKEN POPCORN BALL",
+    "hero_brand": "nutrich",
+    "paired_sku": "rais-veg-07",
+    "paired_product": "CHEESY CORN TRIANGLE",
+    "luminance_0s": 155.3,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        48.13
+      ],
+      [
+        0.5,
+        1.0,
+        74.41
+      ],
+      [
+        1.0,
+        2.0,
+        26.45
+      ],
+      [
+        2.0,
+        3.0,
+        25.77
+      ],
+      [
+        3.0,
+        4.0,
+        75.26
+      ],
+      [
+        4.0,
+        5.0,
+        24.62
+      ],
+      [
+        5.0,
+        5.95,
+        24.44
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.8,
+    "i_lufs": -21.5,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc03_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc03_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc03_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc03_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc03_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc03_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc03_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc03_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc03_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 3,
+    "title": "Cricket Match Snack Attack",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_03_cricket_match/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc03_telugu_03_cricket_match.mp4",
+    "file_size_mb": 7.64,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-chk-03",
+    "hero_product": "CHICKEN POPCORN BALL",
+    "hero_brand": "nutrich",
+    "paired_sku": "rais-veg-07",
+    "paired_product": "CHEESY CORN TRIANGLE",
+    "luminance_0s": 155.3,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        48.13
+      ],
+      [
+        0.5,
+        1.0,
+        74.41
+      ],
+      [
+        1.0,
+        2.0,
+        26.45
+      ],
+      [
+        2.0,
+        3.0,
+        25.77
+      ],
+      [
+        3.0,
+        4.0,
+        75.26
+      ],
+      [
+        4.0,
+        5.0,
+        24.62
+      ],
+      [
+        5.0,
+        5.95,
+        24.44
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -21.2,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc03_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc03_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc03_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc03_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc03_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc03_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc03_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc03_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc03_te_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 4,
+    "title": "After-School Hunger Rush",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_04_after_school_hunger/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc04_hindi_04_after_school_hunger.mp4",
+    "file_size_mb": 5.34,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-mcca",
+    "hero_product": "MCCAIN SMILES",
+    "hero_brand": "mccain",
+    "paired_sku": "rais-veg-01",
+    "paired_product": "AMUL FRENCH FRIES",
+    "luminance_0s": 122.8,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        56.09
+      ],
+      [
+        0.5,
+        1.0,
+        77.0
+      ],
+      [
+        1.0,
+        2.0,
+        25.02
+      ],
+      [
+        2.0,
+        3.0,
+        24.73
+      ],
+      [
+        3.0,
+        4.0,
+        83.62
+      ],
+      [
+        4.0,
+        5.0,
+        17.54
+      ],
+      [
+        5.0,
+        5.95,
+        17.24
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.8,
+    "i_lufs": -21.4,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc04_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc04_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc04_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc04_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc04_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc04_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc04_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc04_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc04_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 4,
+    "title": "After-School Hunger Rush",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_04_after_school_hunger/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc04_telugu_04_after_school_hunger.mp4",
+    "file_size_mb": 5.31,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-mcca",
+    "hero_product": "MCCAIN SMILES",
+    "hero_brand": "mccain",
+    "paired_sku": "rais-veg-01",
+    "paired_product": "AMUL FRENCH FRIES",
+    "luminance_0s": 122.8,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        56.09
+      ],
+      [
+        0.5,
+        1.0,
+        77.0
+      ],
+      [
+        1.0,
+        2.0,
+        25.02
+      ],
+      [
+        2.0,
+        3.0,
+        24.73
+      ],
+      [
+        3.0,
+        4.0,
+        83.62
+      ],
+      [
+        4.0,
+        5.0,
+        17.54
+      ],
+      [
+        5.0,
+        5.95,
+        17.24
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -21.5,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc04_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc04_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc04_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc04_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc04_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc04_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc04_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc04_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc04_te_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 5,
+    "title": "Family Gathering Party Platter",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_05_friends_arrive/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc05_hindi_05_friends_arrive.mp4",
+    "file_size_mb": 5.39,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-03",
+    "hero_product": "ITC VEG MOMOS",
+    "hero_brand": "itc master chef",
+    "paired_sku": "rais-veg-vegs",
+    "paired_product": "VEG SPRING ROLLS",
+    "luminance_0s": 122.5,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        64.53
+      ],
+      [
+        0.5,
+        1.0,
+        80.75
+      ],
+      [
+        1.0,
+        2.0,
+        30.84
+      ],
+      [
+        2.0,
+        3.0,
+        31.01
+      ],
+      [
+        3.0,
+        4.0,
+        79.51
+      ],
+      [
+        4.0,
+        5.0,
+        22.0
+      ],
+      [
+        5.0,
+        5.95,
+        20.86
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.8,
+    "i_lufs": -21.3,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc05_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc05_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc05_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc05_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc05_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc05_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc05_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc05_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc05_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 5,
+    "title": "Family Gathering Party Platter",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_05_friends_arrive/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc05_telugu_05_friends_arrive.mp4",
+    "file_size_mb": 5.36,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-03",
+    "hero_product": "ITC VEG MOMOS",
+    "hero_brand": "itc master chef",
+    "paired_sku": "rais-veg-vegs",
+    "paired_product": "VEG SPRING ROLLS",
+    "luminance_0s": 122.5,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        64.53
+      ],
+      [
+        0.5,
+        1.0,
+        80.75
+      ],
+      [
+        1.0,
+        2.0,
+        30.84
+      ],
+      [
+        2.0,
+        3.0,
+        31.01
+      ],
+      [
+        3.0,
+        4.0,
+        79.51
+      ],
+      [
+        4.0,
+        5.0,
+        22.0
+      ],
+      [
+        5.0,
+        5.95,
+        20.86
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -21.0,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc05_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc05_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc05_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc05_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc05_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc05_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc05_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc05_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc05_te_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 6,
+    "title": "QSR Commercial Kitchen Efficiency",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_06_busy_day_convenience/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc06_hindi_06_busy_day_convenience.mp4",
+    "file_size_mb": 6.01,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-chk-06",
+    "hero_product": "CHICKEN BURGER PATTY",
+    "hero_brand": "nutrich",
+    "paired_sku": "rais-veg-burg",
+    "paired_product": "BURGER BUNS",
+    "luminance_0s": 138.5,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        49.68
+      ],
+      [
+        0.5,
+        1.0,
+        65.9
+      ],
+      [
+        1.0,
+        2.0,
+        24.95
+      ],
+      [
+        2.0,
+        3.0,
+        24.72
+      ],
+      [
+        3.0,
+        4.0,
+        67.72
+      ],
+      [
+        4.0,
+        5.0,
+        22.78
+      ],
+      [
+        5.0,
+        5.95,
+        22.43
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.8,
+    "i_lufs": -21.6,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc06_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc06_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc06_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc06_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc06_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc06_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc06_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc06_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc06_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 6,
+    "title": "QSR Commercial Kitchen Efficiency",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_06_busy_day_convenience/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc06_telugu_06_busy_day_convenience.mp4",
+    "file_size_mb": 5.98,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-chk-06",
+    "hero_product": "CHICKEN BURGER PATTY",
+    "hero_brand": "nutrich",
+    "paired_sku": "rais-veg-burg",
+    "paired_product": "BURGER BUNS",
+    "luminance_0s": 138.5,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        49.68
+      ],
+      [
+        0.5,
+        1.0,
+        65.9
+      ],
+      [
+        1.0,
+        2.0,
+        24.95
+      ],
+      [
+        2.0,
+        3.0,
+        24.72
+      ],
+      [
+        3.0,
+        4.0,
+        67.72
+      ],
+      [
+        4.0,
+        5.0,
+        22.78
+      ],
+      [
+        5.0,
+        5.95,
+        22.43
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -21.3,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc06_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc06_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc06_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc06_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc06_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc06_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc06_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc06_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc06_te_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 7,
+    "title": "Birthday Party Celebration Platter",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_07_birthday_party/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc07_hindi_07_birthday_party.mp4",
+    "file_size_mb": 6.18,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-07",
+    "hero_product": "CHEESY CORN TRIANGLE",
+    "hero_brand": "itc master chef",
+    "paired_sku": "rais-moj-02",
+    "paired_product": "BLUE CURACAO SYRUP",
+    "luminance_0s": 125.4,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        56.13
+      ],
+      [
+        0.5,
+        1.0,
+        91.78
+      ],
+      [
+        1.0,
+        2.0,
+        28.96
+      ],
+      [
+        2.0,
+        3.0,
+        28.86
+      ],
+      [
+        3.0,
+        4.0,
+        105.0
+      ],
+      [
+        4.0,
+        5.0,
+        22.64
+      ],
+      [
+        5.0,
+        5.95,
+        22.12
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.7,
+    "i_lufs": -21.2,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc07_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc07_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc07_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc07_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc07_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc07_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc07_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc07_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc07_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 7,
+    "title": "Birthday Party Celebration Platter",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_07_birthday_party/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc07_telugu_07_birthday_party.mp4",
+    "file_size_mb": 6.16,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-07",
+    "hero_product": "CHEESY CORN TRIANGLE",
+    "hero_brand": "itc master chef",
+    "paired_sku": "rais-moj-02",
+    "paired_product": "BLUE CURACAO SYRUP",
+    "luminance_0s": 125.4,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        56.13
+      ],
+      [
+        0.5,
+        1.0,
+        91.78
+      ],
+      [
+        1.0,
+        2.0,
+        28.96
+      ],
+      [
+        2.0,
+        3.0,
+        28.86
+      ],
+      [
+        3.0,
+        4.0,
+        105.0
+      ],
+      [
+        4.0,
+        5.0,
+        22.64
+      ],
+      [
+        5.0,
+        5.95,
+        22.12
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -21.2,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc07_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc07_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc07_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc07_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc07_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc07_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc07_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc07_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc07_te_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 8,
+    "title": "Street Food Cart Quick Bites",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_08_restaurant_rush_hour/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc08_hindi_08_restaurant_rush_hour.mp4",
+    "file_size_mb": 6.79,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-chi-fing",
+    "hero_product": "CHICKEN FINGERS",
+    "hero_brand": "rais master",
+    "paired_sku": "rais-veg-02",
+    "paired_product": "HUP HUP FRENCH FRIES",
+    "luminance_0s": 133.4,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        55.35
+      ],
+      [
+        0.5,
+        1.0,
+        90.02
+      ],
+      [
+        1.0,
+        2.0,
+        29.77
+      ],
+      [
+        2.0,
+        3.0,
+        29.97
+      ],
+      [
+        3.0,
+        4.0,
+        95.63
+      ],
+      [
+        4.0,
+        5.0,
+        23.27
+      ],
+      [
+        5.0,
+        5.95,
+        22.74
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.8,
+    "i_lufs": -21.6,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc08_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc08_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc08_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc08_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc08_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc08_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc08_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc08_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc08_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 8,
+    "title": "Street Food Cart Quick Bites",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_08_restaurant_rush_hour/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc08_telugu_08_restaurant_rush_hour.mp4",
+    "file_size_mb": 6.76,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-chi-fing",
+    "hero_product": "CHICKEN FINGERS",
+    "hero_brand": "rais master",
+    "paired_sku": "rais-veg-02",
+    "paired_product": "HUP HUP FRENCH FRIES",
+    "luminance_0s": 133.4,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        55.35
+      ],
+      [
+        0.5,
+        1.0,
+        90.02
+      ],
+      [
+        1.0,
+        2.0,
+        29.77
+      ],
+      [
+        2.0,
+        3.0,
+        29.97
+      ],
+      [
+        3.0,
+        4.0,
+        95.63
+      ],
+      [
+        4.0,
+        5.0,
+        23.27
+      ],
+      [
+        5.0,
+        5.95,
+        22.74
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -21.2,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc08_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc08_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc08_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc08_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc08_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc08_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc08_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc08_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc08_te_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 9,
+    "title": "Burger Shop Upgrade & Transformation",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_09_burger_shop_transformation/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc09_hindi_09_burger_shop_transformation.mp4",
+    "file_size_mb": 6.34,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-05",
+    "hero_product": "ITC PANEER PATTY",
+    "hero_brand": "itc master chef",
+    "paired_sku": "rais-veg-burg",
+    "paired_product": "BURGER BUNS",
+    "luminance_0s": 157.9,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        52.32
+      ],
+      [
+        0.5,
+        1.0,
+        71.83
+      ],
+      [
+        1.0,
+        2.0,
+        30.34
+      ],
+      [
+        2.0,
+        3.0,
+        30.55
+      ],
+      [
+        3.0,
+        4.0,
+        75.47
+      ],
+      [
+        4.0,
+        5.0,
+        29.02
+      ],
+      [
+        5.0,
+        5.95,
+        28.61
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.8,
+    "i_lufs": -21.5,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc09_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc09_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc09_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc09_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc09_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc09_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc09_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc09_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc09_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 9,
+    "title": "Burger Shop Upgrade & Transformation",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_09_burger_shop_transformation/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc09_telugu_09_burger_shop_transformation.mp4",
+    "file_size_mb": 6.32,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-05",
+    "hero_product": "ITC PANEER PATTY",
+    "hero_brand": "itc master chef",
+    "paired_sku": "rais-veg-burg",
+    "paired_product": "BURGER BUNS",
+    "luminance_0s": 157.9,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        52.32
+      ],
+      [
+        0.5,
+        1.0,
+        71.83
+      ],
+      [
+        1.0,
+        2.0,
+        30.34
+      ],
+      [
+        2.0,
+        3.0,
+        30.55
+      ],
+      [
+        3.0,
+        4.0,
+        75.47
+      ],
+      [
+        4.0,
+        5.0,
+        29.02
+      ],
+      [
+        5.0,
+        5.95,
+        28.61
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -21.3,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc09_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc09_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc09_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc09_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc09_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc09_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc09_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc09_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc09_te_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 10,
+    "title": "Balcony Rain & Evening Chai Bliss",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_10_summer_refreshment/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc10_hindi_10_summer_refreshment.mp4",
+    "file_size_mb": 7.11,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-06",
+    "hero_product": "GODREJ PANEER POPS",
+    "hero_brand": "godrej",
+    "paired_sku": "rais-brd-03",
+    "paired_product": "VKL PERI PERI POWDER",
+    "luminance_0s": 159.2,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        73.54
+      ],
+      [
+        0.5,
+        1.0,
+        114.15
+      ],
+      [
+        1.0,
+        2.0,
+        32.25
+      ],
+      [
+        2.0,
+        3.0,
+        33.1
+      ],
+      [
+        3.0,
+        4.0,
+        91.69
+      ],
+      [
+        4.0,
+        5.0,
+        30.56
+      ],
+      [
+        5.0,
+        5.95,
+        30.22
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.8,
+    "i_lufs": -21.0,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc10_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc10_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc10_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc10_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc10_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc10_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc10_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc10_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc10_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 10,
+    "title": "Balcony Rain & Evening Chai Bliss",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_10_summer_refreshment/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc10_telugu_10_summer_refreshment.mp4",
+    "file_size_mb": 7.09,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-06",
+    "hero_product": "GODREJ PANEER POPS",
+    "hero_brand": "godrej",
+    "paired_sku": "rais-brd-03",
+    "paired_product": "VKL PERI PERI POWDER",
+    "luminance_0s": 159.2,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        73.54
+      ],
+      [
+        0.5,
+        1.0,
+        114.15
+      ],
+      [
+        1.0,
+        2.0,
+        32.25
+      ],
+      [
+        2.0,
+        3.0,
+        33.1
+      ],
+      [
+        3.0,
+        4.0,
+        91.69
+      ],
+      [
+        4.0,
+        5.0,
+        30.56
+      ],
+      [
+        5.0,
+        5.95,
+        30.22
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -20.9,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc10_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc10_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc10_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc10_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc10_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc10_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc10_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc10_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc10_te_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 11,
+    "title": "Weekend Movie Night Crunch",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_11_the_irresistible_crunch/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc11_hindi_11_the_irresistible_crunch.mp4",
+    "file_size_mb": 5.95,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-02",
+    "hero_product": "HUP HUP FRENCH FRIES",
+    "hero_brand": "hup hup",
+    "paired_sku": "rais-sau-mrfo",
+    "paired_product": "CHOCOLATE DRESSING",
+    "luminance_0s": 160.7,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        55.71
+      ],
+      [
+        0.5,
+        1.0,
+        110.22
+      ],
+      [
+        1.0,
+        2.0,
+        25.98
+      ],
+      [
+        2.0,
+        3.0,
+        25.54
+      ],
+      [
+        3.0,
+        4.0,
+        102.94
+      ],
+      [
+        4.0,
+        5.0,
+        24.83
+      ],
+      [
+        5.0,
+        5.95,
+        24.4
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.8,
+    "i_lufs": -21.6,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc11_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc11_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc11_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc11_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc11_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc11_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc11_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc11_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc11_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 11,
+    "title": "Weekend Movie Night Crunch",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_11_the_irresistible_crunch/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc11_telugu_11_the_irresistible_crunch.mp4",
+    "file_size_mb": 5.92,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-02",
+    "hero_product": "HUP HUP FRENCH FRIES",
+    "hero_brand": "hup hup",
+    "paired_sku": "rais-sau-mrfo",
+    "paired_product": "CHOCOLATE DRESSING",
+    "luminance_0s": 160.7,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        55.71
+      ],
+      [
+        0.5,
+        1.0,
+        110.22
+      ],
+      [
+        1.0,
+        2.0,
+        25.98
+      ],
+      [
+        2.0,
+        3.0,
+        25.54
+      ],
+      [
+        3.0,
+        4.0,
+        102.94
+      ],
+      [
+        4.0,
+        5.0,
+        24.83
+      ],
+      [
+        5.0,
+        5.95,
+        24.4
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -21.3,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc11_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc11_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc11_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc11_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc11_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc11_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc11_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc11_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc11_te_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 12,
+    "title": "Road Trip Highway Rest Stop",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_12_restaurant_stock_planning/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc12_hindi_12_restaurant_stock_planning.mp4",
+    "file_size_mb": 5.95,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-04",
+    "hero_product": "VEG BURGER PATTY",
+    "hero_brand": "chilli fill",
+    "paired_sku": "rais-moj-01",
+    "paired_product": "LIME & MINT MOJITO",
+    "luminance_0s": 136.2,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        64.99
+      ],
+      [
+        0.5,
+        1.0,
+        105.79
+      ],
+      [
+        1.0,
+        2.0,
+        34.64
+      ],
+      [
+        2.0,
+        3.0,
+        34.7
+      ],
+      [
+        3.0,
+        4.0,
+        100.17
+      ],
+      [
+        4.0,
+        5.0,
+        27.55
+      ],
+      [
+        5.0,
+        5.95,
+        27.64
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.8,
+    "i_lufs": -21.6,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc12_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc12_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc12_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc12_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc12_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc12_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc12_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc12_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc12_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 12,
+    "title": "Road Trip Highway Rest Stop",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_12_restaurant_stock_planning/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc12_telugu_12_restaurant_stock_planning.mp4",
+    "file_size_mb": 5.93,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-04",
+    "hero_product": "VEG BURGER PATTY",
+    "hero_brand": "chilli fill",
+    "paired_sku": "rais-moj-01",
+    "paired_product": "LIME & MINT MOJITO",
+    "luminance_0s": 136.2,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        64.99
+      ],
+      [
+        0.5,
+        1.0,
+        105.79
+      ],
+      [
+        1.0,
+        2.0,
+        34.64
+      ],
+      [
+        2.0,
+        3.0,
+        34.7
+      ],
+      [
+        3.0,
+        4.0,
+        100.17
+      ],
+      [
+        4.0,
+        5.0,
+        27.55
+      ],
+      [
+        5.0,
+        5.95,
+        27.64
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -20.9,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc12_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc12_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc12_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc12_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc12_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc12_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc12_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc12_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc12_te_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 13,
+    "title": "Post-Workout Wholesome Protein Reward",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_13_weekend_movie_night/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc13_hindi_13_weekend_movie_night.mp4",
+    "file_size_mb": 5.35,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-chs-04",
+    "hero_product": "MILKY MIST PANEER",
+    "hero_brand": "milky mist",
+    "paired_sku": "rais-veg-08",
+    "paired_product": "SWEET CORN",
+    "luminance_0s": 155.1,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        48.16
+      ],
+      [
+        0.5,
+        1.0,
+        71.11
+      ],
+      [
+        1.0,
+        2.0,
+        25.08
+      ],
+      [
+        2.0,
+        3.0,
+        24.78
+      ],
+      [
+        3.0,
+        4.0,
+        81.48
+      ],
+      [
+        4.0,
+        5.0,
+        17.75
+      ],
+      [
+        5.0,
+        5.95,
+        17.22
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.7,
+    "i_lufs": -21.1,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc13_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc13_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc13_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc13_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc13_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc13_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc13_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc13_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc13_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 13,
+    "title": "Post-Workout Wholesome Protein Reward",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_13_weekend_movie_night/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc13_telugu_13_weekend_movie_night.mp4",
+    "file_size_mb": 5.32,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-chs-04",
+    "hero_product": "MILKY MIST PANEER",
+    "hero_brand": "milky mist",
+    "paired_sku": "rais-veg-08",
+    "paired_product": "SWEET CORN",
+    "luminance_0s": 155.1,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        48.16
+      ],
+      [
+        0.5,
+        1.0,
+        71.11
+      ],
+      [
+        1.0,
+        2.0,
+        25.08
+      ],
+      [
+        2.0,
+        3.0,
+        24.78
+      ],
+      [
+        3.0,
+        4.0,
+        81.48
+      ],
+      [
+        4.0,
+        5.0,
+        17.75
+      ],
+      [
+        5.0,
+        5.95,
+        17.22
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -21.2,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc13_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc13_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc13_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc13_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc13_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc13_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc13_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc13_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc13_te_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 14,
+    "title": "Late-Night QSR Takeaway Rush",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_14_packaging_matters/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc14_hindi_14_packaging_matters.mp4",
+    "file_size_mb": 5.62,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-pizz",
+    "hero_product": "PIZZA BASE 8 INCH",
+    "hero_brand": "rais master",
+    "paired_sku": "rais-chs-01",
+    "paired_product": "MOZZARELLA CHEESE",
+    "luminance_0s": 147.0,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        58.25
+      ],
+      [
+        0.5,
+        1.0,
+        82.32
+      ],
+      [
+        1.0,
+        2.0,
+        29.37
+      ],
+      [
+        2.0,
+        3.0,
+        29.61
+      ],
+      [
+        3.0,
+        4.0,
+        83.21
+      ],
+      [
+        4.0,
+        5.0,
+        25.96
+      ],
+      [
+        5.0,
+        5.95,
+        25.67
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.8,
+    "i_lufs": -21.3,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc14_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc14_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc14_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc14_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc14_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc14_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc14_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc14_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc14_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 14,
+    "title": "Late-Night QSR Takeaway Rush",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_14_packaging_matters/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc14_telugu_14_packaging_matters.mp4",
+    "file_size_mb": 5.6,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-veg-pizz",
+    "hero_product": "PIZZA BASE 8 INCH",
+    "hero_brand": "rais master",
+    "paired_sku": "rais-chs-01",
+    "paired_product": "MOZZARELLA CHEESE",
+    "luminance_0s": 147.0,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        58.25
+      ],
+      [
+        0.5,
+        1.0,
+        82.32
+      ],
+      [
+        1.0,
+        2.0,
+        29.37
+      ],
+      [
+        2.0,
+        3.0,
+        29.61
+      ],
+      [
+        3.0,
+        4.0,
+        83.21
+      ],
+      [
+        4.0,
+        5.0,
+        25.96
+      ],
+      [
+        5.0,
+        5.95,
+        25.67
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -21.0,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc14_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc14_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc14_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc14_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc14_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc14_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc14_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc14_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc14_te_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 15,
+    "title": "Cold-Chain Logistics & Food Partner",
+    "lang": "hi",
+    "filepath": "public/videos/campaigns/scenario_15_meet_your_food_partner/master_hindi_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc15_hindi_15_meet_your_food_partner.mp4",
+    "file_size_mb": 5.91,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-brd-02",
+    "hero_product": "CAJUN BREADING MIX",
+    "hero_brand": "vkl",
+    "paired_sku": "rais-chs-03",
+    "paired_product": "CHEESE SLICES",
+    "luminance_0s": 173.2,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        49.98
+      ],
+      [
+        0.5,
+        1.0,
+        71.35
+      ],
+      [
+        1.0,
+        2.0,
+        31.82
+      ],
+      [
+        2.0,
+        3.0,
+        31.42
+      ],
+      [
+        3.0,
+        4.0,
+        80.78
+      ],
+      [
+        4.0,
+        5.0,
+        29.81
+      ],
+      [
+        5.0,
+        5.95,
+        29.54
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -25.8,
+    "i_lufs": -21.8,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc15_hi_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc15_hi_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc15_hi_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc15_hi_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc15_hi_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc15_hi_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc15_hi_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc15_hi_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc15_hi_endcard_15s.jpg"
+  },
+  {
+    "sc_id": 15,
+    "title": "Cold-Chain Logistics & Food Partner",
+    "lang": "te",
+    "filepath": "public/videos/campaigns/scenario_15_meet_your_food_partner/master_telugu_18s.mp4",
+    "clean_path": "public/videos/final_30_reels/sc15_telugu_15_meet_your_food_partner.mp4",
+    "file_size_mb": 5.89,
+    "duration": 18.07,
+    "resolution": "1080x1920",
+    "fps": 30.0,
+    "vcodec": "h264",
+    "acodec": "aac",
+    "hero_sku": "rais-brd-02",
+    "hero_product": "CAJUN BREADING MIX",
+    "hero_brand": "vkl",
+    "paired_sku": "rais-chs-03",
+    "paired_product": "CHEESE SLICES",
+    "luminance_0s": 173.2,
+    "is_not_black": true,
+    "rmse_diffs": [
+      [
+        0.0,
+        0.5,
+        49.98
+      ],
+      [
+        0.5,
+        1.0,
+        71.35
+      ],
+      [
+        1.0,
+        2.0,
+        31.82
+      ],
+      [
+        2.0,
+        3.0,
+        31.42
+      ],
+      [
+        3.0,
+        4.0,
+        80.78
+      ],
+      [
+        4.0,
+        5.0,
+        29.81
+      ],
+      [
+        5.0,
+        5.95,
+        29.54
+      ]
+    ],
+    "cuts_prompt": true,
+    "continuous_motion": true,
+    "mean_14_16": -24.4,
+    "i_lufs": -21.5,
+    "whatsapp_verified": "9347453135",
+    "zero_prices_verified": true,
+    "passed": true,
+    "frame_paths": [
+      [
+        0.0,
+        "public/videos/catalogue_qa_work/sc15_te_t_0.0s.jpg"
+      ],
+      [
+        0.5,
+        "public/videos/catalogue_qa_work/sc15_te_t_0.5s.jpg"
+      ],
+      [
+        1.0,
+        "public/videos/catalogue_qa_work/sc15_te_t_1.0s.jpg"
+      ],
+      [
+        2.0,
+        "public/videos/catalogue_qa_work/sc15_te_t_2.0s.jpg"
+      ],
+      [
+        3.0,
+        "public/videos/catalogue_qa_work/sc15_te_t_3.0s.jpg"
+      ],
+      [
+        4.0,
+        "public/videos/catalogue_qa_work/sc15_te_t_4.0s.jpg"
+      ],
+      [
+        5.0,
+        "public/videos/catalogue_qa_work/sc15_te_t_5.0s.jpg"
+      ],
+      [
+        5.95,
+        "public/videos/catalogue_qa_work/sc15_te_t_6.0s.jpg"
+      ]
+    ],
+    "endcard_frame": "public/videos/catalogue_qa_work/sc15_te_endcard_15s.jpg"
+  }
+]

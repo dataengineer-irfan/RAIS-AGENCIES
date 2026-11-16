@@ -1,0 +1,82 @@
+<USER_REQUEST>
+"C:\Users\affra\Documents\RAIS\RAIS_Product_Catalogue_No_Prices.html" analyze this file then act on below prompt# RAIS AGENCIES — CATALOGUE-ACCURATE 30-REEL CAMPAIGN REBUILD
+
+## ROLE
+
+Act as a senior AI video-production engineer, video editor, creative director, and quality-assurance engineer. Work directly inside the existing RAIS project repository. Inspect the actual files, implement the required changes, render the videos, and verify the exported MP4s.
+
+Do not stop after producing a plan, storyboard, report, mockup, or prompt. The deliverable is the actual corrected video campaign.
+
+## 1. SOURCE OF TRUTH
+
+Use this catalogue as the authoritative reference:
+
+`frontend/public/RAIS_Product_Catalogue_No_Prices.html`
+
+The catalogue contains 66 SKUs across 8 categories. Extract the exact product names, brands, image paths, category assignments, and available descriptions directly from the file.
+
+Inspect the associated product assets, including:
+- `assets/products/`
+- `assets/hercules/`
+- Other asset directories referenced by the HTML or existing campaign code.
+
+Resolve the actual paths in the repository. Do not assume the files exist without checking them.
+
+**Never substitute generic internet images or invented packaging for a real catalogue product when the actual product image is available.** Do not use unrelated global brand logos or claim RAIS stocks a product unless the catalogue supports that claim.
+
+## 2. CAMPAIGN DELIVERABLE
+
+Produce 30 separate Instagram Reels:
+- 15 distinct scenarios.
+- 15 Hindi versions.
+- 15 Telugu versions.
+- Each approximately 15–22 seconds.
+- Vertical 9:16, preferably 1080 × 1920, 30 fps.
+- MP4, H.264 video, AAC audio.
+- Natural-sounding language-specific narration, correctly synchronized with the visuals.
+- Distinct scenarios, product selections, shot sequences, and openings.
+- No visible pricing or rates anywhere.
+
+Use the existing campaign and rendering infrastructure where practical. Preserve working components instead of u
+<truncated 5370 bytes>
+irm the file exists and has a nonzero size.
+- Check duration, resolution, frame rate, video codec, audio codec, and audio stream.
+- Generate a contact sheet from the opening at 0.0, 0.5, 1, 2, 3, 4, 5, and 6 seconds.
+- Check for static openings, frozen frames, broken images, abrupt transitions, and unreadable text.
+- Verify correct catalogue products and brands against the SKU manifest.
+- Confirm the correct Hindi or Telugu audio plays and matches the scene.
+- Check text safe areas and ensure content fits a mobile screen.
+- Verify the WhatsApp number is `9347453135`.
+- Search rendered overlays and timelines for accidental pricing.
+- Review every opening visually. A successful FFmpeg command alone is not sufficient QA.
+
+Run automated checks for all videos and report any failures honestly. Re-render and retest failed videos.
+
+## 10. FINAL DELIVERY
+
+Create:
+- 30 individual final MP4 files.
+- An organized folder structure grouped by scenario and language.
+- A downloadable ZIP of the final campaign if practical.
+- A product-to-video manifest documenting which catalogue SKUs appear in each Reel.
+- A QA report with real file paths, durations, technical checks, missing assets, and exceptions.
+- Opening contact sheets for visual review.
+
+At completion, provide the exact output directory and actual downloadable file paths.
+
+Do not mark the task complete if videos have not been rendered. Do not report 30/30 QA success without checking all 30 exported files.
+
+## PRIORITY
+
+1. Catalogue accuracy.
+2. Correct brand images and packaging.
+3. Immediate motion and strong first-six-second retention.
+4. Natural Hindi and Telugu voice-over.
+5. Correct RAIS branding and contact details.
+6. Actual exported MP4s and verifiable QA.
+
+Begin by inspecting the repository and catalogue. Then implement, render, and verify the campaign. Do not respond with another plan in place of the deliverables.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-10-26T18:04:56+05:30.
+</ADDITIONAL_METADATA>

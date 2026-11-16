@@ -1,0 +1,596 @@
+import json
+
+manifest_18s = {
+  "1": {
+    "title": "Rainy-Day Crispy Cravings",
+    "folder": "scenario_01_monsoon_cravings",
+    "character": "public/images/character_test_scene_a_rain.jpg",
+    "is_b2b": False,
+    "sku1": {
+      "code": "rais-chk-04",
+      "name": "CHICKEN MOMOS",
+      "brand": "triken",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Chicken",
+      "asset": "public/images/products_catalogue/triken_chicken_momos.jpg"
+    },
+    "sku2": {
+      "code": "rais-veg-01",
+      "name": "AMUL FRENCH FRIES",
+      "brand": "amul",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Veg",
+      "asset": "public/images/products_catalogue/amul_french_fries_6mm.jpg",
+      "paired_type": "GOURMET DIP & SAUCE",
+      "paired_code": "rais-sau-08",
+      "paired_name": "FOODRITE MAYONNAISE",
+      "paired_brand": "foodrite",
+      "paired_asset": "public/images/products_catalogue/mealtime_veg_mayo.jpg"
+    },
+    "audio_hi": [
+      "बारिश में कुछ गरमा-गरम खाने का मन?",
+      "ट्राई कीजिए Triken Chicken Momos का असली स्वाद!",
+      "साथ में क्रिस्पी Amul French Fries और क्रीमी Mayonnaise!",
+      "ऑर्डर के लिए WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "వర్షంలో వేడి వేడిగా ఏదైనా తినాలనిపిస్తుందా?",
+      "ట్రై చేయండి రుచికరమైన Triken Chicken Momos!",
+      "క్రిస్పీ Amul French Fries మరియు క్రీమీ Mayonnaise!",
+      "ఆర్డర్స్ కోసం WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  },
+  "2": {
+    "title": "Midnight Hunger Attack",
+    "folder": "scenario_02_midnight_hunger",
+    "character": "public/images/characters/ayesha_midnight.jpg",
+    "is_b2b": False,
+    "sku1": {
+      "code": "rais-chk-05",
+      "name": "CHICKEN NUGGETS",
+      "brand": "master chef",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Chicken",
+      "asset": "public/images/products_catalogue/itc_crunchy_chicken_nuggets.jpg"
+    },
+    "sku2": {
+      "code": "rais-veg-02",
+      "name": "HUP HUP FRENCH FRIES",
+      "brand": "hup hup",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Veg",
+      "asset": "public/images/products_catalogue/hup_hup_french_fries.jpg",
+      "paired_type": "GOURMET DIP & SAUCE",
+      "paired_code": "rais-sau-04",
+      "paired_name": "DELMONTE TANDOORI MAYO",
+      "paired_brand": "del monte",
+      "paired_asset": "public/images/products_catalogue/delmonte_tandoori_mayo.jpg"
+    },
+    "audio_hi": [
+      "रात 12 बजे अचानक ज़ोरों की भूख?",
+      "तैयार कीजिए क्रिस्पी Master Chef Chicken Nuggets!",
+      "साथ में क्रिस्पी Hup Hup Fries और Tandoori Mayo!",
+      "ऑर्डर के लिए WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "అర్ధరాత్రి వేళ ఆకలి వేస్తోందా?",
+      "టేస్ట్ చేయండి Master Chef Chicken Nuggets!",
+      "క్రిస్పీ Hup Hup Fries మరియు Tandoori Mayo!",
+      "ఆర్డర్స్ కోసం WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  },
+  "3": {
+    "title": "Cricket Match Snack Attack",
+    "folder": "scenario_03_cricket_match",
+    "character": "public/images/characters/ayesha_cricket.jpg",
+    "is_b2b": False,
+    "sku1": {
+      "code": "rais-chk-03",
+      "name": "CHICKEN POPCORN BALL",
+      "brand": "nutrich",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Chicken",
+      "asset": "public/images/products_catalogue/nutrich_chicken_popcorn.jpg"
+    },
+    "sku2": {
+      "code": "rais-veg-07",
+      "name": "CHEESY CORN TRIANGLE",
+      "brand": "itc master chef",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Veg",
+      "asset": "public/images/products_catalogue/itc_cheesy_corn_triangles.jpg",
+      "paired_type": "GOURMET DIP & SAUCE",
+      "paired_code": "rais-sau-01",
+      "paired_name": "DELMONTE TOMATO KETCHUP",
+      "paired_brand": "del monte",
+      "paired_asset": "public/images/products_catalogue/delmonte_ketchup_bottle.jpg"
+    },
+    "audio_hi": [
+      "क्रिकेट मैच का रोमांच और स्नैक टाइम!",
+      "एंजॉय कीजिए Nutrich Chicken Popcorn Balls!",
+      "साथ में Cheesy Corn Triangles और Delmonte Ketchup!",
+      "ऑर्डर के लिए WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "క్రికెట్ మ్యాచ్ చూస్తూ స్నాక్స్ ఎంజాయ్ చేయండి!",
+      "టేస్టీ Nutrich Chicken Popcorn Balls!",
+      "మరియు Cheesy Corn Triangles తో టొమాటో కెచప్!",
+      "ఆర్డర్స్ కోసం WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  },
+  "4": {
+    "title": "After-School Hunger Rush",
+    "folder": "scenario_04_after_school_hunger",
+    "character": "public/images/characters/ayesha_after_school.jpg",
+    "is_b2b": False,
+    "sku1": {
+      "code": "rais-veg-mcca",
+      "name": "MCCAIN SMILES",
+      "brand": "mccain",
+      "pack": "📦 1.5kg Pack",
+      "category": "Frozen Veg",
+      "asset": "public/images/products_catalogue/mccain_smiles.jpg"
+    },
+    "sku2": {
+      "code": "rais-veg-01",
+      "name": "AMUL FRENCH FRIES",
+      "brand": "amul",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Veg",
+      "asset": "public/images/products_catalogue/amul_french_fries_6mm.jpg",
+      "paired_type": "GOURMET DIP & SAUCE",
+      "paired_code": "rais-sau-02",
+      "paired_name": "FOODRITE TOMATO KETCHUP",
+      "paired_brand": "foodrite",
+      "paired_asset": "public/images/products_catalogue/foodrite_tomato_ketchup_pouch.jpg"
+    },
+    "audio_hi": [
+      "स्कूल के बाद बच्चों के लिए टेस्टी स्नैक्स!",
+      "परोसिए क्रिस्पी और फन McCain Smiles!",
+      "साथ में Amul French Fries और Foodrite Ketchup!",
+      "ऑर्डर के लिए WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "పిల్లల కోసం స్కూల్ తర్వాత బెస్ట్ స్నాక్స్!",
+      "సర్వ్ చేయండి క్రిస్పీ McCain Smiles!",
+      "గోల్డెన్ Amul Fries మరియు Foodrite Ketchup!",
+      "ఆర్డర్స్ కోసం WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  },
+  "5": {
+    "title": "Family Gathering Party Platter",
+    "folder": "scenario_05_friends_arrive",
+    "character": "public/images/characters/ayesha_family.jpg",
+    "is_b2b": False,
+    "sku1": {
+      "code": "rais-veg-03",
+      "name": "ITC VEG MOMOS",
+      "brand": "itc master chef",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Veg",
+      "asset": "public/images/products_catalogue/itc_veg_momos.jpg"
+    },
+    "sku2": {
+      "code": "rais-veg-vegs",
+      "name": "VEG SPRING ROLLS",
+      "brand": "rais master",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Veg",
+      "asset": "public/images/products_catalogue/spring_rolls.jpg",
+      "paired_type": "GOURMET DIP & SAUCE",
+      "paired_code": "rais-sau-08",
+      "paired_name": "FOODRITE MAYONNAISE",
+      "paired_brand": "foodrite",
+      "paired_asset": "public/images/products_catalogue/mealtime_veg_mayo.jpg"
+    },
+    "audio_hi": [
+      "घर पर अचानक मेहमान आएं तो नो टेंशन!",
+      "मिनटों में तैयार कीजिए ITC Veg Momos!",
+      "साथ में क्रिस्पी Veg Spring Rolls और Mayonnaise!",
+      "ऑर्डर के लिए WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "ఇంటికి బంధువులు వస్తే నో టెన్షన్!",
+      "వేడి వేడిగా సర్వ్ చేయండి ITC Veg Momos!",
+      "క్రిస్పీ Veg Spring Rolls మరియు Mayonnaise డిప్!",
+      "ఆర్డర్స్ కోసం WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  },
+  "6": {
+    "title": "QSR Commercial Kitchen Efficiency",
+    "folder": "scenario_06_busy_day_convenience",
+    "character": "public/images/characters/ayesha_qsr_kitchen.jpg",
+    "is_b2b": True,
+    "sku1": {
+      "code": "rais-chk-06",
+      "name": "CHICKEN BURGER PATTY",
+      "brand": "nutrich",
+      "pack": "📦 Wholesale Pack",
+      "category": "Frozen Chicken",
+      "asset": "public/images/products_catalogue/chicken_patty.jpg"
+    },
+    "sku2": {
+      "code": "rais-veg-burg",
+      "name": "BURGER BUNS",
+      "brand": "rais master",
+      "pack": "📦 6 Pcs Pack",
+      "category": "Bakery",
+      "asset": "public/images/products_catalogue/burger_buns.jpg",
+      "paired_type": "COMMERCIAL PACKAGING",
+      "paired_code": "rais-box-04",
+      "paired_name": "BURGER BOX 4\"x4\"",
+      "paired_brand": "commercial packaging",
+      "paired_asset": "public/images/products_catalogue/burger_box_printed.jpg"
+    },
+    "audio_hi": [
+      "फास्ट फूड रेस्टोरेंट के लिए बेस्ट सर्विस!",
+      "तैयार कीजिए Nutrich Chicken Burger Patty!",
+      "फ्रेश Burger Buns और टेकअवे Packaging Boxes!",
+      "होलसेल सप्लाइ WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "ఫాస్ట్ ఫుడ్ రెస్టారెంట్స్ కోసం బెస్ట్ సొల్యూషన్!",
+      "పర్ఫెక్ట్ Nutrich Chicken Burger Patty!",
+      "ఫ్రెష్ Burger Buns మరియు టేక్-అవే ప్యాకేజింగ్ బాక్సెస్!",
+      "హోల్‌సేల్ సప్లై WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  },
+  "7": {
+    "title": "Birthday Party Celebration Platter",
+    "folder": "scenario_07_birthday_party",
+    "character": "public/images/characters/ayesha_birthday.jpg",
+    "is_b2b": False,
+    "sku1": {
+      "code": "rais-veg-07",
+      "name": "CHEESY CORN TRIANGLE",
+      "brand": "itc master chef",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Veg",
+      "asset": "public/images/products_catalogue/itc_cheesy_corn_triangles.jpg"
+    },
+    "sku2": {
+      "code": "rais-moj-02",
+      "name": "BLUE CURACAO SYRUP",
+      "brand": "rais crush",
+      "pack": "🍾 750ml Bottle",
+      "category": "Syrups",
+      "asset": "public/images/products_catalogue/blue_curacao_syrup.jpg",
+      "paired_type": "CRISPY PARTY SNACK",
+      "paired_code": "rais-veg-01",
+      "paired_name": "AMUL FRENCH FRIES",
+      "paired_brand": "amul",
+      "paired_asset": "public/images/products_catalogue/amul_french_fries_6mm.jpg"
+    },
+    "audio_hi": [
+      "बर्थडे पार्टी सेलिब्रेशन को बनाइए खास!",
+      "परोसिए चीज़ी ITC Corn Triangles!",
+      "रिफ्रेशिंग Blue Curacao ड्रिंक और Amul French Fries!",
+      "ऑर्डर के लिए WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "బర్త్‌డే పార్టీలను మరింత స్పెషల్‌గా మార్చండి!",
+      "రుచికరమైన ITC Cheesy Corn Triangles!",
+      "రిఫ్రెషింగ్ Blue Curacao డ్రింక్ మరియు Amul Fries!",
+      "ఆర్డర్స్ కోసం WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  },
+  "8": {
+    "title": "Street Food Cart Quick Bites",
+    "folder": "scenario_08_restaurant_rush_hour",
+    "character": "public/images/characters/ayesha_streetfood.jpg",
+    "is_b2b": False,
+    "sku1": {
+      "code": "rais-chi-fing",
+      "name": "CHICKEN FINGERS",
+      "brand": "rais master",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Chicken",
+      "asset": "public/images/products_catalogue/chicken_fingers.jpg"
+    },
+    "sku2": {
+      "code": "rais-veg-02",
+      "name": "HUP HUP FRENCH FRIES",
+      "brand": "hup hup",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Veg",
+      "asset": "public/images/products_catalogue/hup_hup_french_fries.jpg",
+      "paired_type": "GOURMET DIP & SAUCE",
+      "paired_code": "rais-sau-02",
+      "paired_name": "FOODRITE TOMATO KETCHUP",
+      "paired_brand": "foodrite",
+      "paired_asset": "public/images/products_catalogue/foodrite_tomato_ketchup_pouch.jpg"
+    },
+    "audio_hi": [
+      "शाम के वक्त गरमा-गरम क्रिस्पी स्नैक्स!",
+      "तैयार कीजिए गोल्डन Chicken Fingers!",
+      "साथ में Hup Hup French Fries और Foodrite Ketchup!",
+      "ऑर्डर के लिए WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "సాయంత్రం వేళ క్రంచీ హాట్ స్నాక్స్!",
+      "టేస్టీ క్రిస్పీ Chicken Fingers!",
+      "మరియు Hup Hup French Fries తో టొమాటో కెచప్!",
+      "ఆర్డర్స్ కోసం WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  },
+  "9": {
+    "title": "Burger Shop Upgrade & Transformation",
+    "folder": "scenario_09_burger_shop_transformation",
+    "character": "public/images/characters/ayesha_burger.jpg",
+    "is_b2b": True,
+    "sku1": {
+      "code": "rais-veg-05",
+      "name": "ITC PANEER PATTY",
+      "brand": "itc master chef",
+      "pack": "📦 Wholesale Pack",
+      "category": "Frozen Veg",
+      "asset": "public/images/products_catalogue/itc_paneer_patty.jpg"
+    },
+    "sku2": {
+      "code": "rais-veg-burg",
+      "name": "BURGER BUNS",
+      "brand": "rais master",
+      "pack": "📦 6 Pcs Pack",
+      "category": "Bakery",
+      "asset": "public/images/products_catalogue/burger_buns.jpg",
+      "paired_type": "COMMERCIAL PACKAGING",
+      "paired_code": "rais-box-04",
+      "paired_name": "BURGER BOX 4\"x4\"",
+      "paired_brand": "commercial packaging",
+      "paired_asset": "public/images/products_catalogue/burger_box_printed.jpg"
+    },
+    "audio_hi": [
+      "अपने कैफे और बर्गर शॉप को दें प्रीमियम मेनू!",
+      "बनाइए स्वादिष्ट ITC Paneer Patty Burgers!",
+      "सॉफ्ट Burger Buns और ब्रांडेड टेकअवे बॉक्सेस!",
+      "होलसेल सप्लाइ WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "మీ కేఫ్‌లో ప్రీమియం బర్గర్స్ అందించండి!",
+      "రుచికరమైన ITC Paneer Patty బర్గర్స్!",
+      "సాఫ్ట్ Burger Buns మరియు టేక్-అవే బాక్సెస్!",
+      "హోల్‌సేల్ సప్లై WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  },
+  "10": {
+    "title": "Balcony Rain & Evening Chai Bliss",
+    "folder": "scenario_10_summer_refreshment",
+    "character": "public/images/characters/ayesha_balcony.jpg",
+    "is_b2b": False,
+    "sku1": {
+      "code": "rais-veg-06",
+      "name": "GODREJ PANEER POPS",
+      "brand": "godrej",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Veg",
+      "asset": "public/images/products_catalogue/godrej_paneer_pops.jpg"
+    },
+    "sku2": {
+      "code": "rais-brd-03",
+      "name": "VKL PERI PERI POWDER",
+      "brand": "vkl",
+      "pack": "🌶️ 500g Pack",
+      "category": "Seasoning",
+      "asset": "public/images/products_catalogue/vkl_peri_peri_powder.jpg",
+      "paired_type": "GOURMET DIP & SAUCE",
+      "paired_code": "rais-sau-08",
+      "paired_name": "FOODRITE MAYONNAISE",
+      "paired_brand": "foodrite",
+      "paired_asset": "public/images/products_catalogue/mealtime_veg_mayo.jpg"
+    },
+    "audio_hi": [
+      "बालकनी में बारिश और गरमा-गरम चाय!",
+      "खाइए क्रिस्पी Godrej Paneer Pops!",
+      "स्पाइसी Peri Peri मसाला और क्रीमी Mayonnaise!",
+      "ऑर्डर के लिए WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "బాల్కనీలో వర్షం మరియు వేడి టీ ఎంజాయ్ చేయండి!",
+      "క్రిస్పీ Godrej Paneer Pops!",
+      "స్పైసీ Peri Peri మసాలా మరియు Mayonnaise డిప్!",
+      "ఆర్డర్స్ కోసం WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  },
+  "11": {
+    "title": "Weekend Movie Night Crunch",
+    "folder": "scenario_11_the_irresistible_crunch",
+    "character": "public/images/characters/ayesha_movie.jpg",
+    "is_b2b": False,
+    "sku1": {
+      "code": "rais-veg-02",
+      "name": "HUP HUP FRENCH FRIES",
+      "brand": "hup hup",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Veg",
+      "asset": "public/images/products_catalogue/hup_hup_french_fries.jpg"
+    },
+    "sku2": {
+      "code": "rais-sau-mrfo",
+      "name": "CHOCOLATE DRESSING",
+      "brand": "foodrite",
+      "pack": "🍫 1kg Pack",
+      "category": "Dressing",
+      "asset": "public/images/products_catalogue/mr_foodrite_chocolate_dressing.jpg",
+      "paired_type": "CHEESY PARTY DIP",
+      "paired_code": "rais-sau-05",
+      "paired_name": "DELMONTE CHEESE SAUCE",
+      "paired_brand": "del monte",
+      "paired_asset": "public/images/products_catalogue/delmonte_creamy_cheese.jpg"
+    },
+    "audio_hi": [
+      "वीकेंड मूवी नाइट दोस्तों के साथ!",
+      "एंजॉय कीजिए क्रंची Hup Hup French Fries!",
+      "साथ में Delmonte Cheese Sauce और Chocolate Dressing!",
+      "ऑर्डर के लिए WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "వీకెండ్ మూవీ నైట్ ఫ్రెండ్స్ తో!",
+      "క్రంచీ Hup Hup French Fries!",
+      "మరియు క్రీమీ Cheese Sauce తో చాక్లెట్ డ్రెస్సింగ్!",
+      "ఆర్డర్స్ కోసం WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  },
+  "12": {
+    "title": "Road Trip Highway Rest Stop",
+    "folder": "scenario_12_restaurant_stock_planning",
+    "character": "public/images/characters/ayesha_roadtrip.jpg",
+    "is_b2b": False,
+    "sku1": {
+      "code": "rais-veg-04",
+      "name": "VEG BURGER PATTY",
+      "brand": "chilli fill",
+      "pack": "📦 1kg Pack",
+      "category": "Frozen Veg",
+      "asset": "public/images/products_catalogue/chilli_garlic_patty.jpg"
+    },
+    "sku2": {
+      "code": "rais-moj-01",
+      "name": "LIME & MINT MOJITO",
+      "brand": "rais crush",
+      "pack": "🍹 750ml Bottle",
+      "category": "Syrups",
+      "asset": "public/images/products_catalogue/lime_and_mint_mojito.jpg",
+      "paired_type": "CRISPY SNACK COMBO",
+      "paired_code": "rais-veg-01",
+      "paired_name": "AMUL FRENCH FRIES",
+      "paired_brand": "amul",
+      "paired_asset": "public/images/products_catalogue/amul_french_fries_6mm.jpg"
+    },
+    "audio_hi": [
+      "हाईवे रोड ट्रिप में मजेदार रिफ्रेशिंग ब्रेक!",
+      "गरमा-गरम Chilli Fill Veg Burger Patty!",
+      "साथ में चिल्ड Lime Mint Mojito और Amul Fries!",
+      "ऑर्डर के लिए WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "హైవే రోడ్ ట్రిప్‌లో రిఫ్రెషింగ్ బ్రేక్!",
+      "టేస్టీ Chilli Fill Veg Burger Patty!",
+      "కూల్ Lime Mint Mojito మరియు Amul French Fries!",
+      "ఆర్డర్స్ కోసం WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  },
+  "13": {
+    "title": "Post-Workout Wholesome Protein Reward",
+    "folder": "scenario_13_weekend_movie_night",
+    "character": "public/images/characters/ayesha_fitness.jpg",
+    "is_b2b": False,
+    "sku1": {
+      "code": "rais-chs-04",
+      "name": "MILKY MIST PANEER",
+      "brand": "milky mist",
+      "pack": "📦 1kg Diced Cubes",
+      "category": "Dairy",
+      "asset": "public/images/products_catalogue/milky_mist_paneer_diced.jpg"
+    },
+    "sku2": {
+      "code": "rais-veg-08",
+      "name": "SWEET CORN",
+      "brand": "rais fresh",
+      "pack": "🌽 1kg Pack",
+      "category": "Frozen Veg",
+      "asset": "public/images/products_catalogue/sweet_corn_pack.jpg",
+      "paired_type": "HEALTHY PROTEIN COMBO",
+      "paired_code": "rais-veg-03",
+      "paired_name": "ITC VEG MOMOS",
+      "paired_brand": "itc master chef",
+      "paired_asset": "public/images/products_catalogue/itc_veg_momos.jpg"
+    },
+    "audio_hi": [
+      "वर्कआउट के बाद हेल्दी प्रोटीन डाइट!",
+      "खाइए फ्रेश Milky Mist Diced Paneer!",
+      "स्वीट कॉर्न और स्टीम्ड Veg Momos का परफेक्ट कॉम्बो!",
+      "ऑर्डर के लिए WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "వర్కౌట్ తర్వాత హెల్తీ ప్రొటీన్ డైట్!",
+      "ఫ్రెష్ Milky Mist Paneer Cubes!",
+      "స్వీట్ కార్న్ మరియు స్టీమ్డ్ Veg Momos కాంబో!",
+      "ఆర్డర్స్ కోసం WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  },
+  "14": {
+    "title": "Late-Night QSR Takeaway Rush",
+    "folder": "scenario_14_packaging_matters",
+    "character": "public/images/characters/ayesha_late_qsr.jpg",
+    "is_b2b": True,
+    "sku1": {
+      "code": "rais-veg-pizz",
+      "name": "PIZZA BASE 8 INCH",
+      "brand": "rais master",
+      "pack": "📦 Wholesale Pack",
+      "category": "Bakery",
+      "asset": "public/images/products_catalogue/pizza_base.jpg"
+    },
+    "sku2": {
+      "code": "rais-chs-01",
+      "name": "MOZZARELLA CHEESE",
+      "brand": "milky mist",
+      "pack": "🧀 2kg Diced Pack",
+      "category": "Dairy",
+      "asset": "public/images/products_catalogue/milky_mist_mozzarella_2kg.jpg",
+      "paired_type": "COMMERCIAL PACKAGING",
+      "paired_code": "rais-box-05",
+      "paired_name": "PIZZA BOX CORRUGATED",
+      "paired_brand": "commercial packaging",
+      "paired_asset": "public/images/products_catalogue/burger_box_kraft.jpg"
+    },
+    "audio_hi": [
+      "लेट-नाइट डिलीवरी में गरमा-गरम चीज़ी पिज्जा!",
+      "रेडी-टू-बेक Pizza Base 8 Inch!",
+      "Milky Mist Mozzarella Cheese और मजबूत Pizza Boxes!",
+      "होलसेल सप्लाइ WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "లేట్-నైట్ డెలివరీలో వేడి వేడి చీజీ పిజ్జా!",
+      "రెడీ-టు-బేక్ Pizza Base 8 Inch!",
+      "Milky Mist Mozzarella మరియు బలమైన Pizza Boxes!",
+      "హోల్‌సేల్ సప్లై WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  },
+  "15": {
+    "title": "Cold-Chain Logistics & Food Partner",
+    "folder": "scenario_15_meet_your_food_partner",
+    "character": "public/images/characters/ayesha_late_qsr_clean.jpg",
+    "is_b2b": True,
+    "sku1": {
+      "code": "rais-brd-02",
+      "name": "CAJUN BREADING MIX",
+      "brand": "vkl",
+      "pack": "📦 1kg Commercial Pack",
+      "category": "Breading",
+      "asset": "public/images/products_catalogue/vkl_cajun_breading.jpg"
+    },
+    "sku2": {
+      "code": "rais-chs-03",
+      "name": "CHEESE SLICES",
+      "brand": "milky mist",
+      "pack": "🧀 750g Pack",
+      "category": "Dairy",
+      "asset": "public/images/products_catalogue/milky_mist_cheese_slices.jpg",
+      "paired_type": "COMMERCIAL PACKAGING",
+      "paired_code": "rais-box-01",
+      "paired_name": "COMMERCIAL CARTONS",
+      "paired_brand": "commercial packaging",
+      "paired_asset": "public/images/products_catalogue/burger_box_kraft.jpg"
+    },
+    "audio_hi": [
+      "रेस्टोरेंट कैफे का भरोसेमंद फूड पार्टनर!",
+      "VKL Crispy Cajun Breading Mix!",
+      "Milky Mist Cheese Slices और कमर्शियल सप्लाइ!",
+      "होलसेल सप्लाइ WhatsApp 9347453135 — RAIS Agencies!"
+    ],
+    "audio_te": [
+      "రెస్టారెంట్ మరియు కేఫ్‌లకు నమ్మకమైన ఫుడ్ పార్ట్నర్!",
+      "VKL Crispy Cajun Breading Mix!",
+      "Milky Mist Cheese Slices మరియు కమర్షియల్ సప్లై!",
+      "హోల్‌సేల్ సప్లై WhatsApp 9347453135 — RAIS Agencies!"
+    ]
+  }
+}
+
+with open("scripts/product_manifest.json", "w", encoding="utf-8") as f:
+    json.dump(manifest_18s, f, indent=2, ensure_ascii=False)
+
+print(f"Updated product_manifest.json with all 15 scenarios tailored for 18-second snappy timing!")
+print("Consumer scenarios (Sc 1-5, 7, 8, 10-13): Paired with delicious Dips/Sauces/Sides (Zero boxes).")
+print("B2B scenarios (Sc 6, 9, 14, 15): Paired with Buns/Packaging/Cartons.")

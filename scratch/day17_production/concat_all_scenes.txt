@@ -1,0 +1,5 @@
+file 'c:/Users/affra/Documents/RAIS_WEBAPP/RAIS_Antigravity_Website_Starter/rais-website/scratch/day17_production/s1_store_hook.mp4'
+file 'c:/Users/affra/Documents/RAIS_WEBAPP/RAIS_Antigravity_Website_Starter/rais-website/scratch/day17_production/s2_kitchen_girl_4s.mp4'
+file 'c:/Users/affra/Documents/RAIS_WEBAPP/RAIS_Antigravity_Website_Starter/rais-website/scratch/day17_production/s3_food_sizzle_4s.mp4'
+file 'c:/Users/affra/Documents/RAIS_WEBAPP/RAIS_Antigravity_Website_Starter/rais-website/scratch/day17_production/s4_brand_girl_3s.mp4'
+file 'c:/Users/affra/Documents/RAIS_WEBAPP/RAIS_Antigravity_Website_Starter/rais-website/scratch/day17_production/s5_endcard_3.5s.mp4'

@@ -1,26 +1,306 @@
 {
-  "mode": "MANUAL_UPLOAD",
-  "automated_scheduling": "DISABLED",
-  "published_slots": [
-    "sc01_te",
-    "sc01_hi"
-  ],
-  "history": [
+  "published": [
     {
-      "scenario": 1,
-      "lang": "te",
-      "post_id": "18149436067564831",
+      "id": "reel-slot-01",
+      "day": 1,
+      "slot": 1,
+      "lang": "Telugu",
+      "product": "Chicken Momos",
+      "postId": "18149436067564831",
       "permalink": "https://www.instagram.com/reel/De_pjGMCSOw/",
-      "published_at": "2026-10-27T16:02:25.409831",
-      "status": "SUCCESS"
+      "publishedAt": "2026-10-27 16:02:25"
     },
     {
-      "scenario": 1,
-      "lang": "hi",
-      "post_id": "18129191809865321",
+      "id": "reel-slot-02",
+      "day": 1,
+      "slot": 2,
+      "lang": "Hindi",
+      "product": "Chicken Momos",
+      "postId": "18129191809865321",
       "permalink": "https://www.instagram.com/reel/De_prsIDBRA/",
-      "published_at": "2026-10-27T16:03:34.795106",
-      "status": "SUCCESS"
+      "publishedAt": "2026-10-27 16:03:34"
+    },
+    {
+      "id": "reel-slot-03",
+      "day": 2,
+      "slot": 1,
+      "lang": "Telugu",
+      "product": "Chicken Nuggets",
+      "postId": "18193271389397575",
+      "permalink": "https://www.instagram.com/reel/Dfb-POxCb6M/",
+      "publishedAt": "2026-11-07 16:01:44"
+    }
+  ],
+  "queue": [
+    {
+      "id": "reel-slot-04",
+      "day": 2,
+      "slot": 2,
+      "lang": "Hindi",
+      "file": "sc02_hindi_02_midnight_hunger.mp4",
+      "product": "Chicken Nuggets",
+      "theme": "Midnight Hunger Attack",
+      "caption": "रात 12 बजे भूख लगी है? क्या सोच रहे हैं? 🍟🥟\nट्राई करें Master Chef Crispy Chicken Nuggets & Hup Hup French Fries!\n\nRayachoti में होटल्स, कैफे और रेस्टोरेंट्स के लिए बेस्ट होलसेल सप्लायर — RAIS Agencies!\n✅ 100% Cold-Chain Freshness (-18°C)\n✅ डायरेक्ट होलसेल रेट्स (No Middlemen)\n✅ रायचोटी में तेज लोकल डिलीवरी\n\n📍 RAIS Agencies — Near Reddies Colony, Rayachoty (516269)\n📲 WhatsApp: 9347453135 / 9573261696\n🌐 raisfoods.in\n\n#Rayachoti #Rayachoty #RAISAgencies #RaisFrozenFoods #ChickenNuggets #MasterChef #FrozenFoodsWholesale #RayachotiHotels"
+    },
+    {
+      "id": "reel-slot-05",
+      "day": 3,
+      "slot": 1,
+      "lang": "Telugu",
+      "file": "sc03_telugu_03_cricket_match.mp4",
+      "product": "French Fries",
+      "theme": "Cricket Match Snacks",
+      "caption": "క్రికెట్ మ్యాచ్ చూస్తూ క్రిస్పీ స్నాక్స్ ఎంజాయ్ చేయండి! 🍟🏏\nహోటల్స్, కేఫ్‌లు & ఫాస్ట్ ఫుడ్ సెంటర్ల కోసం గోల్డెన్ క్రిస్పీ French Fries డైరెక్ట్ హోల్‌సేల్ సప్లై!\n\n✅ 100% Cold-Chain Freshness (-18°C)\n✅ బెస్ట్ క్వాలిటీ & హై-మార్జిన్ B2B రేట్స్\n✅ Rayachoti అంతటా ఆన్-టైమ్ డెలివరీ\n\n📍 RAIS Agencies — Near Reddies Colony, Rayachoty (516269)\n📲 WhatsApp / Call: 9347453135 / 9573261696\n🌐 raisfoods.in\n\n#Rayachoti #Rayachoty #RAISAgencies #FrenchFries #FastFoodSupplies #FrozenFoodWholesale #RayachotiFoodies"
+    },
+    {
+      "id": "reel-slot-06",
+      "day": 3,
+      "slot": 2,
+      "lang": "Hindi",
+      "file": "sc03_hindi_03_cricket_match.mp4",
+      "product": "French Fries",
+      "theme": "Cricket Match Snacks",
+      "caption": "क्रिकेट मैच हो या शाम का नाश्ता — क्रिस्पी फ्रेंच फ्राइज का कोई मुकाबला नहीं! 🍟🏏\nRayachoti के होटल्स, कैफे और फास्ट फूड सेंटर्स के लिए प्रीमियम फ्रेंच फ्राइज होलसेल सप्लाई!\n\n✅ 100% फ्रेश & हाइजीनिक\n✅ डायरेक्ट B2B होलसेल मार्जिन्स\n✅ रायचोटी में ऑन-टाइम डिलीवरी\n\n📍 RAIS Agencies — Near Reddies Colony, Rayachoty (516269)\n📲 WhatsApp / Call: 9347453135 / 9573261696\n🌐 raisfoods.in\n\n#Rayachoti #Rayachoty #RAISAgencies #FrenchFries #SnacksWholesale #RayachotiHotels"
+    },
+    {
+      "id": "reel-slot-07",
+      "day": 4,
+      "slot": 1,
+      "lang": "Telugu",
+      "file": "sc04_telugu_04_after_school_hunger.mp4",
+      "product": "Veggie Pizza Pocket",
+      "theme": "After School Hunger",
+      "caption": "సాయంత్రం స్కూల్ నుంచి రాగానే పిల్లల కోసం చీజీ పిజ్జా పాకెట్స్! 🍕🥟\nకేఫ్‌లు & బేకరీల కోసం ప్రీమియం ఫ్రోజెన్ స్నాక్స్ హోల్‌సేల్ సప్లై రాయచోటిలో!\n\n📍 RAIS Agencies — Near Reddies Colony, Rayachoty (516269)\n📲 WhatsApp: 9347453135 / 9573261696\n🌐 raisfoods.in\n\n#Rayachoti #PizzaPocket #RAISAgencies #RaisFrozenFoods #FrozenSnacks"
+    },
+    {
+      "id": "reel-slot-08",
+      "day": 4,
+      "slot": 2,
+      "lang": "Hindi",
+      "file": "sc04_hindi_04_after_school_hunger.mp4",
+      "product": "Veggie Pizza Pocket",
+      "theme": "After School Hunger",
+      "caption": "शाम के नाश्ते के लिए बेस्ट — चीज़ी वेजी पिज़्ज़ा पॉकेट्स! 🍕🥟\nRayachoti के कैफे और बेकरी के लिए डायरेक्ट होलसेल सप्लाई।\n\n📍 RAIS Agencies — Near Reddies Colony, Rayachoty (516269)\n📲 WhatsApp: 9347453135 / 9573261696\n🌐 raisfoods.in\n\n#Rayachoti #PizzaPocket #RAISAgencies #RaisFrozenFoods #FrozenSnacks"
+    },
+    {
+      "id": "reel-slot-09",
+      "day": 5,
+      "slot": 1,
+      "lang": "Telugu",
+      "file": "sc05_telugu_05_friends_arrive.mp4",
+      "product": "Cheesy Corn Triangles",
+      "theme": "Friends Gathering",
+      "caption": "ఫ్రెండ్స్ గ్యాదరింగ్ కి చీజీ కార్న్ ట్రయాంగిల్స్! 🧀🌽\nహోటల్స్ & రెస్టారెంట్స్ కోసం ప్రీమియం ఫ్రోజెన్ స్టార్టర్స్ హోల్‌సేల్ సప్లై!\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135\n\n#Rayachoti #CheeseTriangles #RAISAgencies"
+    },
+    {
+      "id": "reel-slot-10",
+      "day": 5,
+      "slot": 2,
+      "lang": "Hindi",
+      "file": "sc05_hindi_05_friends_arrive.mp4",
+      "product": "Cheesy Corn Triangles",
+      "theme": "Friends Gathering",
+      "caption": "दोस्तों की पार्टी के लिए चीज़ी कॉर्न ट्रायंगल्स! 🧀🌽\nRayachoti के रेस्टोरेंट्स के लिए बेस्ट होलसेल स्टार्टर्स!\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135\n\n#Rayachoti #CheeseTriangles #RAISAgencies"
+    },
+    {
+      "id": "reel-slot-11",
+      "day": 6,
+      "slot": 1,
+      "lang": "Telugu",
+      "file": "sc06_telugu_06_busy_day_convenience.mp4",
+      "product": "Veg Burger Patty",
+      "theme": "Busy Day Quick Meals",
+      "caption": "జూసీ వెజ్ బర్గర్ ప్యాటీలు — 2 నిమిషాల్లో రెడీ! 🍔\nరాయచోటిలోని బర్గర్ షాపులు & కేఫ్‌ల కోసం బెస్ట్ హోల్‌సేల్ సప్లై!\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-12",
+      "day": 6,
+      "slot": 2,
+      "lang": "Hindi",
+      "file": "sc06_hindi_06_busy_day_convenience.mp4",
+      "product": "Veg Burger Patty",
+      "theme": "Busy Day Quick Meals",
+      "caption": "जूसी वेज बर्गर पैटी — सिर्फ 2 मिनट में तैयार! 🍔\nRayachoti के बर्गर कैफे के लिए बेस्ट होलसेल सप्लायर।\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-13",
+      "day": 7,
+      "slot": 1,
+      "lang": "Telugu",
+      "file": "sc07_telugu_07_birthday_party.mp4",
+      "product": "Chicken Popcorn",
+      "theme": "Birthday Party Platter",
+      "caption": "బర్త్‌డే పార్టీ ప్లాటర్ కోసం క్రిస్పీ చికెన్ పాప్‌కార్న్! 🍗🎉\nహోల్‌సేల్ ఆర్డర్స్ కోసం సంప్రదించండి.\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-14",
+      "day": 7,
+      "slot": 2,
+      "lang": "Hindi",
+      "file": "sc07_hindi_07_birthday_party.mp4",
+      "product": "Chicken Popcorn",
+      "theme": "Birthday Party Platter",
+      "caption": "बर्थडे पार्टी के लिए सुपर क्रिस्पी चिकन पॉपकॉर्न! 🍗🎉\nRayachoti में डायरेक्ट होलसेल सप्लाई।\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-15",
+      "day": 8,
+      "slot": 1,
+      "lang": "Telugu",
+      "file": "sc08_telugu_08_restaurant_rush_hour.mp4",
+      "product": "Mozzarella Cheese 2kg",
+      "theme": "Restaurant Rush Hour",
+      "caption": "పిజ్జా షాపులు & కేఫ్‌ల కోసం Milky Mist మొజ్జెరెల్లా చీజ్ (2kg బ్లాక్ & ష్రెడ్డెడ్)! 🧀🍕\n100% ప్యూర్ డైరీ & అద్భుతమైన చీజ్ పుల్!\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-16",
+      "day": 8,
+      "slot": 2,
+      "lang": "Hindi",
+      "file": "sc08_hindi_08_restaurant_rush_hour.mp4",
+      "product": "Mozzarella Cheese 2kg",
+      "theme": "Restaurant Rush Hour",
+      "caption": "पिज्जा शॉप्स और कैफे के लिए Milky Mist मोज़ेरेला चीज़ (2kg)! 🧀🍕\nबेस्ट स्ट्रेच और 100% शुद्ध डेयरी।\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-17",
+      "day": 9,
+      "slot": 1,
+      "lang": "Telugu",
+      "file": "sc09_telugu_09_burger_shop_transformation.mp4",
+      "product": "Chicken Patty & Mayo",
+      "theme": "Burger Shop Upgrade",
+      "caption": "మీ బర్గర్ షాపును అప్‌గ్రేడ్ చేయండి ITC చికెన్ ప్యాటీ & Foodrite క్రీమీ మయోనైస్‌తో! 🍔\nహోల్‌సేల్ సప్లై రాయచోటిలో!\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-18",
+      "day": 9,
+      "slot": 2,
+      "lang": "Hindi",
+      "file": "sc09_hindi_09_burger_shop_transformation.mp4",
+      "product": "Chicken Patty & Mayo",
+      "theme": "Burger Shop Upgrade",
+      "caption": "अपनी बर्गर शॉप को बनाएं नंबर 1 ITC चिकन पैटी और क्रीमी मेयो के साथ! 🍔\nहोलसेल सप्लायर Rayachoti.\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-19",
+      "day": 10,
+      "slot": 1,
+      "lang": "Telugu",
+      "file": "sc10_telugu_10_summer_refreshment.mp4",
+      "product": "Mojito Syrups Trio",
+      "theme": "Summer Drinks & Mojitos",
+      "caption": "రిఫ్రెషింగ్ మొజిటోలు & కూల్ డ్రింక్స్ కోసం Manama సిరప్స్ (బ్లూ కురకావో, మింట్ & స్ట్రాబెర్రీ)! 🍹❄️\nకేఫ్‌లు & రెస్టారెంట్ల కోసం డైరెక్ట్ సప్లై!\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-20",
+      "day": 10,
+      "slot": 2,
+      "lang": "Hindi",
+      "file": "sc10_hindi_10_summer_refreshment.mp4",
+      "product": "Mojito Syrups Trio",
+      "theme": "Summer Drinks & Mojitos",
+      "caption": "कूल एंड रिफ्रेशिंग मोजितो सिरप (Blue Curacao, Mint, Strawberry)! 🍹❄️\nRayachoti के कैफे के लिए बेस्ट समर ड्रिंक्स सिरप।\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-21",
+      "day": 11,
+      "slot": 1,
+      "lang": "Telugu",
+      "file": "sc11_telugu_11_the_irresistible_crunch.mp4",
+      "product": "Crispy Cajun Breading",
+      "theme": "Crispy Fried Chicken",
+      "caption": "KFC స్టైల్ క్రిస్పీ ఫ్రైడ్ చికెన్ కోసం VKL కాజున్ బ్రెడ్డింగ్ మిక్స్ & స్పైసీ మెరినేడ్! 🍗🔥\nరాయచోటి ఫాస్ట్ ఫుడ్ సెంటర్ల కోసం బెస్ట్ హోల్‌సేల్ సప్లై!\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-22",
+      "day": 11,
+      "slot": 2,
+      "lang": "Hindi",
+      "file": "sc11_hindi_11_the_irresistible_crunch.mp4",
+      "product": "Crispy Cajun Breading",
+      "theme": "Crispy Fried Chicken",
+      "caption": "KFC स्टाइल सुपर क्रिस्पी फ्राइड चिकन के लिए VKL ब्रेडिंग और मेरिनेड! 🍗🔥\nRayachoti में डायरेक्ट होलसेल सप्लाई।\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-23",
+      "day": 12,
+      "slot": 1,
+      "lang": "Telugu",
+      "file": "sc12_telugu_12_restaurant_stock_planning.mp4",
+      "product": "Depot Stock Planning",
+      "theme": "Weekend Stock Planning",
+      "caption": "వీకెండ్ రష్ కోసం స్టాక్ రెడీ చేసుకున్నారా? 📦🍟\nRAIS డిపోలో 126+ ఫ్రోజెన్ ప్రొడక్ట్స్ ఫుల్ స్టాక్ అవైలబుల్!\n\n📍 RAIS Agencies — Near Reddies Colony, Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-24",
+      "day": 12,
+      "slot": 2,
+      "lang": "Hindi",
+      "file": "sc12_hindi_12_restaurant_stock_planning.mp4",
+      "product": "Depot Stock Planning",
+      "theme": "Weekend Stock Planning",
+      "caption": "वीकेंड की तैयारी पूरी है? 📦🍟\nRAIS डिपो में 126+ फ्रोजन आइटम्स रेडी स्टॉक में मौजूद हैं!\n\n📍 RAIS Agencies — Near Reddies Colony, Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-25",
+      "day": 13,
+      "slot": 1,
+      "lang": "Telugu",
+      "file": "sc13_telugu_13_weekend_movie_night.mp4",
+      "product": "Potato Smiles",
+      "theme": "Weekend Movie Night",
+      "caption": "వీకెండ్ మూవీ నైట్ కోసం మెక్‌కెయిన్ పొటాటో స్మైల్స్ & చీజ్ నగ్గెట్స్! 🥔😊\nహోల్‌సేల్ సప్లై రాయచోటిలో!\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-26",
+      "day": 13,
+      "slot": 2,
+      "lang": "Hindi",
+      "file": "sc13_hindi_13_weekend_movie_night.mp4",
+      "product": "Potato Smiles",
+      "theme": "Weekend Movie Night",
+      "caption": "मूवी नाइट के लिए McCain पोटैटो स्माइल्स और नगेट्स! 🥔😊\nRayachoti में होलसेल सप्लाई।\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-27",
+      "day": 14,
+      "slot": 1,
+      "lang": "Telugu",
+      "file": "sc14_telugu_14_packaging_matters.mp4",
+      "product": "Takeaway Packaging",
+      "theme": "Premium Packaging",
+      "caption": "ఫుడ్ డెలివరీ కోసం క్రాఫ్ట్ బర్గర్ బాక్స్‌లు & పిజ్జా బాక్స్‌లు! 📦🍔🍕\nఆయిల్ ప్రూఫ్ & ఎకో-ఫ్రెండ్లీ క్వాలిటీ హోల్‌సేల్ సప్లై!\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-28",
+      "day": 14,
+      "slot": 2,
+      "lang": "Hindi",
+      "file": "sc14_hindi_14_packaging_matters.mp4",
+      "product": "Takeaway Packaging",
+      "theme": "Premium Packaging",
+      "caption": "फूड डिलीवरी के लिए प्रीमियम क्राफ्ट बर्गर और पिज्जा बॉक्स! 📦🍔🍕\nRayachoti में बेस्ट होलसेल पैकेजिंग।\n\n📍 RAIS Agencies — Rayachoty (516269)\n📲 WhatsApp: 9347453135"
+    },
+    {
+      "id": "reel-slot-29",
+      "day": 15,
+      "slot": 1,
+      "lang": "Telugu",
+      "file": "sc15_telugu_15_meet_your_food_partner.mp4",
+      "product": "RAIS Full Suite",
+      "theme": "Rayachoti Food Partner",
+      "caption": "మీ ఫుడ్ బిజినెస్‌కి నమ్మకమైన సప్లయర్ — RAIS Agencies! 🤝❄️\n126+ ప్రొడక్ట్స్, డైరెక్ట్ హోల్‌సేల్ మార్జిన్స్ & రాయచోటి లోకల్ డెలివరీ!\n\n📍 RAIS Agencies — Near Reddies Colony, Rayachoty (516269)\n📲 WhatsApp: 9347453135 / 9573261696\n🌐 raisfoods.in"
+    },
+    {
+      "id": "reel-slot-30",
+      "day": 15,
+      "slot": 2,
+      "lang": "Hindi",
+      "file": "sc15_hindi_15_meet_your_food_partner.mp4",
+      "product": "RAIS Full Suite",
+      "theme": "Rayachoti Food Partner",
+      "caption": "आपके फूड बिजनेस का सच्चा साथी — RAIS Agencies! 🤝❄️\n126+ प्रोडक्ट्स, डायरेक्ट B2B होलसेल रेट्स और रायचोटी लोकल डिलीवरी।\n\n📍 RAIS Agencies — Near Reddies Colony, Rayachoty (516269)\n📲 WhatsApp: 9347453135 / 9573261696\n🌐 raisfoods.in"
     }
   ]
 }

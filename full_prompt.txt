@@ -1,0 +1,386 @@
+<USER_REQUEST>
+# RAIS AGENCIES — CRITICAL VIDEO PIPELINE REPAIR
+## Real Animation + Exact Catalogue Matching + Verification of All 30 Reels
+
+### 1. YOUR MISSION
+
+You are working on my existing RAIS Agencies Instagram video-production project and repository.
+
+The previous delivery claims that 15 scenarios and 30 videos (15 Hindi + 15 Telugu) are complete. However, the actual output has two critical defects:
+
+**DEFECT 1 — STATIC IMAGE OUTPUT:** The supposed videos look like still images placed into MP4 containers. The character does not perform meaningful continuous animation, and the camera and environment do not show convincing motion.
+
+**DEFECT 2 — WRONG OR UNCHANGED PRODUCTS:** Product images do not consistently match the genuine items in my RAIS catalogue. The same products are being reused across different scenarios, the wrong products appear in some scenes, or the intended catalogue items are not changing correctly.
+
+These are production defects, not minor cosmetic issues.
+
+Your task is to inspect the actual repository and files, identify the root causes, repair the pipeline, and regenerate the outputs correctly.
+
+Do not simply rewrite the delivery report, rename files, change metadata, add transitions to still pictures and declare success.
+
+---
+
+## 2. FIRST: AUDIT THE EXISTING PROJECT
+
+Before editing anything, inspect the actual project.
+
+1. Identify the repository root and current Git branch.
+2. Inspect the existing campaign folders, all 30 MP4 files, source images, product assets, scripts, configuration and automated tests.
+3. Find the original reference video and the existing Ayesha character reference assets.
+4. Locate the real RAIS product catalogue and packaging images.
+5. Inspect the existing video-generation, compositing and export pipeline.
+6. Identify exactly why static images are being exported as videos and why incorrect or repeated products appear.
+7. Check the actual rendered MP4 files, not just filenames, code or a Markdown report.
+
+Create a defect report containing:
+- File and script responsible for each problem.
+- Examples of affected videos.
+- Root cause of static or insufficient animation.
+- Root cause of incorrect product selection.
+- Required code and asset changes.
+- Which assets are missing and which can be reused.
+
+Do not claim that a file, image, video or test was inspected unless it was actually inspected.
+
+Do not overwrite the only copy of a working source file. Keep backups or use Git commits that make changes reversible.
+
+---
+
+## 3. REQUIREMENT ONE: REAL, VISIBLE ANIMATION
+
+Every final MP4 must contain genuine visible motion over time.
+
+A still image with an audio track, a changing subtitle, a fade-in, a fade-out, a zoom effect or a moving crop does NOT, by itself, satisfy this requirement.
+
+### A. Animate Ayesha herself
+
+Use the established Ayesha character reference.
+
+Preserve her recognizable face, turquoise/mint embroidered hijab, skin tone, clothing style and stylized 3D appearance.
+
+For every scene, define appropriate actions such as:
+- Natural blinking.
+- Facial expression changes.
+- Smiling or reacting to the situation.
+- Head turns and eye direction changes.
+- Arm and hand gestures.
+- Reaching for or presenting a product.
+- Natural body movement and posture changes.
+- Walking, serving, preparing or interacting with objects where the scene requires it.
+
+Only animate movements supported by the chosen production tool and source assets. Do not create distorted hands, extra fingers, changing faces, melting objects or unnatural body movement.
+
+Use an appropriate combination of image-to-video generation, reference-guided video generation, rigged 2D/3D character animation or another genuine animation method.
+
+Choose tools that are actually available in the environment. Do not assume an offline script can create sophisticated character animation simply because FFmpeg and Python are installed.
+
+If the existing environment cannot generate genuine character animation, identify the exact missing capability and recommend the most practical solution before pretending the problem is fixed.
+
+### B. Animate the environment
+
+Scene motion should complement character motion.
+
+Depending on the scenario, use appropriate elements such as:
+- Rain falling outside the window.
+- Natural movement in steam or cooking scenes.
+- Food preparation and serving actions.
+- Hands placing products on a table.
+- Friends reacting during a gathering.
+- Subtle lighting changes.
+- Appropriate camera movement and scene transitions.
+
+Effects must match the physical setting. Do not add rain, steam or floating particles to every video just to make it appear animated.
+
+### C. Camera movement is supplementary
+
+Use purposeful tracking, panning, tilting, dolly movement or depth-aware parallax where appropriate.
+
+Camera movement can enhance real animation but cannot replace it.
+
+Do not use the same zoom-and-pan template across all 15 scenarios.
+
+### D. Use multiple meaningful shots
+
+Create distinct shots for each story.
+
+For a roughly 21-second video, a possible structure is:
+- Opening hook.
+- Character reaction.
+- Product reveal.
+- Product interaction or use.
+- Brand and enquiry ending.
+
+Adjust the number and length of shots to the story. Do not force identical timings onto every campaign.
+
+### E. Prove the animation exists
+
+For every exported video:
+1. Extract frames from the beginning, middle and end of every meaningful scene.
+2. Compare representative frames to verify that the character, environment or relevant objects change meaningfully over time.
+3. Confirm that motion is visible during ordinary playback.
+4. Detect repeated or frozen frames and unexpectedly long static intervals.
+5. Inspect character anatomy and product integrity throughout the shot.
+6. Play the entire video and verify that the motion is coherent.
+
+A video with only an audio track over a static image must fail quality control.
+
+A video with only moving subtitles or a slow zoom over a still character must also fail.
+
+If a shot is intentionally static for a specific storytelling reason, it may remain static briefly, but the complete video must still contain substantial genuine animation.
+
+---
+
+## 4. REQUIREMENT TWO: EXACT RAIS CATALOGUE PRODUCTS
+
+This is a business advertisement. Product accuracy is mandatory.
+
+### A. Establish a single source of truth
+
+Inspect the real RAIS catalogue, product photographs, package images and product records already present in the repository.
+
+Create or repair a structured product manifest. For each item, record:
+- Exact product name.
+- Brand.
+- Product category.
+- Exact source-image path.
+- Packaging variant, where identifiable.
+- Permitted use in campaigns.
+- Verification status.
+
+Use the actual catalogue and supplied images as the authority.
+
+Never invent a catalogue item or claim that an unverified product is available.
+
+### B. Build an explicit scenario-to-product mapping
+
+Create a mapping table for all 15 scenarios before rendering any videos.
+
+Each scenario must list the exact intended products and the approved source assets for those products.
+
+Examples of intended category matching:
+- Rainy-day snacks: verified crispy snacks, fries or other suitable products actually sold by RAIS.
+- Midnight hunger: verified products suitable for the featured preparation.
+- Cricket match: verified party snacks.
+- After-school snack time: appropriate verified products.
+- Friends arriving: verified party-food products.
+- Busy-day meals: verified tortillas, sauces, mayonnaise or other appropriate products if they are in the catalogue.
+- Birthday celebrations: verified suitable snacks.
+- Restaurant rush: appropriate genuine commercial food products.
+- Burger scenario: actual burger-related ingredients that RAIS sells.
+- Summer refreshments: actual beverage or mojito products, if present.
+- Crunch campaign: verified crispy products.
+- Restaurant stock planning: actual products relevant to the scene.
+- Movie night: verified pizza or snack products.
+- Packaging scenario: actual packaging products.
+- Brand introduction: a curated selection of genuine catalogue products.
+
+These are examples, not permission to assume that any specific SKU exists. Verify every item before use.
+
+### C. Never substitute unrelated product imagery
+
+If the script mentions a particular brand or SKU, the image must show that exact item whenever an authentic package image is available.
+
+Do not:
+- Show one brand's packaging while naming another brand.
+- Display a generic generated packet as if it were a real branded product.
+- Change package colours, labels or logos.
+- Use a product from another scenario simply because the image already exists.
+- Feature products that are absent from the supplied catalogue.
+- invent prices, discounts, stock availability or delivery promises.
+
+If no suitable product photograph exists, ask for the correct image or use a clearly disclosed, unbranded illustrative food shot without falsely representing it as the actual package.
+
+### D. Separate product accuracy from food beauty shots
+
+Generated food close-ups may be used to illustrate a serving suggestion where appropriate, but they must not replace or falsify a real product package.
+
+When showing the product package, preserve its actual appearance.
+
+Where the product is cooked or served, ensure the food reasonably corresponds to the actual item.
+
+### E. Validate product selection automatically
+
+Add automated checks that verify:
+- Every scenario's featured SKU belongs to its approved product mapping.
+- Every package asset resolves to a real source file.
+- The advertised brand and product name agree with the asset.
+- No unapproved substitute is silently used.
+- No unsupported price or availability claim is introduced.
+
+A passing filename check alone is insufficient. The actual rendered frames must also be visually inspected.
+
+---
+
+## 5. KEEP AYESHA CONSISTENT
+
+Use the established character reference and the uploaded example image as visual references.
+
+Maintain the same recognizable character across all 15 scenarios and both languages.
+
+Vary her actions, expressions, camera angles, settings and outfits only when appropriate and approved. Do not let the character's face or hijab change randomly between frames.
+
+If your tool supports reference images, character identity controls or reusable character rigs, use them.
+
+If it does not support these features, state the limitation and propose the best practical workaround.
+
+Create a character-consistency review for representative frames from all scenarios.
+
+Do not claim 100% character consistency based only on the presence of the same filename or an identical starting image.
+
+---
+
+## 6. FIX THE ACTUAL PRODUCTION PIPELINE
+
+Inspect the existing scripts before deciding on the repair.
+
+A tool such as FFmpeg is suitable for assembling, encoding and mixing genuine video, but it does not automatically generate high-quality character animation from a still photograph.
+
+Implement the appropriate pipeline for the available tools:
+
+1. Select the approved scenario and product assets.
+2. Generate or produce genuinely animated shots using a suitable supported method.
+3. Review the generated shots for character consistency and product correctness.
+4. Assemble the shots with FFmpeg or the project's supported editing tools.
+5. Add verified narration, subtitles, sound design and approved branding.
+6. Export the vertical MP4.
+7. Validate the exported file and inspect it visually.
+
+Keep source assets, intermediate files, final renders and QA reports separate.
+
+Do not replace the existing system with a completely new framework unless necessary. Explain the root cause and make the smallest reliable changes that fix it.
+
+Do not hard-code a false success result or modify tests merely to make them pass.
+
+---
+
+## 7. NARRATION AND LANGUAGE
+
+Produce Hindi and Telugu versions for every approved scenario, using the same underlying visual story wherever practical.
+
+Preserve the natural voice style established in the approved reference.
+
+Check:
+- Correct Hindi and Telugu wording.
+- Pronunciation of English product and brand names.
+- Natural narration speed.
+- Correct subtitle synchronisation.
+- Appropriate sound effects and background music.
+- No clipped speech or unintended silent gaps.
+
+The audio must complement the actual scene. It cannot be used to disguise a static video.
+
+Use free or already available tools where feasible. Do not purchase credits, subscribe to services or incur costs without my explicit approval.
+
+If genuine video generation requires a paid or external service, stop and explain the cost and alternatives before using it.
+
+---
+
+## 8. TECHNICAL EXPORT REQUIREMENTS
+
+Preferred output:
+- Vertical 9:16.
+- 1080 × 1920.
+- Approximately 30 fps.
+- H.264 MP4.
+- AAC audio.
+- Correct audio/video duration alignment.
+- Readable subtitles and appropriate Instagram-safe margins.
+
+Use these as target specifications, not as a substitute for visual quality.
+
+Check the actual exported video stream, frame rate, dimensions, audio stream and duration using available media-inspection tools.
+
+Do not merely change metadata to claim that a video meets the requirements.
+
+---
+
+## 9. QUALITY GATES — NO FALSE SUCCESS REPORTS
+
+Every video must pass four separate gates.
+
+### Gate A — Motion
+Does the video contain meaningful, coherent character or scene animation throughout the story?
+
+### Gate B — Product accuracy
+Are the actual visible products consistent with the approved scenario mapping and catalogue?
+
+### Gate C — Visual and audio quality
+Are character anatomy, lighting, transitions, narration, subtitles and audio acceptable?
+
+### Gate D — Technical integrity
+Does the actual exported MP4 play correctly with the expected dimensions, frame rate and audio?
+
+A video fails if any mandatory gate fails.
+
+Maintain a report for every video containing:
+- Scenario number and language.
+- Final file path.
+- Featured products and source assets.
+- Animation method used.
+- Duration, resolution and frame rate.
+- Motion-QA result.
+- Product-QA result.
+- Audio/subtitle-QA result.
+- Technical-QA result.
+- Any remaining limitation.
+
+Automated tests are useful but cannot replace visual review.
+
+Do not claim that all 30 videos have passed unless all 30 actual video files have been checked.
+
+---
+
+## 10. IMPLEMENTATION ORDER
+
+Do not regenerate all 30 videos immediately.
+
+### Phase 1 — Audit
+
+Inspect the current 30 MP4s, the source images, product catalogue and scripts. Identify and document the actual defects.
+
+### Phase 2 — Repair one pilot
+
+Use Scenario 1, rainy-day crispy cravings, as the pilot.
+
+Produce one Hindi version with:
+- Genuine visible animation.
+- The same Ayesha character.
+- Correct, verified RAIS products.
+- Accurate Hindi narration and subtitles.
+- A clear approved RAIS end card.
+
+If a critical input is missing, ask for it rather than substituting a fabricated asset.
+
+### Phase 3 — Pilot validation
+
+Play the pilot from beginning to end. Inspect representative frames throughout the video. Verify actual motion, product correctness and export integrity.
+
+Provide the file and a concise QA report.
+
+### Phase 4 — Approval gate
+
+STOP and ask me to approve the corrected pilot.
+
+Do not generate the remaining scenarios until I explicitly approve the pilot.
+
+### Phase 5 — Full rollout
+
+Only after approval, repair and regenerate the remaining scenarios. Produce Hindi and Telugu versions, verify each video individually, and deliver the full campaign inventory with QA results.
+
+Do not publish any video automatically.
+
+---
+
+## 11. FINAL INSTRUCTION
+
+My requirement is not 30 MP4 files that technically exist. My requirement is 30 genuinely animated, professionally edited RAIS advertisements featuring the same recognizable presenter and the correct catalogue products.
+
+First inspect the actual assets and code. Fix the root causes. Prove the solution with one corrected Scenario 1 pilot.
+
+Be honest about the available tools and limitations. If the environment cannot produce genuine character animation, say so before wasting time regenerating static videos.
+
+Start with the audit and Scenario 1 pilot. Stop before the remaining 14 scenarios until I approve it.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-10-25T10:55:46+05:30.
+</ADDITIONAL_METADATA>
