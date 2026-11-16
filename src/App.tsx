@@ -115,6 +115,30 @@ export const App: React.FC = () => {
   const totalQuoteCount = Object.values(quoteItems).reduce((sum, qty) => sum + qty, 0);
   const distinctProductCount = Object.keys(quoteItems).filter((sku) => quoteItems[sku] > 0).length;
 
+  // Dedicated Full-Screen Standalone Web Application for Wholesale Admin Portal
+  if (currentPage === 'automation') {
+    if (isAdminAuthenticated) {
+      return (
+        <AutomationDashboardPage 
+          onBackToHome={() => handleNavigate('home')}
+          onLogout={() => {
+            AuthService.logout();
+            setIsAdminAuthenticated(false);
+            handleNavigate('home');
+          }}
+        />
+      );
+    }
+    return (
+      <div className="min-h-screen bg-[#070b14] flex flex-col justify-center items-center font-sans">
+        <AdminLoginPage
+          onLoginSuccess={() => setIsAdminAuthenticated(true)}
+          onBackToHome={() => handleNavigate('home')}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#081026] text-slate-100 flex flex-col font-sans selection:bg-cyan-400 selection:text-slate-950 pb-20 sm:pb-0">
       
@@ -158,22 +182,6 @@ export const App: React.FC = () => {
           <ContactPage />
         ) : currentPage === 'legal' ? (
           <LegalPage />
-        ) : currentPage === 'automation' ? (
-          isAdminAuthenticated ? (
-            <AutomationDashboardPage 
-              onBackToHome={() => handleNavigate('home')}
-              onLogout={() => {
-                AuthService.logout();
-                setIsAdminAuthenticated(false);
-                handleNavigate('home');
-              }}
-            />
-          ) : (
-            <AdminLoginPage
-              onLoginSuccess={() => setIsAdminAuthenticated(true)}
-              onBackToHome={() => handleNavigate('home')}
-            />
-          )
         ) : (
           <HomePage
             onOpenQuote={() => setIsQuoteOpen(true)}
