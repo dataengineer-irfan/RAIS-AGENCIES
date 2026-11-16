@@ -12,6 +12,9 @@ import { MediaLibraryView } from '../components/growth-engine/MediaLibraryView';
 import { B2BLeadsView } from '../components/growth-engine/B2BLeadsView';
 import { AutomationControlView } from '../components/growth-engine/AutomationControlView';
 import { BusinessInfoManagerView } from '../components/growth-engine/BusinessInfoManagerView';
+import { ReelsStudioView } from '../components/growth-engine/ReelsStudioView';
+import { MetaPublishingView } from '../components/growth-engine/MetaPublishingView';
+import { InstagramEnquiriesView } from '../components/growth-engine/InstagramEnquiriesView';
 import { api } from '../services/api';
 
 interface AutomationDashboardPageProps {
@@ -79,6 +82,7 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
 
       {/* Main Content Pane */}
       <main className="flex-1 p-6 md:p-8 overflow-y-auto max-w-7xl mx-auto">
+        {/* Google Growth Suite */}
         {currentTab === 'overview' && (
           <Overview 
             onNavigate={setCurrentTab} 
@@ -86,21 +90,28 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
           />
         )}
         {currentTab === 'google' && <GoogleConnectionView />}
-        {currentTab === 'content' && <ContentStudioView />}
-        {currentTab === 'calendar' && <PublishingCalendarView />}
         {currentTab === 'reviews' && <ReviewsInboxView />}
         {currentTab === 'seo' && <LocalSEOView />}
         {currentTab === 'competitors' && <CompetitorsView />}
         {currentTab === 'analytics' && <AnalyticsView />}
-        {currentTab === 'media' && <MediaLibraryView />}
+
+        {/* Meta & Instagram Automation Suite */}
+        {currentTab === 'reels' && <ReelsStudioView />}
+        {currentTab === 'meta_publishing' && <MetaPublishingView />}
+        {currentTab === 'enquiries' && <InstagramEnquiriesView />}
+        {currentTab === 'content' && <ContentStudioView />}
+        {currentTab === 'calendar' && <PublishingCalendarView />}
+
+        {/* B2B Depot Management */}
         {currentTab === 'leads' && <B2BLeadsView />}
+        {currentTab === 'media' && <MediaLibraryView />}
+        {(currentTab === 'business_info' || currentTab === 'business') && <BusinessInfoManagerView />}
         {currentTab === 'automation' && (
           <AutomationControlView 
             killSwitchActive={killSwitchActive} 
             setKillSwitchActive={setKillSwitchActive} 
           />
         )}
-        {currentTab === 'business_info' && <BusinessInfoManagerView />}
       </main>
     </div>
   );
