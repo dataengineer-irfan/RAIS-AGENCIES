@@ -23,6 +23,7 @@ export const AboutPage: React.FC = () => {
             <span className="bg-gradient-to-r from-cyan-300 to-sky-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,210,255,0.4)]">
               RAIS Agencies
             </span>
+            <span className="sr-only"> — Wholesale Frozen Food & Cold Chain Distributor Rayachoty</span>
           </h1>
           <p className="text-sm sm:text-base text-slate-300 mt-3 leading-relaxed">
             Rayachoty's direct wholesale agency for frozen foods, fast food ingredients, and takeaway packaging for hotels, fast food centers, cafes, and bakeries across Rayachoty (516269) and Annamayya district.
@@ -70,6 +71,15 @@ export const AboutPage: React.FC = () => {
         </div>
 
         {/* 4 Core Operational Disciplines */}
+        <div className="text-center mb-8">
+          <h2 className="text-xl sm:text-2xl font-serif font-bold text-white">
+            Our 4 Core Cold-Chain & Wholesale Disciplines
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            HACCP-grade -18°C storage and authentic brand distribution serving Rayachoty food businesses
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           <div className="rounded-3xl border border-cyan-500/25 bg-[#0f1c3f]/85 p-7 shadow-lg backdrop-blur-md space-y-4 hover:border-cyan-400/50 transition-colors">
             <div className="size-12 rounded-2xl bg-cyan-400/15 border border-cyan-400/30 flex items-center justify-center text-cyan-300">

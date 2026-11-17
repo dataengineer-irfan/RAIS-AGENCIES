@@ -43,6 +43,7 @@ export const ContactPage: React.FC = () => {
             <span className="bg-gradient-to-r from-cyan-300 to-sky-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,210,255,0.4)]">
               Distribution Hub
             </span>
+            <span className="sr-only"> — Wholesale Depot Beside Indel Money Bank, Rayachoty</span>
           </h1>
           <p className="text-sm sm:text-base text-slate-300 mt-3 leading-relaxed">
             Reach out for immediate wholesale orders, product availability confirmation, or to establish a recurring restaurant delivery schedule across Rayachoty and Rayalaseema.
@@ -53,6 +54,14 @@ export const ContactPage: React.FC = () => {
 
           {/* Left Column: Direct channels and location */}
           <div className="lg:col-span-5 space-y-5">
+            <div className="mb-2">
+              <h2 className="text-xl sm:text-2xl font-bold font-serif text-white">
+                Depot Channels & Counter Location
+              </h2>
+              <p className="text-xs text-slate-400 mt-1">
+                Direct phone, WhatsApp, and Google Maps coordinates for Rayachoty depot pickup
+              </p>
+            </div>
 
             {/* Phone Card */}
             <div className="p-6 rounded-3xl bg-[#0f1c3f]/85 border border-cyan-500/25 shadow-xl backdrop-blur-xl flex items-start gap-4">

@@ -115,6 +115,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               <span className="bg-gradient-to-r from-cyan-300 to-sky-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,210,255,0.4)]">
                 Price List
               </span>
+              <span className="sr-only"> — 90+ Commercial Food Service SKUs in Rayachoty</span>
             </h1>
             <p className="text-sm text-slate-300 mt-2 max-w-2xl leading-relaxed">
               Wholesale products and bulk packs for Rayachoty hotels, fast food centers, cafes, and bakeries. Showing {filtered.length} of {PRODUCTS.length} products across 8 categories.
@@ -329,7 +330,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                   <div className="relative overflow-hidden aspect-[4/3] bg-[#081026]">
                     <img
                       src={product.image || assetUrl('/images/products/chicken_momos.jpg')}
-                      alt={product.name}
+                      alt={`${product.name} (${product.brand} - ${product.pack}) Wholesale Food Service Rayachoty - RAIS Agencies`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       loading="lazy"
                     />

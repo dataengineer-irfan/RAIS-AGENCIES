@@ -181,6 +181,7 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
 
                 <h1 className="font-serif text-3xl sm:text-5xl font-black text-white tracking-tight">
                   {category.name}
+                  <span className="sr-only"> Wholesale Supply in Rayachoty</span>
                 </h1>
 
                 <p className="text-sm sm:text-base text-slate-300 max-w-xl leading-relaxed">
@@ -218,7 +219,7 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
             <div className="lg:col-span-5 min-h-[260px] lg:min-h-full relative overflow-hidden bg-[#081026]">
               <img
                 src={heroImage}
-                alt={category.name}
+                alt={`${category.name} Wholesale Distributor Rayachoty - RAIS Agencies`}
                 className="w-full h-full object-cover object-center filter drop-shadow-2xl"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0f1c3f] via-transparent to-transparent lg:bg-gradient-to-r lg:from-[#0f1c3f] lg:via-transparent lg:to-transparent" />
@@ -281,7 +282,7 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
                   <div className="relative overflow-hidden aspect-[4/3] bg-[#081026]">
                     <img
                       src={product.image || heroImage}
-                      alt={product.name}
+                      alt={`${product.name} (${product.brand} - ${product.pack}) Wholesale Rayachoty - RAIS Agencies`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       loading="lazy"
                     />

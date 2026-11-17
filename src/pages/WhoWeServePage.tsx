@@ -115,7 +115,7 @@ export const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onOpenQuote }) =
                   <div className="lg:col-span-5 relative overflow-hidden rounded-2xl aspect-[4/3] bg-[#081026] border border-cyan-400/20">
                     <img
                       src={seg.image}
-                      alt={seg.title}
+                      alt={`${seg.title} - Wholesale Commercial Food Supply Rayachoty - RAIS Agencies`}
                       className="w-full h-full object-cover object-center filter drop-shadow-md"
                       loading="lazy"
                     />

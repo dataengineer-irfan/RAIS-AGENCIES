@@ -75,6 +75,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
               <span className="bg-gradient-to-r from-cyan-200 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(0,210,255,0.4)]">
                 Delivered at its best.
               </span>
+              <span className="sr-only"> — Wholesale Frozen Foods & Food Packaging Solutions in Rayachoty</span>
             </motion.h1>
 
             {/* Animated Sector Ticker */}

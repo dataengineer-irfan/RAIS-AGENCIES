@@ -21,6 +21,7 @@ export const LegalPage: React.FC = () => {
             <span className="bg-gradient-to-r from-cyan-300 to-sky-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,210,255,0.4)]">
               Supply & Orders
             </span>
+            <span className="sr-only"> — -18°C Cold Chain & Wholesale Terms, RAIS Agencies Rayachoty</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 mt-2">
             Simple, transparent wholesale rules for businesses buying from RAIS Agencies, Rayachoty (516269).
