@@ -2,12 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
-  <!-- Home Showroom -->
+  <!-- Home Showroom with Geotagged Shop & Depot Photos -->
   <url>
     <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/</loc>
     <lastmod>2026-11-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/images/ref-assets/rais_storefront_official.jpg</image:loc>
+      <image:title>RAIS Agencies Wholesale Depot Storefront Sundupalli Road Rayachoty</image:title>
+      <image:caption>Official storefront of RAIS Agencies Wholesale Frozen Foods beside Indel Money Bank on Sundupalli Road, Rayachoty</image:caption>
+      <image:geo_location>Rayachoty, Andhra Pradesh, India</image:geo_location>
+    </image:image>
+    <image:image>
+      <image:loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/images/ref-assets/rais_location_indel_bank_route.jpg</image:loc>
+      <image:title>RAIS Agencies Location Map and Street Landmark Rayachoty</image:title>
+      <image:caption>Route map and landmark showing RAIS Agencies beside Indel Money Bank on Sundupalli Road, Rayachoty</image:caption>
+      <image:geo_location>Rayachoty, Andhra Pradesh, India</image:geo_location>
+    </image:image>
   </url>
 
   <!-- Proximity Geo-Silo: Madanapalle B2B Supply Hub -->
