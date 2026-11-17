@@ -37,6 +37,10 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
   });
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('google_auth')) {
+      setCurrentTab('google');
+    }
     loadAppInitialState();
   }, []);
 

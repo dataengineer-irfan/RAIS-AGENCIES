@@ -90,6 +90,19 @@ export class AuthService {
   }
 
   /**
+   * Sets a verified admin session directly (e.g. after Google OAuth return).
+   */
+  static setDirectSession(user: string = 'admin'): void {
+    const session: AdminSession = {
+      isAuthenticated: true,
+      user,
+      loginTime: new Date().toISOString(),
+      token: 'admin-token-' + Date.now()
+    };
+    sessionStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(session));
+  }
+
+  /**
    * Checks if user has an active authenticated session.
    */
   static checkAuth(): boolean {

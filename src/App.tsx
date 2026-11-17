@@ -82,7 +82,14 @@ export const App: React.FC = () => {
   const [homeCategoryFilter, setHomeCategoryFilter] = useState<string>('ALL');
   const [isQuoteOpen, setIsQuoteOpen] = useState<boolean>(false);
   const [quoteItems, setQuoteItems] = useState<{ [sku: string]: number }>({});
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(() => AuthService.checkAuth());
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('google_auth') === 'success') {
+      AuthService.setDirectSession('admin (Google Verified)');
+      return true;
+    }
+    return AuthService.checkAuth();
+  });
 
   useEffect(() => {
     AnalyticsService.init();

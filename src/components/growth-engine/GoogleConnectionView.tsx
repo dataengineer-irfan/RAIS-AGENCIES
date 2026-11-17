@@ -279,7 +279,7 @@ export const GoogleConnectionView: React.FC = () => {
               {currentState === 'NOT_CONNECTED' && 'Next Action: Complete Setup in Google Cloud Console'}
             </h3>
             <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-              {currentState === 'NOT_CONFIGURED' && 'Create an OAuth 2.0 Web Client in Google Cloud Console. Set Redirect URI to http://localhost:8000/api/v1/google/callback, then add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET to backend/.env.'}
+              {currentState === 'NOT_CONFIGURED' && 'Create an OAuth 2.0 Web Client in Google Cloud Console. Set Redirect URI to https://rais-growth-backend.onrender.com/api/v1/google/callback, then add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET.'}
               {currentState === 'AUTHORIZATION_PENDING' && 'Client credentials detected in backend/.env. Click "Connect Google" above to grant profile management permissions to RAIS Agencies.'}
               {currentState === 'API_ACCESS_NOT_APPROVED' && 'Google restricts GBP API access. The application draft is prepared in docs/GOOGLE_BUSINESS_PROFILE_API_ACCESS_APPLICATION.md. Submit the form to Google and await manual approval (~14 business days).'}
               {currentState === 'CONNECTED' && 'RAIS Agencies is officially authenticated with Google Business Profile. Location information and review synchronization are operational.'}
@@ -353,7 +353,7 @@ export const GoogleConnectionView: React.FC = () => {
               <span>Production Setup (Google Cloud Console)</span>
             </h2>
             <button
-              onClick={() => copyConfig('USE_MOCK_GBP=False\nGOOGLE_CLIENT_ID=\nGOOGLE_CLIENT_SECRET=\nGOOGLE_REDIRECT_URI=http://localhost:8000/api/v1/google/callback')}
+              onClick={() => copyConfig('USE_MOCK_GBP=False\nGOOGLE_CLIENT_ID=\nGOOGLE_CLIENT_SECRET=\nGOOGLE_REDIRECT_URI=https://rais-growth-backend.onrender.com/api/v1/google/callback\nFRONTEND_URL=https://rais-growth-backend.onrender.com')}
               className="text-slate-400 hover:text-slate-200 text-xs flex items-center gap-1"
             >
               {copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
@@ -365,15 +365,21 @@ export const GoogleConnectionView: React.FC = () => {
             <p>To connect live production Google Business Profile APIs:</p>
             <ol className="list-decimal pl-4 space-y-1.5 text-[11px] text-slate-400">
               <li>
-                Visit <a href="https://console.cloud.google.com" target="_blank" rel="noreferrer" className="text-amber-400 underline">Google Cloud Console</a> and create or select your project.
+                Visit <a href="https://console.cloud.google.com" target="_blank" rel="noreferrer" className="text-amber-400 underline">Google Cloud Console</a> and select your project.
               </li>
               <li>
-                Enable <strong>My Business Account Management API</strong> and <strong>My Business Business Information API</strong>.
+                Under <strong>APIs & Services &gt; Credentials &gt; OAuth 2.0 Client IDs</strong>:
               </li>
               <li>
-                Create an <strong>OAuth 2.0 Web Client</strong> with Authorized Redirect URI:
+                Add Authorized JavaScript origin:
                 <code className="block bg-[#070b14] p-1.5 rounded mt-1 font-mono text-[10px] text-amber-300">
-                  http://localhost:8000/api/v1/google/callback
+                  https://rais-growth-backend.onrender.com
+                </code>
+              </li>
+              <li>
+                Add Authorized Redirect URI:
+                <code className="block bg-[#070b14] p-1.5 rounded mt-1 font-mono text-[10px] text-amber-300">
+                  https://rais-growth-backend.onrender.com/api/v1/google/callback
                 </code>
               </li>
               <li>
