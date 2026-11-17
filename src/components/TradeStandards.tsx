@@ -39,6 +39,9 @@ export const TradeStandards: React.FC<TradeStandardsProps> = ({ onOpenQuote }) =
 
   const distributionRoutes = [
     { hub: 'Rayachoty Central Depot', type: 'Primary Hub', note: 'Immediate counter handover & local kitchen routes' },
+    { hub: 'Sundupalli & Chinnamandem Corridor', type: 'Daily Supply Route', note: 'Daily dairy, frozen fries, and packaging drops' },
+    { hub: 'Galiveedu & Kadiri Highway', type: 'Commercial Corridor', note: 'Direct wholesale distribution for cafes & fast food centers' },
+    { hub: 'Kalakada & Mahal Sector', type: 'Scheduled Delivery', note: 'Scheduled supply drops for bakeries, pizzerias & shawarma points' },
     { hub: 'Kadapa Sector Corridor', type: 'Regional Route', note: 'Scheduled supply drops for QSRs & hotels' },
     { hub: 'Madanapalle Highway', type: 'Regional Route', note: 'Bulk frozen carton dispatch for bakeries & cafés' },
     { hub: 'Rajampet Sector Link', type: 'Regional Route', note: 'Direct foodservice supply, catering & dining' }

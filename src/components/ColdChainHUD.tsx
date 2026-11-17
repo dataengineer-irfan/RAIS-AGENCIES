@@ -141,10 +141,21 @@ export const ColdChainHUD: React.FC = () => {
                 <span>Daily Wholesale Supply & Delivery Areas</span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {['Rayachoty Town Hub', 'Kadapa Road', 'Rajampet Road', 'Madanapalle Road', 'Galiveedu & Nearby'].map((area, idx) => (
+                {[
+                  'Rayachoty Town Hub',
+                  'Sundupalli',
+                  'Galiveedu',
+                  'Kadiri',
+                  'Chinnamandem',
+                  'Kalakada',
+                  'Mahal',
+                  'Madanapalle Route',
+                  'Kadapa Route',
+                  'Rajampet Link'
+                ].map((area, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-stone-900 text-[11px] font-mono text-stone-400 border border-stone-800"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-stone-900 text-[11px] font-mono text-stone-300 border border-stone-800 hover:border-amber-500/40 transition-colors"
                   >
                     <MapPin className="w-3 h-3 text-amber-500/70" />
                     {area}
