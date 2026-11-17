@@ -1,0 +1,34 @@
+name: Keep Render Backend Alive
+
+on:
+  schedule:
+    # Run every 8 minutes (Render sleeps after 15 minutes of inactivity)
+    - cron: '*/8 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: 'keep-render-alive'
+  cancel-in-progress: true
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render Backend Root
+        run: |
+          echo "Pinging Render backend root at $(date -u)..."
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -m 45 https://rais-growth-backend.onrender.com/ || echo "000")
+          echo "Render Root HTTP Status: $HTTP_STATUS"
+
+      - name: Ping Google Status Endpoint
+        run: |
+          echo "Pinging Google Status endpoint..."
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -m 45 https://rais-growth-backend.onrender.com/api/v1/google/status || echo "000")
+          echo "Google Status HTTP: $HTTP_STATUS"
+
+      - name: Ping Google Performance Endpoint
+        run: |
+          echo "Pinging Google Performance telemetry endpoint..."
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -m 45 https://rais-growth-backend.onrender.com/api/v1/google/performance || echo "000")
+          echo "Performance Telemetry HTTP: $HTTP_STATUS"
+          echo "Keep-alive ping completed successfully. Render backend is warm and active."
