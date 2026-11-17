@@ -10,6 +10,30 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Proximity Geo-Silo: Madanapalle B2B Supply Hub -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/wholesale-frozen-foods-madanapalle.html</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Proximity Geo-Silo: Kadapa Regional Restaurant Supplies -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/restaurant-supplies-kadapa.html</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Proximity Geo-Silo: Rajampet Packaging & Frozen Food -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/pizza-packaging-rajampet.html</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
   <!-- Complete Products Catalog (90+ SKUs) -->
   <url>
     <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/products</loc>
