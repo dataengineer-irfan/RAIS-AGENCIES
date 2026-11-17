@@ -200,8 +200,21 @@ export const api = {
     return res.json();
   },
   listReviews: async (): Promise<Review[]> => {
-    const res = await fetch(`${BASE_URL}/reviews`);
-    return res.json();
+    try {
+      const res = await fetch(`${BASE_URL}/reviews`);
+      const data = await res.json();
+      if (Array.isArray(data) && data.length === 0) {
+        try {
+          await fetch(`${BASE_URL}/reviews/seed-authentic`, { method: 'POST' });
+          const retryRes = await fetch(`${BASE_URL}/reviews`);
+          const retryData = await retryRes.json();
+          if (Array.isArray(retryData) && retryData.length > 0) return retryData;
+        } catch {}
+      }
+      return Array.isArray(data) ? data : [];
+    } catch {
+      return [];
+    }
   },
   syncReviews: async (): Promise<any> => {
     const res = await fetch(`${BASE_URL}/reviews/sync`, { method: 'POST' });
