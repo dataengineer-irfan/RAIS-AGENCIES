@@ -14,8 +14,67 @@ import { Footer } from './components/Footer';
 import { QuoteModal } from './components/QuoteModal';
 import { MobileQuickBar } from './components/MobileQuickBar';
 import { RequisitionBar } from './components/RequisitionBar';
-import { ProductItem } from './data/catalogue';
+import { ProductItem, CATEGORIES } from './data/catalogue';
 import { AnalyticsService } from './services/analyticsService';
+
+const CATEGORY_SLUG_MAP: Record<string, string> = {
+  'chicken': 'CHICKEN',
+  'frozen-nonveg-snacks': 'CHICKEN',
+  'non-veg': 'CHICKEN',
+  'veg': 'VEG',
+  'frozen-veg-snacks': 'VEG',
+  'french-fries': 'VEG',
+  'french-fries-specialty-potatoes': 'VEG',
+  'dairy': 'DAIRY',
+  'commercial-dairy-cheese': 'DAIRY',
+  'cheese': 'DAIRY',
+  'mozzarella': 'DAIRY',
+  'bakery': 'BAKERY',
+  'bakery-pizza-bases': 'BAKERY',
+  'pizza-bases': 'BAKERY',
+  'sauces': 'SAUCES',
+  'sauces-mayo-condiments': 'SAUCES',
+  'mayo': 'SAUCES',
+  'syrups': 'SYRUPS',
+  'beverage-crushes-syrups': 'SYRUPS',
+  'crushes': 'SYRUPS',
+  'spices': 'SPICES',
+  'seasonings': 'SPICES',
+  'packaging': 'PACKAGING',
+  'packaging-disposables': 'PACKAGING',
+  'boxes': 'PACKAGING'
+};
+
+const PAGE_SEO: Record<string, { title: string; description: string }> = {
+  home: {
+    title: 'RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty',
+    description: 'B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.'
+  },
+  products: {
+    title: 'Wholesale Products Catalog (90+ SKUs) | RAIS Agencies Rayachoty',
+    description: 'Explore commercial wholesale pricing on Milky Mist mozzarella, Amul french fries, Triken momos, pizza boxes, and Del Monte sauces in Rayachoty.'
+  },
+  'who-we-serve': {
+    title: 'Who We Serve | Food Service Supply for Cafes & QSRs — RAIS Agencies',
+    description: 'Dedicated cold-chain food distribution for restaurants, cafes, pizza kitchens, and caterers across Rayachoty and Annamayya district.'
+  },
+  about: {
+    title: 'About RAIS Agencies | Cold Chain Infrastructure & Depot Hub — Rayachoty',
+    description: 'Rayachoty’s premier commercial food distributor beside Indel Money Bank, Sundupalli Road. Guaranteed -18°C cold chain storage and daily delivery.'
+  },
+  contact: {
+    title: 'Contact RAIS Agencies | Sundupalli Road Depot & WhatsApp Ordering — Rayachoty',
+    description: 'Connect with RAIS Agencies wholesale depot in Rayachoty. WhatsApp 9347453135 for catalog, quotations, and commercial kitchen supplies.'
+  },
+  legal: {
+    title: 'Terms of Wholesale Supply & Cold Chain Quality Guarantee | RAIS Agencies',
+    description: 'Wholesale terms, HACCP-standard cold-chain storage parameters (-18°C), and return policies for RAIS Agencies Rayachoty commercial partners.'
+  },
+  automation: {
+    title: 'RAIS Growth Engine | B2B Wholesale CRM & Social Studio — Rayachoty',
+    description: 'Google Business Profile growth engine, AI review response gate, Meta Instagram studio, and B2B leads CRM for RAIS Agencies.'
+  }
+};
 
 export const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<NavPage>('home');
@@ -40,8 +99,9 @@ export const App: React.FC = () => {
         setCurrentPage('products');
         setSelectedCategoryCode(null);
       } else if (hash.startsWith('category/')) {
-        const cat = hash.replace('category/', '').toUpperCase();
-        setSelectedCategoryCode(cat);
+        const catSlug = hash.replace('category/', '').toLowerCase();
+        const mappedCode = CATEGORY_SLUG_MAP[catSlug] || catSlug.toUpperCase();
+        setSelectedCategoryCode(mappedCode);
       } else if (hash === 'who-we-serve') {
         setCurrentPage('who-we-serve');
         setSelectedCategoryCode(null);
@@ -66,6 +126,36 @@ export const App: React.FC = () => {
 
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
+
+  // Dynamic Page-by-Page SEO Synchronization (Title, Meta Description, OpenGraph)
+  useEffect(() => {
+    let title = PAGE_SEO[currentPage]?.title || PAGE_SEO.home.title;
+    let description = PAGE_SEO[currentPage]?.description || PAGE_SEO.home.description;
+
+    if (selectedCategoryCode) {
+      const cat = CATEGORIES.find(c => c.code.toUpperCase() === selectedCategoryCode.toUpperCase());
+      if (cat) {
+        title = `${cat.name} Wholesale Supply | RAIS Agencies Rayachoty`;
+        description = `Wholesale bulk supplier of ${cat.name} in Rayachoty, Andhra Pradesh. Guaranteed cold chain delivery (-18°C) for cafes, QSRs, and food businesses.`;
+      }
+    }
+
+    document.title = title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', description);
+    }
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+      ogTitle.setAttribute('content', title);
+    }
+
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) {
+      ogDesc.setAttribute('content', description);
+    }
+  }, [currentPage, selectedCategoryCode]);
 
   const handleNavigate = (page: NavPage, categoryCode?: string) => {
     if (categoryCode) {

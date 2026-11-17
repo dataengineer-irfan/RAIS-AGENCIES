@@ -1,0 +1,552 @@
+{
+  "timestamp": "2026-11-17T08:24:32.235Z",
+  "httpEndpoints": [
+    {
+      "url": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "responseTimeMs": 326,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/index.html",
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "responseTimeMs": 294,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/catalogue.html",
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "responseTimeMs": 363,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/RAIS_Product_Catalogue_No_Prices.html",
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "responseTimeMs": 409,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/RAIS_End_User_Automation_Setup_Manual.html",
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "responseTimeMs": 289,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/RAIS_Instagram_Automation_Setup_Journey_BabySteps.html",
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "responseTimeMs": 298,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/RAIS_Agencies_Automation_Architecture_Presentation.html",
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "responseTimeMs": 288,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://rais-growth-backend.onrender.com/",
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "responseTimeMs": 317,
+      "contentType": "application/json"
+    },
+    {
+      "url": "https://rais-growth-backend.onrender.com/api/health",
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "responseTimeMs": 157,
+      "contentType": "application/json"
+    },
+    {
+      "url": "https://rais-growth-backend.onrender.com/api/v1/google/status",
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "responseTimeMs": 131,
+      "contentType": "application/json"
+    },
+    {
+      "url": "https://rais-growth-backend.onrender.com/api/v1/google/performance",
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "responseTimeMs": 111,
+      "contentType": "application/json"
+    },
+    {
+      "url": "https://rais-growth-backend.onrender.com/api/v1/reviews",
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "responseTimeMs": 104,
+      "contentType": "application/json"
+    },
+    {
+      "url": "https://rais-growth-backend.onrender.com/api/v1/business-info",
+      "statusCode": 404,
+      "statusMessage": "Not Found",
+      "responseTimeMs": 110,
+      "contentType": "application/json"
+    },
+    {
+      "url": "https://rais-growth-backend.onrender.com/api/v1/seo/keywords",
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "responseTimeMs": 125,
+      "contentType": "application/json"
+    },
+    {
+      "url": "https://rais-growth-backend.onrender.com/docs",
+      "statusCode": 200,
+      "statusMessage": "OK",
+      "responseTimeMs": 127,
+      "contentType": "text/html; charset=utf-8"
+    }
+  ],
+  "spaPages": [
+    {
+      "route": "Home Showroom",
+      "hash": "#/",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/",
+      "durationMs": 4481,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 1,
+      "h1Text": "Frozen at its peak.\nDelivered at its best.",
+      "h2Count": 6,
+      "h2Samples": [
+        "Everything your kitchen needs",
+        "Our Products",
+        "From our freezer to your kitchen in four simple steps",
+        "Wholesale Products & Packaging Inspection"
+      ],
+      "totalImages": 24,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    },
+    {
+      "route": "Full Products Catalog (90+ SKUs)",
+      "hash": "#/products",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/products",
+      "durationMs": 1007,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 1,
+      "h1Text": "Wholesale Products & Price List",
+      "h2Count": 0,
+      "h2Samples": [],
+      "totalImages": 91,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    },
+    {
+      "route": "Category: Frozen Veg Snacks",
+      "hash": "#/category/frozen-veg-snacks",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/frozen-veg-snacks",
+      "durationMs": 1009,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 1,
+      "h1Text": "Chicken & Non-Veg Snacks",
+      "h2Count": 1,
+      "h2Samples": [
+        "Available Items (6)"
+      ],
+      "totalImages": 8,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    },
+    {
+      "route": "Category: Frozen Non-Veg Snacks",
+      "hash": "#/category/frozen-nonveg-snacks",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/frozen-nonveg-snacks",
+      "durationMs": 1007,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 1,
+      "h1Text": "Chicken & Non-Veg Snacks",
+      "h2Count": 1,
+      "h2Samples": [
+        "Available Items (6)"
+      ],
+      "totalImages": 8,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    },
+    {
+      "route": "Category: Commercial Dairy & Cheese",
+      "hash": "#/category/commercial-dairy-cheese",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/commercial-dairy-cheese",
+      "durationMs": 1007,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 1,
+      "h1Text": "Chicken & Non-Veg Snacks",
+      "h2Count": 1,
+      "h2Samples": [
+        "Available Items (6)"
+      ],
+      "totalImages": 8,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    },
+    {
+      "route": "Category: French Fries & Specialty Potatoes",
+      "hash": "#/category/french-fries-specialty-potatoes",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/french-fries-specialty-potatoes",
+      "durationMs": 1016,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 1,
+      "h1Text": "Chicken & Non-Veg Snacks",
+      "h2Count": 1,
+      "h2Samples": [
+        "Available Items (6)"
+      ],
+      "totalImages": 8,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    },
+    {
+      "route": "Category: Bakery & Pizza Bases",
+      "hash": "#/category/bakery-pizza-bases",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/bakery-pizza-bases",
+      "durationMs": 1011,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 1,
+      "h1Text": "Chicken & Non-Veg Snacks",
+      "h2Count": 1,
+      "h2Samples": [
+        "Available Items (6)"
+      ],
+      "totalImages": 8,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    },
+    {
+      "route": "Category: Packaging & Disposables",
+      "hash": "#/category/packaging-disposables",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/packaging-disposables",
+      "durationMs": 1006,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 1,
+      "h1Text": "Chicken & Non-Veg Snacks",
+      "h2Count": 1,
+      "h2Samples": [
+        "Available Items (6)"
+      ],
+      "totalImages": 8,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    },
+    {
+      "route": "Category: Sauces, Mayo & Condiments",
+      "hash": "#/category/sauces-mayo-condiments",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/sauces-mayo-condiments",
+      "durationMs": 1017,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 1,
+      "h1Text": "Chicken & Non-Veg Snacks",
+      "h2Count": 1,
+      "h2Samples": [
+        "Available Items (6)"
+      ],
+      "totalImages": 8,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    },
+    {
+      "route": "Category: Beverage Crushes & Syrups",
+      "hash": "#/category/beverage-crushes-syrups",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/beverage-crushes-syrups",
+      "durationMs": 1014,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 1,
+      "h1Text": "Chicken & Non-Veg Snacks",
+      "h2Count": 1,
+      "h2Samples": [
+        "Available Items (6)"
+      ],
+      "totalImages": 8,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    },
+    {
+      "route": "Who We Serve (Cafes, QSRs, Hotels)",
+      "hash": "#/who-we-serve",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/who-we-serve",
+      "durationMs": 1012,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 1,
+      "h1Text": "Wholesale Supply Built for Rayachoty Food Businesses",
+      "h2Count": 4,
+      "h2Samples": [
+        "Fast-Food & Burger Hubs",
+        "Pizzerias & Italian Bistros",
+        "Cafés & Beverage Lounges",
+        "Hotels, Dhabas, Biryani Points & Caterers"
+      ],
+      "totalImages": 5,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    },
+    {
+      "route": "About RAIS & Cold Chain Infra",
+      "hash": "#/about",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/about",
+      "durationMs": 1008,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 1,
+      "h1Text": "About RAIS Agencies",
+      "h2Count": 0,
+      "h2Samples": [],
+      "totalImages": 1,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    },
+    {
+      "route": "Contact & Wholesale Depot",
+      "hash": "#/contact",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/contact",
+      "durationMs": 1009,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 1,
+      "h1Text": "Contact & Distribution Hub",
+      "h2Count": 1,
+      "h2Samples": [
+        "Send a Commercial Message"
+      ],
+      "totalImages": 2,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    },
+    {
+      "route": "Legal, Terms & Cold Chain Guarantee",
+      "hash": "#/legal",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/legal",
+      "durationMs": 1011,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 1,
+      "h1Text": "Terms of Wholesale Supply & Orders",
+      "h2Count": 4,
+      "h2Samples": [
+        "1. Wholesale Orders & Payment Terms",
+        "2. Cold Storage & Quality Handover",
+        "3. GST & Wholesale Billing",
+        "4. Direct Business Communication"
+      ],
+      "totalImages": 1,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    },
+    {
+      "route": "Automation Engine Dashboard",
+      "hash": "#/automation",
+      "fullUrl": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/automation",
+      "durationMs": 1008,
+      "error": null,
+      "title": "RAIS Agencies | Wholesale Frozen Foods & Packaging Solutions — Rayachoty",
+      "titleLength": 72,
+      "description": "B2B wholesale supplier of frozen food products, packaging solutions, dairy, gourmet sauces, and beverage syrups in Rayachoty, Andhra Pradesh.",
+      "descLength": 141,
+      "keywords": "RAIS Agencies, frozen food wholesale, Rayachoty, Milky Mist, french fries wholesale, burger patty, pizza boxes, Del Monte, food service Andhra Pradesh",
+      "ogTitle": "RAIS Agencies | Wholesale Frozen Foods & Food Service Distribution",
+      "ogDesc": "Commercial wholesale partner for restaurants, cafés, and caterers. Frozen food products and food packaging solutions in Rayachoty, direct WhatsApp ordering.",
+      "ogType": "website",
+      "ogImage": null,
+      "canonical": "https://dataengineer-irfan.github.io/RAIS-AGENCIES/",
+      "h1Count": 0,
+      "h1Text": null,
+      "h2Count": 1,
+      "h2Samples": [
+        "Wholesale Admin Portal"
+      ],
+      "totalImages": 0,
+      "missingAltCount": 0,
+      "jsonLdCount": 1,
+      "jsonLdTypes": [
+        "WholesaleStore"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Home Showroom -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Complete Products Catalog (90+ SKUs) -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/products</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Category: Commercial Dairy & Cheese (Milky Mist Mozzarella) -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/dairy</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Category: French Fries & Specialty Potatoes (Amul, Hup Hup) -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/veg</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Category: Frozen Chicken Momos & Nuggets (Triken) -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/chicken</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Category: Bakery & Pizza Bases (8.5 & 10 inch) -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/bakery</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Category: Food Packaging & Disposables (Pizza Boxes, OGR Paper) -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/packaging</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Category: Sauces, Mayo & Condiments (Del Monte) -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/sauces</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Category: Beverage Crushes & Syrups -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/category/syrups</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Who We Serve -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/who-we-serve</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- About RAIS Agencies & Cold Chain -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/about</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Contact & Wholesale Depot Hub -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/#/contact</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Static Standalone B2B Catalogue (Print & WhatsApp Ready) -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/catalogue.html</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Static Wholesale Product Catalogue (No Prices) -->
+  <url>
+    <loc>https://dataengineer-irfan.github.io/RAIS-AGENCIES/RAIS_Product_Catalogue_No_Prices.html</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+</urlset>

@@ -1,0 +1,12 @@
+# robots.txt for RAIS Agencies (Rayachoty)
+User-agent: *
+Allow: /
+Allow: /catalogue.html
+Allow: /RAIS_Product_Catalogue_No_Prices.html
+
+# Disallow admin dashboard indexing to preserve SaaS privacy
+Disallow: /#/automation
+Disallow: /#/admin
+
+# Sitemaps
+Sitemap: https://dataengineer-irfan.github.io/RAIS-AGENCIES/sitemap.xml
