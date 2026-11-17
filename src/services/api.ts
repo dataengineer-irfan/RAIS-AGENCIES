@@ -207,6 +207,14 @@ export const api = {
     const res = await fetch(`${BASE_URL}/reviews/sync`, { method: 'POST' });
     return res.json();
   },
+  createTestReview: async (authorName?: string, rating?: number, comment?: string): Promise<any> => {
+    const params = new URLSearchParams();
+    if (authorName) params.append('author_name', authorName);
+    if (rating) params.append('rating', rating.toString());
+    if (comment) params.append('comment', comment);
+    const res = await fetch(`${BASE_URL}/reviews/test-review?${params.toString()}`, { method: 'POST' });
+    return res.json();
+  },
   approveReviewReply: async (draftId: number, replyText: string, approverName: string = 'Admin'): Promise<any> => {
     const res = await fetch(`${BASE_URL}/reviews/reply/${draftId}/approve`, {
       method: 'POST',

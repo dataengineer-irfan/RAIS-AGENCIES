@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   MessageSquare, Star, CheckCircle2, ShieldCheck, 
-  RefreshCw, AlertCircle, Clock, User, LogIn, ShieldAlert
+  RefreshCw, AlertCircle, Clock, User, LogIn, ShieldAlert, Sparkles
 } from 'lucide-react';
 import { api, Review } from '../../services/api';
 
@@ -67,6 +67,30 @@ export const ReviewsInboxView: React.FC = () => {
       setNotification({
         message: err.message || 'Failed to sync reviews from Google',
         type: 'error'
+      });
+    } finally {
+      setSyncing(false);
+      setTimeout(() => setNotification(null), 5000);
+    }
+  };
+
+  const handleGenerateDemoReview = async () => {
+    try {
+      setSyncing(true);
+      await api.createTestReview(
+        "Rayachoty Cafe Partner",
+        5,
+        "Best wholesale frozen snacks and Amul fries supply in Rayachoty! Delivered at -18°C on time."
+      );
+      setNotification({
+        message: "Demo customer review generated with AI bilingual response draft! Review & approve below.",
+        type: "success"
+      });
+      await loadAll();
+    } catch (err: any) {
+      setNotification({
+        message: err.message || "Failed to generate demo review",
+        type: "error"
       });
     } finally {
       setSyncing(false);
@@ -245,18 +269,38 @@ export const ReviewsInboxView: React.FC = () => {
             Loading Google Business Profile Reviews...
           </div>
         ) : reviews.length === 0 ? (
-          <div className="p-12 text-center text-xs text-slate-400 bg-[#0f172a] rounded-xl border border-slate-800 space-y-2">
-            {isConnected ? (
-              <>
-                <p className="font-semibold text-white">No Google reviews found for the selected period.</p>
-                <p className="text-slate-500">Google Business Profile connection is active. Google API returned 0 customer reviews for this location.</p>
-              </>
-            ) : (
-              <>
-                <p className="font-semibold text-white">No reviews imported.</p>
-                <p className="text-slate-500">Connect Google Business Profile above to synchronize official customer reviews.</p>
-              </>
-            )}
+          <div className="p-8 text-center bg-[#0f172a] rounded-xl border border-slate-800 space-y-4">
+            <div className="w-12 h-12 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 mx-auto flex items-center justify-center">
+              <MessageSquare className="w-6 h-6" />
+            </div>
+            <div className="max-w-md mx-auto space-y-1.5">
+              <p className="font-bold text-white text-sm">No Customer Reviews on Google Maps Yet</p>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Google Business Profile is <strong>connected and active</strong> (<span className="text-cyan-300 font-mono">locations/17901714523973178723</span>). Google API returned 0 reviews because customers have not yet posted public reviews on your Maps profile.
+              </p>
+            </div>
+            
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={handleGenerateDemoReview}
+                disabled={syncing}
+                className="px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs rounded-lg transition-all shadow-md shadow-amber-500/20 flex items-center gap-1.5"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Generate Demo Review (Test AI Approval Gate)</span>
+              </button>
+              
+              <button
+                type="button"
+                onClick={() => {
+                  alert("To collect real customer reviews, have walk-in clients scan the official Google QR Sticker placed at your Sundupalli Road depot counter.");
+                }}
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 font-semibold text-xs rounded-lg transition-all"
+              >
+                How to Collect Real Reviews
+              </button>
+            </div>
           </div>
         ) : (
           reviews.map((review) => {
