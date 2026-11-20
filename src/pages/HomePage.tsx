@@ -6,6 +6,7 @@ import { OrderingWorkflow } from '../components/OrderingWorkflow';
 import { BrandMarquee } from '../components/BrandMarquee';
 import { Interactive3DShowcase } from '../components/Interactive3DShowcase';
 import { WhoWeServe } from '../components/WhoWeServe';
+import { TradeStandards } from '../components/TradeStandards';
 import { ContactSection } from '../components/ContactSection';
 import { ProductItem } from '../data/catalogue';
 
@@ -63,7 +64,10 @@ export const HomePage: React.FC<HomePageProps> = ({
       {/* 7. Who We Serve — Commercial Foodservice Sectors */}
       <WhoWeServe onOpenQuote={onOpenQuote} />
 
-      {/* 8. Visit or Call — Contact & Embedded Google Map */}
+      {/* 8. The RAIS Distribution Standard & 10 Corridor Driving Routes */}
+      <TradeStandards onOpenQuote={onOpenQuote} />
+
+      {/* 9. Visit or Call — Contact & Embedded Google Map */}
       <ContactSection />
     </>
   );
