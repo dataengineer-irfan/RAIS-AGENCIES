@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="te">
+<html lang="hi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAIS Agencies — Sheru Bhai Telugu Voice-over Studio</title>
+  <title>RAIS Agencies — Sheru Bhai Funny Voice-over Reel (Hindi)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Ramabhadra&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Outfit', sans-serif; background-color: #0b0f19; }
-    .telugu-font { font-family: 'Ramabhadra', sans-serif; }
+    .hindi-font { font-family: 'Noto Sans Devanagari', sans-serif; }
   </style>
 </head>
 <body class="text-slate-100 min-h-screen p-4 md:p-8 flex flex-col items-center justify-center">
@@ -20,32 +20,32 @@
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
       <div>
-        <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold rounded-full uppercase tracking-wider mb-2">
-          ✨ 100% Studio Natural Human Audio (Zero Robot / Zero Chipmunk)
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold rounded-full uppercase tracking-wider mb-2">
+          🦁 शेरू भाई स्पेशल एडिशन (HINDI VERSION)
         </div>
         <h1 class="text-2xl md:text-3xl font-black text-white tracking-tight flex items-center gap-3">
-          RAIS Agencies — Sheru Bhai Telugu Reel
+          RAIS Agencies — Sheru Bhai Hindi Voice-over Reel
         </h1>
-        <p class="text-slate-400 text-sm mt-1">Authentic Telugu Studio Voice-overs • Frame-Synchronized with Video Subtitles</p>
+        <p class="text-slate-400 text-sm mt-1">100% Studio Natural Human Hindi Audio • Frame-Synchronized with Video Scenes</p>
       </div>
       <a href="./#/admin" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-semibold rounded-xl transition border border-slate-700 text-center">
         ← Back to Admin
       </a>
     </div>
 
-    <!-- 3-Voice Selector -->
+    <!-- 3-Voice Selector (Hindi) -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-3 my-6 p-2 bg-slate-950/80 rounded-2xl border border-slate-800">
       <button id="btn-v1" onclick="switchVideo('v1')" class="py-3 px-3 rounded-xl font-bold text-xs md:text-sm transition flex flex-col items-center justify-center gap-1 bg-amber-500 text-slate-950 shadow-lg">
-        <span class="text-sm md:text-base font-extrabold">🎙️ Voice 1: Studio Male</span>
-        <span class="text-[11px] font-medium opacity-90">Warm, Natural Human (Recommended)</span>
+        <span class="text-sm md:text-base font-extrabold">🦁 Voice 1: Sheru Bhai Hero</span>
+        <span class="text-[11px] font-medium opacity-90">Madhur Neural (Energetic Swagger)</span>
       </button>
       <button id="btn-v2" onclick="switchVideo('v2')" class="py-3 px-3 rounded-xl font-bold text-xs md:text-sm transition flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-white">
-        <span class="text-sm md:text-base font-extrabold">🦁 Voice 2: Deep Mass Hero</span>
+        <span class="text-sm md:text-base font-extrabold">🎬 Voice 2: Deep Mass Hero</span>
         <span class="text-[11px] font-medium opacity-75">Resonant Cinema Baritone</span>
       </button>
       <button id="btn-v3" onclick="switchVideo('v3')" class="py-3 px-3 rounded-xl font-bold text-xs md:text-sm transition flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-white">
-        <span class="text-sm md:text-base font-extrabold">✨ Voice 3: Clear Melodious</span>
-        <span class="text-[11px] font-medium opacity-75">Crisp, High-Engagement Tone</span>
+        <span class="text-sm md:text-base font-extrabold">✨ Voice 3: Vibrant Commercial</span>
+        <span class="text-[11px] font-medium opacity-75">Swara Neural (Crisp Female)</span>
       </button>
     </div>
 
@@ -55,21 +55,21 @@
       <!-- Video Player (9:16 Vertical Reel) -->
       <div class="md:col-span-5 flex flex-col items-center">
         <div class="relative w-full max-w-[290px] rounded-2xl overflow-hidden border-2 border-amber-500/40 shadow-[0_0_35px_rgba(245,158,11,0.25)] bg-black">
-          <video id="player" controls playsinline class="w-full h-auto aspect-[9/16] object-cover">
-            <source id="video-source" src="videos/sheru_voice_mohan_natural.mp4" type="video/mp4">
+          <video id="player" controls playsinline autoplay class="w-full h-auto aspect-[9/16] object-cover">
+            <source id="video-source" src="videos/sheru_hindi_madhur_natural.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
         </div>
-        <a id="download-link" href="videos/sheru_voice_mohan_natural.mp4" download="RAIS_Sheru_Bhai_Telugu_Reel.mp4" class="mt-4 w-full max-w-[290px] py-2.5 px-4 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition">
+        <a id="download-link" href="videos/sheru_hindi_madhur_natural.mp4" download="RAIS_Sheru_Bhai_Hindi_Reel.mp4" class="mt-4 w-full max-w-[290px] py-2.5 px-4 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-          Download Selected Reel (HD MP4)
+          Download Hindi Reel (HD MP4)
         </a>
       </div>
 
-      <!-- Dialogue Timeline -->
+      <!-- Hindi Dialogue Timeline -->
       <div class="md:col-span-7 space-y-3">
         <h3 class="text-xs font-extrabold uppercase tracking-widest text-slate-400 pb-1">
-          Synced Dialogue Timeline
+          Synced Hindi Dialogue Timeline
         </h3>
 
         <!-- Scene 1 -->
@@ -77,8 +77,8 @@
           <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300 shrink-0">0:00 - 0:02</span>
           <div>
             <div class="text-xs text-rose-400 font-semibold mb-0.5">Cafe Owner (Empty Deep Freezer)</div>
-            <p class="telugu-font text-base text-white font-medium">"అయ్యో స్టాక్ అయిపోయింది"</p>
-            <p class="text-xs text-slate-400 italic">"Ayyo stock aypoyindi!" (Oh no! The stock is over!)</p>
+            <p class="hindi-font text-base text-white font-bold">"अरे यार! सारा स्टॉक खत्म हो गया!"</p>
+            <p class="text-xs text-slate-400 italic">"Arrey yaar! Saara stock khatam ho gaya!" (Oh no! All stock is finished!)</p>
           </div>
         </div>
 
@@ -87,8 +87,8 @@
           <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 shrink-0">0:02 - 0:04</span>
           <div>
             <div class="text-xs text-amber-400 font-semibold mb-0.5">🦁 Sheru Bhai (Hero Entrance on Hover Scooter)</div>
-            <p class="telugu-font text-base text-white font-medium">"టెన్షన్ వద్దు షేరు భాయ్ వచ్చేశాడు"</p>
-            <p class="text-xs text-slate-400 italic">"Tension vaddu Sheru Bhai vacheshaadu!" (No tension! Sheru Bhai is here!)</p>
+            <p class="hindi-font text-base text-white font-bold">"टेंशन मत लो भाई! शेरू भाई आ गया!"</p>
+            <p class="text-xs text-slate-400 italic">"Tension mat lo bhai! Sheru Bhai aa gaya!" (No tension bro! Sheru Bhai is here!)</p>
           </div>
         </div>
 
@@ -96,9 +96,9 @@
         <div class="p-3.5 rounded-xl bg-slate-950/60 border border-amber-500/30 flex items-start gap-3">
           <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 shrink-0">0:04 - 0:06</span>
           <div>
-            <div class="text-xs text-amber-400 font-semibold mb-0.5">🦁 Sheru Bhai (Flying Above Street Traffic)</div>
-            <p class="telugu-font text-base text-white font-medium">"ట్రాఫిక్ ఏంటి నేను ఎగురుతా"</p>
-            <p class="text-xs text-slate-400 italic">"Traffic enti nenu eguruthaa!" (What traffic? I fly!)</p>
+            <div class="text-xs text-amber-400 font-semibold mb-0.5">🦁 Sheru Bhai (Gliding Over Street Traffic)</div>
+            <p class="hindi-font text-base text-white font-bold">"ट्रैफिक क्या चीज़ है? मैं तो उड़ता हूँ!"</p>
+            <p class="text-xs text-slate-400 italic">"Traffic kya cheez hai? Main toh udta hoon!" (What traffic? I fly in the sky!)</p>
           </div>
         </div>
 
@@ -107,8 +107,8 @@
           <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 shrink-0">0:06 - 0:10</span>
           <div>
             <div class="text-xs text-amber-400 font-semibold mb-0.5">🦁 Sheru Bhai (Delivering at Cafe Counter)</div>
-            <p class="telugu-font text-base text-white font-medium">"ఫ్రైస్ కావాలా మోమోస్ నగ్గెట్స్ అన్నీ నా కార్ట్ లోనే"</p>
-            <p class="text-xs text-slate-400 italic">"Fries kaavaalaa? Momos? Nuggets? Everything in my cart!"</p>
+            <p class="hindi-font text-base text-white font-bold">"फ्राइज़, मोमोज़, नगेट्स... सब मेरी कार्ट में है!"</p>
+            <p class="text-xs text-slate-400 italic">"Fries, momos, nuggets... sab meri cart mein hai!"</p>
           </div>
         </div>
 
@@ -116,9 +116,9 @@
         <div class="p-3.5 rounded-xl bg-slate-950/60 border border-amber-500/30 flex items-start gap-3">
           <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 shrink-0">0:10 - 0:15</span>
           <div>
-            <div class="text-xs text-amber-400 font-semibold mb-0.5">🦁 Sheru Bhai (Twin Rocket Exhaust Launch)</div>
-            <p class="telugu-font text-base text-white font-medium">"కేఫ్ అయినా రెస్టారెంట్ అయినా స్పీడ్ డెలివరీ"</p>
-            <p class="text-xs text-slate-400 italic">"Cafe or restaurant... speed delivery!"</p>
+            <div class="text-xs text-amber-400 font-semibold mb-0.5">🦁 Sheru Bhai (Twin Rocket Boost Launch)</div>
+            <p class="hindi-font text-base text-white font-bold">"कैफ़े हो या रेस्टोरेंट... सुपर फास्ट डिलीवरी!"</p>
+            <p class="text-xs text-slate-400 italic">"Cafe ho ya restaurant... super fast delivery!"</p>
           </div>
         </div>
 
@@ -126,9 +126,9 @@
         <div class="p-3.5 rounded-xl bg-slate-950/60 border border-sky-500/30 flex items-start gap-3">
           <span class="text-xs font-mono font-bold px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 shrink-0">0:15 - 0:19</span>
           <div>
-            <div class="text-xs text-sky-400 font-semibold mb-0.5">RAIS Depot Beside Indel Bank & Hotline Call</div>
-            <p class="telugu-font text-base text-white font-medium">"రాయీస్ ఏజెన్సీస్ రాయచోటి ఇప్పుడే కాల్ చేయండి"</p>
-            <p class="text-xs text-slate-400 italic">"RAIS Agencies, Rayachoty... Call now on 9347453135!"</p>
+            <div class="text-xs text-sky-400 font-semibold mb-0.5">RAIS Depot Beside Indel Bank & Hotline</div>
+            <p class="hindi-font text-base text-white font-bold">"राइज़ एजेंसीज़, रायचोटी... अभी कॉल करें!"</p>
+            <p class="text-xs text-slate-400 italic">"RAIS Agencies, Rayachoty... Abhi call karein on 9347453135!"</p>
           </div>
         </div>
 
@@ -140,9 +140,9 @@
 
   <script>
     const videos = {
-      v1: 'videos/sheru_voice_mohan_natural.mp4',
-      v2: 'videos/sheru_voice_mohan_deep.mp4',
-      v3: 'videos/sheru_voice_shruti_clear.mp4'
+      v1: 'videos/sheru_hindi_madhur_natural.mp4',
+      v2: 'videos/sheru_hindi_madhur_deep.mp4',
+      v3: 'videos/sheru_hindi_swara_natural.mp4'
     };
 
     function switchVideo(key) {
