@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   UserCheck, Plus, MessageCircle, Phone, 
-  MapPin, CheckCircle2, RefreshCw, X, AlertCircle
+  MapPin, CheckCircle2, RefreshCw, X, AlertCircle, Star
 } from 'lucide-react';
 import { api, B2BLead } from '../../services/api';
 
@@ -193,15 +193,26 @@ export const B2BLeadsView: React.FC = () => {
                         <option value="LOST">LOST</option>
                       </select>
                     </td>
-                    <td className="py-3.5 px-4 text-right">
+                    <td className="py-3.5 px-4 text-right space-x-2 whitespace-nowrap">
                       <a
                         href={`https://wa.me/91${lead.phone.replace(/\D/g, '')}?text=${encodeURIComponent(`Hello ${lead.contact_person || lead.business_name}, this is RAIS Agencies Rayachoty (Wholesale Frozen Foods & Packaging). How can we help your kitchen today?`)}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-[11px] font-semibold transition-all shadow"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-[11px] font-semibold transition-all border border-slate-700"
+                        title="Chat on WhatsApp"
                       >
-                        <MessageCircle className="w-3.5 h-3.5" />
-                        <span>WhatsApp</span>
+                        <MessageCircle className="w-3 h-3" />
+                        <span>Chat</span>
+                      </a>
+                      <a
+                        href={`https://wa.me/91${lead.phone.replace(/\D/g, '')}?text=${encodeURIComponent(`Namaste ${lead.contact_person || lead.business_name} garu! 🙏 Thank you for choosing RAIS Agencies Rayachoty.\n\nCould you take 30 seconds to support our wholesale depot with a 5-star Google Maps review?\n\n⭐ Review link: https://search.google.com/local/writereview?placeid=ChIJWWL3zBgDszsR-lQG81niw0c\n\nSuggested review:\n"RAIS Agencies is our trusted wholesale partner in ${lead.location || 'Rayachoty'} for French Fries, Mozzarella Cheese, Momos, and Pizza Boxes!"`)}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-[11px] font-semibold transition-all shadow"
+                        title="1-Click Review Request"
+                      >
+                        <Star className="w-3 h-3 fill-amber-300 text-amber-300" />
+                        <span>Request Review</span>
                       </a>
                     </td>
                   </tr>

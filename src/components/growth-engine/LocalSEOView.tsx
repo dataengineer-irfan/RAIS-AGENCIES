@@ -8,8 +8,10 @@ import { api, KeywordTarget } from '../../services/api';
 export const LocalSEOView: React.FC = () => {
   const [keywords, setKeywords] = useState<KeywordTarget[]>([]);
   const [audit, setAudit] = useState<any>(null);
+  const [qnaData, setQnaData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [activeTab, setActiveTab] = useState<'keywords' | 'audit' | 'guidelines'>('keywords');
+  const [activeTab, setActiveTab] = useState<'keywords' | 'audit' | 'guidelines' | 'qna'>('keywords');
+  const [copiedId, setCopiedId] = useState<number | null>(null);
 
   useEffect(() => {
     loadData();
@@ -18,12 +20,14 @@ export const LocalSEOView: React.FC = () => {
   const loadData = async () => {
     try {
       setLoading(true);
-      const [kwData, auditData] = await Promise.all([
+      const [kwData, auditData, qnaRes] = await Promise.all([
         api.listKeywords(),
-        api.getSeoAudit()
+        api.getSeoAudit(),
+        api.getGoogleQnA().catch(() => null)
       ]);
       setKeywords(kwData);
       setAudit(auditData);
+      setQnaData(qnaRes);
     } catch (err) {
       console.error('Failed to load SEO data', err);
     } finally {
@@ -62,10 +66,11 @@ export const LocalSEOView: React.FC = () => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
+      <div className="flex items-center gap-2 border-b border-slate-800 pb-2 flex-wrap">
         {[
           { id: 'keywords', label: `Target Keywords (${keywords.length})` },
           { id: 'audit', label: 'GBP Profile Audit' },
+          { id: 'qna', label: `Google Q&A / Ask Maps AI (${qnaData?.total_entries || 5})` },
           { id: 'guidelines', label: 'Documented Ranking Factors vs Myths' }
         ].map((t) => (
           <button
@@ -226,6 +231,104 @@ export const LocalSEOView: React.FC = () => {
                 <strong>Price Wars in Public Posts:</strong> Exposing wholesale pricing publicly harms cafe margins and client trust.
               </li>
             </ul>
+          </div>
+        </div>
+      )}
+
+      {/* Tab 4: Google Q&A Pre-seeding Engine ("Ask Maps" AI) */}
+      {activeTab === 'qna' && (
+        <div className="space-y-4">
+          <div className="bg-[#0f172a] border border-slate-800 rounded-xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h2 className="text-sm font-bold text-white flex items-center gap-2">
+                <Info className="w-4 h-4 text-emerald-400" />
+                <span>Google Maps Q&A & Conversational AI Knowledge Graph</span>
+              </h2>
+              <p className="text-xs text-slate-400 mt-1 max-w-2xl">
+                Google's Gemini and "Ask Maps" AI index GBP Questions &amp; Answers and website Schema.org <code>FAQPage</code> to answer voice and conversational queries from cafe owners.
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-mono px-2.5 py-1 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-semibold flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5" />
+                <span>Schema FAQPage Active</span>
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4">
+            {(qnaData?.qna_list || [
+              {
+                id: 1,
+                question: "What is the delivery radius for frozen food from your Rayachoty depot?",
+                answer: "We deliver daily across Rayachoty town (516269) and operate scheduled route logistics to all 10 surrounding supply corridors: Sundupalli, Galiveedu, Kadiri, Chinnamandem, Kalakada, Mahal, Madanapalle, Kadapa, and Rajampet with guaranteed -18°C continuous cold chain storage.",
+                category: "Cold Chain & Logistics",
+                target_keywords: ["frozen food wholesale rayachoty", "refrigerated delivery annamayya district"]
+              },
+              {
+                id: 2,
+                question: "Do you supply Milky Mist mozzarella cheese and Amul French fries to cafes in bulk wholesale cartons?",
+                answer: "Yes. RAIS Agencies is an authorized commercial wholesale supplier in Rayachoty. We stock 1kg & 2kg Milky Mist diced mozzarella cheese (high stretch), Amul 6mm shoestring & Hup Hup 9mm french fries, Triken frozen chicken momos, and burger patties at direct wholesale trade rates.",
+                category: "Commercial Food Products",
+                target_keywords: ["milky mist cheese wholesale rayachoty", "french fries wholesale rayachoty", "triken chicken momos wholesale"]
+              },
+              {
+                id: 3,
+                question: "Where is your wholesale depot located in Rayachoty and what is your contact number?",
+                answer: "Our central commercial depot is located beside Indel Money Bank, Sundupalli Road, Near Reddies Colony, Rayachoty – 516269, Annamayya District, Andhra Pradesh. For trade pricing, bulk carton orders, or kitchen delivery, WhatsApp or call 9347453135.",
+                category: "Depot Location & Contact",
+                target_keywords: ["frozen food supplier rayachoty", "sundupalli road rayachoty wholesale"]
+              },
+              {
+                id: 4,
+                question: "Do you sell corrugated pizza boxes and greaseproof food packaging materials?",
+                answer: "Yes. We stock commercial 3-ply corrugated pizza takeaway boxes in 7, 8, 9, 10, and 12-inch sizes with ventilation flutes, kraft burger clamshell boxes, and certified 40 GSM oil and grease-resistant (OGR) butter paper wrapping sheets for shawarmas, burgers, and rolls.",
+                category: "Packaging Solutions",
+                target_keywords: ["pizza boxes wholesale rayachoty", "butter paper supplier rayachoty", "kraft burger boxes"]
+              },
+              {
+                id: 5,
+                question: "What are your wholesale depot operating and order dispatch hours?",
+                answer: "Our depot is open Monday through Saturday from 8:00 AM to 9:30 PM, and on Sunday from 8:00 AM to 2:00 PM for commercial kitchen pickups and scheduled route dispatches.",
+                category: "Operating Hours",
+                target_keywords: ["rais agencies depot hours rayachoty", "wholesale food pickup rayachoty"]
+              }
+            ]).map((q: any) => (
+              <div key={q.id} className="bg-[#0f172a] border border-slate-800 rounded-xl p-5 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400 px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">
+                    {q.category}
+                  </span>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(`Q: ${q.question}\nA: ${q.answer}`);
+                      setCopiedId(q.id);
+                      setTimeout(() => setCopiedId(null), 2000);
+                    }}
+                    className="text-[11px] text-slate-400 hover:text-white px-2 py-1 rounded bg-[#070b14] border border-slate-800 transition-colors flex items-center gap-1"
+                  >
+                    {copiedId === q.id ? <Check className="w-3 h-3 text-emerald-400" /> : null}
+                    <span>{copiedId === q.id ? 'Copied' : 'Copy Q&A'}</span>
+                  </button>
+                </div>
+
+                <div className="text-sm font-bold text-white">
+                  Q: {q.question}
+                </div>
+
+                <div className="p-3 bg-[#070b14] rounded-lg border border-slate-800/80 text-xs text-slate-300 leading-relaxed">
+                  A: {q.answer}
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {q.target_keywords?.map((kw: string, kidx: number) => (
+                    <span key={kidx} className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800/60 text-slate-400 border border-slate-700/40">
+                      #{kw}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}

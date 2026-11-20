@@ -14,6 +14,13 @@ export const ReviewsInboxView: React.FC = () => {
   const [notification, setNotification] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
   const [replyTexts, setReplyTexts] = useState<Record<number, string>>({});
   const [approverName, setApproverName] = useState<string>('RAIS Admin');
+  const [showRequestDrawer, setShowRequestDrawer] = useState<boolean>(false);
+  const [reqCustomerName, setReqCustomerName] = useState<string>('');
+  const [reqCafeName, setReqCafeName] = useState<string>('');
+  const [reqMandal, setReqMandal] = useState<string>('Rayachoty');
+  const [reqPhone, setReqPhone] = useState<string>('');
+  const [reqProducts, setReqProducts] = useState<string>('French Fries, Milky Mist Mozzarella Cheese, Triken Momos, Pizza Boxes');
+  const [generatedRequest, setGeneratedRequest] = useState<any>(null);
 
   useEffect(() => {
     loadAll();
@@ -113,6 +120,31 @@ export const ReviewsInboxView: React.FC = () => {
     }
   };
 
+  const handleGenerateReviewRequest = async () => {
+    try {
+      const prods = reqProducts.split(',').map((p) => p.trim()).filter(Boolean);
+      const res = await api.generateReviewRequest({
+        customer_name: reqCustomerName || 'Cafe Partner',
+        cafe_name: reqCafeName || 'Local Eatery',
+        mandal_town: reqMandal,
+        phone_number: reqPhone,
+        products: prods
+      });
+      setGeneratedRequest(res);
+      setNotification({
+        message: 'WhatsApp review request with pre-populated keywords generated!',
+        type: 'success'
+      });
+      setTimeout(() => setNotification(null), 4000);
+    } catch (err: any) {
+      setNotification({
+        message: err.message || 'Failed to generate review request',
+        type: 'error'
+      });
+      setTimeout(() => setNotification(null), 4000);
+    }
+  };
+
   const handleApproveReply = async (draftId: number) => {
     const textToPublish = replyTexts[draftId];
     if (!textToPublish) return;
@@ -182,6 +214,13 @@ export const ReviewsInboxView: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-3">
+          <button
+            onClick={() => setShowRequestDrawer(!showRequestDrawer)}
+            className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all shadow-md shadow-emerald-600/20"
+          >
+            <MessageSquare className="w-3.5 h-3.5 fill-white" />
+            <span>{showRequestDrawer ? 'Close Funnel' : 'Request Review (WhatsApp)'}</span>
+          </button>
           <div className="flex items-center gap-2 px-3 py-1.5 bg-[#070b14] border border-slate-800 rounded-lg text-xs">
             <User className="w-3.5 h-3.5 text-slate-400" />
             <input
@@ -202,6 +241,122 @@ export const ReviewsInboxView: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* ALGORITHMIC ENHANCEMENT 1: Automated WhatsApp Review Request Funnel */}
+      {showRequestDrawer && (
+        <div className="bg-[#0f172a] border border-emerald-500/40 rounded-xl p-5 space-y-4 shadow-xl shadow-emerald-950/20">
+          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-emerald-400" />
+              <h2 className="text-sm font-bold text-white">1-Click WhatsApp Review Funnel (Keyword Pre-populated)</h2>
+            </div>
+            <span className="text-[11px] text-emerald-400 font-mono">Rank Signal: Review Velocity + Keyword Match</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+                Customer / Owner Name
+              </label>
+              <input
+                type="text"
+                value={reqCustomerName}
+                onChange={(e) => setReqCustomerName(e.target.value)}
+                placeholder="e.g. Ramesh Garu"
+                className="w-full bg-[#070b14] border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
+              />
+            </div>
+            <div>
+              <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+                Cafe / Hotel Name
+              </label>
+              <input
+                type="text"
+                value={reqCafeName}
+                onChange={(e) => setReqCafeName(e.target.value)}
+                placeholder="e.g. Reddies Colony Cafe"
+                className="w-full bg-[#070b14] border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
+              />
+            </div>
+            <div>
+              <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+                Supply Corridor / Mandal
+              </label>
+              <select
+                value={reqMandal}
+                onChange={(e) => setReqMandal(e.target.value)}
+                className="w-full bg-[#070b14] border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
+              >
+                {['Rayachoty', 'Sundupalli', 'Galiveedu', 'Kadiri', 'Chinnamandem', 'Kalakada', 'Mahal', 'Madanapalle', 'Kadapa', 'Rajampet'].map((town) => (
+                  <option key={town} value={town}>{town}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+                Customer WhatsApp Number (Optional)
+              </label>
+              <input
+                type="text"
+                value={reqPhone}
+                onChange={(e) => setReqPhone(e.target.value)}
+                placeholder="e.g. 9876543210 (or leave empty to open WhatsApp picker)"
+                className="w-full bg-[#070b14] border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
+              />
+            </div>
+            <div>
+              <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+                Purchased Products (Pre-populates Google Maps Anchor Keywords)
+              </label>
+              <input
+                type="text"
+                value={reqProducts}
+                onChange={(e) => setReqProducts(e.target.value)}
+                placeholder="French Fries, Mozzarella, Momos, Pizza Boxes"
+                className="w-full bg-[#070b14] border border-slate-800 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between pt-2">
+            <span className="text-[11px] text-slate-400">
+              Direct review link: <code className="text-emerald-400 font-mono">search.google.com/...placeid=ChIJWWL3zBgDszsR-lQG81niw0c</code>
+            </span>
+            <button
+              onClick={handleGenerateReviewRequest}
+              className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-bold text-xs rounded-lg transition-all shadow-md shadow-emerald-500/20 flex items-center gap-1.5"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Generate 1-Click WhatsApp Invitation</span>
+            </button>
+          </div>
+
+          {generatedRequest && (
+            <div className="p-4 bg-[#070b14] border border-emerald-500/30 rounded-lg space-y-3">
+              <div className="text-[11px] font-semibold text-emerald-400 uppercase tracking-wider">
+                Generated WhatsApp Review Invitation Preview:
+              </div>
+              <div className="p-3 bg-slate-900/80 rounded border border-slate-800 text-xs text-slate-200 whitespace-pre-line leading-relaxed font-mono">
+                {generatedRequest.whatsapp_message}
+              </div>
+              <div className="flex items-center justify-end gap-3">
+                <a
+                  href={generatedRequest.whatsapp_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-5 py-2.5 bg-[#25D366] hover:bg-[#1ebe5b] text-white font-bold text-xs rounded-lg transition-all shadow-lg flex items-center gap-2"
+                >
+                  <MessageSquare className="w-4 h-4 fill-white" />
+                  <span>Open & Send in WhatsApp Now</span>
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Compliance Callout */}
       <div className="p-3.5 bg-amber-500/10 border border-amber-500/30 rounded-lg flex items-center gap-3 text-xs text-amber-300">

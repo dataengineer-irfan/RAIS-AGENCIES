@@ -29,28 +29,15 @@ export const ContactSection: React.FC = () => {
               {/* Contact Entries */}
               <div className="mt-6 space-y-3.5">
                 <a
-                  href={`tel:${BUSINESS_INFO.phones[0]}`}
+                  href={`tel:${BUSINESS_INFO.primaryPhone}`}
                   className="flex items-center gap-4 text-slate-200 hover:text-cyan-300 transition-colors group"
                 >
                   <div className="size-10 rounded-xl bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 flex items-center justify-center font-bold shrink-0 group-hover:scale-105 transition-transform">
                     <Phone className="size-4.5" />
                   </div>
                   <div>
-                    <div className="text-[10px] font-bold uppercase text-slate-400">Direct Desk</div>
-                    <div className="text-sm sm:text-base font-bold font-mono text-white">{BUSINESS_INFO.phones[0]}</div>
-                  </div>
-                </a>
-
-                <a
-                  href={`tel:${BUSINESS_INFO.phones[1]}`}
-                  className="flex items-center gap-4 text-slate-200 hover:text-cyan-300 transition-colors group"
-                >
-                  <div className="size-10 rounded-xl bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 flex items-center justify-center font-bold shrink-0 group-hover:scale-105 transition-transform">
-                    <Phone className="size-4.5" />
-                  </div>
-                  <div>
-                    <div className="text-[10px] font-bold uppercase text-slate-400">Secondary Logistics</div>
-                    <div className="text-sm sm:text-base font-bold font-mono text-white">{BUSINESS_INFO.phones[1]}</div>
+                    <div className="text-[10px] font-bold uppercase text-slate-400">Direct Wholesale Hotline & WhatsApp</div>
+                    <div className="text-sm sm:text-base font-bold font-mono text-white">{BUSINESS_INFO.primaryPhone}</div>
                   </div>
                 </a>
 
@@ -103,13 +90,13 @@ export const ContactSection: React.FC = () => {
               </a>
 
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Reddies+Colony+Rayachoty+516269"
+                href="https://www.google.com/maps/dir/?api=1&destination=RAIS+Agencies+Sundupalli+Road+Rayachoty&destination_place_id=ChIJWWL3zBgDszsR-lQG81niw0c"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-cyan-400/40 bg-cyan-400/10 hover:bg-cyan-400/20 text-cyan-200 font-bold text-sm transition-all hover:scale-[1.02]"
               >
                 <Navigation className="w-4 h-4 text-cyan-300" />
-                <span>Directions</span>
+                <span>Directions (Google Maps)</span>
               </a>
             </div>
           </div>
@@ -118,7 +105,7 @@ export const ContactSection: React.FC = () => {
           <div className="lg:col-span-6 relative min-h-[380px] sm:min-h-[460px] bg-[#081026] border-t lg:border-t-0 lg:border-l border-cyan-500/20">
             <iframe
               title="RAIS Agencies Hub Location"
-              src="https://www.google.com/maps?q=Reddies+Colony,+Rayachoty,+516269&output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3869.873294371908!2d78.75682707578768!3d14.05935898636652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb30318ccf76259%3A0x47c3e259f30654fa!2sRAIS%20Agencies!5e0!3m2!1sen!2sin!4v1731600000000!5m2!1sen!2sin"
               className="absolute inset-0 w-full h-full border-0 filter brightness-90 contrast-110"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -127,12 +114,12 @@ export const ContactSection: React.FC = () => {
             {/* Open in Maps Overlay Button */}
             <div className="absolute top-4 left-4 z-10">
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Reddies+Colony+Rayachoty+516269"
+                href="https://www.google.com/maps/place/RAIS+Agencies/@14.059359,78.759402,17z/data=!3m1!4b1!4m6!3m5!1s0x3bb30318ccf76259:0x47c3e259f30654fa!8m2!3d14.059359!4d78.759402!16s%2Fg%2F11npc8m4rr"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#081026]/90 border border-cyan-400/40 text-xs font-bold text-white shadow-lg backdrop-blur-md hover:bg-cyan-400 hover:text-slate-950 transition-colors"
               >
-                <span>Open in Maps</span>
+                <span>Open in Google Maps</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>

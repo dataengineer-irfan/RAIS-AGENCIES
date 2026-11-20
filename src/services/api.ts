@@ -310,5 +310,35 @@ export const api = {
   getAuditLogs: async (): Promise<AuditLogItem[]> => {
     const res = await fetch(`${BASE_URL}/automation/audit-logs`);
     return res.json();
+  },
+  generateReviewRequest: async (payload: {
+    customer_name: string;
+    cafe_name: string;
+    mandal_town: string;
+    phone_number?: string;
+    products?: string[];
+  }): Promise<any> => {
+    const res = await fetch(`${BASE_URL}/reviews/generate-request`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    return res.json();
+  },
+  getReviewTemplates: async (): Promise<any[]> => {
+    const res = await fetch(`${BASE_URL}/reviews/request-templates`);
+    return res.json();
+  },
+  getGoogleQnA: async (): Promise<any> => {
+    const res = await fetch(`${BASE_URL}/seo/qna`);
+    return res.json();
+  },
+  seedGoogleQnA: async (): Promise<any> => {
+    const res = await fetch(`${BASE_URL}/seo/qna/seed`, { method: 'POST' });
+    return res.json();
+  },
+  publishPostNow: async (postId: number): Promise<any> => {
+    const res = await fetch(`${BASE_URL}/campaigns/posts/${postId}/publish-now`, { method: 'POST' });
+    return res.json();
   }
 };

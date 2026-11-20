@@ -313,6 +313,42 @@ export const PublishingCalendarView: React.FC = () => {
                   Test Link
                 </a>
               </div>
+
+              {/* ALGORITHMIC ENHANCEMENT 5: 1-Click Google LocalPost Publishing */}
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-slate-800">
+                <span className="text-[11px] text-slate-400">
+                  {selectedPost.status === 'PUBLISHED' 
+                    ? 'Post is published live on Google Maps.' 
+                    : 'Dispatch immediately to Google Business Profile feed.'}
+                </span>
+                <button
+                  type="button"
+                  disabled={actionLoading}
+                  onClick={async () => {
+                    try {
+                      setActionLoading(true);
+                      const res = await api.publishPostNow(selectedPost.id);
+                      setNotification({
+                        message: res.message || 'Post published to Google Business Profile!',
+                        type: 'success'
+                      });
+                      await loadCampaigns();
+                    } catch (err: any) {
+                      setNotification({
+                        message: err.message || 'Failed to publish post to Google',
+                        type: 'error'
+                      });
+                    } finally {
+                      setActionLoading(false);
+                      setTimeout(() => setNotification(null), 5000);
+                    }
+                  }}
+                  className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 disabled:opacity-50 text-slate-950 font-bold text-xs rounded-lg transition-all shadow-md shadow-emerald-500/20 flex items-center justify-center gap-1.5"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  <span>{selectedPost.status === 'PUBLISHED' ? 'Re-publish to Google Maps' : '1-Click Publish to Google Maps'}</span>
+                </button>
+              </div>
             </div>
           ) : (
             <div className="h-64 flex flex-col items-center justify-center text-slate-500 text-xs">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Snowflake, Building2, FileCheck2, Truck, ShieldCheck, MapPin, ChevronRight } from 'lucide-react';
+import { Snowflake, Building2, FileCheck2, Truck, ShieldCheck, MapPin, ChevronRight, Navigation } from 'lucide-react';
 
 interface TradeStandardsProps {
   onOpenQuote: () => void;
@@ -38,13 +38,76 @@ export const TradeStandards: React.FC<TradeStandardsProps> = ({ onOpenQuote }) =
   ];
 
   const distributionRoutes = [
-    { hub: 'Rayachoty Central Depot', type: 'Primary Hub', note: 'Immediate counter handover & local kitchen routes' },
-    { hub: 'Sundupalli & Chinnamandem Corridor', type: 'Daily Supply Route', note: 'Daily dairy, frozen fries, and packaging drops' },
-    { hub: 'Galiveedu & Kadiri Highway', type: 'Commercial Corridor', note: 'Direct wholesale distribution for cafes & fast food centers' },
-    { hub: 'Kalakada & Mahal Sector', type: 'Scheduled Delivery', note: 'Scheduled supply drops for bakeries, pizzerias & shawarma points' },
-    { hub: 'Kadapa Sector Corridor', type: 'Regional Route', note: 'Scheduled supply drops for QSRs & hotels' },
-    { hub: 'Madanapalle Highway', type: 'Regional Route', note: 'Bulk frozen carton dispatch for bakeries & cafés' },
-    { hub: 'Rajampet Sector Link', type: 'Regional Route', note: 'Direct foodservice supply, catering & dining' }
+    {
+      hub: 'Rayachoty Town (516269)',
+      distance: 'Depot Hub',
+      type: 'Primary Depot Hub',
+      note: 'Immediate counter handover, depot pickup & local cafe delivery',
+      directionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Rayachoty+Andhra+Pradesh+516269&destination=RAIS+Agencies+Sundupalli+Road+Rayachoty&destination_place_id=ChIJWWL3zBgDszsR-lQG81niw0c'
+    },
+    {
+      hub: 'Sundupalli Corridor',
+      distance: '18 km',
+      type: 'Daily Supply Route',
+      note: 'Daily dairy, frozen fries, and packaging drops along Sundupalli Highway',
+      directionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Sundupalli+Andhra+Pradesh&destination=RAIS+Agencies+Sundupalli+Road+Rayachoty&destination_place_id=ChIJWWL3zBgDszsR-lQG81niw0c'
+    },
+    {
+      hub: 'Galiveedu Highway',
+      distance: '24 km',
+      type: 'Daily / Alternate Day',
+      note: 'Direct wholesale supply for fast food centers, shawarmas & bakeries',
+      directionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Galiveedu+Andhra+Pradesh&destination=RAIS+Agencies+Sundupalli+Road+Rayachoty&destination_place_id=ChIJWWL3zBgDszsR-lQG81niw0c'
+    },
+    {
+      hub: 'Kadiri Sector',
+      distance: '52 km',
+      type: 'Scheduled Route',
+      note: 'Commercial food kitchens, cafes, and bulk frozen carton delivery',
+      directionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Kadiri+Andhra+Pradesh&destination=RAIS+Agencies+Sundupalli+Road+Rayachoty&destination_place_id=ChIJWWL3zBgDszsR-lQG81niw0c'
+    },
+    {
+      hub: 'Chinnamandem Route',
+      distance: '15 km',
+      type: 'Daily Route',
+      note: 'Direct kitchen drops of french fries, nuggets, and kraft boxes',
+      directionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Chinnamandem+Andhra+Pradesh&destination=RAIS+Agencies+Sundupalli+Road+Rayachoty&destination_place_id=ChIJWWL3zBgDszsR-lQG81niw0c'
+    },
+    {
+      hub: 'Kalakada Sector',
+      distance: '28 km',
+      type: 'Scheduled Delivery',
+      note: 'Scheduled supply drops for bakeries, pizzerias & food points',
+      directionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Kalakada+Andhra+Pradesh&destination=RAIS+Agencies+Sundupalli+Road+Rayachoty&destination_place_id=ChIJWWL3zBgDszsR-lQG81niw0c'
+    },
+    {
+      hub: 'Mahal Cross Sector',
+      distance: '38 km',
+      type: 'Scheduled Delivery',
+      note: 'Mahal Cross eateries, highway food stalls & dhaba kitchen supply',
+      directionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Mahal+Cross+Kalakada+Andhra+Pradesh&destination=RAIS+Agencies+Sundupalli+Road+Rayachoty&destination_place_id=ChIJWWL3zBgDszsR-lQG81niw0c'
+    },
+    {
+      hub: 'Madanapalle Highway',
+      distance: '54 km',
+      type: 'Regional Corridor',
+      note: 'Bulk frozen carton dispatch for cafes, pizzerias & restaurants',
+      directionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Madanapalle+Andhra+Pradesh&destination=RAIS+Agencies+Sundupalli+Road+Rayachoty&destination_place_id=ChIJWWL3zBgDszsR-lQG81niw0c'
+    },
+    {
+      hub: 'Kadapa Sector Corridor',
+      distance: '52 km',
+      type: 'Regional Route',
+      note: 'Wholesale frozen snacks and pizza packaging supply for QSRs',
+      directionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Kadapa+Andhra+Pradesh&destination=RAIS+Agencies+Sundupalli+Road+Rayachoty&destination_place_id=ChIJWWL3zBgDszsR-lQG81niw0c'
+    },
+    {
+      hub: 'Rajampet Sector Link',
+      distance: '45 km',
+      type: 'Regional Route',
+      note: 'Direct foodservice supply, catering events & dining establishments',
+      directionsUrl: 'https://www.google.com/maps/dir/?api=1&origin=Rajampet+Andhra+Pradesh&destination=RAIS+Agencies+Sundupalli+Road+Rayachoty&destination_place_id=ChIJWWL3zBgDszsR-lQG81niw0c'
+    }
   ];
 
   return (
@@ -124,14 +187,31 @@ export const TradeStandards: React.FC<TradeStandardsProps> = ({ onOpenQuote }) =
             </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-6">
             {distributionRoutes.map((r, idx) => (
-              <div key={idx} className="space-y-1">
-                <span className="text-[10px] font-mono font-bold text-[#C8900A] uppercase tracking-wider block">
-                  {r.type}
-                </span>
-                <div className="text-xs font-bold text-white">{r.hub}</div>
-                <p className="text-[11px] text-[#A89880] leading-snug">{r.note}</p>
+              <div key={idx} className="p-3.5 rounded-lg bg-[#241a14]/60 border border-[#2E2418] hover:border-[#C8900A]/40 transition-all flex flex-col justify-between space-y-3 group">
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono font-bold text-[#C8900A] uppercase tracking-wider block">
+                      {r.type}
+                    </span>
+                    <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[#C8900A]/10 text-[#C8900A] border border-[#C8900A]/20">
+                      {r.distance}
+                    </span>
+                  </div>
+                  <div className="text-xs font-bold text-white group-hover:text-[#C8900A] transition-colors">{r.hub}</div>
+                  <p className="text-[11px] text-[#A89880] leading-snug">{r.note}</p>
+                </div>
+
+                <a
+                  href={r.directionsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-1.5 w-full py-1.5 px-2 rounded bg-[#1C1410] hover:bg-[#C8900A] text-[#C8900A] hover:text-white border border-[#C8900A]/30 text-[10px] font-bold transition-all shadow-sm"
+                >
+                  <Navigation className="w-3 h-3" />
+                  <span>Google Route</span>
+                </a>
               </div>
             ))}
           </div>

@@ -1305,7 +1305,7 @@ export const BUSINESS_INFO = {
   tagline: 'Wholesale Frozen Food Products & Packaging Solutions',
   subtagline: 'FROZEN FOOD PRODUCTS',
   address: 'Near Reddies Colony, Beside Indel Money Bank, Sundupalli Road, Rayachoty - 516269, Annamayya District, Andhra Pradesh, India',
-  phones: ['9347453135', '9573261696'],
+  phones: ['9347453135'],
   primaryPhone: '9347453135',
   whatsappNumber: '919347453135',
   whatsappUrl: 'https://wa.me/919347453135',
