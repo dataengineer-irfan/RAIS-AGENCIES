@@ -26,6 +26,17 @@ export function assetUrl(path: string | undefined | null): string {
   // Ensure trailing slash on base
   const normalizedBase = base.endsWith('/') ? base : `${base}/`;
   
+  // If the path already starts with the base path, return it directly (idempotent)
+  if (path.startsWith(normalizedBase) || (base !== '/' && path.startsWith(base))) {
+    return path;
+  }
+  if (path.startsWith('/RAIS-AGENCIES/') || path.startsWith('/RAIS-AGENCIES')) {
+    return path;
+  }
+  if (path.startsWith('RAIS-AGENCIES/')) {
+    return `/${path}`;
+  }
+
   // Strip leading slash from asset path to prevent domain-root browser override
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
   

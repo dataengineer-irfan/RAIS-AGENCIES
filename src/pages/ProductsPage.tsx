@@ -339,10 +339,13 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                   {/* Photo Container */}
                   <div className="relative overflow-hidden aspect-[4/3] bg-[#081026]">
                     <img
-                      src={product.image || assetUrl('/images/products/chicken_momos.jpg')}
+                      src={assetUrl(product.image || '/assets/products/triken_chicken_momos_pack_details.jpg')}
                       alt={`${product.name} (${product.brand} - ${product.pack}) Wholesale Food Service Rayachoty - RAIS Agencies`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
                     />
                     {/* Deep Sub-Zero Bottom Gradient */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0f1c3f] via-transparent to-transparent opacity-80" />

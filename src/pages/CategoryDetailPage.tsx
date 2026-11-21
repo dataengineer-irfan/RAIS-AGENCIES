@@ -284,10 +284,13 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
                 >
                   <div className="relative overflow-hidden aspect-[4/3] bg-[#081026]">
                     <img
-                      src={product.image || heroImage}
+                      src={assetUrl(product.image || heroImage)}
                       alt={`${product.name} (${product.brand} - ${product.pack}) Wholesale Rayachoty - RAIS Agencies`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0f1c3f] via-transparent to-transparent opacity-80" />
                     <div className="absolute top-2.5 right-2.5 flex items-center gap-1 px-2 py-0.5 rounded-full bg-cyan-950/80 border border-cyan-400/30 text-[10px] font-bold text-cyan-300 backdrop-blur-md">

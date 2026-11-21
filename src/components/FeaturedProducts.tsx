@@ -180,26 +180,30 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
                 className="flex items-center gap-3.5 px-5 py-3.5 transition-colors hover:bg-cyan-400/[0.06] group"
               >
                 {/* Product Thumbnail with Brand Monogram Fallback */}
-                <div className="relative size-12 shrink-0 rounded-xl overflow-hidden border border-cyan-500/30 bg-[#081026] flex items-center justify-center shadow-md">
-                  {product.image ? (
+                <div
+                  style={{ backgroundColor: badge.bg, color: badge.text }}
+                  className="relative size-12 shrink-0 rounded-xl overflow-hidden border border-cyan-500/30 flex items-center justify-center shadow-md font-serif font-bold text-xs uppercase tracking-wider"
+                >
+                  {/* Fallback Monogram is always present in background */}
+                  <span>{badge.label}</span>
+
+                  {/* Overlaid Image */}
+                  {product.image && (
                     <img
                       src={assetUrl(product.image)}
                       alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
                     />
-                  ) : (
-                    <div
-                      style={{ backgroundColor: badge.bg, color: badge.text }}
-                      className="w-full h-full font-serif font-bold text-xs flex items-center justify-center uppercase tracking-wider"
-                    >
-                      {badge.label}
-                    </div>
                   )}
+
                   {/* Subtle Brand Tag Badge */}
                   <span
                     style={{ backgroundColor: badge.bg, color: badge.text }}
-                    className="absolute bottom-0.5 right-0.5 px-1 py-0.2 text-[8px] font-black rounded-xs shadow-xs"
+                    className="absolute bottom-0.5 right-0.5 px-1 py-0.2 text-[8px] font-black rounded-xs shadow-xs z-10"
                   >
                     {badge.label}
                   </span>
@@ -460,6 +464,9 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
                           alt={product.name}
                           loading="lazy"
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center text-slate-500 text-xs">

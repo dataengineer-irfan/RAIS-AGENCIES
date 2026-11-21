@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, Thermometer, Package, Box, ShieldCheck, MessageSquare, Plus, Minus, ArrowRight, Building2, CheckCircle2 } from 'lucide-react';
 import { ProductItem, BUSINESS_INFO } from '../data/catalogue';
+import { assetUrl } from '../utils/assetUrl';
 
 interface ProductSpecModalProps {
   product: ProductItem | null;
@@ -134,9 +135,12 @@ export const ProductSpecModal: React.FC<ProductSpecModalProps> = ({
             {product.image ? (
               <>
                 <img
-                  src={product.image}
+                  src={assetUrl(product.image)}
                   alt={product.name}
                   className="w-full h-full object-cover object-center"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
                 />
                 <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-slate-950/85 backdrop-blur-md border border-slate-700 text-[10px] font-bold text-amber-400">
                   Verified Official Photography
