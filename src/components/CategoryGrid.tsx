@@ -13,18 +13,21 @@ const CATEGORY_PLINTH_IMAGES: Record<string, { image: string; isNew?: boolean }>
   CHICKEN: { image: assetUrl('/images/ref-assets/cat_chicken_ice.png') },
   CHK: { image: assetUrl('/images/ref-assets/cat_chicken_ice.png') },
   VEG: { image: assetUrl('/images/ref-assets/cat_veg_ice.png') },
-  SAUCES: { image: assetUrl('/images/ref-assets/cat_sauces_ice.png') },
-  SAU: { image: assetUrl('/images/ref-assets/cat_sauces_ice.png') },
-  BREADING: { image: assetUrl('/images/ref-assets/cat_breadmix_ice.png') },
-  BRD: { image: assetUrl('/images/ref-assets/cat_breadmix_ice.png') },
+  DAIRY: { image: assetUrl('/images/ref-assets/cat_cheese_ice.png') },
   CHEESE: { image: assetUrl('/images/ref-assets/cat_cheese_ice.png') },
   CHE: { image: assetUrl('/images/ref-assets/cat_cheese_ice.png') },
+  BAKERY: { image: assetUrl('/images/ref-assets/cat_breadmix_ice.png') },
+  BREADING: { image: assetUrl('/images/ref-assets/cat_breadmix_ice.png') },
+  BRD: { image: assetUrl('/images/ref-assets/cat_breadmix_ice.png') },
+  SAUCES: { image: assetUrl('/images/ref-assets/cat_sauces_ice.png') },
+  SAU: { image: assetUrl('/images/ref-assets/cat_sauces_ice.png') },
+  SYRUPS: { image: assetUrl('/images/ref-assets/cat_mojitos_ice.png') },
+  MOJITOS: { image: assetUrl('/images/ref-assets/cat_mojitos_ice.png') },
+  MOJ: { image: assetUrl('/images/ref-assets/cat_mojitos_ice.png') },
   SPICES: { image: assetUrl('/images/ref-assets/cat_spices_ice.png'), isNew: true },
   SPI: { image: assetUrl('/images/ref-assets/cat_spices_ice.png'), isNew: true },
   PACKAGING: { image: assetUrl('/images/ref-assets/cat_packaging_ice.png') },
-  PKG: { image: assetUrl('/images/ref-assets/cat_packaging_ice.png') },
-  MOJITOS: { image: assetUrl('/images/ref-assets/cat_mojitos_ice.png') },
-  MOJ: { image: assetUrl('/images/ref-assets/cat_mojitos_ice.png') }
+  PKG: { image: assetUrl('/images/ref-assets/cat_packaging_ice.png') }
 };
 
 export const CategoryGrid: React.FC<CategoryGridProps> = ({
@@ -106,9 +109,9 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({
                 </div>
 
                 {/* Content & Action Arrow */}
-                <div className="flex items-end justify-between pt-1">
-                  <div>
-                    <h3 className="font-serif text-base sm:text-lg font-bold text-white group-hover:text-cyan-300 transition-colors line-clamp-1">
+                <div className="flex items-end justify-between pt-1 gap-2">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-serif text-sm sm:text-base font-bold text-white group-hover:text-cyan-300 transition-colors line-clamp-2 leading-snug min-h-[2.6rem] flex items-center">
                       {cat.name}
                     </h3>
                     <p className="text-xs text-slate-400 pt-0.5">

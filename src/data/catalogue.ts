@@ -32,7 +32,7 @@ const RAW_CATEGORIES: CategoryItem[] = [
     itemCount: 6,
     accent: 'from-amber-500/20 to-orange-500/20',
     iconName: 'Flame',
-    image: '/assets/products/triken_chicken_momos.jpg'
+    image: '/images/ref-assets/cat_chicken_ice.png'
   },
   {
     code: 'VEG',
@@ -41,7 +41,7 @@ const RAW_CATEGORIES: CategoryItem[] = [
     itemCount: 14,
     accent: 'from-emerald-500/20 to-teal-500/20',
     iconName: 'Leaf',
-    image: '/assets/products/amul_french_fries_9mm.jpg'
+    image: '/images/ref-assets/cat_veg_ice.png'
   },
   {
     code: 'DAIRY',
@@ -50,7 +50,7 @@ const RAW_CATEGORIES: CategoryItem[] = [
     itemCount: 8,
     accent: 'from-yellow-500/20 to-amber-500/20',
     iconName: 'Milk',
-    image: '/assets/products/milky_mist_mozzarella_1kg.jpg'
+    image: '/images/ref-assets/cat_cheese_ice.png'
   },
   {
     code: 'BAKERY',
@@ -59,7 +59,7 @@ const RAW_CATEGORIES: CategoryItem[] = [
     itemCount: 5,
     accent: 'from-amber-600/20 to-yellow-600/20',
     iconName: 'Wheat',
-    image: '/assets/products/burger_buns.jpg'
+    image: '/images/ref-assets/cat_breadmix_ice.png'
   },
   {
     code: 'SAUCES',
@@ -68,7 +68,7 @@ const RAW_CATEGORIES: CategoryItem[] = [
     itemCount: 24,
     accent: 'from-red-500/20 to-rose-500/20',
     iconName: 'Droplets',
-    image: '/assets/products/delmonte_tandoori_mayo.jpg'
+    image: '/images/ref-assets/cat_sauces_ice.png'
   },
   {
     code: 'SYRUPS',
@@ -77,7 +77,7 @@ const RAW_CATEGORIES: CategoryItem[] = [
     itemCount: 12,
     accent: 'from-cyan-500/20 to-blue-500/20',
     iconName: 'Wine',
-    image: '/assets/products/manama_syrups_trio.jpg'
+    image: '/images/ref-assets/cat_mojitos_ice.png'
   },
   {
     code: 'SPICES',
@@ -86,7 +86,7 @@ const RAW_CATEGORIES: CategoryItem[] = [
     itemCount: 9,
     accent: 'from-orange-500/20 to-red-500/20',
     iconName: 'Sparkles',
-    image: '/assets/products/vkl_crispy_cajun_breading.jpg'
+    image: '/images/ref-assets/cat_spices_ice.png'
   },
   {
     code: 'PACKAGING',
@@ -95,7 +95,7 @@ const RAW_CATEGORIES: CategoryItem[] = [
     itemCount: 12,
     accent: 'from-indigo-500/20 to-blue-500/20',
     iconName: 'Package',
-    image: '/assets/products/pizza_box_printed_8x8.jpg'
+    image: '/images/ref-assets/cat_packaging_ice.png'
   },
 ];
 

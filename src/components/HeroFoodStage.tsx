@@ -15,28 +15,28 @@ const SATELLITE_ITEMS: SatelliteItem[] = [
     src: assetUrl('/images/ref-assets/hero_momos_cutout.png'),
     alt: 'Steamed Momos',
     offset: 0,
-    label: 'ITC Chicken Momos',
+    label: 'TRIKEN Chicken Momos',
     badge: 'IQF -18°C'
   },
   {
     src: assetUrl('/images/ref-assets/hero_fries_cutout.png'),
     alt: 'French Fries',
     offset: Math.PI * 0.5,
-    label: 'Shoestring Fries',
+    label: 'McCain / Amul Fries',
     badge: '9mm Grade-A'
   },
   {
     src: assetUrl('/images/ref-assets/hero_popcorn_cutout.png'),
     alt: 'Chicken Popcorn',
     offset: Math.PI,
-    label: 'Crispy Nuggets & Pops',
+    label: 'ITC Chicken Nuggets',
     badge: 'High-Hold Crisp'
   },
   {
     src: assetUrl('/images/ref-assets/hero_cheese_cutout.png'),
     alt: 'Mozzarella & Paneer',
     offset: Math.PI * 1.5,
-    label: 'Malai Paneer Cubes',
+    label: 'Milky Mist Mozzarella',
     badge: '100% Dairy'
   }
 ];
@@ -108,9 +108,9 @@ export const HeroFoodStage: React.FC = () => {
 
         {/* Central Master Food Stack (Burger + Paneer Blocks + Fries) */}
         <motion.div
-          animate={{ y: [0, -14, 0] }}
+          animate={{ y: [0, -10, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute left-1/2 top-[20%] z-20 w-[60%] -translate-x-1/2 drop-shadow-[0_25px_35px_rgba(0,0,0,0.65)]"
+          className="absolute left-1/2 top-[22%] z-20 w-[50%] max-w-[280px] -translate-x-1/2 drop-shadow-[0_25px_35px_rgba(0,0,0,0.65)]"
         >
           <motion.img
             src={assetUrl('/images/ref-assets/hero_burger_stack.png')}
@@ -126,16 +126,16 @@ export const HeroFoodStage: React.FC = () => {
         {/* Orbiting Satellite Food Items in 3D Elliptical Paths */}
         {SATELLITE_ITEMS.map((item) => {
           const currentAngle = angle + item.offset;
-          // Elliptical perspective orbit coordinates
-          const xRadius = 42; // percentage of stage width
-          const yRadius = 15; // compressed vertical axis for 3D tilt perspective
+          // Wider elliptical orbit to clear central stack completely
+          const xRadius = 45; // percentage of stage width
+          const yRadius = 22; // expanded vertical radius for collision-free clearance
           const xPercent = 50 + Math.cos(currentAngle) * xRadius;
           const yPercent = 52 + Math.sin(currentAngle) * yRadius;
 
           // Depth sorting: if sin(angle) > 0, item is in foreground; if < 0, background
           const isForeground = Math.sin(currentAngle) > 0;
-          const scale = isForeground ? 1.05 : 0.82;
-          const opacity = isForeground ? 1 : 0.65;
+          const scale = isForeground ? 1.05 : 0.85;
+          const opacity = isForeground ? 1 : 0.7;
           const zIndex = isForeground ? 30 : 10;
 
           return (
@@ -154,12 +154,12 @@ export const HeroFoodStage: React.FC = () => {
               transition={{ duration: 0.15 }}
               className="absolute group cursor-pointer"
             >
-              {/* Product Disc */}
-              <div className="relative p-2 rounded-2xl bg-[#0f1c3f]/85 border border-cyan-400/40 shadow-xl shadow-black/60 backdrop-blur-md transition-transform duration-300 group-hover:scale-115">
+              {/* Product Disc with Guaranteed Identical Square Dimensions */}
+              <div className="relative w-14 h-14 sm:w-16 sm:h-16 aspect-square p-2 rounded-2xl bg-[#0f1c3f]/90 border border-cyan-400/50 shadow-xl shadow-black/60 backdrop-blur-md flex items-center justify-center transition-transform duration-300 group-hover:scale-115">
                 <img
                   src={item.src}
                   alt={item.alt}
-                  className="w-14 h-14 sm:w-16 sm:h-16 object-contain filter drop-shadow-[0_4px_10px_rgba(0,210,255,0.35)]"
+                  className="w-full h-full object-contain filter drop-shadow-[0_4px_10px_rgba(0,210,255,0.35)]"
                   draggable={false}
                 />
                 

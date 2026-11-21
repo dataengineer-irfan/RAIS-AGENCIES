@@ -18,18 +18,21 @@ const CATEGORY_PLINTH_IMAGES: Record<string, string> = {
   CHICKEN: assetUrl('/images/ref-assets/cat_chicken_ice.png'),
   CHK: assetUrl('/images/ref-assets/cat_chicken_ice.png'),
   VEG: assetUrl('/images/ref-assets/cat_veg_ice.png'),
-  SAUCES: assetUrl('/images/ref-assets/cat_sauces_ice.png'),
-  SAU: assetUrl('/images/ref-assets/cat_sauces_ice.png'),
-  BREADING: assetUrl('/images/ref-assets/cat_breadmix_ice.png'),
-  BRD: assetUrl('/images/ref-assets/cat_breadmix_ice.png'),
+  DAIRY: assetUrl('/images/ref-assets/cat_cheese_ice.png'),
   CHEESE: assetUrl('/images/ref-assets/cat_cheese_ice.png'),
   CHE: assetUrl('/images/ref-assets/cat_cheese_ice.png'),
+  BAKERY: assetUrl('/images/ref-assets/cat_breadmix_ice.png'),
+  BREADING: assetUrl('/images/ref-assets/cat_breadmix_ice.png'),
+  BRD: assetUrl('/images/ref-assets/cat_breadmix_ice.png'),
+  SAUCES: assetUrl('/images/ref-assets/cat_sauces_ice.png'),
+  SAU: assetUrl('/images/ref-assets/cat_sauces_ice.png'),
+  SYRUPS: assetUrl('/images/ref-assets/cat_mojitos_ice.png'),
+  MOJITOS: assetUrl('/images/ref-assets/cat_mojitos_ice.png'),
+  MOJ: assetUrl('/images/ref-assets/cat_mojitos_ice.png'),
   SPICES: assetUrl('/images/ref-assets/cat_spices_ice.png'),
   SPI: assetUrl('/images/ref-assets/cat_spices_ice.png'),
   PACKAGING: assetUrl('/images/ref-assets/cat_packaging_ice.png'),
-  PKG: assetUrl('/images/ref-assets/cat_packaging_ice.png'),
-  MOJITOS: assetUrl('/images/ref-assets/cat_mojitos_ice.png'),
-  MOJ: assetUrl('/images/ref-assets/cat_mojitos_ice.png')
+  PKG: assetUrl('/images/ref-assets/cat_packaging_ice.png')
 };
 
 const BRAND_BADGES: Record<string, { bg: string; text: string; label: string }> = {

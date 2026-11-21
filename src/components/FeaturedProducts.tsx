@@ -18,18 +18,21 @@ const CATEGORY_PLINTH_IMAGES: Record<string, string> = {
   CHICKEN: assetUrl('/images/ref-assets/cat_chicken_ice.png'),
   CHK: assetUrl('/images/ref-assets/cat_chicken_ice.png'),
   VEG: assetUrl('/images/ref-assets/cat_veg_ice.png'),
-  SAUCES: assetUrl('/images/ref-assets/cat_sauces_ice.png'),
-  SAU: assetUrl('/images/ref-assets/cat_sauces_ice.png'),
-  BREADING: assetUrl('/images/ref-assets/cat_breadmix_ice.png'),
-  BRD: assetUrl('/images/ref-assets/cat_breadmix_ice.png'),
+  DAIRY: assetUrl('/images/ref-assets/cat_cheese_ice.png'),
   CHEESE: assetUrl('/images/ref-assets/cat_cheese_ice.png'),
   CHE: assetUrl('/images/ref-assets/cat_cheese_ice.png'),
+  BAKERY: assetUrl('/images/ref-assets/cat_breadmix_ice.png'),
+  BREADING: assetUrl('/images/ref-assets/cat_breadmix_ice.png'),
+  BRD: assetUrl('/images/ref-assets/cat_breadmix_ice.png'),
+  SAUCES: assetUrl('/images/ref-assets/cat_sauces_ice.png'),
+  SAU: assetUrl('/images/ref-assets/cat_sauces_ice.png'),
+  SYRUPS: assetUrl('/images/ref-assets/cat_mojitos_ice.png'),
+  MOJITOS: assetUrl('/images/ref-assets/cat_mojitos_ice.png'),
+  MOJ: assetUrl('/images/ref-assets/cat_mojitos_ice.png'),
   SPICES: assetUrl('/images/ref-assets/cat_spices_ice.png'),
   SPI: assetUrl('/images/ref-assets/cat_spices_ice.png'),
   PACKAGING: assetUrl('/images/ref-assets/cat_packaging_ice.png'),
-  PKG: assetUrl('/images/ref-assets/cat_packaging_ice.png'),
-  MOJITOS: assetUrl('/images/ref-assets/cat_mojitos_ice.png'),
-  MOJ: assetUrl('/images/ref-assets/cat_mojitos_ice.png')
+  PKG: assetUrl('/images/ref-assets/cat_packaging_ice.png')
 };
 
 export function getBrandBadge(brand: string, name: string): { label: string; bg: string; text: string } {
@@ -176,12 +179,30 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
                 key={product.sku}
                 className="flex items-center gap-3.5 px-5 py-3.5 transition-colors hover:bg-cyan-400/[0.06] group"
               >
-                {/* Brand Monogram Avatar Disc */}
-                <div
-                  style={{ backgroundColor: badge.bg, color: badge.text }}
-                  className="size-10 shrink-0 rounded-full font-serif font-bold text-xs flex items-center justify-center shadow-md uppercase tracking-wider"
-                >
-                  {badge.label}
+                {/* Product Thumbnail with Brand Monogram Fallback */}
+                <div className="relative size-12 shrink-0 rounded-xl overflow-hidden border border-cyan-500/30 bg-[#081026] flex items-center justify-center shadow-md">
+                  {product.image ? (
+                    <img
+                      src={assetUrl(product.image)}
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div
+                      style={{ backgroundColor: badge.bg, color: badge.text }}
+                      className="w-full h-full font-serif font-bold text-xs flex items-center justify-center uppercase tracking-wider"
+                    >
+                      {badge.label}
+                    </div>
+                  )}
+                  {/* Subtle Brand Tag Badge */}
+                  <span
+                    style={{ backgroundColor: badge.bg, color: badge.text }}
+                    className="absolute bottom-0.5 right-0.5 px-1 py-0.2 text-[8px] font-black rounded-xs shadow-xs"
+                  >
+                    {badge.label}
+                  </span>
                 </div>
 
                 {/* Product Info */}
@@ -435,7 +456,7 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
                     <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-[#081026] mb-3">
                       {product.image ? (
                         <img
-                          src={product.image}
+                          src={assetUrl(product.image)}
                           alt={product.name}
                           loading="lazy"
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
