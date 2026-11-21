@@ -1,12 +1,12 @@
 import os
 import qrcode
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REF_DIR = os.path.join(BASE_DIR, "public", "images", "ref-assets")
 PROD_DIR = os.path.join(BASE_DIR, "public", "images", "products")
 ASSETS_PROD_DIR = os.path.join(BASE_DIR, "public", "assets", "products")
-WAPP_DIR = r"C:\Users\affra\Pictures\wapp"
+ENHANCED_DIR = os.path.join(BASE_DIR, "public", "assets", "enhanced_insta_photos")
 PUB_IMG = os.path.join(BASE_DIR, "public", "images")
 
 # URLs & Info
@@ -45,16 +45,22 @@ def make_circular_thumbnail(img_path, size=52, border_color="#f59e0b", border_w=
         im = Image.open(img_path).convert('RGBA')
         ss_size = size * 3
         w, h = im.size
-        min_dim = min(w, h)
-        im_crop = im.crop(((w - min_dim)//2, (h - min_dim)//2, (w + min_dim)//2, (h + min_dim)//2))
-        im_res = im_crop.resize((ss_size, ss_size), Image.Resampling.LANCZOS)
+        
+        # Fit inside square with white canvas
+        scale = min(ss_size / w, ss_size / h)
+        new_w = max(1, int(w * scale))
+        new_h = max(1, int(h * scale))
+        im_res = im.resize((new_w, new_h), Image.Resampling.LANCZOS)
+        
+        sq = Image.new('RGBA', (ss_size, ss_size), (255, 255, 255, 255))
+        sq.paste(im_res, ((ss_size - new_w)//2, (ss_size - new_h)//2), im_res)
         
         mask = Image.new('L', (ss_size, ss_size), 0)
         draw_mask = ImageDraw.Draw(mask)
         draw_mask.ellipse((0, 0, ss_size, ss_size), fill=255)
         
         circle_im = Image.new('RGBA', (ss_size, ss_size), (0, 0, 0, 0))
-        circle_im.paste(im_res, (0, 0), mask)
+        circle_im.paste(sq, (0, 0), mask)
         
         draw_circle = ImageDraw.Draw(circle_im)
         draw_circle.ellipse((2, 2, ss_size - 3, ss_size - 3), outline=border_color, width=border_w * 3)
@@ -102,58 +108,35 @@ inner_diamond = [
     (logo_cx, logo_cy + crest_size - 14),
     (logo_cx - crest_size + 14, logo_cy)
 ]
-draw.polygon(inner_diamond, outline="#38bdf8", width=3)
+draw.polygon(inner_diamond, outline="#0284c7", width=2)
+draw.text((logo_cx, logo_cy - 20), "RAIS", fill="#f59e0b", font=font_h1, anchor="mm")
+draw.text((logo_cx, logo_cy + 25), "FOODS", fill="#38bdf8", font=font_badge, anchor="mm")
 
-# Inside Logo: Red "R" and "RAIS" banner
-draw.text((logo_cx, logo_cy - 25), "R", fill="#dc2626", font=font_brand, anchor="mm")
-draw.rectangle([(logo_cx - 85, logo_cy + 50), (logo_cx + 85, logo_cy + 95)], fill="#07112c")
-draw.text((logo_cx, logo_cy + 72), "RAIS", fill="#ffffff", font=font_sub_brand, anchor="mm")
+# Brand Title & Slogans
+draw.text((330, 110), "RAIS AGENCIES", fill="#ffffff", font=font_brand)
+draw.text((335, 215), "RAYACHOTY'S PREMIER FOOD SERVICE & COLD-CHAIN DISTRIBUTOR", fill="#38bdf8", font=font_h2)
+draw.text((335, 265), "Cold-Chain Frozen Foods • Sauces & Condiments • Mojito Syrups • Premium Packaging", fill="#94a3b8", font=font_body)
+draw.text((335, 315), "📍 " + DEPOT_ADDR, fill="#cbd5e1", font=font_small_bold)
 
-# Header Text
-text_start_x = 340
-draw.text((text_start_x, 80), "RAIS AGENCIES", fill="#ffffff", font=font_brand, anchor="lt")
-draw.text((text_start_x + 850, 85), "EST. RAYACHOTY", fill="#f59e0b", font=font_badge, anchor="lt")
+# Hotline Banner on top right
+hotline_box = [(W - 680, 75), (W - 80, 230)]
+draw.rounded_rectangle(hotline_box, radius=16, fill="#0f1c3f", outline="#f59e0b", width=3)
+draw.text((W - 380, 115), "📞 ORDER HOTLINE / WHATSAPP", fill="#f59e0b", font=font_table_hdr, anchor="mm")
+draw.text((W - 380, 175), HOTLINE_DISPLAY, fill="#ffffff", font=font_h1, anchor="mm")
 
-# Subheader with snowflakes
-draw.text((text_start_x, 195), "❄️  FROZEN FOOD PRODUCTS & COMMERCIAL FOOD SERVICE  ❄️", fill="#f59e0b", font=font_sub_brand, anchor="lt")
-draw.text((text_start_x, 255), "Authorized Wholesale Distributor for Cafes, QSRs, Fast Food Outlets, Bakeries & HORECA", fill="#94a3b8", font=font_body, anchor="lt")
+# QR Codes in Header
+qr_cat = generate_qr(CATALOGUE_URL, size=150)
+qr_wa = generate_qr(WHATSAPP_URL, size=150)
 
-# Contact line
-draw.text((text_start_x, 310), f"📍 {DEPOT_ADDR}", fill="#cbd5e1", font=font_small, anchor="lt")
-draw.text((text_start_x, 345), f"📞 Order & Dispatch Hotline: {HOTLINE_DISPLAY}  |  💬 WhatsApp Daily Trade Desk", fill="#22c55e", font=font_body_bold, anchor="lt")
+cat_qr_x = W - 370
+wa_qr_x = W - 180
+qr_y = 255
 
-# Right Top QR Boxes (WhatsApp Order & Live Catalogue)
-qr_card_w, qr_card_h = 320, 370
+canvas.paste(qr_cat, (cat_qr_x - 170, qr_y))
+draw.text((cat_qr_x - 95, qr_y + 160), "📱 ONLINE CATALOGUE", fill="#38bdf8", font=font_status, anchor="mm")
 
-# QR 1: WhatsApp Order
-qr1_x = 1680
-qr1_y = 35
-draw.rounded_rectangle([(qr1_x, qr1_y), (qr1_x + qr_card_w, qr1_y + qr_card_h)], radius=18, fill="#081432", outline="#22c55e", width=3)
-draw.rounded_rectangle([(qr1_x, qr1_y), (qr1_x + qr_card_w, qr1_y + 55)], radius=16, fill="#15803d")
-draw.rectangle([(qr1_x, qr1_y + 40), (qr1_x + qr_card_w, qr1_y + 55)], fill="#15803d")
-draw.text((qr1_x + qr_card_w//2, qr1_y + 27), "💬 WhatsApp Order", fill="#ffffff", font=font_badge, anchor="mm")
-
-qr1_img = generate_qr(WHATSAPP_URL, size=230)
-qr1_img_x = qr1_x + (qr_card_w - 230)//2
-qr1_img_y = qr1_y + 70
-draw.rounded_rectangle([(qr1_img_x - 6, qr1_img_y - 6), (qr1_img_x + 236, qr1_img_y + 236)], radius=10, fill="#ffffff")
-canvas.paste(qr1_img, (qr1_img_x, qr1_img_y))
-draw.text((qr1_x + qr_card_w//2, qr1_y + 335), "SCAN TO ORDER", fill="#f59e0b", font=font_body_bold, anchor="mm")
-
-# QR 2: Live Master Catalogue
-qr2_x = 2030
-qr2_y = 35
-draw.rounded_rectangle([(qr2_x, qr2_y), (qr2_x + qr_card_w, qr2_y + qr_card_h)], radius=18, fill="#081432", outline="#38bdf8", width=3)
-draw.rounded_rectangle([(qr2_x, qr2_y), (qr2_x + qr_card_w, qr2_y + 55)], radius=16, fill="#0369a1")
-draw.rectangle([(qr2_x, qr2_y + 40), (qr2_x + qr_card_w, qr2_y + 55)], fill="#0369a1")
-draw.text((qr2_x + qr_card_w//2, qr2_y + 27), "🌐 Master Catalogue", fill="#ffffff", font=font_badge, anchor="mm")
-
-qr2_img = generate_qr(CATALOGUE_URL, size=230)
-qr2_img_x = qr2_x + (qr_card_w - 230)//2
-qr2_img_y = qr2_y + 70
-draw.rounded_rectangle([(qr2_img_x - 6, qr2_img_y - 6), (qr2_img_x + 236, qr2_img_y + 236)], radius=10, fill="#ffffff")
-canvas.paste(qr2_img, (qr2_img_x, qr2_img_y))
-draw.text((qr2_x + qr_card_w//2, qr2_y + 335), "SCAN FOR CATALOGUE", fill="#38bdf8", font=font_body_bold, anchor="mm")
+canvas.paste(qr_wa, (wa_qr_x, qr_y))
+draw.text((wa_qr_x + 75, qr_y + 160), "💬 DIRECT WHATSAPP", fill="#22c55e", font=font_status, anchor="mm")
 
 
 # ==========================================
@@ -164,14 +147,14 @@ cat_bar_h = 175
 draw.rounded_rectangle([(60, cat_bar_y), (W - 60, cat_bar_y + cat_bar_h)], radius=20, fill="#0a1434", outline="#1e3a8a", width=2)
 
 top_category_icons = [
-    ("FRENCH FRIES", os.path.join(REF_DIR, "hero_fries_cutout.png")),
-    ("NUGGETS", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.32 PM (1).jpeg")), # Authentic ITC Nuggets pack
-    ("BURGER PATTIES", os.path.join(REF_DIR, "hero_burger_stack.png")),
-    ("POPCORN", os.path.join(REF_DIR, "hero_popcorn_cutout.png")),
-    ("FRIED CHICKEN", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 5.51.38 PM.jpeg")), # Authentic KFC Buckets
-    ("CHEESE & DAIRY", os.path.join(REF_DIR, "hero_cheese_cutout.png")),
-    ("MAYO & SAUCES", os.path.join(PROD_DIR, "delmonte_tandoori_mayo.png")),
-    ("PACKAGING", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 5.51.37 PM.jpeg")) # Authentic Boxes Display
+    ("FRENCH FRIES", os.path.join(ENHANCED_DIR, "02_Veg_Snacks", "amul_french_fries_9mm.jpg")),
+    ("NUGGETS", os.path.join(ENHANCED_DIR, "01_Frozen_Chicken", "itc_master_chef_crunchy_chicken_nuggets_1kg.jpg")),
+    ("BURGER PATTIES", os.path.join(ENHANCED_DIR, "02_Veg_Snacks", "chill_fill_veg_burger_patty.jpg")),
+    ("POPCORN", os.path.join(ENHANCED_DIR, "01_Frozen_Chicken", "itc_master_chef_chicken_popcorn_1kg.jpg")),
+    ("FRIED CHICKEN", os.path.join(ENHANCED_DIR, "07_Packaging_Disposables", "fried_chicken_buckets_carton_display.jpg")),
+    ("CHEESE & DAIRY", os.path.join(ENHANCED_DIR, "03_Dairy_Cheese", "milky_mist_mozzarella_2kg_pack_studio.jpg")),
+    ("MAYO & SAUCES", os.path.join(ENHANCED_DIR, "04_Sauces_Condiments", "delmonte_eggless_mayonnaise_premium_pouch.jpg")),
+    ("PACKAGING", os.path.join(ENHANCED_DIR, "07_Packaging_Disposables", "pizza_boxes_8x8_printed_plain_flat.jpg"))
 ]
 
 cat_w = (W - 140) // 8
@@ -236,7 +219,7 @@ def draw_commercial_table_no_rates(card_x, card_y, card_w, card_h, header_title,
         # S.NO.
         draw.text((col_sno_x + sno_w//2, ry + row_h//2), str(sno), fill="#e2e8f0", font=font_body_bold, anchor="mm")
         
-        # Circular Product Thumbnail Image (Original Photos)
+        # Circular Product Thumbnail Image (Pure clean product photos)
         thumb_size = 46
         thumb = make_circular_thumbnail(img_p, size=thumb_size, border_color="#f59e0b", border_w=2)
         canvas.paste(thumb, (col_img_x + (img_w - thumb_size)//2, int(ry + (row_h - thumb_size)//2)), thumb)
@@ -264,12 +247,12 @@ right_x = W - 70 - col_w
 
 # --- TABLE 1: CHICKEN ITEMS (Left Top) ---
 chicken_items = [
-    (1, "SIGNATURE TORTILLAH 8 INCHES FROZEN", "1 PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 5.51.38 PM (2).jpeg")),
-    (2, "SIGNATURE TORTILLAH 8.5 INCHES", "1 PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 5.51.38 PM (2).jpeg")),
-    (3, "NUTRICH CHICKEN POPCORN BALL", "1 KG PACKET", os.path.join(PROD_DIR, "itc_chicken_popcorn.webp")),
-    (4, "I.T.C CHICKEN MOMOS", "1 PACKET", os.path.join(ASSETS_PROD_DIR, "triken_chicken_momos.jpg")),
-    (5, "ITC CHICKEN NUGGETS", "1 KG PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.32 PM (1).jpeg")), # Original packaging photo
-    (6, "NUTRICH CHICKEN BURGER PATTY", "1 KG PACKET", os.path.join(ASSETS_PROD_DIR, "chicken_patty.jpg"))
+    (1, "SIGNATURE TORTILLA 8.5 INCHES", "1 PACKET", os.path.join(ENHANCED_DIR, "05_Bakery_Breading", "fresh2go_tortilla_wrap_8_5_inch.jpg")),
+    (2, "SIGNATURE TORTILLA 10 INCHES", "1 PACKET", os.path.join(ENHANCED_DIR, "05_Bakery_Breading", "signature_tortilla_wraps_stack.jpg")),
+    (3, "NUTRICH CHICKEN POPCORN BALL", "1 KG PACKET", os.path.join(ENHANCED_DIR, "01_Frozen_Chicken", "itc_master_chef_chicken_popcorn_1kg.jpg")),
+    (4, "TRIKEN CHICKEN MOMOS", "1 PACKET", os.path.join(ENHANCED_DIR, "01_Frozen_Chicken", "triken_chicken_momos_pack_details.jpg")),
+    (5, "ITC CRUNCHY CHICKEN NUGGETS", "1 KG PACKET", os.path.join(ENHANCED_DIR, "01_Frozen_Chicken", "itc_master_chef_crunchy_chicken_nuggets_1kg.jpg")),
+    (6, "ITC CHICKEN BREAST STRIPS", "1 KG PACKET", os.path.join(ENHANCED_DIR, "01_Frozen_Chicken", "itc_chicken_breast_strips_1kg.jpg"))
 ]
 t1_y = 650
 t1_h = 475
@@ -278,14 +261,14 @@ draw_commercial_table_no_rates(left_x, t1_y, col_w, t1_h, "CHICKEN ITEMS", "#831
 # --- TABLE 2: KETCHUP & SAUCES (Right Top) ---
 ketchup_items = [
     (1, "DELMONT TOMATO KETCHUP 1.1kg", "1 PACKET (1.1 KG)", os.path.join(PROD_DIR, "delmonte_tomato_ketchup.png")),
-    (2, "FOODRITE TOMATO KETCHUP", "1 KG PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.05 PM (1).jpeg")), # Original pouch photo
-    (3, "DELMONTE KETCHUP (8g SACHET)", "DISPENSER BOX", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.08 PM (3).jpeg")), # Original dispenser photo
+    (2, "FOODRITE TOMATO KETCHUP", "1 KG PACKET", os.path.join(PROD_DIR, "foodrite_tomato_ketchup.jpg")),
+    (3, "DELMONTE KETCHUP (8g SACHET)", "DISPENSER BOX", os.path.join(PROD_DIR, "delmonte_ketchup_sachet.png")),
     (4, "DELMONT TANDOORI MAYO", "1 KG PACKET", os.path.join(PROD_DIR, "delmonte_tandoori_mayo.png")),
-    (5, "DELMONTE CREAMY CHEESE SAUCE", "1 KG PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.28 PM (1).jpeg")), # Original pack photo
-    (6, "DELMONTE PIZZA PASTA SAUCE", "1 KG PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.28 PM.jpeg")), # Original pack photo
-    (7, "MAYANK GOLD KETCHUP (9g SACHET)", "DISPENSER BOX", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.08 PM (3).jpeg")),
-    (8, "FOODRITE SALAD MAYONNAISE", "1 KG PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.30 PM.jpeg")), # Original mayo photo
-    (9, "FOODRITE MAYONNAISE (8g SACHET)", "DISPENSER BOX", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.08 PM.jpeg")) # Original dispenser photo
+    (5, "DELMONTE CREAMY CHEESE SAUCE", "1 KG PACKET", os.path.join(ASSETS_PROD_DIR, "delmonte_creamy_cheese.jpg")),
+    (6, "DELMONTE PIZZA PASTA SAUCE", "1 KG PACKET", os.path.join(PROD_DIR, "delmonte_pizza_pasta_sauce.png")),
+    (7, "MAYANK GOLD KETCHUP (9g SACHET)", "DISPENSER BOX", os.path.join(PROD_DIR, "delmonte_ketchup_sachet.png")),
+    (8, "FOODRITE SALAD MAYONNAISE", "1 KG PACKET", os.path.join(PROD_DIR, "foodrite_mayonnaise.jpg")),
+    (9, "DELMONTE EGGLESS MAYONNAISE", "1 KG POUCH", os.path.join(ENHANCED_DIR, "04_Sauces_Condiments", "delmonte_eggless_mayonnaise_premium_pouch.jpg"))
 ]
 t2_y = 650
 t2_h = 670
@@ -293,15 +276,15 @@ draw_commercial_table_no_rates(right_x, t2_y, col_w, t2_h, "KETCHUP & SAUCES", "
 
 # --- TABLE 3: VEG ITEMS (Left Middle) ---
 veg_items = [
-    (1, "HUP HUP FRENCH FRIES 9MM", "2.5 KG PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.35 PM.jpeg")), # Original Amul/Hup pack photo
-    (2, "HUP HUP FRENCH FRIES 6MM", "2.5 KG PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.36 PM.jpeg")), # Original Hup pack photo
+    (1, "AMUL FRENCH FRIES 9MM", "2.5 KG PACKET", os.path.join(ENHANCED_DIR, "02_Veg_Snacks", "amul_french_fries_9mm.jpg")),
+    (2, "HUP HUP FRENCH FRIES 6MM", "2.5 KG PACKET", os.path.join(ENHANCED_DIR, "02_Veg_Snacks", "hup_hup_french_fries_6mm.jpg")),
     (3, "I.T.C VEG MOMOS", "1 PACKET", os.path.join(ASSETS_PROD_DIR, "veg_momos.jpg")),
-    (4, "CHILLI FILL VEG BURGER PATTY", "1.2 KG PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.32 PM.jpeg")), # Original patty pack photo
-    (5, "ITC PANEER PATTY", "1.02 KG PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.34 PM.jpeg")), # Original paneer patty photo
+    (4, "CHILL FILL VEG BURGER PATTY", "1.2 KG PACKET", os.path.join(ENHANCED_DIR, "02_Veg_Snacks", "chill_fill_veg_burger_patty.jpg")),
+    (5, "MILKY MIST MALAI PANEER CUBES", "1 KG PACKET", os.path.join(ENHANCED_DIR, "03_Dairy_Cheese", "milky_mist_malai_paneer_cubes_1kg.jpg")),
     (6, "GODREJ PANEER POPS", "1 KG PACKET", os.path.join(PROD_DIR, "paneer_pops.png")),
-    (7, "ITC CHEESY CORN TRIANGLE", "1 KG PACKET", os.path.join(PUB_IMG, "cheesy_triangle.jpg")),
-    (8, "SWEET CORN (KERNELS)", "1 KG FROZEN PACK", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.33 PM.jpeg")), # Original sweet corn photo
-    (9, "GODREJ TANDOORI PANEER NUGGETS", "1 KG PACKET", os.path.join(PROD_DIR, "itc_cheese_jalapeno_nuggets.webp"))
+    (7, "ITC CHEESY CORN TRIANGLE", "1 KG PACKET", os.path.join(ASSETS_PROD_DIR, "cheesy_triangle.jpg")),
+    (8, "SWEET CORN (KERNELS)", "1 KG FROZEN PACK", os.path.join(ENHANCED_DIR, "02_Veg_Snacks", "american_sweet_corn_1kg.jpg")),
+    (9, "CHILL FILL POTATO CHEESE SHOTZ", "1 KG PACKET", os.path.join(ENHANCED_DIR, "02_Veg_Snacks", "chill_fill_potato_cheese_shotz_1kg.jpg"))
 ]
 t3_y = t1_y + t1_h + 20
 t3_h = 670
@@ -309,10 +292,10 @@ draw_commercial_table_no_rates(left_x, t3_y, col_w, t3_h, "VEG ITEMS", "#15803d"
 
 # --- TABLE 4: BREAD MIX & POWDERS (Right Middle 1) ---
 bread_items = [
-    (1, "VKL EXTRA H & S MARINDE", "1 KG PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.23 PM.jpeg")), # Original marinade photo
-    (2, "VKL CRISPY CAJUN BREADING MIX", "1 KG PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.24 PM.jpeg")), # Original breading mix photo
-    (3, "VKL PERI PERI POWDER", "250 GRAMS PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.05 PM.jpeg")), # Original sprinkler photo
-    (4, "OREGANO & HERB SEASONING", "1 KG PACKET", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.26 PM.jpeg")) # Original oregano photo
+    (1, "VKL EXTRA H & S MARINADE", "1 KG PACKET", os.path.join(ASSETS_PROD_DIR, "vkl_extra_hs_marinade.jpg")),
+    (2, "VKL CRISPY CAJUN BREADING MIX", "1 KG PACKET", os.path.join(ENHANCED_DIR, "05_Bakery_Breading", "vkl_crispy_cajun_breading_mix_pack.jpg")),
+    (3, "VKL PERI PERI POWDER", "250 GRAMS PACKET", os.path.join(ASSETS_PROD_DIR, "vkl_peri_peri_sprinkler.jpg")),
+    (4, "OREGANO & HERB SEASONING", "1 KG PACKET", os.path.join(ASSETS_PROD_DIR, "big_bell_oregano.jpg"))
 ]
 t4_y = t2_y + t2_h + 20
 t4_h = 350
@@ -320,10 +303,10 @@ draw_commercial_table_no_rates(right_x, t4_y, col_w, t4_h, "BREAD MIX & POWDERS"
 
 # --- TABLE 5: CHEESE & SLICES (Right Middle 2) ---
 cheese_items = [
-    (1, "MILKY MIST MOZEROLLA DICED CHEESE", "2 KG PACKET", os.path.join(ASSETS_PROD_DIR, "milky_mist_mozzarella_2kg.jpg")),
-    (2, "MILKY MIST MOZEROLLA DICED CHEESE", "1 KG PACKET", os.path.join(ASSETS_PROD_DIR, "milky_mist_mozzarella_1kg.jpg")),
+    (1, "MILKY MIST MOZZARELLA 2KG PACK", "2 KG PACKET", os.path.join(ENHANCED_DIR, "03_Dairy_Cheese", "milky_mist_mozzarella_2kg_pack_studio.jpg")),
+    (2, "MILKY MIST MOZZARELLA DICED CHEESE", "1 KG PACKET", os.path.join(ENHANCED_DIR, "03_Dairy_Cheese", "mozzarella_cheese_diced_cubes_plate.jpg")),
     (3, "MILKY MIST CHEESE SLICE", "765 GRAMS PACKET", os.path.join(ASSETS_PROD_DIR, "milky_mist_cheese_slices.jpg")),
-    (4, "MILKY MIST PANEER (DICED CUBES)", "1 KG PACKET", os.path.join(ASSETS_PROD_DIR, "paneer_diced_cubes.jpg"))
+    (4, "MILKY MIST PANEER (DICED CUBES)", "1 KG PACKET", os.path.join(ENHANCED_DIR, "03_Dairy_Cheese", "milky_mist_malai_paneer_cubes_1kg.jpg"))
 ]
 t5_y = t4_y + t4_h + 20
 t5_h = 350
@@ -331,11 +314,11 @@ draw_commercial_table_no_rates(right_x, t5_y, col_w, t5_h, "CHEESE & SLICES", "#
 
 # --- TABLE 6: PIZZA BOXES & BURGER BOXES (Left Bottom) ---
 box_items = [
-    (1, "PIZZA BOX 8\"x8\" PLAIN", "100 NOS", os.path.join(ASSETS_PROD_DIR, "pizza_boxes_assortment.jpg")),
-    (2, "BURGER BOX 4\"x4\"", "100 NOS", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.07 PM (1).jpeg")), # Original printed burger box photo
-    (3, "PIZZA BOX 8\"x8\" PRINTED", "100 NOS", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.07 PM.jpeg")), # Original pizza box pile photo
-    (4, "BURGER BOX 4\"x4\" PRINTED", "100 NOS", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.07 PM (1).jpeg")),
-    (5, "BURGER BOX 5\"x5\" PRINTED", "100 NOS", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.07 PM (1).jpeg"))
+    (1, "PIZZA BOX 8\"x8\" PRINTED / PLAIN", "100 NOS", os.path.join(ENHANCED_DIR, "07_Packaging_Disposables", "pizza_boxes_8x8_printed_plain_flat.jpg")),
+    (2, "BURGER BOX 4\"x4\" PRINTED", "100 NOS", os.path.join(ENHANCED_DIR, "07_Packaging_Disposables", "burger_pastry_boxes_4x4_printed_flat.jpg")),
+    (3, "BURGER BOX 5\"x5\" PRINTED", "100 NOS", os.path.join(ENHANCED_DIR, "07_Packaging_Disposables", "burger_pastry_boxes_4x4_printed_flat.jpg")),
+    (4, "FRIED CHICKEN BUCKETS (34 PCS)", "1 CASE", os.path.join(ENHANCED_DIR, "07_Packaging_Disposables", "fried_chicken_buckets_carton_display.jpg")),
+    (5, "DISPOSABLE BOWLS & FOOD CONTAINERS", "1 CASE", os.path.join(ENHANCED_DIR, "07_Packaging_Disposables", "clear_plastic_round_bowls_lids_stacks.jpg"))
 ]
 t6_y = t3_y + t3_h + 20
 t6_h = 420
@@ -346,7 +329,7 @@ spices_items = [
     (1, "CHILLY POWDER NO 1 (PICKLE)", "1 KG PACKET", os.path.join(PROD_DIR, "chilli_powder.jpg")),
     (2, "CHILLY POWDER", "1 KG PACKET", os.path.join(PROD_DIR, "chilli_powder.jpg")),
     (3, "TURMERIC POWDER", "1 KG PACKET", os.path.join(PROD_DIR, "turmeric_powder.jpg")),
-    (4, "CORIANDER POWDER", "1 KG PACKET", os.path.join(ASSETS_PROD_DIR, "coriander_powder.jpg"))
+    (4, "CORIANDER POWDER", "1 KG PACKET", os.path.join(PROD_DIR, "spices_blend.jpg"))
 ]
 t7_y = t5_y + t5_h + 20
 t7_h = 350
@@ -357,8 +340,8 @@ draw.text((right_x + col_w - 65, t7_y + 28), "★ NEW", fill="#ffffff", font=fon
 
 # --- TABLE 8: MOJITOS (Spanning Table at Bottom) ---
 mojitos_items = [
-    (1, "LIME AND MINT MOJITO SYRUP", "1 BOTTLE (1 LITRE)", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 6.30.20 PM.jpeg")), # Original MANAMA Mojito bottle photo
-    (2, "BLUECURCO MOJITO SYRUP", "1 BOTTLE (1 LITRE)", os.path.join(WAPP_DIR, "WhatsApp Image 2026-10-25 at 5.51.38 PM (1).jpeg")) # Original MANAMA trio bottle photo
+    (1, "LIME AND MINT MOJITO SYRUP", "1 BOTTLE (1 LITRE)", os.path.join(PROD_DIR, "mojito_lime_mint.jpg")),
+    (2, "BLUECURCO MOJITO SYRUP", "1 BOTTLE (1 LITRE)", os.path.join(PROD_DIR, "mojito_blue_curacao.jpg"))
 ]
 t8_y = max(t6_y + t6_h, t7_y + t7_h) + 20
 t8_w = W - 140
