@@ -117,10 +117,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               <span className="bg-gradient-to-r from-cyan-300 to-sky-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,210,255,0.4)]">
                 Price List
               </span>
-              <span className="sr-only"> — 90+ Commercial Food Service SKUs in Rayachoty</span>
+              <span className="sr-only"> — Commercial Food Service Master Catalogue in Rayachoty</span>
             </h1>
             <p className="text-sm text-slate-300 mt-2 max-w-2xl leading-relaxed">
-              Wholesale products and bulk packs for Rayachoty hotels, fast food centers, cafes, and bakeries. Showing {filtered.length} of {PRODUCTS.length} products across 8 categories.
+              Wholesale products and bulk packs for Rayachoty hotels, fast food centers, cafes, and bakeries. Showing {filtered.length} products across 8 categories.
             </p>
           </div>
 
@@ -133,7 +133,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-400/50 hover:border-amber-400 text-xs font-bold text-amber-200 hover:text-white transition-all shadow-lg backdrop-blur-md"
             >
               <Sparkles className="w-4 h-4 text-amber-300" />
-              <span>Full 90-SKU Catalogue (HTML)</span>
+              <span>Full Wholesale Catalogue (HTML)</span>
             </a>
 
             <button
@@ -571,7 +571,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               </div>
               <div>
                 <h3 className="text-xl font-bold text-white">Product Catalogue QR Code</h3>
-                <p className="text-xs text-slate-400">Direct instant scan for 90-SKU wholesale catalogue</p>
+                <p className="text-xs text-slate-400">Direct instant scan for wholesale master catalogue</p>
               </div>
             </div>
 
