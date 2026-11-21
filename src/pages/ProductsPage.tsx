@@ -113,9 +113,9 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               <span>Rayachoty Wholesale Catalogue</span>
             </div>
             <h1 className="font-serif text-3xl sm:text-5xl font-black text-white tracking-tight">
-              Wholesale Products &{' '}
+              Commercial Products &{' '}
               <span className="bg-gradient-to-r from-cyan-300 to-sky-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,210,255,0.4)]">
-                Price List
+                Master Catalogue
               </span>
               <span className="sr-only"> — Commercial Food Service Master Catalogue in Rayachoty</span>
             </h1>
