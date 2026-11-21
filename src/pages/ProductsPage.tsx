@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { PRODUCTS, CATEGORIES, ProductItem } from '../data/catalogue';
-import { Search, Plus, Minus, FileDown, LayoutGrid, List, Info, Sparkles, Snowflake, ArrowRight } from 'lucide-react';
+import { Search, Plus, Minus, FileDown, LayoutGrid, List, Info, Sparkles, Snowflake, ArrowRight, QrCode, Copy, Check, ExternalLink, X } from 'lucide-react';
 import { ProductSpecModal } from '../components/ProductSpecModal';
 import { assetUrl } from '../utils/assetUrl';
 import { AnalyticsService } from '../services/analyticsService';
@@ -50,6 +50,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   const [sortBy, setSortBy] = useState<'name-asc' | 'name-desc' | 'brand'>('name-asc');
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
   const [specProduct, setSpecProduct] = useState<ProductItem | null>(null);
+  const [showQrModal, setShowQrModal] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
 
   const brands = useMemo(() => {
     const bSet = new Set(PRODUCTS.map((p) => p.brand));
@@ -133,6 +135,14 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
               <Sparkles className="w-4 h-4 text-amber-300" />
               <span>Full 90-SKU Catalogue (HTML)</span>
             </a>
+
+            <button
+              onClick={() => setShowQrModal(true)}
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/50 hover:border-cyan-400 text-xs font-bold text-cyan-200 hover:text-white transition-all shadow-lg backdrop-blur-md"
+            >
+              <QrCode className="w-4 h-4 text-cyan-300" />
+              <span>Catalogue QR Code</span>
+            </button>
 
             <a
               href={assetUrl('/images/brochure.jpg')}
@@ -537,6 +547,105 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           if (onOpenFullQuote) onOpenFullQuote();
         }}
       />
+
+      {/* Product Catalogue QR Code Modal */}
+      {showQrModal && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200"
+          onClick={() => setShowQrModal(false)}
+        >
+          <div 
+            className="relative w-full max-w-lg bg-[#0b1329] border border-cyan-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl text-white"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowQrModal(false)}
+              className="absolute top-5 right-5 p-2 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-3 mb-2">
+              <div className="p-2.5 rounded-xl bg-cyan-500/20 border border-cyan-400/40 text-cyan-300">
+                <QrCode className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white">Product Catalogue QR Code</h3>
+                <p className="text-xs text-slate-400">Direct instant scan for 90-SKU wholesale catalogue</p>
+              </div>
+            </div>
+
+            {/* QR Image Box */}
+            <div className="my-6 p-6 rounded-2xl bg-white/5 border border-slate-700/60 flex flex-col items-center justify-center text-center">
+              <div className="p-3 bg-white rounded-2xl shadow-xl">
+                <img
+                  src={assetUrl('/images/catalogue_qr_code.png')}
+                  alt="RAIS Agencies Catalogue QR"
+                  className="w-48 h-48 sm:w-56 sm:h-56 object-contain"
+                />
+              </div>
+              <p className="text-xs text-cyan-300 font-semibold mt-4">
+                Scan with smartphone camera to open live catalogue
+              </p>
+              <div className="mt-3 flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs font-mono text-slate-300 max-w-full overflow-hidden text-ellipsis">
+                <span className="truncate">https://dataengineer-irfan.github.io/RAIS-AGENCIES/catalogue.html</span>
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText('https://dataengineer-irfan.github.io/RAIS-AGENCIES/catalogue.html');
+                    setCopiedLink(true);
+                    setTimeout(() => setCopiedLink(false), 2500);
+                  }}
+                  className="p-1 rounded hover:bg-slate-800 text-slate-400 hover:text-cyan-300 transition-colors"
+                  title="Copy Link"
+                >
+                  {copiedLink ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Download Options */}
+            <div className="space-y-2.5">
+              <div className="grid grid-cols-2 gap-2.5">
+                <a
+                  href={assetUrl('/images/catalogue_qr_code.png')}
+                  download="RAIS-Agencies-Catalogue-QR.png"
+                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-slate-200 hover:text-white transition-colors"
+                >
+                  <FileDown className="w-4 h-4 text-cyan-400" />
+                  <span>QR PNG (300 DPI)</span>
+                </a>
+                <a
+                  href={assetUrl('/images/catalogue_qr_code.svg')}
+                  download="RAIS-Agencies-Catalogue-QR.svg"
+                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-slate-200 hover:text-white transition-colors"
+                >
+                  <FileDown className="w-4 h-4 text-cyan-400" />
+                  <span>Vector (SVG)</span>
+                </a>
+              </div>
+
+              <a
+                href={assetUrl('/images/catalogue_qr_standee_card.png')}
+                download="RAIS-Agencies-Catalogue-Standee.png"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-xs transition-all shadow-lg shadow-cyan-500/20"
+              >
+                <FileDown className="w-4 h-4" />
+                <span>Download Print-Ready Counter Standee Flyer (1200x1600)</span>
+              </a>
+
+              <a
+                href={assetUrl('/catalogue.html')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-cyan-300 text-xs font-bold transition-colors"
+              >
+                <span>Open Standalone HTML Catalogue</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
