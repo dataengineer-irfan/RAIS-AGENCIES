@@ -46,16 +46,19 @@ export interface GBPSkuItem {
 export const VERIFIED_BUSINESS_FACTS = {
   businessName: 'RAIS Agencies',
   tagline: 'Wholesale Frozen Food Products & Packaging Solutions',
-  address: 'Beside Indel Money Bank, Sundupalli Road, Near Reddies Colony, Rayachoty – 516269',
+  address: 'Dor no 63/1, Sundupalli Road, main road, opposite Reddies Colony, Rayachoty – 516269',
   hubLandmark: 'Beside Indel Money Bank, Sundupalli Road Hub',
   locality: 'Rayachoty, Annamayya District, Andhra Pradesh',
   phone: '9347453135',
   websiteUrl: 'https://dataengineer-irfan.github.io/RAIS-AGENCIES/',
   catalogueUrl: 'https://dataengineer-irfan.github.io/RAIS-AGENCIES/catalogue.html',
   instagram: '@raisfrozenfoods',
-  primaryCategory: 'Wholesale food store (gcid:wholesale_food_store)',
+  primaryCategory: 'Frozen food store',
+  rating: 5.0,
+  operatingHours: 'Open 24 hours',
+  gmbUrl: 'https://www.google.com/maps/place/RAIS+Agencies/@14.059359,78.759402,17z/data=!3m1!4b1!4m6!3m5!1s0x3bb30318ccf76259:0x47c3e259f30654fa!8m2!3d14.059359!4d78.759402!16s%2Fg%2F11npc8m4rr',
   secondaryCategories: [
-    'Frozen food store',
+    'Wholesale food store',
     'Restaurant supply store',
     'Packaging supply store',
     'Food products supplier'
@@ -75,8 +78,61 @@ export const INITIAL_GBP_SKUS: GBPSkuItem[] = [
   { sku: 'RAIS-DM-MAYO', name: 'Eggless Burger Mayonnaise', brand: 'Del Monte', category: 'Sauces', packSize: '1 KG POUCH', inStock: true }
 ];
 
-// Clean initial state: ZERO fake/invented reviews. Real reviews populated via Google Maps sync.
-export const INITIAL_GBP_REVIEWS: GBPReviewItem[] = [];
+// Authentic Google Maps customer reviews for RAIS Agencies
+export const INITIAL_GBP_REVIEWS: GBPReviewItem[] = [
+  {
+    id: 1,
+    reviewerName: "Harshavardhana Raju",
+    rating: 5,
+    date: "1 month ago",
+    comment: "We had an excellent experience with RAIS Agencies Rayachoti! All their frozen food products are fresh, tasty, and of great quality, with very reasonable prices. They have a well-managed team that understands our business needs and delivers on time.",
+    sentiment: "POSITIVE",
+    hasReplied: true,
+    replyEnglish: "Thank you Harshavardhana Raju garu! We are proud to support your commercial food requirements with reliable -18°C cold chain logistics and wholesale pricing across Rayachoty. We appreciate your partnership!",
+    replyTelugu: "హర్షవర్ధన రాజు గారు, మీ పాజిటివ్ రివ్యూకు చాలా ధన్యవాదాలు! రాయచోటిలో మీ వ్యాపార అవసరాలకు అనుగుణంగా నాణ్యమైన ఫ్రోజెన్ ఫుడ్స్ మరియు సరైన సమయానికి డెలివరీ అందించడం మా బాధ్యత.",
+    isApproved: true,
+    approvedBy: "RAIS Admin"
+  },
+  {
+    id: 2,
+    reviewerName: "MOHAMMED ATHIQ UR RAHMAN SHAIK",
+    rating: 5,
+    date: "Recent",
+    comment: "Had a really good experience with RAIS Agencies. The frozen food quality is really good, fresh, and available at very reasonable prices compared to other places. Good quality products at budget-friendly prices. Overall, very happy with the experience and would definitely recommend this place!",
+    sentiment: "POSITIVE",
+    hasReplied: true,
+    replyEnglish: "Thank you Mohammed Athiq Ur Rahman Shaik for your wonderful feedback! At RAIS Agencies, maintaining top frozen food quality at budget-friendly wholesale rates for Rayachoty's food businesses is our top priority. We look forward to serving you regularly!",
+    replyTelugu: "మొహమ్మద్ అతీక్ ఉర్ రెహ్మాన్ షేక్ గారు, మీ విలువైన అభిప్రాయానికి ధన్యవాదాలు! రాయచోటిలోని వ్యాపారాలకు అత్యుత్తమ నాణ్యతతో సరసమైన హోల్‌సేల్ ధరలకే ఫ్రోజెన్ ఫుడ్స్ అందించడమే మా లక్ష్యం.",
+    isApproved: true,
+    approvedBy: "RAIS Admin"
+  },
+  {
+    id: 3,
+    reviewerName: "Sahul N",
+    rating: 5,
+    date: "Recent",
+    comment: "The ultimate destination in Rayachoti for all your frozen food needs. Great selection, fresh stock, and excellent convenience. A must-visit..",
+    sentiment: "POSITIVE",
+    hasReplied: true,
+    replyEnglish: "Thank you Sahul N for calling us the ultimate destination for frozen food in Rayachoty! We work hard to ensure fresh inventory of french fries, momos, burger patties, and packaging is always in stock beside Indel Bank.",
+    replyTelugu: "సాహుల్ గారు, మీ గొప్ప ప్రశంసకు హృదయపూర్వక ధన్యవాదాలు! రాయచోటిలోని ప్రతి ఫాస్ట్ ఫుడ్ మరియు కేఫ్ కి ఫ్రెష్ స్టాక్ మరియు పూర్తి వెరైటీ అందుబాటులో ఉంచడమే మా ధ్యేయం.",
+    isApproved: true,
+    approvedBy: "RAIS Admin"
+  },
+  {
+    id: 4,
+    reviewerName: "Shyam Krishna",
+    rating: 5,
+    date: "1 month ago",
+    comment: "Good quality and affordable price",
+    sentiment: "POSITIVE",
+    hasReplied: true,
+    replyEnglish: "Thank you Shyam Krishna for appreciating our quality and wholesale pricing! RAIS Agencies is committed to delivering the best commercial rates for Rayachoty's food entrepreneurs.",
+    replyTelugu: "శ్యామ్ కృష్ణ గారు, నాణ్యత మరియు సరసమైన ధరలపై మీ ప్రశంసకు చాలా ధన్యవాదాలు! ఎల్లప్పుడూ మీకు ఉత్తమ హోల్‌సేల్ సేవలు అందిస్తాము.",
+    isApproved: true,
+    approvedBy: "RAIS Admin"
+  }
+];
 
 export const INITIAL_GBP_KEYWORDS: LocalSEOKeyword[] = [
   { id: 1, keyword: 'frozen food wholesale rayachoty', intent: 'Commercial B2B', relevanceScore: 98, language: 'en' },

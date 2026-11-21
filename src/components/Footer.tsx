@@ -68,21 +68,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
                 <span className="text-slate-300 leading-snug">
-                  Near Reddies Colony,<br />
-                  Rayachoty - 516269,<br />
-                  Annamayya District, Andhra Pradesh
+                  Dor no 63/1, Sundupalli Road,<br />
+                  Opposite Reddies Colony,<br />
+                  Rayachoty - 516269, A.P.
                 </span>
               </div>
 
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 <div className="text-slate-300">
-                  <a href={`tel:${BUSINESS_INFO.phones[0]}`} className="hover:text-white">
-                    {BUSINESS_INFO.phones[0]}
-                  </a>
-                  <span className="mx-1">/</span>
-                  <a href={`tel:${BUSINESS_INFO.phones[1]}`} className="hover:text-white">
-                    {BUSINESS_INFO.phones[1]}
+                  <a href={`tel:${BUSINESS_INFO.primaryPhone}`} className="hover:text-white font-mono font-bold">
+                    +91 {BUSINESS_INFO.primaryPhone}
                   </a>
                 </div>
               </div>
@@ -95,7 +91,19 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   rel="noopener noreferrer"
                   className="text-emerald-400 hover:text-emerald-300 font-bold"
                 >
-                  WhatsApp: +91 {BUSINESS_INFO.phones[0]}
+                  WhatsApp: +91 {BUSINESS_INFO.primaryPhone}
+                </a>
+              </div>
+
+              <div className="pt-1">
+                <a
+                  href={BUSINESS_INFO.gmbUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 hover:text-amber-200 text-xs font-semibold hover:bg-amber-500/20 transition-all"
+                >
+                  <span>⭐ 5.0 Google Maps Profile</span>
+                  <span className="text-[10px] text-slate-400">• Open 24h</span>
                 </a>
               </div>
 

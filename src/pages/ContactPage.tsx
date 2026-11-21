@@ -77,16 +77,10 @@ export const ContactPage: React.FC = () => {
                 </p>
                 <div className="mt-2 space-y-1">
                   <a
-                    href={`tel:${BUSINESS_INFO.phones[0]}`}
+                    href={`tel:${BUSINESS_INFO.primaryPhone}`}
                     className="text-base font-bold font-mono text-white hover:text-cyan-300 transition-colors block"
                   >
-                    +91 {BUSINESS_INFO.phones[0]}
-                  </a>
-                  <a
-                    href={`tel:${BUSINESS_INFO.phones[1]}`}
-                    className="text-base font-bold font-mono text-white hover:text-cyan-300 transition-colors block"
-                  >
-                    +91 {BUSINESS_INFO.phones[1]}
+                    +91 {BUSINESS_INFO.primaryPhone}
                   </a>
                 </div>
               </div>
@@ -158,7 +152,7 @@ export const ContactPage: React.FC = () => {
               </div>
               <div>
                 <h3 className="text-xs font-bold text-amber-300 uppercase tracking-wider">
-                  Official 90-SKU Master Catalogue
+                  Commercial Wholesale Master Catalogue
                 </h3>
                 <p className="text-xs text-slate-400 mt-0.5">
                   View complete product list, pack sizes & specifications online:
@@ -344,32 +338,50 @@ export const ContactPage: React.FC = () => {
 
         </div>
 
-        {/* Live Rayachoty Google Maps Embed */}
+        {/* Live Rayachoty Google Maps & GMB Verification Embed */}
         <div className="rounded-3xl border border-cyan-500/25 bg-[#0f1c3f]/90 overflow-hidden shadow-2xl relative">
           <div className="p-6 border-b border-cyan-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h3 className="font-serif text-lg font-bold text-white">
-                Rayachoty Central Distribution Hub Map
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-[10px] font-bold text-amber-300 uppercase tracking-wider mb-2">
+                <span>⭐ 5.0 Google Business Profile</span>
+                <span className="text-slate-400 font-normal">• Frozen food store</span>
+              </div>
+              <h3 className="font-serif text-lg sm:text-xl font-bold text-white">
+                RAIS Agencies — Central Distribution Hub
               </h3>
-              <p className="text-xs text-slate-400 pt-0.5">
-                Near Reddies Colony, Rayachoty - 516269, Annamayya District, Andhra Pradesh
+              <p className="text-xs text-slate-300 pt-0.5">
+                {BUSINESS_INFO.gmbAddress}
+              </p>
+              <p className="text-[11px] text-cyan-300 pt-0.5 font-mono">
+                Plus Code: {BUSINESS_INFO.gmbPlusCode} • {BUSINESS_INFO.gmbOperatingHours}
               </p>
             </div>
-            <a
-              href="https://maps.google.com/?q=Reddies+Colony,+Rayachoty,+Andhra+Pradesh+516269"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-cyan-400/20 border border-cyan-400/40 text-cyan-200 text-xs font-bold hover:bg-cyan-400 hover:text-slate-950 transition-all shrink-0"
-            >
-              <span>Open in Google Maps</span>
-              <ExternalLink className="size-3.5" />
-            </a>
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
+              <a
+                href={BUSINESS_INFO.gmbDirectionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-cyan-400 text-slate-950 text-xs font-bold hover:bg-cyan-300 transition-all shadow-md"
+              >
+                <span>Get Directions</span>
+                <ExternalLink className="size-3.5" />
+              </a>
+              <a
+                href={BUSINESS_INFO.gmbUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-200 text-xs font-bold hover:bg-amber-500 hover:text-slate-950 transition-all"
+              >
+                <span>View on Google Maps</span>
+                <ExternalLink className="size-3.5" />
+              </a>
+            </div>
           </div>
 
-          <div className="w-full h-[400px] relative bg-[#081026]">
+          <div className="w-full h-[420px] relative bg-[#081026]">
             <iframe
-              title="RAIS Agencies Rayachoty Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15474.34963503144!2d78.7428807!3d14.0538965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb3b4733d744d01%3A0x6e26b1509a76d1e!2sRayachoty%2C%20Andhra%20Pradesh%20516269!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
+              title="RAIS Agencies Google Maps Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3868.567845347249!2d78.75682707573424!3d14.059358986366034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb30318ccf76259%3A0x47c3e259f30654fa!2sRAIS%20Agencies!5e0!3m2!1sen!2sin!4v1716000000000!5m2!1sen!2sin"
               className="w-full h-full border-0 filter contrast-105"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

@@ -54,13 +54,23 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex w-fit items-center gap-2.5 rounded-full border border-cyan-400/30 bg-white/5 py-1.5 pl-1.5 pr-4 text-xs font-semibold text-cyan-200 backdrop-blur-md shadow-lg shadow-cyan-950/40"
+              className="flex flex-wrap items-center gap-2.5"
             >
-              <span className="flex items-center gap-1 rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 px-2.5 py-0.5 text-[11px] font-black text-slate-950">
-                <Sparkles className="w-3 h-3 fill-current" />
-                No.1
+              <a
+                href={BUSINESS_INFO.gmbUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-500/10 py-1.5 pl-2 pr-4 text-xs font-semibold text-amber-200 backdrop-blur-md shadow-lg shadow-amber-950/40 hover:bg-amber-500/20 transition-all hover:scale-105"
+              >
+                <span className="flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 px-2 py-0.5 text-[11px] font-black text-slate-950">
+                  ★ 5.0
+                </span>
+                <span>Google Business Profile • Frozen Food Store</span>
+              </a>
+              <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-cyan-400/30 bg-white/5 py-1.5 px-3 text-xs font-semibold text-cyan-200 backdrop-blur-md">
+                <Sparkles className="w-3 h-3 text-cyan-400" />
+                <span>Rayachoty Central Depot Hub</span>
               </span>
-              <span>Frozen Food & Packaging Wholesale in Rayachoty</span>
             </motion.div>
 
             {/* Display Headline */}

@@ -39,13 +39,22 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Top verified facts bar */}
       <div className="hidden md:flex items-center justify-between px-6 py-1.5 text-xs bg-[#040918]/90 text-slate-300 border-b border-cyan-500/15">
         <div className="flex items-center gap-6">
+          <a
+            href={BUSINESS_INFO.gmbUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-amber-300 hover:text-amber-200 font-bold transition-colors"
+          >
+            <span>⭐ 5.0 Google Rated</span>
+            <span className="text-[11px] font-normal text-slate-400">• Frozen food store</span>
+          </a>
           <div className="flex items-center gap-1.5 text-slate-300">
             <MapPin className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Near Reddies Colony, Rayachoty - 516269, A.P.</span>
+            <span>Sundupalli Road, Opp. Reddies Colony, Rayachoty - 516269</span>
           </div>
           <div className="flex items-center gap-1.5 text-slate-300">
             <Phone className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Direct Desk: <strong>{BUSINESS_INFO.phones[0]}</strong> / <strong>{BUSINESS_INFO.phones[1]}</strong></span>
+            <span>Direct Desk: <strong>+91 {BUSINESS_INFO.primaryPhone}</strong></span>
           </div>
         </div>
         <div className="flex items-center gap-4 text-xs">

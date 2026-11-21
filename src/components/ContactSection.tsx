@@ -51,13 +51,21 @@ export const ContactSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Operating Hours & UPI Settlement — Eliminates Left Box Void */}
+                {/* Operating Hours, GMB Rating & UPI Settlement */}
                 <div className="pt-2 grid grid-cols-2 gap-3 text-xs border-t border-cyan-500/15">
-                  <div className="p-2.5 rounded-xl bg-[#081026]/70 border border-cyan-500/20">
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-cyan-300">Daily Operations</div>
-                    <div className="text-white font-semibold text-[11px] pt-0.5">6:00 AM – 9:00 PM</div>
-                    <div className="text-slate-400 text-[10px]">Rayachoty Town Supply</div>
-                  </div>
+                  <a 
+                    href={BUSINESS_INFO.gmbUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-2.5 rounded-xl bg-[#081026]/70 border border-amber-500/30 hover:border-amber-400 transition-colors block"
+                  >
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-amber-300">Google Business Profile</div>
+                    <div className="text-white font-semibold text-[11px] pt-0.5 flex items-center gap-1">
+                      <span>⭐ 5.0 Rating</span>
+                      <span className="text-slate-400 font-normal">• Verified</span>
+                    </div>
+                    <div className="text-slate-400 text-[10px]">{BUSINESS_INFO.gmbOperatingHours} • Frozen food store</div>
+                  </a>
                   <div className="p-2.5 rounded-xl bg-[#081026]/70 border border-cyan-500/20">
                     <div className="text-[10px] font-bold uppercase tracking-wider text-cyan-300">Direct Settlement</div>
                     <div className="text-white font-mono font-bold text-[11px] pt-0.5">{BUSINESS_INFO.upiId}</div>
