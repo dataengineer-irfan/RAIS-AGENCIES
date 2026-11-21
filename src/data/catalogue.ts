@@ -114,7 +114,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 Packet',
     hsn: '02071400',
     price: 180.0,
-    image: '/assets/products/triken_chicken_momos.jpg',
+    image: '/assets/products/enhanced_chicken-001.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from TRIKEN. Pack size: 1 Packet. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -127,7 +127,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '02071400',
     price: 340.0,
-    image: '/assets/products/itc_crunchy_chicken_nuggets.jpg',
+    image: '/assets/products/enhanced_chicken-002.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from Master Chef. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -140,7 +140,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1.1 KG',
     hsn: '02071400',
     price: 430.0,
-    image: '/assets/products/chicken_fingers.jpg',
+    image: '/assets/products/enhanced_chicken-003.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from RAIS Master. Pack size: 1.1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -153,7 +153,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '02071400',
     price: 325.0,
-    image: '/assets/products/gourmet_sauces.jpg',
+    image: '/assets/products/enhanced_chicken-004.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Nutrich. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -166,7 +166,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '02071400',
     price: 350.0,
-    image: '/assets/products/hero_popcorn.png',
+    image: '/assets/products/enhanced_chicken-005.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Nutrich. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -179,7 +179,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '500g',
     hsn: '02071400',
     price: 180.0,
-    image: '/assets/products/spring_rolls.jpg',
+    image: '/assets/products/enhanced_chicken-006.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from RAIS Master. Pack size: 500g. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -192,7 +192,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '2.5 KG',
     hsn: '20041000',
     price: 285.0,
-    image: '/assets/products/amul_french_fries_9mm.jpg',
+    image: '/assets/products/enhanced_veg-001.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from AMUL. Pack size: 2.5 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -205,7 +205,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1.5 KG',
     hsn: '20041000',
     price: 245.0,
-    image: '/assets/products/chill_fill_veg_patty.jpg',
+    image: '/assets/products/enhanced_veg-002.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from Chill Fill. Pack size: 1.5 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -218,7 +218,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '20041000',
     price: 320.0,
-    image: '/assets/products/cheesy_triangle.jpg',
+    image: '/assets/products/enhanced_veg-003.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Godrej. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -231,7 +231,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '20041000',
     price: 510.0,
-    image: '/assets/products/hero_popcorn.png',
+    image: '/assets/products/enhanced_veg-004.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Godrej. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -244,7 +244,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '20041000',
     price: 360.0,
-    image: '/assets/products/hero_popcorn.png',
+    image: '/assets/products/enhanced_veg-005.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Godrej. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -257,7 +257,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '2.5kg',
     hsn: '20041000',
     price: 280.0,
-    image: '/assets/products/hup_hup_french_fries.jpg',
+    image: '/assets/products/enhanced_veg-006.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from Hup Hup / Amul. Pack size: 2.5kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -270,7 +270,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 Packet',
     hsn: '20041000',
     price: 165.0,
-    image: '/assets/products/veg_momos.jpg',
+    image: '/assets/products/enhanced_veg-007.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from ITC Master Chef. Pack size: 1 Packet. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -283,7 +283,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '20041000',
     price: 350.0,
-    image: '/assets/products/cheesy_triangle.jpg',
+    image: '/assets/products/enhanced_veg-008.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from ITC Master Chef. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -296,7 +296,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1.2kg',
     hsn: '20041000',
     price: 220.0,
-    image: '/assets/products/gourmet_sauces.jpg',
+    image: '/assets/products/enhanced_veg-009.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from ITC / Chilli Fill. Pack size: 1.2kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -309,7 +309,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1.02 KG',
     hsn: '20041000',
     price: 530.0,
-    image: '/assets/products/itc_spicy_paneer_patty.jpg',
+    image: '/assets/products/enhanced_veg-010.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from ITC Master Chef. Pack size: 1.02 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -322,7 +322,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1.5 KG',
     hsn: '20041000',
     price: 340.0,
-    image: '/assets/products/hup_hup_french_fries.jpg',
+    image: '/assets/products/enhanced_veg-011.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from MC cain. Pack size: 1.5 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -335,7 +335,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1.5 KG',
     hsn: '20041000',
     price: 370.0,
-    image: '/assets/products/mccain_smiles.jpg',
+    image: '/assets/products/enhanced_veg-012.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from MC cain. Pack size: 1.5 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -348,7 +348,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '500g',
     hsn: '20041000',
     price: 180.0,
-    image: '/assets/products/spring_rolls.jpg',
+    image: '/assets/products/enhanced_veg-013.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from RAIS Master. Pack size: 500g. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -361,7 +361,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '20041000',
     price: 260.0,
-    image: '/assets/products/veggie_balls.jpg',
+    image: '/assets/products/enhanced_veg-014.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from RAIS Master. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -374,7 +374,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1L',
     hsn: '04061000',
     price: undefined,
-    image: '/assets/products/cat_cheese.png',
+    image: '/assets/products/enhanced_dairy-001.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Amul. Pack size: 1L. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -387,7 +387,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '500g',
     hsn: '04061000',
     price: 120.0,
-    image: '/assets/products/nutrilite_butter.jpg',
+    image: '/assets/products/enhanced_dairy-002.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from Nutrilite. Pack size: 500g. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -400,7 +400,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '765g',
     hsn: '04061000',
     price: 450.0,
-    image: '/assets/products/milky_mist_cheese_slices.jpg',
+    image: '/assets/products/enhanced_dairy-003.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Milky Mist. Pack size: 765g. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -413,7 +413,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '04061000',
     price: 460.0,
-    image: '/assets/products/milky_mist_mozzarella_1kg.jpg',
+    image: '/assets/products/enhanced_dairy-004.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from Milky Mist. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -426,7 +426,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '2KG',
     hsn: '04061000',
     price: 910.0,
-    image: '/assets/products/milky_mist_mozzarella_2kg.jpg',
+    image: '/assets/products/enhanced_dairy-005.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Milky Mist. Pack size: 2KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -439,7 +439,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1kg',
     hsn: '04061000',
     price: 465.0,
-    image: '/assets/products/paneer_diced_cubes.jpg',
+    image: '/assets/products/enhanced_dairy-006.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Milky Mist. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -452,7 +452,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '04061000',
     price: 420.0,
-    image: '/assets/products/cheesy_triangle.jpg',
+    image: '/assets/products/enhanced_dairy-007.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Chill Fill. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -465,7 +465,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1kg',
     hsn: '04061000',
     price: 100.0,
-    image: '/assets/products/sweet_corn_pack.jpg',
+    image: '/assets/products/enhanced_dairy-008.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Fresh Agro. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -478,7 +478,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 Pc',
     hsn: '19059090',
     price: 10.0,
-    image: '/assets/products/burger_buns.jpg',
+    image: '/assets/products/enhanced_bakery-001.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from Bake Fresh. Pack size: 1 Pc. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -491,7 +491,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 Packet',
     hsn: '19059090',
     price: 35.0,
-    image: '/assets/products/pizza_base.jpg',
+    image: '/assets/products/enhanced_bakery-002.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from Bake Fresh. Pack size: 1 Packet. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -504,7 +504,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '5 Pcs',
     hsn: '19059090',
     price: 100.0,
-    image: '/assets/products/pizza_base.jpg',
+    image: '/assets/products/enhanced_bakery-003.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Bake Fresh. Pack size: 5 Pcs. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -517,7 +517,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: 'Commercial Pack',
     hsn: '19059090',
     price: 105.0,
-    image: '/assets/products/fresh2go_tortilla_10.jpg',
+    image: '/assets/products/enhanced_bakery-004.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Signature. Pack size: Commercial Pack. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -530,7 +530,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: 'Commercial Pack',
     hsn: '19059090',
     price: 85.0,
-    image: '/assets/products/fresh2go_tortilla_8_5.jpg',
+    image: '/assets/products/enhanced_bakery-005.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Signature. Pack size: Commercial Pack. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -543,7 +543,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1kg',
     hsn: '21039090',
     price: undefined,
-    image: '/assets/products/mealtime_veg_mayo.jpg',
+    image: '/assets/products/enhanced_sauces-001.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Foodrite. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -556,7 +556,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '800g',
     hsn: '21039090',
     price: undefined,
-    image: '/assets/products/sweet_corn_pack.jpg',
+    image: '/assets/products/enhanced_sauces-002.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Del Monte / Agro. Pack size: 800g. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -569,7 +569,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '800g',
     hsn: '21039090',
     price: undefined,
-    image: '/assets/products/cat_veg.png',
+    image: '/assets/products/enhanced_sauces-003.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Del Monte / Agro. Pack size: 800g. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -582,7 +582,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '21039090',
     price: 225.0,
-    image: '/assets/products/culinary_sauce_5kg.jpg',
+    image: '/assets/products/enhanced_sauces-004.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Commercial Food Service. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -595,7 +595,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1kg',
     hsn: '21039090',
     price: 315.0,
-    image: '/assets/products/delmonte_tandoori_mayo.jpg',
+    image: '/assets/products/enhanced_sauces-005.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from Del Monte. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -608,7 +608,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: 'Commercial Pack',
     hsn: '21039090',
     price: 120.0,
-    image: '/assets/products/delmonte_ketchup_1_1kg.jpg',
+    image: '/assets/products/enhanced_sauces-006.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Del Monte. Pack size: Commercial Pack. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -621,7 +621,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1kg',
     hsn: '21039090',
     price: 195.0,
-    image: '/assets/products/cat_cheese.png',
+    image: '/assets/products/enhanced_sauces-007.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Del Monte. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -634,7 +634,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '8g Pkt Dispenser',
     hsn: '21039090',
     price: 75.2,
-    image: '/assets/products/ketchup_sachets.jpg',
+    image: '/assets/products/enhanced_sauces-008.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Del Monte. Pack size: 8g Pkt Dispenser. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -647,7 +647,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1kg',
     hsn: '21039090',
     price: 170.0,
-    image: '/assets/products/delmonte_pizza_pasta_sauce.jpg',
+    image: '/assets/products/enhanced_sauces-009.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from Del Monte. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -660,7 +660,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '3kg',
     hsn: '21039090',
     price: undefined,
-    image: '/assets/products/delmonte_pizza_pasta_front.jpg',
+    image: '/assets/products/enhanced_sauces-010.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Del Monte. Pack size: 3kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -673,7 +673,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1kg',
     hsn: '21039090',
     price: 230.0,
-    image: '/assets/products/delmonte_barbeque_sauce.jpg',
+    image: '/assets/products/enhanced_sauces-011.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Del Monte. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -686,7 +686,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '21039090',
     price: 195.0,
-    image: '/assets/products/delmonte_tandoori_mayo.jpg',
+    image: '/assets/products/enhanced_sauces-012.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Del Monte. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -699,7 +699,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '8g Packet',
     hsn: '21039090',
     price: 190.0,
-    image: '/assets/products/foodrite_mayo_sachets.jpg',
+    image: '/assets/products/enhanced_sauces-013.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Foodrite. Pack size: 8g Packet. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -712,7 +712,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '21039090',
     price: 120.0,
-    image: '/assets/products/mealtime_veg_mayo.jpg',
+    image: '/assets/products/enhanced_sauces-014.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Foodrite. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -725,7 +725,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '21039090',
     price: 65.0,
-    image: '/assets/products/foodrite_tomato_ketchup_pouch.jpg',
+    image: '/assets/products/enhanced_sauces-015.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Foodrite. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -738,7 +738,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '5 KG',
     hsn: '21039090',
     price: 280.0,
-    image: '/assets/products/gourmet_sauces.jpg',
+    image: '/assets/products/enhanced_sauces-016.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Foodrite. Pack size: 5 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -751,7 +751,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '5kg Can',
     hsn: '21039090',
     price: 360.0,
-    image: '/assets/products/red_sauce_can_5kg.jpg',
+    image: '/assets/products/enhanced_sauces-017.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Foodrite. Pack size: 5kg Can. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -764,7 +764,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '9g Packet',
     hsn: '21039090',
     price: 70.0,
-    image: '/assets/products/ketchup_sachets.jpg',
+    image: '/assets/products/enhanced_sauces-018.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Mayank Gold. Pack size: 9g Packet. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -777,7 +777,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1.1 KG',
     hsn: '21039090',
     price: 198.0,
-    image: '/assets/products/delmonte_spicy_pizza_pasta.jpg',
+    image: '/assets/products/enhanced_sauces-019.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Del Monte. Pack size: 1.1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -790,7 +790,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '5 KG',
     hsn: '21039090',
     price: 230.0,
-    image: '/assets/products/gourmet_sauces.jpg',
+    image: '/assets/products/enhanced_sauces-020.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Spic\'s. Pack size: 5 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -803,7 +803,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '21039090',
     price: 240.0,
-    image: '/assets/products/delmonte_pizza_pasta_sauce.jpg',
+    image: '/assets/products/enhanced_sauces-021.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Commercial Food Service. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -816,7 +816,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '5 KG',
     hsn: '21039090',
     price: 260.0,
-    image: '/assets/products/red_sauce_can_5kg.jpg',
+    image: '/assets/products/enhanced_sauces-022.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Commercial Food Service. Pack size: 5 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -829,7 +829,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 Ltr',
     hsn: '21039090',
     price: 24.0,
-    image: '/assets/products/cooking_vinegar.jpg',
+    image: '/assets/products/enhanced_sauces-023.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Commercial Food Service. Pack size: 1 Ltr. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -842,7 +842,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1kg',
     hsn: '21039090',
     price: undefined,
-    image: '/assets/products/cat_breadmix.png',
+    image: '/assets/products/enhanced_sauces-024.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Commercial Grade. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -855,7 +855,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 Bottle',
     hsn: '21069099',
     price: 290.0,
-    image: '/assets/products/manama_syrups_trio.jpg',
+    image: '/assets/products/enhanced_syrups-001.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from MANAMA. Pack size: 1 Bottle. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -868,7 +868,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1kg',
     hsn: '21069099',
     price: undefined,
-    image: '/assets/products/foodrite_blackcurrant_crush.jpg',
+    image: '/assets/products/enhanced_syrups-002.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Foodrite. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -881,7 +881,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1kg',
     hsn: '21069099',
     price: undefined,
-    image: '/assets/products/foodrite_blueberry_crush.jpg',
+    image: '/assets/products/enhanced_syrups-003.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Foodrite. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -894,7 +894,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1kg',
     hsn: '21069099',
     price: undefined,
-    image: '/assets/products/foodrite_butterscotch_crush.jpg',
+    image: '/assets/products/enhanced_syrups-004.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Foodrite. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -907,7 +907,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1kg',
     hsn: '21069099',
     price: undefined,
-    image: '/assets/products/foodrite_strawberry_crush.jpg',
+    image: '/assets/products/enhanced_syrups-005.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Foodrite. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -920,7 +920,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 Bottle',
     hsn: '21069099',
     price: 290.0,
-    image: '/assets/products/manama_syrups_front.jpg',
+    image: '/assets/products/enhanced_syrups-006.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from MANAMA. Pack size: 1 Bottle. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -933,7 +933,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1L',
     hsn: '21069099',
     price: undefined,
-    image: '/assets/products/manama_syrups_shelf.jpg',
+    image: '/assets/products/enhanced_syrups-007.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from MANAMA. Pack size: 1L. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -946,7 +946,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1L',
     hsn: '21069099',
     price: undefined,
-    image: '/assets/products/manama_syrups_shelf.jpg',
+    image: '/assets/products/enhanced_syrups-008.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from MANAMA. Pack size: 1L. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -959,7 +959,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1L',
     hsn: '21069099',
     price: undefined,
-    image: '/assets/products/manama_syrups_shelf.jpg',
+    image: '/assets/products/enhanced_syrups-009.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from MANAMA. Pack size: 1L. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -972,7 +972,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1L',
     hsn: '21069099',
     price: undefined,
-    image: '/assets/products/manama_syrups_shelf.jpg',
+    image: '/assets/products/enhanced_syrups-010.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from MANAMA. Pack size: 1L. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -985,7 +985,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1L',
     hsn: '21069099',
     price: undefined,
-    image: '/assets/products/manama_syrups_shelf.jpg',
+    image: '/assets/products/enhanced_syrups-011.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from MANAMA. Pack size: 1L. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -998,7 +998,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1kg',
     hsn: '21069099',
     price: 215.0,
-    image: '/assets/products/foodrite_chocolate_dressing.jpg',
+    image: '/assets/products/enhanced_syrups-012.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Foodrite. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1011,7 +1011,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '09109929',
     price: 350.0,
-    image: '/assets/products/chilly_powder.jpg',
+    image: '/assets/products/enhanced_spices-001.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Pure Spices. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1024,7 +1024,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '09109929',
     price: 380.0,
-    image: '/assets/products/chilly_powder.jpg',
+    image: '/assets/products/enhanced_spices-002.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Pure Spices. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1037,7 +1037,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '09109929',
     price: 260.0,
-    image: '/assets/products/coriander_powder.jpg',
+    image: '/assets/products/enhanced_spices-003.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Pure Spices. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1050,7 +1050,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 kg',
     hsn: '09109929',
     price: 350.0,
-    image: '/assets/products/chilli_flakes.jpg',
+    image: '/assets/products/enhanced_spices-004.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from BHARAT. Pack size: 1 kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1063,7 +1063,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1/2kg',
     hsn: '09109929',
     price: 310.0,
-    image: '/assets/products/big_bell_oregano.jpg',
+    image: '/assets/products/enhanced_spices-005.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from VKL. Pack size: 1/2kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1076,7 +1076,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '09109929',
     price: 200.0,
-    image: '/assets/products/turmeric_powder.jpg',
+    image: '/assets/products/enhanced_spices-006.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Pure Spices. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1089,7 +1089,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1kg',
     hsn: '09109929',
     price: 315.0,
-    image: '/assets/products/vkl_crispy_cajun_breading.jpg',
+    image: '/assets/products/enhanced_spices-007.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from VKL. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1102,7 +1102,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '09109929',
     price: 370.0,
-    image: '/assets/products/vkl_extra_hs_marinade.jpg',
+    image: '/assets/products/enhanced_spices-008.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from VKL. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1115,7 +1115,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '250g',
     hsn: '09109929',
     price: 150.0,
-    image: '/assets/products/vkl_peri_peri_sprinkler.jpg',
+    image: '/assets/products/enhanced_spices-009.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Pure Spices. Pack size: 250g. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1128,7 +1128,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '100 Nos',
     hsn: '48192020',
     price: 350.0,
-    image: '/assets/products/burger_box_printed.jpg',
+    image: '/assets/products/enhanced_packaging-001.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 100 Nos. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1141,7 +1141,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '100 Nos',
     hsn: '48192020',
     price: 400.0,
-    image: '/assets/products/burger_box_printed.jpg',
+    image: '/assets/products/enhanced_packaging-002.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 100 Nos. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1154,7 +1154,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '34 Pieces',
     hsn: '48192020',
     price: 545.0,
-    image: '/assets/products/kfc_bucket.jpg',
+    image: '/assets/products/enhanced_packaging-003.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 34 Pieces. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1167,7 +1167,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '48192020',
     price: 120.0,
-    image: '/assets/products/butter_paper_pack.jpg',
+    image: '/assets/products/enhanced_packaging-004.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1180,7 +1180,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '100 Nos',
     hsn: '48192020',
     price: 540.0,
-    image: '/assets/products/burger_box_printed.jpg',
+    image: '/assets/products/enhanced_packaging-005.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 100 Nos. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1193,7 +1193,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '34 Pieces',
     hsn: '48192020',
     price: 540.0,
-    image: '/assets/products/kfc_bucket.jpg',
+    image: '/assets/products/enhanced_packaging-006.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 34 Pieces. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1206,7 +1206,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 Packet',
     hsn: '48192020',
     price: 50.0,
-    image: '/assets/products/mayo_portion_cups.jpg',
+    image: '/assets/products/enhanced_packaging-007.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 1 Packet. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1219,7 +1219,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1.2kg',
     hsn: '48192020',
     price: 620.0,
-    image: '/assets/products/pizza_box_printed_8x8.jpg',
+    image: '/assets/products/enhanced_packaging-008.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 1.2kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1232,7 +1232,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '100 Nos',
     hsn: '48192020',
     price: 600.0,
-    image: '/assets/products/plain_pizza_box_kraft.jpg',
+    image: '/assets/products/enhanced_packaging-009.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 100 Nos. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1245,7 +1245,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '100 Nos',
     hsn: '48192020',
     price: 800.0,
-    image: '/assets/products/plain_pizza_box_white.jpg',
+    image: '/assets/products/enhanced_packaging-010.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 100 Nos. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1258,7 +1258,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1 KG',
     hsn: '48192020',
     price: 17.0,
-    image: '/assets/products/tissue_papers_pack.jpg',
+    image: '/assets/products/enhanced_packaging-011.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1271,7 +1271,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '100 Nos',
     hsn: '48192020',
     price: 700.0,
-    image: '/assets/products/pizza_box_colour_8x8.jpg',
+    image: '/assets/products/enhanced_packaging-012.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 100 Nos. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
