@@ -12,32 +12,32 @@ interface SatelliteItem {
 
 const SATELLITE_ITEMS: SatelliteItem[] = [
   {
-    src: assetUrl('/images/ref-assets/hero_momos_cutout.png'),
-    alt: 'Steamed Momos',
+    src: assetUrl('/assets/products/triken_chicken_momos_pack_details.jpg'),
+    alt: 'TRIKEN Chicken Momos',
     offset: 0,
     label: 'TRIKEN Chicken Momos',
     badge: 'IQF -18°C'
   },
   {
-    src: assetUrl('/images/ref-assets/hero_fries_cutout.png'),
-    alt: 'French Fries',
+    src: assetUrl('/assets/products/mccain_french_fries_2_5kg.jpg'),
+    alt: 'McCain French Fries',
     offset: Math.PI * 0.5,
-    label: 'McCain / Amul Fries',
-    badge: '9mm Grade-A'
+    label: 'McCain 2.5kg Fries',
+    badge: 'Grade-A'
   },
   {
-    src: assetUrl('/images/ref-assets/hero_popcorn_cutout.png'),
-    alt: 'Chicken Popcorn',
+    src: assetUrl('/assets/products/itc_master_chef_crunchy_chicken_nuggets_1kg.jpg'),
+    alt: 'ITC Chicken Nuggets',
     offset: Math.PI,
     label: 'ITC Chicken Nuggets',
-    badge: 'High-Hold Crisp'
+    badge: '1 KG Pack'
   },
   {
-    src: assetUrl('/images/ref-assets/hero_cheese_cutout.png'),
-    alt: 'Mozzarella & Paneer',
+    src: assetUrl('/assets/products/milky_mist_mozzarella_2kg_pack_studio.jpg'),
+    alt: 'Milky Mist Mozzarella',
     offset: Math.PI * 1.5,
     label: 'Milky Mist Mozzarella',
-    badge: '100% Dairy'
+    badge: '2 KG Diced'
   }
 ];
 

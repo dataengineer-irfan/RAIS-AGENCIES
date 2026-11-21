@@ -21,27 +21,27 @@ interface FoodShowcaseItem {
 
 const FOOD_SHOWCASE_ITEMS: Record<'momo' | 'nugget' | 'fries', FoodShowcaseItem> = {
   momo: {
-    image: assetUrl('/images/products/chicken_momos.jpg'),
-    name: 'ITC Handcrafted Pleated Momos',
-    tag: 'Traditional Bamboo Steamer Presentation with Red Schezwan Chutney',
-    badge: '12-Pleat IQF -18°C',
-    alt: 'Authentic Handcrafted Steamed Momos Dumplings in Bamboo Steamer',
-    categoryLabel: 'FROZEN SNACKS · WHOLESALE BULK SUPPLY'
+    image: assetUrl('/assets/products/triken_chicken_momos_pack_details.jpg'),
+    name: 'TRIKEN Chicken Momos (IQF -18°C)',
+    tag: 'Official Wholesale TRIKEN Commercial Packaging with Frozen Quality Lock',
+    badge: 'TRIKEN · IQF -18°C',
+    alt: 'Authentic TRIKEN Chicken Momos Commercial Wholesale Supply - RAIS Agencies',
+    categoryLabel: 'FROZEN CHICKEN SNACKS · TRIKEN AUTHORISED SUPPLY'
   },
   nugget: {
-    image: assetUrl('/images/products/chicken_nuggets.jpg'),
+    image: assetUrl('/assets/products/itc_master_chef_crunchy_chicken_nuggets_1kg.jpg'),
     name: 'ITC Master Chef Crunchy Chicken Nuggets',
-    tag: 'Cast Iron Skillet Presentation with Herb Mayonnaise Dip',
-    badge: 'Golden Panko Crusted',
-    alt: 'Crunchy Golden Chicken Nuggets and Popcorn in Cast Iron Skillet',
+    tag: '1 KG Commercial Wholesale Packaging with Cold-Chain Lock',
+    badge: 'ITC Master Chef · 1 KG',
+    alt: 'ITC Master Chef Crunchy Chicken Nuggets 1KG Commercial Packshot',
     categoryLabel: 'CHICKEN SNACKS · FAST FOOD STAPLE'
   },
   fries: {
-    image: assetUrl('/images/products/french_fries_basket.jpg'),
-    name: 'Grade-A Shoestring French Fries (9mm)',
-    tag: 'Commercial Stainless Steel Wire Frying Basket Presentation',
-    badge: '9mm High-Hold Crisp',
-    alt: 'Hot Golden Shoestring French Fries in Commercial Fryer Basket with Flaked Sea Salt',
+    image: assetUrl('/assets/products/mccain_french_fries_2_5kg.jpg'),
+    name: 'McCain / Amul French Fries (2.5 KG)',
+    tag: 'Grade-A Shoestring Commercial Case Packshot',
+    badge: 'McCain / Amul · 2.5 KG',
+    alt: 'McCain and Amul Commercial French Fries 2.5kg Wholesale Supply',
     categoryLabel: 'FRENCH FRIES · FAST FOOD MUST-HAVE'
   }
 };

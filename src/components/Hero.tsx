@@ -4,7 +4,6 @@ import { ArrowRight, MessageSquare, MapPin, Sparkles, Box, UtensilsCrossed, Stor
 import { BUSINESS_INFO, PRODUCTS } from '../data/catalogue';
 import { ThreeSubZeroCanvas } from './ThreeSubZeroCanvas';
 import { HeroFoodStage } from './HeroFoodStage';
-import { ThreeHeroFoodViewer } from './ThreeHeroFoodViewer';
 import { assetUrl } from '../utils/assetUrl';
 
 interface HeroProps {
@@ -20,7 +19,7 @@ const SECTOR_WORDS = [
 ];
 
 export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
-  const [activeViewer, setActiveViewer] = useState<'hub' | 'stage' | 'webgl'>('hub');
+  const [activeViewer, setActiveViewer] = useState<'hub' | 'triken' | 'stage'>('hub');
   const [tickerIndex, setTickerIndex] = useState(0);
 
   React.useEffect(() => {
@@ -242,6 +241,18 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
               </button>
 
               <button
+                onClick={() => setActiveViewer('triken')}
+                className={`flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold transition-all ${
+                  activeViewer === 'triken'
+                    ? 'bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 shadow-md'
+                    : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                <span>Triken Momos</span>
+              </button>
+
+              <button
                 onClick={() => setActiveViewer('stage')}
                 className={`flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold transition-all ${
                   activeViewer === 'stage'
@@ -251,18 +262,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
               >
                 <UtensilsCrossed className="w-3.5 h-3.5" />
                 <span>3D Food Stage</span>
-              </button>
-
-              <button
-                onClick={() => setActiveViewer('webgl')}
-                className={`flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold transition-all ${
-                  activeViewer === 'webgl'
-                    ? 'bg-gradient-to-r from-cyan-400 to-sky-400 text-slate-950 shadow-md'
-                    : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                <Box className="w-3.5 h-3.5" />
-                <span>3D Mesh</span>
               </button>
             </div>
 
@@ -365,12 +364,89 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
                     </a>
                   </div>
                 </div>
-              ) : activeViewer === 'stage' ? (
-                <HeroFoodStage />
-              ) : (
-                <div className="w-full max-w-[500px] h-[440px] rounded-2xl border border-cyan-400/30 bg-[#0f1c3f]/80 p-4 shadow-2xl backdrop-blur-xl">
-                  <ThreeHeroFoodViewer modelType="momo" />
+              ) : activeViewer === 'triken' ? (
+                <div className="w-full max-w-[500px] rounded-2xl border border-cyan-400/40 bg-[#0f1c3f]/95 p-4 sm:p-5 shadow-2xl backdrop-blur-xl relative overflow-hidden">
+                  {/* Ambient radial glow */}
+                  <div className="absolute -top-16 -right-16 w-48 h-48 bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
+
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-cyan-500/20">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" />
+                      <span className="text-xs font-black uppercase tracking-wider text-cyan-200">Official Brand Partner</span>
+                    </div>
+                    <span className="text-[11px] font-bold text-amber-300 bg-amber-500/15 border border-amber-400/30 px-2.5 py-0.5 rounded-full">
+                      TRIKEN Chicken Momos
+                    </span>
+                  </div>
+
+                  {/* Real Triken Momos Packaging Photo */}
+                  <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden border border-cyan-500/30 mb-3 bg-[#081026] group">
+                    <img
+                      src={assetUrl('/assets/products/triken_chicken_momos_pack_details.jpg')}
+                      alt="Official TRIKEN Chicken Momos Commercial Packaging - RAIS Agencies"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#081026] via-transparent to-transparent opacity-70" />
+                    <div className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-cyan-400 text-slate-950 text-[10px] font-black uppercase tracking-wider shadow-md">
+                      IQF -18°C Flash Frozen
+                    </div>
+                    <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between">
+                      <div>
+                        <div className="text-sm font-bold text-white drop-shadow-md">TRIKEN Chicken Momos</div>
+                        <div className="text-[11px] text-cyan-200">Wholesale Master Pack · Ready to Steam or Fry</div>
+                      </div>
+                      <span className="text-[11px] font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-2 py-0.5 rounded-md">
+                        In Stock
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Real Freezer Staged Photo + Specs */}
+                  <div className="grid grid-cols-2 gap-2.5 mb-3">
+                    <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-cyan-500/25 bg-[#081026] group">
+                      <img
+                        src={assetUrl('/assets/products/triken_chicken_momos_freezer_rack.jpg')}
+                        alt="Triken Chicken Momos Staged in Depot Cold Chain Freezer"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
+                      <span className="absolute bottom-1.5 left-2 text-[10px] font-bold text-slate-200">
+                        Depot Freezer Stock
+                      </span>
+                    </div>
+
+                    <div className="rounded-xl border border-cyan-500/20 bg-[#081026]/80 p-2.5 flex flex-col justify-center text-xs space-y-1">
+                      <div className="flex items-center gap-1.5 text-slate-300">
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                        <span className="text-[11px]">Brand: <strong>TRIKEN Foods</strong></span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-300">
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                        <span className="text-[11px]">Pack: <strong>Commercial 1 Pkt</strong></span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-300">
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                        <span className="text-[11px]">Texture: <strong>Juicy Chicken Fill</strong></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* WhatsApp Action Footer */}
+                  <div className="pt-1">
+                    <a
+                      href={`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encodeURIComponent('Hello RAIS Agencies, I want to order TRIKEN Chicken Momos wholesale for my shop in Rayachoty.')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1ebe5b] text-white text-xs font-bold transition-all shadow-md hover:scale-[1.01]"
+                    >
+                      <MessageSquare className="w-3.5 h-3.5 fill-white" />
+                      <span>Order TRIKEN Momos on WhatsApp</span>
+                    </a>
+                  </div>
                 </div>
+              ) : (
+                <HeroFoodStage />
               )}
             </div>
 
