@@ -63,9 +63,11 @@ export class GBPStorage {
         const parsed: GBPReviewItem[] = JSON.parse(data);
         // Purge legacy fake mock reviews if present
         const hasLegacyMock = parsed.some(r => r.reviewerName === 'Sri Krishna Cafe & Bakers');
-        if (hasLegacyMock) {
-          localStorage.removeItem(STORAGE_KEYS.REVIEWS);
-          return [];
+        // Ensure authentic new reviews (like Hidayathullah H) are present
+        const hasHidayathullah = parsed.some(r => r.reviewerName.toLowerCase().includes('hidayathullah'));
+        if (hasLegacyMock || !hasHidayathullah) {
+          localStorage.setItem(STORAGE_KEYS.REVIEWS, JSON.stringify(INITIAL_GBP_REVIEWS));
+          return INITIAL_GBP_REVIEWS;
         }
         return parsed;
       }
