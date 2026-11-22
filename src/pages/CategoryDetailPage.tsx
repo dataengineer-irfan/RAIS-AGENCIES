@@ -152,7 +152,7 @@ export const CategoryDetailPage: React.FC<CategoryDetailPageProps> = ({
   };
 
   const appGuide = getCategoryApplicationGuide(category.code);
-  const heroImage = CATEGORY_PLINTH_IMAGES[category.code] || category.image || assetUrl('/images/products/chicken_momos.jpg');
+  const heroImage = CATEGORY_PLINTH_IMAGES[category.code] || category.image || assetUrl('/assets/products/triken_chicken_momos_pack_details.jpg');
 
   return (
     <div className="py-10 sm:py-16 bg-[#081026] text-white min-h-screen relative overflow-hidden">

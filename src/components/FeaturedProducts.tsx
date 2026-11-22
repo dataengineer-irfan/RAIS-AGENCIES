@@ -60,6 +60,7 @@ const ProductRowThumbnail: React.FC<{
   name: string;
   badge: { label: string; bg: string; text: string };
 }> = ({ image, name, badge }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const [loadFailed, setLoadFailed] = useState(false);
   const resolvedUrl = image ? assetUrl(image) : null;
 
@@ -74,8 +75,11 @@ const ProductRowThumbnail: React.FC<{
           src={resolvedUrl}
           alt=""
           role="presentation"
-          className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+          className={`absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-all duration-300 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
           loading="lazy"
+          onLoad={() => setIsLoaded(true)}
           onError={() => setLoadFailed(true)}
         />
       )}
@@ -477,9 +481,13 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
                           alt={product.name}
                           loading="lazy"
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
+                          onLoad={(e) => {
+                            e.currentTarget.style.opacity = '1';
+                          }}
                           onError={(e) => {
                             e.currentTarget.style.display = 'none';
                           }}
+                          style={{ opacity: 0, transition: 'opacity 0.25s ease-in' }}
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center text-slate-500 text-xs">

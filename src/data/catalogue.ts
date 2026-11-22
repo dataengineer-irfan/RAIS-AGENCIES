@@ -1128,7 +1128,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '100 Nos',
     hsn: '48192020',
     price: 350.0,
-    image: '/assets/products/enhanced_packaging-001.jpg',
+    image: '/assets/products/burger_pastry_boxes_4x4_printed_flat.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 100 Nos. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1141,7 +1141,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '100 Nos',
     hsn: '48192020',
     price: 400.0,
-    image: '/assets/products/enhanced_packaging-002.jpg',
+    image: '/assets/products/burger_pastry_boxes_4x4_printed_flat.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 100 Nos. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1180,7 +1180,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '100 Nos',
     hsn: '48192020',
     price: 540.0,
-    image: '/assets/products/enhanced_packaging-005.jpg',
+    image: '/assets/products/boxes_display_pizza_burger.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 100 Nos. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1219,7 +1219,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1.2kg',
     hsn: '48192020',
     price: 620.0,
-    image: '/assets/products/enhanced_packaging-008.jpg',
+    image: '/assets/products/pizza_boxes_8x8_printed_plain_flat.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 1.2kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },

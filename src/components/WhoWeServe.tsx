@@ -16,16 +16,16 @@ export const WhoWeServe: React.FC<WhoWeServeProps> = ({ onOpenQuote }) => {
       title: 'Fast Food & Burger Centers',
       subtitle: 'Fast Food Joints · Shawarma Counters · Food Trucks',
       icon: Utensils,
-      image: assetUrl('/images/burger_boxes.jpg'),
-      tag: 'Fries, Patties & Boxes',
+      image: assetUrl('/assets/products/burger_pastry_boxes_4x4_printed_flat.jpg'),
+      tag: 'Fries, Patties & Printed Boxes',
       description:
-        'Crispy french fries, juicy chicken and veg burger patties, tandoori mayonnaise, and heavy kraft burger clamshell boxes. Keep your counter fast, profitable, and running smooth during evening rush hours.',
+        'Crispy french fries, juicy chicken and veg burger patties, tandoori mayonnaise, and heavy food-grade printed burger clamshell boxes. Keep your counter fast, profitable, and running smooth during evening rush hours.',
       stockItems: [
         'Hup Hup French Fries 9mm (2.5kg)',
         'Nutrich Chicken Burger Patty (1kg)',
         'Chilli Fill Veg Burger Patty (1.2kg)',
         'Del Monte Tandoori Mayo (1kg)',
-        'Kraft Burger Clamshell Boxes (100 Nos)'
+        'Printed 4x4 & 5x5 Burger Clamshell Boxes (100 Nos)'
       ]
     },
     {
@@ -33,15 +33,15 @@ export const WhoWeServe: React.FC<WhoWeServeProps> = ({ onOpenQuote }) => {
       title: 'Pizzerias & Bakeries',
       subtitle: 'Pizza Outlets · Cafes · Bakeries',
       icon: Pizza,
-      image: assetUrl('/images/mozzarella_cheese.jpg'),
-      tag: 'Mozzarella & Pizza Boxes',
+      image: assetUrl('/assets/products/pizza_boxes_8x8_printed_plain_flat.jpg'),
+      tag: 'Mozzarella & Printed Pizza Boxes',
       description:
-        'Top quality Milky Mist mozzarella cheese for high stretch and bubbling melt, fresh par-baked pizza bases, pizza pasta sauce, and heavy corrugated takeaway pizza boxes.',
+        'Top quality Milky Mist mozzarella cheese for high stretch and bubbling melt, fresh par-baked pizza bases, pizza pasta sauce, and printed corrugated takeaway pizza boxes.',
       stockItems: [
         'Milky Mist Mozzarella Diced (2kg)',
         'Par-Baked 8-inch Pizza Bases',
         'Del Monte Pizza Pasta Sauce (1kg)',
-        'Kraft Fluted Pizza Boxes (100 Nos)',
+        'Printed 8x8 & 10x10 Corrugated Pizza Boxes (100 Nos)',
         'Oregano & Chilli Flake Seasoning (1kg)'
       ]
     },
@@ -50,7 +50,7 @@ export const WhoWeServe: React.FC<WhoWeServeProps> = ({ onOpenQuote }) => {
       title: 'Cafés & Juice Bars',
       subtitle: 'Tea & Coffee Points · Shake & Juice Bars',
       icon: Coffee,
-      image: assetUrl('/images/products/mojito_lime_mint.jpg'),
+      image: assetUrl('/images/ref-assets/cat_mojitos_ice.png'),
       tag: 'Syrups, Crushes & Wraps',
       description:
         'Concentrated mojito syrups, Blue Curacao, fruit crushes, cheese corn triangles, and soft tortilla wraps for quick toasties, rolls, and shawarmas.',
@@ -67,7 +67,7 @@ export const WhoWeServe: React.FC<WhoWeServeProps> = ({ onOpenQuote }) => {
       title: 'Hotels, Caterers & Cloud Kitchens',
       subtitle: 'Biryani Hotels · Marriage Caterers · Cloud Kitchens',
       icon: Store,
-      image: assetUrl('/images/chicken_nuggets.jpg'),
+      image: assetUrl('/assets/products/itc_master_chef_crunchy_chicken_nuggets_1kg.jpg'),
       tag: 'Bulk Cartons & Wholesale Packs',
       description:
         'Bulk cartons of ITC nuggets, Triken momos, paneer cubes, Del Monte ketchup sachets, and paper packaging. Direct wholesale factory rates with zero middleman markup.',

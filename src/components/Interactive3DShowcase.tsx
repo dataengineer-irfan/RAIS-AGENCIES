@@ -45,26 +45,26 @@ const SHOWCASE_ITEMS: Record<ModelType, ShowcaseItem> = {
   },
   carton: {
     image: assetUrl('/assets/products/pizza_boxes_8x8_printed_plain_flat.jpg'),
-    name: '8"×8" & 10"×10" Corrugated Pizza Delivery Boxes',
-    tag: 'Authentic Food-Grade Corrugated Pizza Delivery Boxes (Printed & Plain Kraft)',
+    name: '8"×8" & 10"×10" Printed Pizza Delivery Boxes ("Pizza: Where Dreams Become Toppings")',
+    tag: 'Authentic Food-Grade Printed Pizza Delivery Boxes with Steam Vents & Thermal Flute',
     badge: '8"×8" & 10"×10" · Heat-Lock Flute',
     alt: 'RAIS Agencies Authentic 8x8 Pizza Delivery Boxes Wholesale Supply Rayachoty',
     categoryLabel: 'COMMERCIAL FOOD PACKAGING · MASTER PIZZA BOXES'
   },
   burger_box: {
     image: assetUrl('/assets/products/burger_pastry_boxes_4x4_printed_flat.jpg'),
-    name: '4"×4" Kraft Burger & Pastry Takeaway Boxes',
-    tag: 'Heavy-Gauge Food-Grade Kraft Clamshell Boxes (Greaseproof & Steam-Vented)',
+    name: '4"×4" Printed Burger & Pastry Clamshell Boxes ("Burger & Pastries")',
+    tag: 'Heavy-Duty Printed Clamshell Boxes with Food-Grade Greaseproof Coating',
     badge: '4"×4" Clamshell · 320 GSM',
     alt: 'RAIS Agencies Authentic 4x4 Burger Clamshell Takeaway Packaging Boxes',
     categoryLabel: 'FAST FOOD PACKAGING · HIGH GREASE RESISTANCE'
   },
   cryo_pod: {
-    image: assetUrl('/assets/products/chest_freezer_chicken_snacks_mccain.jpg'),
-    name: 'Sub-Zero Cold Chain Deep Freezer Fleet (-18°C)',
-    tag: 'Commercial Deep Freezers Storing ITC, McCain & Triken at Continuous -18°C',
+    image: assetUrl('/assets/products/depot_real_deep_freezer.jpg'),
+    name: 'RAIS Depot Authentic Commercial Deep Freezer (-18°C)',
+    tag: 'Continuous -18°C Deep Freeze Preserving Chill Fill, McCain, Triken & Veg Snacks',
     badge: '-18°C Continuous · Zero Melt',
-    alt: 'RAIS Agencies Depot Deep Freezer Fleet Sub-Zero Cold Storage Rayachoty',
+    alt: 'RAIS Agencies Authentic Rayachoty Depot Deep Freezer Sub-Zero Cold Storage',
     categoryLabel: 'COLD-CHAIN DEPOT · ZERO QUALITY BREAK'
   }
 };
@@ -343,8 +343,8 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                 {activeModel === 'momo' && 'TRIKEN Handcrafted Chicken Momos'}
                 {activeModel === 'nugget' && 'ITC Master Chef Crunchy Chicken Nuggets'}
                 {activeModel === 'fries' && 'Grade-A Shoestring French Fries (9mm)'}
-                {activeModel === 'carton' && '8"×8" & 10"×10" Corrugated Pizza Boxes'}
-                {activeModel === 'burger_box' && '4"×4" Kraft Takeaway Clamshell Box'}
+                {activeModel === 'carton' && '8"×8" & 10"×10" Printed Pizza Delivery Boxes'}
+                {activeModel === 'burger_box' && '4"×4" & 5"×5" Printed Burger Clamshell Boxes'}
                 {activeModel === 'cryo_pod' && 'Rayachoty -18°C Cold Storage Depot'}
               </h3>
 
@@ -356,9 +356,9 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                 {activeModel === 'fries' &&
                   'Grade-A shoestring french fries (6mm / 9mm). Absorbs very little oil, fries in under 3 minutes, and stays crispy. Best wholesale case rates in Rayachoty.'}
                 {activeModel === 'carton' &&
-                  'Heavy-duty 3-ply and 5-ply food-grade corrugated pizza boxes. Specially engineered for Rayachoty pizzerias, cafes & bakers to lock in steam and heat without sogginess. Available in printed full-colour and plain kraft wholesale bundles.'}
+                  'Heavy-duty food-grade printed corrugated pizza boxes ("Pizza: Where Dreams Become Toppings"). Specially engineered for Rayachoty pizzerias, cafes & bakers to lock in heat without sogginess. Available in printed full-colour wholesale bundles.'}
                 {activeModel === 'burger_box' &&
-                  'Heavy virgin kraft clamshell box with built-in laser steam vents. Keeps burgers hot and fresh without making buns soggy. 100% food grade.'}
+                  'Heavy-duty food-grade printed clamshell boxes ("Burger & Pastries") with built-in steam vents. Keeps burgers hot and fresh without making buns soggy. 100% food grade certified.'}
                 {activeModel === 'cryo_pod' &&
                   'Commercial deep freezer cold storage right at our Rayachoty depot. Every product stays completely frozen and fresh with zero melting before reaching your kitchen.'}
               </p>
