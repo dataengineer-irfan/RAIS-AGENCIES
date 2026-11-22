@@ -15,6 +15,7 @@ import { BusinessInfoManagerView } from '../components/growth-engine/BusinessInf
 import { ReelsStudioView } from '../components/growth-engine/ReelsStudioView';
 import { MetaPublishingView } from '../components/growth-engine/MetaPublishingView';
 import { InstagramEnquiriesView } from '../components/growth-engine/InstagramEnquiriesView';
+import { TrafficAnalyticsTab } from '../components/automation/TrafficAnalyticsTab';
 import { api } from '../services/api';
 
 interface AutomationDashboardPageProps {
@@ -98,6 +99,7 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
         {currentTab === 'seo' && <LocalSEOView />}
         {currentTab === 'competitors' && <CompetitorsView />}
         {currentTab === 'analytics' && <AnalyticsView />}
+        {currentTab === 'ga4_traffic' && <TrafficAnalyticsTab />}
 
         {/* Meta & Instagram Automation Suite */}
         {currentTab === 'reels' && <ReelsStudioView />}

@@ -29,7 +29,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
         { id: 'reviews', label: 'Google Reviews Inbox', icon: MessageSquare },
         { id: 'seo', label: 'Local SEO & Keywords', icon: Search },
         { id: 'competitors', label: 'Competitor Tracker', icon: Users },
-        { id: 'analytics', label: 'Performance Telemetry', icon: BarChart3 }
+        { id: 'analytics', label: 'GMB Maps Telemetry', icon: BarChart3 },
+        { id: 'ga4_traffic', label: 'Google Analytics (GA4)', icon: CheckCircle2, badge: 'G-LX7011WRHR' }
       ]
     },
     {
