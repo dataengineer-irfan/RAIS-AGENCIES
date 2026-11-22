@@ -395,8 +395,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                   <button
                     type="button"
                     onClick={handleWhatsAppSend}
-                    disabled={itemsInQuote.length === 0}
-                    className="w-full sm:flex-1 py-3.5 px-5 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] disabled:opacity-40 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/40 transition-all hover:scale-[1.01]"
+                    className="w-full sm:flex-1 py-3.5 px-5 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/40 transition-all hover:scale-[1.01]"
                   >
                     <MessageSquare className="size-4 fill-current" />
                     <span>Send Order via WhatsApp</span>
@@ -404,8 +403,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
                   <button
                     type="submit"
-                    disabled={itemsInQuote.length === 0}
-                    className="w-full sm:w-auto py-3.5 px-6 rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 hover:from-cyan-300 hover:to-sky-400 disabled:opacity-40 text-slate-950 font-black text-xs flex items-center justify-center gap-1.5 transition-all shadow-md hover:scale-[1.01]"
+                    className="w-full sm:w-auto py-3.5 px-6 rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 hover:from-cyan-300 hover:to-sky-400 text-slate-950 font-black text-xs flex items-center justify-center gap-1.5 transition-all shadow-md hover:scale-[1.01]"
                   >
                     <Send className="size-3.5" />
                     <span>Request Wholesale Bill</span>
