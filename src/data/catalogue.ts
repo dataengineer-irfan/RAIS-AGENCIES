@@ -1063,7 +1063,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1/2kg',
     hsn: '09109929',
     price: 310.0,
-    image: '/assets/products/enhanced_spices-005.jpg',
+    image: '/assets/products/big_bell_oregano.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from VKL. Pack size: 1/2kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
