@@ -31,25 +31,37 @@ export const ProductSpecModal: React.FC<ProductSpecModalProps> = ({
       case 'VEG':
         return {
           type: 'Frozen Cold Storage (-18°C)',
-          detail: 'Keep frozen until use. Sub-zero commercial warehouse storage.'
+          detail: 'Keep frozen until use. Continuous sub-zero commercial warehouse storage.'
         };
+      case 'DAIRY':
       case 'CHEESE':
-        if (p.name.toLowerCase().includes('mozzarella')) {
+        if (p.name.toLowerCase().includes('mozzarella') || p.name.toLowerCase().includes('sweet corn')) {
           return {
-            type: 'Frozen Storage (-18°C)',
-            detail: 'Sub-zero frozen storage to maintain free-flowing diced shred.'
+            type: 'Frozen Cold Storage (-18°C)',
+            detail: 'Sub-zero frozen storage to maintain free-flowing diced shred and freshness.'
           };
         }
         return {
           type: 'Chilled Storage (2°C - 4°C)',
           detail: 'Commercial refrigeration. Keep chilled in sealed dairy storage.'
         };
+      case 'BAKERY':
+      case 'BREADING':
+        return {
+          type: 'Fresh Bakery Ambient / Chilled',
+          detail: 'Store sealed in clean, dry environment. Use within recommended commercial batch window.'
+        };
       case 'SAUCES':
         return {
           type: 'Ambient Dry Goods',
-          detail: 'Cool, dry storage. Refrigerate after opening.'
+          detail: 'Cool, dry storage. Keep sealed and refrigerate after opening.'
         };
-      case 'BREADING':
+      case 'SYRUPS':
+      case 'MOJITOS':
+        return {
+          type: 'Ambient Beverage Storage',
+          detail: 'Store in a cool, shaded environment. Seal tightly after each pump/pour.'
+        };
       case 'SPICES':
         return {
           type: 'Dry Ambient Storage',
@@ -59,11 +71,6 @@ export const ProductSpecModal: React.FC<ProductSpecModalProps> = ({
         return {
           type: 'Dry Pallet Storage',
           detail: 'Food-grade dry ambient storage. Keep away from moisture.'
-        };
-      case 'MOJITOS':
-        return {
-          type: 'Ambient Beverage Storage',
-          detail: 'Store in a cool, shaded environment.'
         };
       default:
         return {

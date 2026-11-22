@@ -122,7 +122,7 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              <span>🥟 Handcrafted Momos</span>
+              <span>🥟 TRIKEN Momos</span>
             </button>
             <button
               onClick={() => { setActiveModel('nugget'); resetTilt(); }}

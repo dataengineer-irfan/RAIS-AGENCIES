@@ -145,7 +145,7 @@ export const InstagramEnquiriesView: React.FC = () => {
             >
               <option value="Price for 5 cartons of Hup Hup fries in Rayachoty?">Price for 5 cartons of Hup Hup fries in Rayachoty?</option>
               <option value="CATALOGUE">Comment: "CATALOGUE"</option>
-              <option value="Do you have ITC chicken momos in Rayachoty depot?">Do you have ITC chicken momos in Rayachoty depot?</option>
+              <option value="Do you have TRIKEN chicken momos in Rayachoty depot?">Do you have TRIKEN chicken momos in Rayachoty depot?</option>
               <option value="Where is your wholesale depot located?">Where is your wholesale depot located?</option>
               <option value="Give me 20% discount on mozzarella cheese">Give me 20% discount on mozzarella cheese</option>
             </select>

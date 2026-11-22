@@ -7,7 +7,7 @@ const VALUE_PILLARS = [
   {
     icon: ShieldCheck,
     title: '100% Genuine Brand Stock',
-    description: 'Direct allocations from ITC Master Chef, McCain, Godrej, Del Monte, Milky Mist & Amul.'
+    description: 'Direct allocations from Triken, ITC Master Chef, McCain, Godrej, Del Monte, Milky Mist & Amul.'
   },
   {
     icon: Snowflake,

@@ -70,10 +70,10 @@ export const WhoWeServe: React.FC<WhoWeServeProps> = ({ onOpenQuote }) => {
       image: assetUrl('/images/chicken_nuggets.jpg'),
       tag: 'Bulk Cartons & Wholesale Packs',
       description:
-        'Bulk cartons of ITC nuggets, momos, paneer cubes, Del Monte ketchup sachets, and paper packaging. Direct wholesale factory rates with zero middleman markup.',
+        'Bulk cartons of ITC nuggets, Triken momos, paneer cubes, Del Monte ketchup sachets, and paper packaging. Direct wholesale factory rates with zero middleman markup.',
       stockItems: [
         'ITC Master Chef Chicken Nuggets (1kg)',
-        'ITC Handcrafted Pleated Momos (500g)',
+        'TRIKEN Handcrafted Pleated Momos (500g)',
         'Milky Mist Fresh Paneer Cubes (1kg)',
         'Del Monte Ketchup Sachets (8g × 1000)',
         'Commercial Table Cups & Napkins'

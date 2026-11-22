@@ -64,9 +64,9 @@ export const WhoWeServePage: React.FC<WhoWeServePageProps> = ({ onOpenQuote }) =
       image: assetUrl('/images/products/chicken_momos.jpg'),
       tag: 'Bulk Staging & High-Volume IQF',
       challenge: 'Serving high-volume lunch and dinner rushes requires quick-cook appetizers, consistent malai paneer, and bulk sauces.',
-      solution: 'ITC frozen momos, Godrej paneer pops & nuggets, Milky Mist fresh paneer cubes, and 1kg/sachet bulk condiments.',
+      solution: 'TRIKEN frozen momos, Godrej paneer pops & nuggets, Milky Mist fresh paneer cubes, and 1kg/sachet bulk condiments.',
       recommended: [
-        'I.T.C Veg & Chicken Momos (1 Packet / 500g)',
+        'TRIKEN Chicken & Veg Momos (1 Packet / approx. 25 pcs)',
         'Godrej Paneer Pops (1kg)',
         'Milky Mist Fresh Paneer Cubes (1kg)',
         'Del Monte Ketchup (8g Sachets × 1000)',

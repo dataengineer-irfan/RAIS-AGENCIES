@@ -206,7 +206,7 @@ export const HeroFoodStage: React.FC = () => {
             Authorised Wholesale
           </div>
           <div className="pt-0.5 text-xs sm:text-sm font-semibold text-white">
-            McCain · ITC Master Chef · Milky Mist
+            Triken · ITC Master Chef · McCain · Milky Mist
           </div>
         </motion.div>
 

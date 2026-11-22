@@ -37,6 +37,7 @@ const CATEGORY_PLINTH_IMAGES: Record<string, string> = {
 
 export function getBrandBadge(brand: string, name: string): { label: string; bg: string; text: string } {
   const combined = `${brand} ${name}`.toLowerCase();
+  if (combined.includes('triken')) return { label: 'TK', bg: '#ea580c', text: '#ffffff' };
   if (combined.includes('itc')) return { label: 'ITC', bg: '#1d4ed8', text: '#ffffff' };
   if (combined.includes('nutrich')) return { label: 'NU', bg: '#dc2626', text: '#ffffff' };
   if (combined.includes('godrej')) return { label: 'GY', bg: '#16a34a', text: '#ffffff' };
@@ -45,6 +46,7 @@ export function getBrandBadge(brand: string, name: string): { label: string; bg:
   if (combined.includes('foodrite')) return { label: 'FR', bg: '#ea580c', text: '#ffffff' };
   if (combined.includes('mayank')) return { label: 'MG', bg: '#ca8a04', text: '#ffffff' };
   if (combined.includes('milky mist')) return { label: 'MM', bg: '#0284c7', text: '#ffffff' };
+  if (combined.includes('manama')) return { label: 'MN', bg: '#0891b2', text: '#ffffff' };
   if (combined.includes('vkl')) return { label: 'VKL', bg: '#9333ea', text: '#ffffff' };
   if (combined.includes('signature')) return { label: 'SG', bg: '#0f766e', text: '#ffffff' };
   if (combined.includes('chilli fill')) return { label: 'CF', bg: '#e11d48', text: '#ffffff' };
@@ -52,6 +54,40 @@ export function getBrandBadge(brand: string, name: string): { label: string; bg:
   if (combined.includes('mccain')) return { label: 'MC', bg: '#b45309', text: '#ffffff' };
   return { label: 'R', bg: '#0e7490', text: '#ffffff' };
 }
+
+const ProductRowThumbnail: React.FC<{
+  image?: string;
+  name: string;
+  badge: { label: string; bg: string; text: string };
+}> = ({ image, name, badge }) => {
+  const [loadFailed, setLoadFailed] = useState(false);
+  const resolvedUrl = image ? assetUrl(image) : null;
+
+  return (
+    <div
+      style={{ backgroundColor: badge.bg, color: badge.text }}
+      className="relative size-12 shrink-0 rounded-xl overflow-hidden border border-cyan-500/30 flex items-center justify-center shadow-md font-serif font-bold text-xs uppercase tracking-wider bg-[#081026]"
+    >
+      <span>{badge.label}</span>
+      {resolvedUrl && !loadFailed && (
+        <img
+          src={resolvedUrl}
+          alt=""
+          role="presentation"
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+          loading="lazy"
+          onError={() => setLoadFailed(true)}
+        />
+      )}
+      <span
+        style={{ backgroundColor: badge.bg, color: badge.text }}
+        className="absolute bottom-0.5 right-0.5 px-1 py-0.2 text-[8px] font-black rounded-xs shadow-xs z-10"
+      >
+        {badge.label}
+      </span>
+    </div>
+  );
+};
 
 export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
   selectedCategory,
@@ -66,7 +102,7 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
   const [viewMode, setViewMode] = useState<'panels' | 'packshots'>('panels');
 
   const popularBrands = useMemo(() => {
-    return ['ITC Master Chef', 'Milky Mist', 'Del Monte', 'Amul', 'McCain', 'Foodrite', 'VKL', 'Nutrich', 'Signature'];
+    return ['Triken', 'ITC Master Chef', 'Milky Mist', 'Del Monte', 'Amul', 'McCain', 'Foodrite', 'Godrej', 'VKL', 'Nutrich', 'Signature', 'MANAMA'];
   }, []);
 
   const filteredProducts = useMemo(() => {
@@ -179,35 +215,12 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
                 key={product.sku}
                 className="flex items-center gap-3.5 px-5 py-3.5 transition-colors hover:bg-cyan-400/[0.06] group"
               >
-                {/* Product Thumbnail with Brand Monogram Fallback */}
-                <div
-                  style={{ backgroundColor: badge.bg, color: badge.text }}
-                  className="relative size-12 shrink-0 rounded-xl overflow-hidden border border-cyan-500/30 flex items-center justify-center shadow-md font-serif font-bold text-xs uppercase tracking-wider"
-                >
-                  {/* Fallback Monogram is always present in background */}
-                  <span>{badge.label}</span>
-
-                  {/* Overlaid Image */}
-                  {product.image && (
-                    <img
-                      src={assetUrl(product.image)}
-                      alt={product.name}
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      loading="lazy"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                      }}
-                    />
-                  )}
-
-                  {/* Subtle Brand Tag Badge */}
-                  <span
-                    style={{ backgroundColor: badge.bg, color: badge.text }}
-                    className="absolute bottom-0.5 right-0.5 px-1 py-0.2 text-[8px] font-black rounded-xs shadow-xs z-10"
-                  >
-                    {badge.label}
-                  </span>
-                </div>
+                {/* Product Thumbnail with Zero-Broken-Image Monogram Fallback */}
+                <ProductRowThumbnail
+                  image={product.image}
+                  name={product.name}
+                  badge={badge}
+                />
 
                 {/* Product Info */}
                 <div className="min-w-0 flex-1">

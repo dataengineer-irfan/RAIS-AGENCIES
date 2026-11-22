@@ -173,7 +173,7 @@ export class EnquiryBot {
   private static detectProductKeywords(text: string): string | null {
     const upper = text.toUpperCase();
     if (upper.includes('FRIES')) return 'French Fries (Hup Hup / McCain)';
-    if (upper.includes('MOMOS')) return 'Steamed Momos (ITC Master Chef)';
+    if (upper.includes('MOMOS')) return 'TRIKEN Handcrafted Momos (IQF -18°C)';
     if (upper.includes('BURGER') || upper.includes('BOXES')) return 'Kraft Burger Boxes & Packaging';
     if (upper.includes('PIZZA')) return 'Corrugated Pizza Boxes & Cheese';
     if (upper.includes('NUGGETS')) return 'Chicken Nuggets & Popcorn';
