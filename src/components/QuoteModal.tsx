@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
-import { X, Trash2, Plus, Minus, MessageSquare, CheckCircle, FileText, Send, Sparkles } from 'lucide-react';
+import { X, Trash2, Plus, Minus, MessageSquare, CheckCircle, FileText, Send, Sparkles, Star, MapPin } from 'lucide-react';
 import { PRODUCTS, BUSINESS_INFO, ProductItem } from '../data/catalogue';
 import { AutomationStorage } from '../services/automationStorage';
+
+const REGIONAL_ROUTES = [
+  'Rayachoty (Hub 516269)',
+  'Chinnamandem',
+  'Kalakada',
+  'Mahal',
+  'Galiveedu',
+  'Rajampeta',
+  'Sundupalli',
+  'Kadiri'
+];
 
 interface QuoteModalProps {
   isOpen: boolean;
@@ -81,7 +92,10 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
     message += `──────────────────\n`;
     if (notes) message += `📝 *Notes:* ${notes}\n`;
     message += `──────────────────\n`;
-    message += `Please send today's wholesale bill and confirm delivery/pickup time.`;
+    message += `Please send today's wholesale bill and confirm delivery/pickup time.\n\n`;
+    message += `⭐ *Rate Our Route Supply (10-Second Google Review):*\n`;
+    message += `https://search.google.com/local/writereview?placeid=ChIJWWL3zBgDszsR-lQG81niw0c\n`;
+    message += `Suggested 5-star feedback: "RAIS Agencies is our trusted wholesale supply partner in ${deliveryArea} for fresh frozen foods and commercial packaging!"\n`;
 
     const encoded = encodeURI(message);
     window.open(`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encoded}`, '_blank');
@@ -133,7 +147,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 Thank you, <strong>{customerName || 'Sir'}</strong>. Click below to send this order directly to our Rayachoty WhatsApp desk for today&apos;s wholesale bill and fast dispatch.
               </p>
 
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
                 <button
                   onClick={handleWhatsAppSend}
                   className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/40"
@@ -151,6 +165,51 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 >
                   Done
                 </button>
+              </div>
+
+              {/* Automated 10-Second 5-Star Review Funnel for Route */}
+              <div className="mt-6 p-4 rounded-2xl bg-[#081026] border border-amber-500/30 text-left space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-amber-300 font-bold text-xs uppercase tracking-wider">
+                    <Sparkles className="size-4 text-amber-400" />
+                    <span>10-Second 5-Star Review Funnel · {deliveryArea}</span>
+                  </div>
+                  <span className="text-[10px] text-emerald-400 font-mono font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                    Route Verified
+                  </span>
+                </div>
+
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Support your regional delivery vehicle dispatch to <strong>{deliveryArea}</strong> with a 5-star Google Maps review.
+                </p>
+
+                <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-amber-200/90 italic">
+                  &ldquo;RAIS Agencies is our trusted wholesale supply partner in {deliveryArea}. Top quality frozen snacks and food packaging materials delivered on time!&rdquo;
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center gap-2 pt-1">
+                  <a
+                    href="https://search.google.com/local/writereview?placeid=ChIJWWL3zBgDszsR-lQG81niw0c"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-black text-xs text-center transition-all shadow-md flex items-center justify-center gap-1.5"
+                  >
+                    <Star className="size-3.5 fill-slate-950 text-slate-950" />
+                    <span>Tap to Submit 5-Star Review (10s)</span>
+                  </a>
+
+                  <a
+                    href={`https://wa.me/?text=${encodeURIComponent(
+                      `Namaste! 🙏 Thank you for choosing RAIS Agencies Rayachoty for delivery along the ${deliveryArea} route.\n\nPlease take 10 seconds to submit a 5-star Google review:\n⭐ https://search.google.com/local/writereview?placeid=ChIJWWL3zBgDszsR-lQG81niw0c\n\nSuggested feedback:\n"RAIS Agencies is our trusted wholesale supply partner in ${deliveryArea}. Top quality frozen snacks and food packaging materials delivered on time!"`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto py-2.5 px-3.5 rounded-xl bg-[#25D366] hover:bg-[#1ebe5b] text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all shadow-md"
+                  >
+                    <MessageSquare className="size-3.5 fill-white" />
+                    <span>WhatsApp Review Request</span>
+                  </a>
+                </div>
               </div>
             </div>
           ) : (
@@ -304,15 +363,17 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
                   <div>
                     <label className="text-[11px] font-semibold text-slate-300 block mb-1">
-                      Delivery Location
+                      Delivery Route / Town *
                     </label>
-                    <input
-                      type="text"
+                    <select
                       value={deliveryArea}
                       onChange={(e) => setDeliveryArea(e.target.value)}
-                      placeholder="Rayachoty / Nearby Town"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#081026] border border-cyan-400/30 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-300"
-                    />
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#081026] border border-cyan-400/30 text-xs text-white focus:outline-none focus:border-cyan-300"
+                    >
+                      {REGIONAL_ROUTES.map((route) => (
+                        <option key={route} value={route}>{route}</option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 

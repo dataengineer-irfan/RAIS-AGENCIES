@@ -1,0 +1,12 @@
+[
+  {
+    "timestamp": "2026-11-22T16:27:29.180687",
+    "event_type": "DAILY_CHECK",
+    "details": {
+      "summary": "5.0 \u00b7 4 reviews",
+      "pending_reply_count": 0,
+      "status": "ALL_CAUGHT_UP",
+      "last_checked": "2026-11-22T16:27:29.180687"
+    }
+  }
+]
