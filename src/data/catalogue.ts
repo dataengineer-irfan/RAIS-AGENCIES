@@ -1128,7 +1128,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '100 Nos',
     hsn: '48192020',
     price: 350.0,
-    image: '/assets/products/burger_pastry_boxes_4x4_printed_flat.jpg',
+    image: '/images/rais_authentic_burger_boxes_clamshells.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 100 Nos. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1141,7 +1141,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '100 Nos',
     hsn: '48192020',
     price: 400.0,
-    image: '/assets/products/burger_pastry_boxes_4x4_printed_flat.jpg',
+    image: '/images/rais_authentic_burger_boxes_clamshells.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 100 Nos. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1154,7 +1154,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '34 Pieces',
     hsn: '48192020',
     price: 545.0,
-    image: '/assets/products/enhanced_packaging-003.jpg',
+    image: '/images/rais_authentic_fried_chicken_buckets.jpg',
     isFeatured: true,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 34 Pieces. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1180,7 +1180,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '100 Nos',
     hsn: '48192020',
     price: 540.0,
-    image: '/assets/products/boxes_display_pizza_burger.jpg',
+    image: '/images/rais_authentic_burger_boxes_clamshells.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 100 Nos. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1193,7 +1193,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '34 Pieces',
     hsn: '48192020',
     price: 540.0,
-    image: '/assets/products/enhanced_packaging-006.jpg',
+    image: '/images/rais_authentic_fried_chicken_buckets.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 34 Pieces. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1219,7 +1219,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '1.2kg',
     hsn: '48192020',
     price: 620.0,
-    image: '/assets/products/pizza_boxes_8x8_printed_plain_flat.jpg',
+    image: '/images/rais_authentic_pizza_delivery_boxes.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 1.2kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1271,7 +1271,7 @@ const RAW_PRODUCTS: ProductItem[] = [
     pack: '100 Nos',
     hsn: '48192020',
     price: 700.0,
-    image: '/assets/products/enhanced_packaging-012.jpg',
+    image: '/images/rais_authentic_pizza_delivery_boxes.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Packaging Solutions. Pack size: 100 Nos. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
@@ -1302,13 +1302,13 @@ export function searchProducts(query: string): ProductItem[] {
 
 export const BUSINESS_INFO = {
   name: 'RAIS AGENCIES',
-  tagline: 'Wholesale Frozen Food Products & Packaging Solutions',
-  subtagline: 'FROZEN FOOD PRODUCTS',
+  tagline: 'Wholesale Frozen Food Products & Commercial Food Packaging Solutions',
+  subtagline: 'FROZEN FOOD PRODUCTS & FOOD PACKAGING',
   address: 'Dor no 63/1, Sundupalli Road, opposite Reddies Colony, Beside Indel Money Bank, Rayachoty - 516269, Annamayya District, Andhra Pradesh, India',
   gmbAddress: 'Dor no 63/1 , Sundupalli Road, main road, opposite Reddies Colony, Rayachoty, Andhra Pradesh 516269',
   gmbName: 'RAIS Agencies',
   gmbRating: 5.0,
-  gmbCategory: 'Frozen food store',
+  gmbCategory: 'Frozen food store & Wholesale food packaging supplier',
   gmbOperatingHours: 'Open 24 hours',
   gmbPlusCode: '3Q55+PQ Rayachoty, Andhra Pradesh',
   gmbUrl: 'https://www.google.com/maps/place/RAIS+Agencies/@14.059359,78.759402,17z/data=!3m1!4b1!4m6!3m5!1s0x3bb30318ccf76259:0x47c3e259f30654fa!8m2!3d14.059359!4d78.759402!16s%2Fg%2F11npc8m4rr',
@@ -1322,6 +1322,16 @@ export const BUSINESS_INFO = {
   instagramUrl: 'https://instagram.com/raisfrozenfoods',
   instagramDmUrl: 'https://ig.me/m/raisfrozenfoods',
   upiId: '9347453135@ybl',
+  deliveryRoutes: [
+    'Rayachoty (Hub 516269)',
+    'Chinnamandem',
+    'Kalakada',
+    'Mahal',
+    'Galiveedu',
+    'Rajampeta',
+    'Sundupalli',
+    'Kadiri'
+  ],
   partnerBrands: [
     'ITC Master Chef',
     'Milky Mist',

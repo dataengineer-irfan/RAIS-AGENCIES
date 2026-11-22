@@ -1,5 +1,5 @@
 import React from 'react';
-import { Snowflake } from 'lucide-react';
+import { Snowflake, Package } from 'lucide-react';
 
 interface RaisLogoProps {
   className?: string;
@@ -50,12 +50,16 @@ export const RaisLogo: React.FC<RaisLogoProps> = ({
               AGENCIES
             </span>
           </div>
-          <div className="flex items-center gap-1 mt-1 text-slate-400 font-medium tracking-wider">
+          <div className="flex items-center gap-1.5 mt-1 text-slate-400 font-medium tracking-wider">
             <Snowflake className="w-2.5 h-2.5 text-cyan-400" />
-            <span className={`${taglineSize} uppercase tracking-widest font-semibold text-cyan-300/80`}>
-              Frozen Food Products
+            <span className={`${taglineSize} uppercase tracking-widest font-black text-cyan-300/90`}>
+              Frozen Foods
             </span>
-            <Snowflake className="w-2.5 h-2.5 text-cyan-400" />
+            <span className="text-amber-400 font-bold">•</span>
+            <Package className="w-2.5 h-2.5 text-amber-400" />
+            <span className={`${taglineSize} uppercase tracking-widest font-black text-amber-300/90`}>
+              Packaging Solutions
+            </span>
           </div>
         </div>
       )}

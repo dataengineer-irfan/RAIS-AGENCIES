@@ -11,11 +11,11 @@ interface HeroProps {
 }
 
 const SECTOR_WORDS = [
-  'Fast food centers & burger points',
-  'Hotels, restaurants & dhabas',
-  'Pizzerias & bakeries',
-  'Cafés, tea & juice bars',
-  'Caterers, shawarma points & kitchens'
+  'Fast food centers, burger & shawarma points',
+  'Pizzerias, bakeries & cafe kitchens',
+  'Commercial pizza boxes & burger packaging',
+  'Fried chicken points & takeaway kitchens',
+  'Hotels, restaurants & banquet caterers'
 ];
 
 export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
@@ -65,7 +65,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
                 <span className="flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 px-2 py-0.5 text-[11px] font-black text-slate-950">
                   ★ 5.0
                 </span>
-                <span>Google Business Profile • Frozen Food Store</span>
+                <span>Google Business Profile • Frozen Foods &amp; Packaging Hub</span>
               </a>
               <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-cyan-400/30 bg-white/5 py-1.5 px-3 text-xs font-semibold text-cyan-200 backdrop-blur-md">
                 <Sparkles className="w-3 h-3 text-cyan-400" />
@@ -73,17 +73,17 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
               </span>
             </motion.div>
 
-            {/* Display Headline */}
+            {/* Display Headline — Equal Weight for Frozen Foods & Packaging */}
             <motion.h1
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-serif text-4xl sm:text-6xl xl:text-[4.2rem] font-black leading-[1.05] tracking-tight text-white"
+              className="font-serif text-3xl sm:text-5xl xl:text-[3.9rem] font-black leading-[1.08] tracking-tight text-white"
             >
-              Frozen at its peak.
+              Wholesale Frozen Foods &amp;
               <br />
-              <span className="bg-gradient-to-r from-cyan-200 via-cyan-400 to-sky-500 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(0,210,255,0.4)]">
-                Delivered at its best.
+              <span className="bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-500 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(245,158,11,0.4)]">
+                Food Packaging Solutions.
               </span>
               <span className="sr-only"> — Wholesale Frozen Foods & Food Packaging Solutions in Rayachoty</span>
             </motion.h1>
@@ -104,7 +104,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -16, opacity: 0 }}
                     transition={{ duration: 0.3, ease: 'easeOut' }}
-                    className="font-bold text-cyan-300 drop-shadow-[0_0_15px_rgba(0,210,255,0.7)] whitespace-nowrap underline decoration-cyan-400/50 underline-offset-4"
+                    className="font-bold text-amber-300 drop-shadow-[0_0_15px_rgba(245,158,11,0.6)] whitespace-nowrap underline decoration-amber-400/50 underline-offset-4"
                   >
                     {SECTOR_WORDS[tickerIndex]}
                   </motion.span>
@@ -119,7 +119,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
               transition={{ duration: 0.6, delay: 0.25 }}
               className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl"
             >
-              Rayachoty&apos;s wholesale supplier of frozen snacks, french fries, momos, burger patties, mozzarella cheese, sauces, syrups, and takeaway packaging for hotels, fast food centers &amp; cafes in Rayachoty (516269).
+              Rayachoty&apos;s direct wholesale distributor of <strong className="text-white">frozen snacks, french fries, chicken momos, burger patties, mozzarella cheese</strong>, and <strong className="text-amber-300">printed pizza boxes, burger clamshells &amp; fried chicken buckets</strong> for hotels, fast food centers &amp; cafes across Rayachoty and 7 regional routes.
             </motion.p>
 
             {/* CTA Button Row with Shimmer Sheen */}
@@ -206,19 +206,49 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuote }) => {
               </div>
             </motion.div>
 
-            {/* Quick Foodservice Category Tags — Eliminates Void Below Metrics */}
+            {/* Dedicated Regional Delivery Coverage Bar (Matching Official Poster) */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.52 }}
+              className="mt-3 p-3 rounded-2xl border border-amber-400/40 bg-gradient-to-r from-amber-500/10 via-[#0f1c3f]/85 to-cyan-500/10 backdrop-blur-md shadow-xl w-full max-w-xl"
+            >
+              <div className="flex items-center justify-between gap-2 mb-2 pb-1.5 border-b border-amber-400/20">
+                <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-amber-300">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  <span>We Deliver to Rayachoty &amp; 7 Nearby Routes:</span>
+                </div>
+                <span className="text-[10px] font-mono text-cyan-300 font-bold bg-cyan-950/70 px-2 py-0.5 rounded-full border border-cyan-400/30">
+                  📍 Hub: 516269
+                </span>
+              </div>
+              <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-bold">
+                {['Chinnamandem', 'Kalakada', 'Mahal', 'Galiveedu', 'Rajampeta', 'Sundupalli', 'Kadiri'].map((town) => (
+                  <span
+                    key={town}
+                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-amber-400/15 border border-amber-400/40 text-amber-200 font-bold"
+                  >
+                    <MapPin className="w-2.5 h-2.5 text-amber-400" />
+                    <span>{town}</span>
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Quick Foodservice & Packaging Category Tags */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.55 }}
-              className="flex flex-wrap items-center gap-2 pt-1 text-[11px] font-semibold text-slate-400"
+              transition={{ duration: 0.6, delay: 0.58 }}
+              className="flex flex-wrap items-center gap-2 pt-2 text-[11px] font-semibold text-slate-400"
             >
-              <span className="text-cyan-400 font-bold uppercase tracking-wider text-[10px]">Stock Lines:</span>
-              <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-cyan-500/20 text-cyan-200">IQF Momos</span>
-              <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-cyan-500/20 text-cyan-200">French Fries 6mm/9mm</span>
-              <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-cyan-500/20 text-cyan-200">Burger Patties & Clamshells</span>
-              <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-cyan-500/20 text-cyan-200">Milky Mist Mozzarella</span>
-              <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-cyan-500/20 text-cyan-200">Del Monte Sauces</span>
+              <span className="text-amber-400 font-bold uppercase tracking-wider text-[10px]">Dual Stock Supply:</span>
+              <span className="px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-400/30 text-amber-200 font-bold">🍕 Printed Pizza Boxes (8"x8", 10"x10")</span>
+              <span className="px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-400/30 text-amber-200 font-bold">🍔 Printed Burger Clamshells (4"x4", 5"x5")</span>
+              <span className="px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-400/30 text-amber-200 font-bold">🍗 Fried Chicken Takeaway Buckets</span>
+              <span className="px-2.5 py-1 rounded-lg bg-cyan-500/10 border border-cyan-400/30 text-cyan-200 font-bold">🥟 TRIKEN Momos</span>
+              <span className="px-2.5 py-1 rounded-lg bg-cyan-500/10 border border-cyan-400/30 text-cyan-200 font-bold">🍟 French Fries 9mm</span>
+              <span className="px-2.5 py-1 rounded-lg bg-cyan-500/10 border border-cyan-400/30 text-cyan-200 font-bold">🧀 Milky Mist Mozzarella</span>
             </motion.div>
 
           </div>

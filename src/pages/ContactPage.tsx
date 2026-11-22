@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BUSINESS_INFO } from '../data/catalogue';
 import { assetUrl } from '../utils/assetUrl';
-import { MapPin, Phone, MessageSquare, Clock, Send, CheckCircle2, ExternalLink } from 'lucide-react';
+import { MapPin, Phone, MessageSquare, Clock, Send, CheckCircle2, ExternalLink, Truck } from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
   const [name, setName] = useState('');
@@ -336,6 +336,79 @@ export const ContactPage: React.FC = () => {
             )}
           </div>
 
+        </div>
+
+        {/* Regional Delivery Fleet Routes & Coverage Area */}
+        <div className="rounded-3xl border border-cyan-500/30 bg-[#0f1c3f]/95 p-6 sm:p-8 shadow-2xl backdrop-blur-xl mb-16 relative overflow-hidden">
+          <div className="absolute -top-20 -right-20 w-64 h-64 bg-cyan-500/15 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="flex flex-col lg:flex-row items-center gap-8">
+            {/* Delivery Poster */}
+            <div className="w-full lg:w-1/2 relative rounded-2xl overflow-hidden border border-cyan-400/30 shadow-2xl group bg-[#081026]">
+              <img
+                src={assetUrl('/images/rais_delivery_routes_poster.jpg')}
+                alt="RAIS Agencies Delivery Vehicle Fleet covering Rayachoty and 7 Surrounding Routes"
+                className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-cyan-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg">
+                Official Delivery Vehicle Fleet
+              </div>
+            </div>
+
+            {/* Route Details & Order Action */}
+            <div className="w-full lg:w-1/2 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider">
+                <Truck className="size-4" />
+                <span>Daily Refrigerated Route Coverage</span>
+              </div>
+
+              <h3 className="font-serif text-2xl sm:text-3xl font-black text-white">
+                We Deliver to <span className="text-cyan-300">Rayachoty</span> and 7 Nearby Routes
+              </h3>
+
+              <p className="text-sm text-slate-300 leading-relaxed">
+                Our refrigerated delivery vehicle services restaurant kitchens, fast food hubs, and bakeries across 7 key regional corridors with strict -18°C cold chain compliance.
+              </p>
+
+              {/* 8 Town Badges */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
+                {[
+                  { name: 'Rayachoty (Hub)', dist: 'Hub 516269', main: true },
+                  { name: 'Chinnamandem', dist: 'Route 1' },
+                  { name: 'Kalakada', dist: 'Route 2' },
+                  { name: 'Mahal', dist: 'Route 3' },
+                  { name: 'Galiveedu', dist: 'Route 4' },
+                  { name: 'Rajampeta', dist: 'Route 5' },
+                  { name: 'Sundupalli', dist: 'Route 6' },
+                  { name: 'Kadiri', dist: 'Route 7' },
+                ].map((route) => (
+                  <div
+                    key={route.name}
+                    className={`p-2.5 rounded-xl border text-center transition-all ${
+                      route.main
+                        ? 'border-cyan-400/50 bg-cyan-500/15 text-cyan-200'
+                        : 'border-cyan-500/20 bg-[#081026]/80 text-slate-300'
+                    }`}
+                  >
+                    <div className="font-bold text-xs text-white">{route.name}</div>
+                    <div className="text-[10px] text-cyan-300 font-mono mt-0.5">{route.dist}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <a
+                  href={`https://wa.me/${BUSINESS_INFO.whatsappNumber}?text=${encodeURIComponent('Hello RAIS Agencies, I want to book a delivery route dispatch for my shop.')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#1ebe5b] text-white text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 hover:scale-[1.02]"
+                >
+                  <MessageSquare className="size-4 fill-white" />
+                  <span>Book Route Dispatch on WhatsApp</span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Live Rayachoty Google Maps & GMB Verification Embed */}

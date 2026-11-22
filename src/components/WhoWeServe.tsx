@@ -16,7 +16,7 @@ export const WhoWeServe: React.FC<WhoWeServeProps> = ({ onOpenQuote }) => {
       title: 'Fast Food & Burger Centers',
       subtitle: 'Fast Food Joints · Shawarma Counters · Food Trucks',
       icon: Utensils,
-      image: assetUrl('/assets/products/burger_pastry_boxes_4x4_printed_flat.jpg'),
+      image: assetUrl('/images/rais_authentic_burger_boxes_clamshells.jpg'),
       tag: 'Fries, Patties & Printed Boxes',
       description:
         'Crispy french fries, juicy chicken and veg burger patties, tandoori mayonnaise, and heavy food-grade printed burger clamshell boxes. Keep your counter fast, profitable, and running smooth during evening rush hours.',
@@ -33,7 +33,7 @@ export const WhoWeServe: React.FC<WhoWeServeProps> = ({ onOpenQuote }) => {
       title: 'Pizzerias & Bakeries',
       subtitle: 'Pizza Outlets · Cafes · Bakeries',
       icon: Pizza,
-      image: assetUrl('/assets/products/pizza_boxes_8x8_printed_plain_flat.jpg'),
+      image: assetUrl('/images/rais_authentic_pizza_delivery_boxes.jpg'),
       tag: 'Mozzarella & Printed Pizza Boxes',
       description:
         'Top quality Milky Mist mozzarella cheese for high stretch and bubbling melt, fresh par-baked pizza bases, pizza pasta sauce, and printed corrugated takeaway pizza boxes.',

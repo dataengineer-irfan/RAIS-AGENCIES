@@ -6,7 +6,7 @@ interface Interactive3DShowcaseProps {
   onOpenQuote?: () => void;
 }
 
-type ModelType = 'momo' | 'nugget' | 'fries' | 'carton' | 'burger_box' | 'cryo_pod';
+type ModelType = 'momo' | 'nugget' | 'fries' | 'carton' | 'burger_box' | 'bucket' | 'cryo_pod';
 type LightingMode = 'studio' | 'cold_vault' | 'depot_warm';
 
 interface ShowcaseItem {
@@ -44,20 +44,28 @@ const SHOWCASE_ITEMS: Record<ModelType, ShowcaseItem> = {
     categoryLabel: 'FRENCH FRIES · FAST FOOD MUST-HAVE'
   },
   carton: {
-    image: assetUrl('/assets/products/pizza_boxes_8x8_printed_plain_flat.jpg'),
-    name: '8"×8" & 10"×10" Printed Pizza Delivery Boxes ("Pizza: Where Dreams Become Toppings")',
-    tag: 'Authentic Food-Grade Printed Pizza Delivery Boxes with Steam Vents & Thermal Flute',
+    image: assetUrl('/images/rais_authentic_pizza_delivery_boxes.jpg'),
+    name: '8"×8" & 10"×10" Printed Pizza Delivery Boxes ("Pizza: Hot & Delicious")',
+    tag: 'Authentic Food-Grade Printed Pizza Delivery Boxes with Steam Flute & Toppings Guide',
     badge: '8"×8" & 10"×10" · Heat-Lock Flute',
     alt: 'RAIS Agencies Authentic 8x8 Pizza Delivery Boxes Wholesale Supply Rayachoty',
     categoryLabel: 'COMMERCIAL FOOD PACKAGING · MASTER PIZZA BOXES'
   },
   burger_box: {
-    image: assetUrl('/assets/products/burger_pastry_boxes_4x4_printed_flat.jpg'),
-    name: '4"×4" Printed Burger & Pastry Clamshell Boxes ("Burger & Pastries")',
-    tag: 'Heavy-Duty Printed Clamshell Boxes with Food-Grade Greaseproof Coating',
-    badge: '4"×4" Clamshell · 320 GSM',
-    alt: 'RAIS Agencies Authentic 4x4 Burger Clamshell Takeaway Packaging Boxes',
+    image: assetUrl('/images/rais_authentic_burger_boxes_clamshells.jpg'),
+    name: '4"×4" & 5"×5" Printed Burger & Pastry Clamshell Boxes ("Wow Tasty" & "Burger & Pastries")',
+    tag: 'Authentic Heavy-Duty Printed Clamshell Boxes with Food-Grade Greaseproof Coating',
+    badge: '4"×4" & 5"×5" · 320 GSM',
+    alt: 'RAIS Agencies Authentic Printed Burger Clamshell Takeaway Packaging Boxes',
     categoryLabel: 'FAST FOOD PACKAGING · HIGH GREASE RESISTANCE'
+  },
+  bucket: {
+    image: assetUrl('/images/rais_authentic_fried_chicken_buckets.jpg'),
+    name: 'Commercial Fried Chicken Takeaway Buckets (KFC-Style · 34 Pcs Sleeves)',
+    tag: 'Authentic Heavy-Duty Printed Fried Chicken Takeaway Buckets in Sealed Wholesale Sleeves',
+    badge: '34 Pcs Sleeve · Oil-Resistant',
+    alt: 'RAIS Agencies Authentic Fried Chicken Takeaway Buckets Wholesale Supply Rayachoty',
+    categoryLabel: 'COMMERCIAL FOOD PACKAGING · FRIED CHICKEN BUCKETS'
   },
   cryo_pod: {
     image: assetUrl('/assets/products/depot_real_deep_freezer.jpg'),
@@ -147,28 +155,39 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
 
             <span className="text-cyan-500/40 px-1 hidden sm:inline">|</span>
 
-            {/* Packaging & Logistics */}
+            {/* Commercial Packaging & Logistics */}
             <button
               onClick={() => { setActiveModel('carton'); resetTilt(); }}
               className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold transition-all rounded-lg ${
                 activeModel === 'carton'
-                  ? 'bg-cyan-400 text-slate-950 shadow-md'
+                  ? 'bg-amber-400 text-slate-950 shadow-md'
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              <Box className="w-3.5 h-3.5 text-cyan-300" />
-              <span>🍕 Master Pizza Boxes</span>
+              <Box className="w-3.5 h-3.5 text-amber-300" />
+              <span>🍕 Pizza Boxes</span>
             </button>
             <button
               onClick={() => { setActiveModel('burger_box'); resetTilt(); }}
               className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold transition-all rounded-lg ${
                 activeModel === 'burger_box'
-                  ? 'bg-cyan-400 text-slate-950 shadow-md'
+                  ? 'bg-amber-400 text-slate-950 shadow-md'
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              <Layers className="w-3.5 h-3.5 text-cyan-300" />
-              <span>🍔 3D Burger Box</span>
+              <Layers className="w-3.5 h-3.5 text-amber-300" />
+              <span>🍔 Burger Boxes</span>
+            </button>
+            <button
+              onClick={() => { setActiveModel('bucket'); resetTilt(); }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold transition-all rounded-lg ${
+                activeModel === 'bucket'
+                  ? 'bg-amber-400 text-slate-950 shadow-md'
+                  : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              <Flame className="w-3.5 h-3.5 text-amber-300" />
+              <span>🍗 KFC Buckets</span>
             </button>
             <button
               onClick={() => { setActiveModel('cryo_pod'); resetTilt(); }}
@@ -330,12 +349,13 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                   {activeModel === 'momo' && 'FROZEN MOMOS · BULK WHOLESALE'}
                   {activeModel === 'nugget' && 'CHICKEN NUGGETS · FAST FOOD STAPLE'}
                   {activeModel === 'fries' && 'FRENCH FRIES · FAST FOOD MUST-HAVE'}
-                  {activeModel === 'carton' && 'CORRUGATED PIZZA DELIVERY BOXES'}
-                  {activeModel === 'burger_box' && 'KRAFT BURGER TAKEAWAY BOX'}
+                  {activeModel === 'carton' && 'COMMERCIAL PIZZA DELIVERY BOXES'}
+                  {activeModel === 'burger_box' && 'PRINTED BURGER CLAMSHELL BOXES'}
+                  {activeModel === 'bucket' && 'FRIED CHICKEN TAKEAWAY BUCKETS'}
                   {activeModel === 'cryo_pod' && 'DEPOT DEEP FREEZER (-18°C)'}
                 </span>
                 <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold px-2 py-0.5 rounded-full">
-                  {activeModel === 'carton' || activeModel === 'burger_box' ? 'Food-Grade Certified' : 'FSSAI Certified'}
+                  {activeModel === 'carton' || activeModel === 'burger_box' || activeModel === 'bucket' ? 'Food-Grade Certified' : 'FSSAI Certified'}
                 </span>
               </div>
 
@@ -345,6 +365,7 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                 {activeModel === 'fries' && 'Grade-A Shoestring French Fries (9mm)'}
                 {activeModel === 'carton' && '8"×8" & 10"×10" Printed Pizza Delivery Boxes'}
                 {activeModel === 'burger_box' && '4"×4" & 5"×5" Printed Burger Clamshell Boxes'}
+                {activeModel === 'bucket' && 'Commercial Fried Chicken Takeaway Buckets (KFC-Style)'}
                 {activeModel === 'cryo_pod' && 'Rayachoty -18°C Cold Storage Depot'}
               </h3>
 
@@ -356,9 +377,11 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                 {activeModel === 'fries' &&
                   'Grade-A shoestring french fries (6mm / 9mm). Absorbs very little oil, fries in under 3 minutes, and stays crispy. Best wholesale case rates in Rayachoty.'}
                 {activeModel === 'carton' &&
-                  'Heavy-duty food-grade printed corrugated pizza boxes ("Pizza: Where Dreams Become Toppings"). Specially engineered for Rayachoty pizzerias, cafes & bakers to lock in heat without sogginess. Available in printed full-colour wholesale bundles.'}
+                  'Heavy-duty food-grade printed corrugated pizza boxes ("Pizza: Hot & Delicious"). Specially engineered for Rayachoty pizzerias, cafes & bakers to lock in heat without sogginess. Available in printed full-colour wholesale bundles.'}
                 {activeModel === 'burger_box' &&
-                  'Heavy-duty food-grade printed clamshell boxes ("Burger & Pastries") with built-in steam vents. Keeps burgers hot and fresh without making buns soggy. 100% food grade certified.'}
+                  'Heavy-duty food-grade printed clamshell boxes ("Wow Tasty" & "Burger & Pastries") with built-in steam vents. Keeps burgers hot and fresh without making buns soggy. 100% food grade certified.'}
+                {activeModel === 'bucket' &&
+                  'Heavy-duty food-grade printed fried chicken takeaway buckets in factory-sealed sleeves. High oil and grease resistance with snug takeaway lids. Perfect for fried chicken joints and fast food counters.'}
                 {activeModel === 'cryo_pod' &&
                   'Commercial deep freezer cold storage right at our Rayachoty depot. Every product stays completely frozen and fresh with zero melting before reaching your kitchen.'}
               </p>
@@ -376,6 +399,7 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                     {activeModel === 'fries' && 'Deep fry directly from frozen at 175°C–180°C for 2.5–3 minutes'}
                     {activeModel === 'carton' && 'Heavy-duty 3-ply B-Flute corrugated board with moisture-lock barrier. Withstands stacking of 10+ boxes.'}
                     {activeModel === 'burger_box' && '320 GSM Virgin Food-Grade Kraft Paperboard with greaseproof inner lining'}
+                    {activeModel === 'bucket' && 'Virgin food-grade poly-coated board with grease barrier. Stamped with "Fried Chicken" graphics.'}
                     {activeModel === 'cryo_pod' && 'Continuous -18°C to -22°C commercial deep freezer holding'}
                   </div>
                 </div>
@@ -391,6 +415,7 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                     {activeModel === 'fries' && 'Maintain at -18°C or below in deep freezer. Fast cooking directly from frozen.'}
                     {activeModel === 'carton' && 'Store in clean dry depot racks. Heat retention tested stable up to 90°C hot pizza delivery.'}
                     {activeModel === 'burger_box' && 'Heat tolerant up to 105°C; oil & grease resistant'}
+                    {activeModel === 'bucket' && 'Store in dry depot racks. Stackable sleeves protect bucket rims from deformation.'}
                     {activeModel === 'cryo_pod' && 'Zero cold-chain break from factory to Rayachoty depot'}
                   </div>
                 </div>
@@ -406,6 +431,7 @@ export const Interactive3DShowcase: React.FC<Interactive3DShowcaseProps> = ({ on
                     {activeModel === 'fries' && '2.5kg commercial foodservice bags · 4 bags (10kg) per wholesale case'}
                     {activeModel === 'carton' && 'Bundles of 100 units / Master cases of 500 units. 8"×8" and 10"×10" sizes.'}
                     {activeModel === 'burger_box' && 'Bundled in packs of 100 Nos / Master bundle 600 Nos'}
+                    {activeModel === 'bucket' && '34 pieces per sealed sleeve / Master cartons of 340 pieces'}
                     {activeModel === 'cryo_pod' && 'Daily dispatch to Rayachoty hotels & shops or instant counter pickup'}
                   </div>
                 </div>

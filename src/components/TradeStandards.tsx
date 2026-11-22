@@ -1,5 +1,6 @@
 import React from 'react';
 import { Snowflake, Building2, FileCheck2, Truck, ShieldCheck, MapPin, ChevronRight, Navigation } from 'lucide-react';
+import { assetUrl } from '../utils/assetUrl';
 
 interface TradeStandardsProps {
   onOpenQuote: () => void;
@@ -160,6 +161,75 @@ export const TradeStandards: React.FC<TradeStandardsProps> = ({ onOpenQuote }) =
               </div>
             );
           })}
+        </div>
+
+        {/* Official Delivery Route Fleet Poster Banner (Matching Rayachoty Depot Poster) */}
+        <div className="mb-14 rounded-3xl overflow-hidden border-2 border-[#C8900A]/40 bg-gradient-to-r from-[#241a14] via-[#1C1410] to-[#0f1c3f]/90 p-6 sm:p-8 shadow-2xl backdrop-blur-xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-6 relative rounded-2xl overflow-hidden border border-[#C8900A]/40 shadow-xl group bg-black">
+              <img
+                src={assetUrl('/images/rais_delivery_routes_poster.jpg')}
+                alt="We Deliver to Rayachoty and 7 Nearby Areas - RAIS Agencies Delivery Fleet"
+                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-102"
+              />
+              <div className="absolute bottom-3 left-3 right-3 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
+                <span className="bg-black/85 backdrop-blur-md px-3 py-1 rounded-full text-xs font-black text-[#C8900A] border border-[#C8900A]/40">
+                  📍 Rayachoty Hub + 7 Regional Routes
+                </span>
+                <span className="bg-emerald-950/85 backdrop-blur-md px-3 py-1 rounded-full text-xs font-black text-emerald-300 border border-emerald-400/40">
+                  ❄️ -18°C Cold Chain Fleet
+                </span>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#C8900A]/15 border border-[#C8900A]/40 text-[#C8900A] text-xs font-bold uppercase tracking-wider">
+                <Truck className="w-3.5 h-3.5 text-[#C8900A]" />
+                <span>Refrigerated Delivery Fleet Dispatch</span>
+              </div>
+
+              <h3 className="font-serif text-2xl sm:text-3xl font-black text-white leading-tight">
+                We Deliver to Rayachoty &amp; 7 Nearby Regional Towns
+              </h3>
+
+              <p className="text-sm text-[#A89880] leading-relaxed">
+                Operating daily &amp; scheduled refrigerated route logistics from our Sundupalli Road depot directly to restaurant, hotel, pizzeria and fast food kitchens across Annamayya District.
+              </p>
+
+              {/* The 7 Official Routes from Poster */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
+                {[
+                  { name: 'Chinnamandem', dist: '15 km' },
+                  { name: 'Kalakada', dist: '28 km' },
+                  { name: 'Mahal', dist: '38 km' },
+                  { name: 'Galiveedu', dist: '24 km' },
+                  { name: 'Rajampeta', dist: '45 km' },
+                  { name: 'Sundupalli', dist: '18 km' },
+                  { name: 'Kadiri', dist: '52 km' },
+                  { name: 'Rayachoty (Hub)', dist: '516269' }
+                ].map((t) => (
+                  <div key={t.name} className="p-2.5 rounded-xl bg-black/40 border border-[#C8900A]/25 flex flex-col justify-between">
+                    <span className="text-xs font-bold text-white flex items-center gap-1">
+                      <MapPin className="w-3 h-3 text-[#C8900A] shrink-0" />
+                      <span className="truncate">{t.name}</span>
+                    </span>
+                    <span className="text-[10px] font-mono text-[#C8900A] mt-1">{t.dist}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 pt-3">
+                <a
+                  href={`https://wa.me/919347453135?text=${encodeURIComponent('Hello RAIS Agencies, I want to inquire about route delivery to my shop.')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 rounded-full bg-gradient-to-r from-[#C8900A] to-amber-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-[#C8900A]/30 transition-all hover:scale-102"
+                >
+                  Book Route Delivery: 9347453135
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Regional Distribution Strip */}

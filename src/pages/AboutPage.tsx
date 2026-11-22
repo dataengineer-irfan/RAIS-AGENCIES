@@ -47,6 +47,9 @@ export const AboutPage: React.FC = () => {
             <p>
               Unlike ordinary shops, RAIS Agencies operates dedicated <strong className="text-cyan-300 font-semibold">-18°C deep freezers</strong> so your french fries, chicken nuggets, momos, burger patties, and pizza cheese never melt, spoil, or lose their taste. We bring genuine stock directly from India's trusted brands like <strong className="text-white font-semibold">Triken Foods</strong>, <strong className="text-white font-semibold">ITC Master Chef</strong>, <strong className="text-white font-semibold">Milky Mist</strong>, <strong className="text-white font-semibold">Del Monte</strong>, <strong className="text-white font-semibold">McCain</strong>, <strong className="text-white font-semibold">Foodrite</strong>, and <strong className="text-white font-semibold">Godrej</strong>.
             </p>
+            <p>
+              Alongside frozen foods, RAIS Agencies is the region's leading distributor of <strong className="text-cyan-300 font-semibold">commercial food packaging solutions</strong>, supplying authentic printed pizza delivery boxes (8"x8", 10"x10"), burger clamshell containers, and fried chicken takeaway buckets. Our dedicated delivery fleet services <strong className="text-white font-semibold">Rayachoty</strong> and 7 surrounding regional corridors: <strong className="text-cyan-300 font-semibold">Chinnamandem, Kalakada, Mahal, Galiveedu, Rajampeta, Sundupalli, and Kadiri</strong>.
+            </p>
           </div>
 
           {/* Operational Metrics Strip */}
@@ -56,8 +59,8 @@ export const AboutPage: React.FC = () => {
               <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-1">Wholesale Items</div>
             </div>
             <div className="p-4 rounded-2xl bg-[#081026]/80 border border-cyan-500/20 text-center">
-              <div className="font-serif text-3xl font-black text-cyan-300">8+</div>
-              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-1">National Brands</div>
+              <div className="font-serif text-3xl font-black text-cyan-300">7</div>
+              <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-1">Delivery Routes</div>
             </div>
             <div className="p-4 rounded-2xl bg-[#081026]/80 border border-cyan-500/20 text-center">
               <div className="font-serif text-3xl font-black text-cyan-300">-18°C</div>

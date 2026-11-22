@@ -95,6 +95,13 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 </a>
               </div>
 
+              <div className="pt-2 border-t border-slate-800 text-[11px] text-slate-300">
+                <span className="font-bold text-cyan-300">Daily Regional Delivery Routes:</span>
+                <p className="text-slate-400 mt-1 leading-relaxed">
+                  Rayachoty (Hub) · Chinnamandem · Kalakada · Mahal · Galiveedu · Rajampeta · Sundupalli · Kadiri
+                </p>
+              </div>
+
               <div className="pt-1">
                 <a
                   href={BUSINESS_INFO.gmbUrl}
@@ -203,7 +210,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               Contact
             </button>
             <span>•</span>
-            <span className="text-cyan-300 font-semibold">Frozen Food Products · Rayachoty</span>
+            <span className="text-cyan-300 font-semibold">Frozen Foods &amp; Food Packaging Solutions · Rayachoty &amp; 7 Regional Routes</span>
           </div>
         </div>
       </div>
