@@ -82,14 +82,14 @@ export const INITIAL_GBP_SKUS: GBPSkuItem[] = [
 export const INITIAL_GBP_REVIEWS: GBPReviewItem[] = [
   {
     id: 1,
-    reviewerName: "Harshavardhana Raju",
+    reviewerName: "Hidayathullah H",
     rating: 5,
-    date: "1 month ago",
-    comment: "We had an excellent experience with RAIS Agencies Rayachoti! All their frozen food products are fresh, tasty, and of great quality, with very reasonable prices. They have a well-managed team that understands our business needs and delivers on time.",
+    date: "20 hours ago (New)",
+    comment: "RAIS Agencies is a great place in Rayachoty for frozen food products and food packaging materials. They offer a good range of products including Milky Mist mozzarella cheese, pizza bases, burger buns, French fries, chicken nuggets, sauces and other restaurant supplies. Good product quality, competitive prices and responsive service. A useful supplier for cafes, restaurants, bakeries and QSR businesses. They also provide delivery to nearby areas. Highly recommended for frozen food and packaging requirements!",
     sentiment: "POSITIVE",
     hasReplied: true,
-    replyEnglish: "Thank you Harshavardhana Raju garu! We are proud to support your commercial food requirements with reliable -18°C cold chain logistics and wholesale pricing across Rayachoty. We appreciate your partnership!",
-    replyTelugu: "హర్షవర్ధన రాజు గారు, మీ పాజిటివ్ రివ్యూకు చాలా ధన్యవాదాలు! రాయచోటిలో మీ వ్యాపార అవసరాలకు అనుగుణంగా నాణ్యమైన ఫ్రోజెన్ ఫుడ్స్ మరియు సరైన సమయానికి డెలివరీ అందించడం మా బాధ్యత.",
+    replyEnglish: "Thank you so much Hidayathullah garu for your fantastic review and for sharing product photos! 🙏 We are proud to support local cafes, restaurants, bakeries, and QSRs across Rayachoty and our nearby delivery corridors with certified cold-chain frozen foods and high-quality printed packaging materials (pizza boxes, burger clamshells, and fried chicken buckets). We look forward to fulfilling your next kitchen order!",
+    replyTelugu: "హిదాయతుల్లా గారు, మీ అద్భుతమైన రివ్యూ మరియు ఫోటోలు పంచుకున్నందుకు చాలా ధన్యవాదాలు! రాయచోటి మరియు పరిసర ప్రాంతాల్లోని హోటళ్లు, కేఫ్‌లకు నాణ్యమైన ఫ్రోజెన్ ఫుడ్స్ మరియు ప్యాకేజింగ్ మెటీరియల్స్ సరఫరా చేయడంలో మేము ఎల్లప్పుడూ ముందుంటాము.",
     isApproved: true,
     approvedBy: "RAIS Admin"
   },
@@ -110,7 +110,7 @@ export const INITIAL_GBP_REVIEWS: GBPReviewItem[] = [
     id: 3,
     reviewerName: "Sahul N",
     rating: 5,
-    date: "Recent",
+    date: "1 week ago",
     comment: "The ultimate destination in Rayachoti for all your frozen food needs. Great selection, fresh stock, and excellent convenience. A must-visit..",
     sentiment: "POSITIVE",
     hasReplied: true,
@@ -121,6 +121,19 @@ export const INITIAL_GBP_REVIEWS: GBPReviewItem[] = [
   },
   {
     id: 4,
+    reviewerName: "Harshavardhana Raju",
+    rating: 5,
+    date: "1 month ago",
+    comment: "We had an excellent experience with RAIS Agencies Rayachoti! All their frozen food products are fresh, tasty, and of great quality, with very reasonable prices. They have a well-managed team that understands our business needs and delivers on time.",
+    sentiment: "POSITIVE",
+    hasReplied: true,
+    replyEnglish: "Thank you Harshavardhana Raju garu! We are proud to support your commercial food requirements with reliable -18°C cold chain logistics and wholesale pricing across Rayachoty. We appreciate your partnership!",
+    replyTelugu: "హర్షవర్ధన రాజు గారు, మీ పాజిటివ్ రివ్యూకు చాలా ధన్యవాదాలు! రాయచోటిలో మీ వ్యాపార అవసరాలకు అనుగుణంగా నాణ్యమైన ఫ్రోజెన్ ఫుడ్స్ మరియు సరైన సమయానికి డెలివరీ అందించడం మా బాధ్యత.",
+    isApproved: true,
+    approvedBy: "RAIS Admin"
+  },
+  {
+    id: 5,
     reviewerName: "Shyam Krishna",
     rating: 5,
     date: "1 month ago",
