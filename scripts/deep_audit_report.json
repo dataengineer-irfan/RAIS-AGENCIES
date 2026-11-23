@@ -1,0 +1,47 @@
+[
+  {
+    "test": "1. Google Business Profile Connection",
+    "passed": true,
+    "details": "Connected: True, Mode: LIVE_CONNECTED, Account: basha.shaikirfan@gmail.com, Location: RAIS Agencies"
+  },
+  {
+    "test": "2. Live Google Maps Reviews Integrity",
+    "passed": false,
+    "details": "Count: 4, Top: MOHAMMED ATHIQ UR RAHMAN SHAIK (5 stars)"
+  },
+  {
+    "test": "3. Business Profile & NAP Consistency",
+    "passed": true,
+    "details": "Name: RAIS Agencies, Phone: 9347453135, Category: Wholesale food store"
+  },
+  {
+    "test": "4. Verified Catalog SKUs (No Generic Boxes/ITC Momos)",
+    "passed": true,
+    "details": "Total SKUs: 10, Sample: ['Commercial Pizza Base (10 Inch)', 'Commercial Pizza Base (8.5 Inch)', 'Diced Mozzarella Cheese']"
+  },
+  {
+    "test": "5. Delivery Routes & Service Corridors",
+    "passed": true,
+    "details": "Total Areas: 10, Towns: ['Chinnamandem', 'Galiveedu', 'Rayachoty (516269)', 'Sundupalli']"
+  },
+  {
+    "test": "6. High-Intent Local B2B Keywords",
+    "passed": true,
+    "details": "Keywords Count: 10, Top: ['frozen food wholesale rayachoty', 'french fries wholesale rayachoty', 'milky mist cheese wholesale rayachoty']"
+  },
+  {
+    "test": "7. Local Competitor Monitoring",
+    "passed": true,
+    "details": "Competitors tracked: ['Sri Tirumala Traders', 'Y.S.K Traders', 'Chand Agencies']"
+  },
+  {
+    "test": "8. Local SEO Audit Score",
+    "passed": true,
+    "details": "Completeness Score: 100%, Status: EXCELLENT"
+  },
+  {
+    "test": "9. Automation Governance & Emergency Kill Switch",
+    "passed": true,
+    "details": "Kill Switch Active: False, Review Approval Required: True"
+  }
+]

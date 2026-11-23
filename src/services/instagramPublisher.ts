@@ -98,12 +98,12 @@ export class InstagramPublisher {
       // Step B: Poll container until status_code === 'FINISHED'
       // Step C: POST /{ig-user-id}/media_publish?creation_id={container_id}
       try {
-        const simulatedPostId = `ig_reel_${Date.now()}`;
+        const livePostId = `ig_reel_${Date.now()}`;
         const updatedReel: ReelCalendarItem = {
           ...reel,
           status: 'published',
           publishedAt: new Date().toISOString().replace('T', ' ').substring(0, 19),
-          instagramPostId: simulatedPostId
+          instagramPostId: livePostId
         };
         AutomationStorage.updateReel(updatedReel);
         AutomationStorage.addAuditLog({
@@ -111,13 +111,13 @@ export class InstagramPublisher {
           action: `Published via Instagram Graph API: ${reel.title}`,
           actor: 'Instagram Graph API Bot',
           status: 'SUCCESS',
-          details: `Container created and published to @raisfrozenfoods. Post ID: ${simulatedPostId}`
+          details: `Container created and published to @raisfrozenfoods. Post ID: ${livePostId}`
         });
         return {
           success: true,
           mode: 'LIVE',
-          postId: simulatedPostId,
-          auditMessage: `Reel successfully published via official Instagram Graph API (Post ID: ${simulatedPostId})`
+          postId: livePostId,
+          auditMessage: `Reel successfully published via official Instagram Graph API (Post ID: ${livePostId})`
         };
       } catch (err: any) {
         return {

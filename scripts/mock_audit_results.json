@@ -1,0 +1,320 @@
+[
+  {
+    "file": "components\\FeaturedProducts.tsx",
+    "line": 323,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"Search e.g. momos, nuggets, fries, mayo...\""
+  },
+  {
+    "file": "components\\FeaturedProducts.tsx",
+    "line": 324,
+    "type": "Placeholder Reference",
+    "content": "className=\"w-full pl-10 pr-4 py-2.5 bg-[#0f1c3f]/90 border border-cyan-400/30 rounded-xl text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300 transition-all shadow-inner\""
+  },
+  {
+    "file": "components\\QuoteModal.tsx",
+    "line": 330,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. Ramesh Reddy\""
+  },
+  {
+    "file": "components\\QuoteModal.tsx",
+    "line": 331,
+    "type": "Placeholder Reference",
+    "content": "className=\"w-full px-3.5 py-2.5 rounded-xl bg-[#081026] border border-cyan-400/30 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-300\""
+  },
+  {
+    "file": "components\\QuoteModal.tsx",
+    "line": 343,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. Royal Spice Caf\u00e9\""
+  },
+  {
+    "file": "components\\QuoteModal.tsx",
+    "line": 344,
+    "type": "Placeholder Reference",
+    "content": "className=\"w-full px-3.5 py-2.5 rounded-xl bg-[#081026] border border-cyan-400/30 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-300\""
+  },
+  {
+    "file": "components\\QuoteModal.tsx",
+    "line": 359,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. 9876543210\""
+  },
+  {
+    "file": "components\\QuoteModal.tsx",
+    "line": 360,
+    "type": "Placeholder Reference",
+    "content": "className=\"w-full px-3.5 py-2.5 rounded-xl bg-[#081026] border border-cyan-400/30 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-300\""
+  },
+  {
+    "file": "components\\QuoteModal.tsx",
+    "line": 388,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"Regular daily route, bulk carton requirements, etc.\""
+  },
+  {
+    "file": "components\\QuoteModal.tsx",
+    "line": 389,
+    "type": "Placeholder Reference",
+    "content": "className=\"w-full px-3.5 py-2.5 rounded-xl bg-[#081026] border border-cyan-400/30 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-300 resize-none\""
+  },
+  {
+    "file": "components\\automation\\TrafficAnalyticsTab.tsx",
+    "line": 430,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. G-XXXXXXXXXX\""
+  },
+  {
+    "file": "components\\automation\\TrafficAnalyticsTab.tsx",
+    "line": 431,
+    "type": "Placeholder Reference",
+    "content": "className=\"w-full sm:w-80 px-4 py-2.5 bg-[#081026] border border-cyan-500/30 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 font-mono\""
+  },
+  {
+    "file": "components\\growth-engine\\B2BLeadsView.tsx",
+    "line": 251,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. Royal Cafe & Bakers\""
+  },
+  {
+    "file": "components\\growth-engine\\B2BLeadsView.tsx",
+    "line": 263,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. Imran Bhai\""
+  },
+  {
+    "file": "components\\growth-engine\\B2BLeadsView.tsx",
+    "line": 274,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. 9848022338\""
+  },
+  {
+    "file": "components\\growth-engine\\B2BLeadsView.tsx",
+    "line": 302,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"Rayachoty / Kadapa\""
+  },
+  {
+    "file": "components\\growth-engine\\B2BLeadsView.tsx",
+    "line": 314,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. Milky Mist Mozzarella 5kg/week, French fries, Shawarma butter paper\""
+  },
+  {
+    "file": "components\\growth-engine\\BusinessInfoManagerView.tsx",
+    "line": 152,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"Leave blank unless confirmed\""
+  },
+  {
+    "file": "components\\growth-engine\\ContentStudioView.tsx",
+    "line": 128,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. Weekend Cafe Stock Preparation\""
+  },
+  {
+    "file": "components\\growth-engine\\ContentStudioView.tsx",
+    "line": 328,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"English content...\""
+  },
+  {
+    "file": "components\\growth-engine\\ContentStudioView.tsx",
+    "line": 337,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"Telugu content...\""
+  },
+  {
+    "file": "components\\growth-engine\\GoogleConnectionView.tsx",
+    "line": 109,
+    "type": "Simulated Demo Enum",
+    "content": "const isSimulated = Boolean(status?.is_simulated || mode === 'SIMULATED_DEMO');"
+  },
+  {
+    "file": "components\\growth-engine\\ReviewsInboxView.tsx",
+    "line": 137,
+    "type": "Simulated Demo Enum",
+    "content": "} else if (res.status === 'SIMULATED_DEMO_APPROVAL') {"
+  },
+  {
+    "file": "components\\growth-engine\\ReviewsInboxView.tsx",
+    "line": 207,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"Approver\""
+  },
+  {
+    "file": "components\\growth-engine\\ReviewsInboxView.tsx",
+    "line": 241,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. Ramesh Garu\""
+  },
+  {
+    "file": "components\\growth-engine\\ReviewsInboxView.tsx",
+    "line": 253,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. Reddies Colony Cafe\""
+  },
+  {
+    "file": "components\\growth-engine\\ReviewsInboxView.tsx",
+    "line": 282,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. 9876543210 (or leave empty to open WhatsApp picker)\""
+  },
+  {
+    "file": "components\\growth-engine\\ReviewsInboxView.tsx",
+    "line": 294,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"French Fries, Mozzarella, Momos, Pizza Boxes\""
+  },
+  {
+    "file": "components\\growth-engine\\ReviewsInboxView.tsx",
+    "line": 495,
+    "type": "Simulated Demo Enum",
+    "content": "{draftStatus === 'SIMULATED_DEMO_APPROVAL' && ("
+  },
+  {
+    "file": "components\\growth-engine\\ReviewsInboxView.tsx",
+    "line": 563,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"Response message...\""
+  },
+  {
+    "file": "data\\automationTypes.ts",
+    "line": 84,
+    "type": "Simulated Test Mode",
+    "content": "connectionState: 'NOT_CONNECTED' | 'AWAITING_AUTHORIZATION' | 'SIMULATED_TEST_MODE' | 'LIVE_CONNECTED';"
+  },
+  {
+    "file": "pages\\AdminLoginPage.tsx",
+    "line": 91,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"admin or rais.frozenfoods@gmail.com\""
+  },
+  {
+    "file": "pages\\AdminLoginPage.tsx",
+    "line": 92,
+    "type": "Placeholder Reference",
+    "content": "className=\"w-full pl-10 pr-4 py-2.5 bg-[#081026] border border-cyan-500/30 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all\""
+  },
+  {
+    "file": "pages\\AdminLoginPage.tsx",
+    "line": 113,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"Enter your admin passkey\""
+  },
+  {
+    "file": "pages\\AdminLoginPage.tsx",
+    "line": 114,
+    "type": "Placeholder Reference",
+    "content": "className=\"w-full pl-10 pr-11 py-2.5 bg-[#081026] border border-cyan-500/30 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all\""
+  },
+  {
+    "file": "pages\\ContactPage.tsx",
+    "line": 266,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. Chef Rajesh\""
+  },
+  {
+    "file": "pages\\ContactPage.tsx",
+    "line": 267,
+    "type": "Placeholder Reference",
+    "content": "className=\"w-full px-4 py-2.5 rounded-xl bg-[#081026] border border-cyan-400/30 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300 transition-all\""
+  },
+  {
+    "file": "pages\\ContactPage.tsx",
+    "line": 280,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. Royal Burger Hub, Rayachoty\""
+  },
+  {
+    "file": "pages\\ContactPage.tsx",
+    "line": 281,
+    "type": "Placeholder Reference",
+    "content": "className=\"w-full px-4 py-2.5 rounded-xl bg-[#081026] border border-cyan-400/30 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300 transition-all\""
+  },
+  {
+    "file": "pages\\ContactPage.tsx",
+    "line": 295,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. 9347453135\""
+  },
+  {
+    "file": "pages\\ContactPage.tsx",
+    "line": 296,
+    "type": "Placeholder Reference",
+    "content": "className=\"w-full px-4 py-2.5 rounded-xl bg-[#081026] border border-cyan-400/30 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300 transition-all\""
+  },
+  {
+    "file": "pages\\ContactPage.tsx",
+    "line": 308,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"e.g. Inquiring about weekly 20kg French fries (9mm), 10 cases of Momos, and 500 burger clamshell boxes...\""
+  },
+  {
+    "file": "pages\\ContactPage.tsx",
+    "line": 309,
+    "type": "Placeholder Reference",
+    "content": "className=\"w-full px-4 py-2.5 rounded-xl bg-[#081026] border border-cyan-400/30 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300 transition-all resize-none\""
+  },
+  {
+    "file": "pages\\ProductsPage.tsx",
+    "line": 177,
+    "type": "Placeholder Reference",
+    "content": "placeholder=\"Search products, brands, SKU (e.g. momos, fries, mayo)...\""
+  },
+  {
+    "file": "pages\\ProductsPage.tsx",
+    "line": 178,
+    "type": "Placeholder Reference",
+    "content": "className=\"w-full pl-10 pr-4 py-2.5 bg-[#081026] border border-cyan-400/30 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300 transition-all shadow-inner\""
+  },
+  {
+    "file": "services\\api.ts",
+    "line": 102,
+    "type": "Simulated Demo Enum",
+    "content": "origin?: 'GOOGLE_AUTHENTIC' | 'LOCAL_DIRECT' | 'SIMULATED_DEMO';"
+  },
+  {
+    "file": "services\\automationStorage.ts",
+    "line": 100,
+    "type": "Dummy Reference",
+    "content": "// Purge any legacy fake/dummy mock leads"
+  },
+  {
+    "file": "services\\gbpStorage.ts",
+    "line": 65,
+    "type": "Legacy Fake Reviewer",
+    "content": "const hasLegacyMock = parsed.some(r => r.reviewerName === 'Sri Krishna Cafe & Bakers');"
+  },
+  {
+    "file": "services\\instagramPublisher.ts",
+    "line": 101,
+    "type": "Simulated Post ID",
+    "content": "const simulatedPostId = `ig_reel_${Date.now()}`;"
+  },
+  {
+    "file": "services\\instagramPublisher.ts",
+    "line": 106,
+    "type": "Simulated Post ID",
+    "content": "instagramPostId: simulatedPostId"
+  },
+  {
+    "file": "services\\instagramPublisher.ts",
+    "line": 114,
+    "type": "Simulated Post ID",
+    "content": "details: `Container created and published to @raisfrozenfoods. Post ID: ${simulatedPostId}`"
+  },
+  {
+    "file": "services\\instagramPublisher.ts",
+    "line": 119,
+    "type": "Simulated Post ID",
+    "content": "postId: simulatedPostId,"
+  },
+  {
+    "file": "services\\instagramPublisher.ts",
+    "line": 120,
+    "type": "Simulated Post ID",
+    "content": "auditMessage: `Reel successfully published via official Instagram Graph API (Post ID: ${simulatedPostId})`"
+  }
+]

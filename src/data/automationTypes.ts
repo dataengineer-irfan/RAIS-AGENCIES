@@ -81,7 +81,7 @@ export interface CustomerLead {
 export interface IntegrationStatus {
   service: 'instagram_graph_api' | 'whatsapp_order_desk' | 'cold_storage_depot' | 'manychat' | 'heygen_presenter';
   name: string;
-  connectionState: 'NOT_CONNECTED' | 'AWAITING_AUTHORIZATION' | 'SIMULATED_TEST_MODE' | 'LIVE_CONNECTED';
+  connectionState: 'NOT_CONNECTED' | 'AWAITING_AUTHORIZATION' | 'LIVE_CONNECTED';
   accountName?: string;
   accountId?: string;
   hasValidToken: boolean;

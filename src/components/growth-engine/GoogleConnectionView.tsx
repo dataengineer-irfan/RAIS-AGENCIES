@@ -96,7 +96,7 @@ export const GoogleConnectionView: React.FC = () => {
     currentState = 'TOKEN_EXPIRED';
   } else if (mode === 'ACCESS_REVOKED' || mode === 'TOKEN_REVOKED') {
     currentState = 'ACCESS_REVOKED';
-  } else if (status?.connected && mode === 'LIVE_CONNECTED') {
+  } else if (status?.connected || mode === 'LIVE_CONNECTED' || statusStr === 'CONNECTED' || statusStr === 'APPROVED') {
     currentState = 'CONNECTED';
   } else if (mode === 'AUTHORIZATION_PENDING') {
     currentState = 'AUTHORIZATION_PENDING';
@@ -106,7 +106,6 @@ export const GoogleConnectionView: React.FC = () => {
     currentState = 'NOT_CONNECTED';
   }
 
-  const isSimulated = Boolean(status?.is_simulated || mode === 'SIMULATED_DEMO');
   const isConnected = currentState === 'CONNECTED';
 
   return (
@@ -133,7 +132,7 @@ export const GoogleConnectionView: React.FC = () => {
             <span>Check Health</span>
           </button>
 
-          {!isConnected && !isSimulated && (
+          {!isConnected && (
             <button
               onClick={handleConnectGoogle}
               disabled={connecting || currentState === 'NOT_CONFIGURED'}
@@ -215,9 +214,7 @@ export const GoogleConnectionView: React.FC = () => {
             {currentState === 'NOT_CONNECTED' && (
               <>
                 <span className="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
-                <span className="text-sm font-bold text-slate-400">
-                  {isSimulated ? 'SIMULATED DEMO' : 'NOT CONNECTED'}
-                </span>
+                <span className="text-sm font-bold text-slate-400">NOT CONNECTED</span>
               </>
             )}
           </div>
@@ -230,14 +227,10 @@ export const GoogleConnectionView: React.FC = () => {
         <div className="bg-[#0f172a] border border-slate-800 rounded-xl p-5">
           <div className="text-xs font-semibold text-slate-400 mb-2">Authorized Location</div>
           <div className="text-sm font-bold text-white truncate">
-            {isConnected ? (status?.location_name || 'RAIS Agencies') : isSimulated ? 'RAIS Agencies (Simulated)' : 'Not Connected'}
+            {isConnected ? (status?.location_name || 'RAIS Agencies') : 'Not Connected'}
           </div>
           <p className="text-[11px] text-slate-400 mt-2 font-mono truncate">
-            {isConnected 
-              ? (status?.location_id || 'No Google location selected') 
-              : isSimulated 
-              ? 'demo-location-simulated' 
-              : 'Not available'}
+            {isConnected ? (status?.location_id || 'No Google location selected') : 'Not available'}
           </p>
         </div>
 

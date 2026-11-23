@@ -160,7 +160,7 @@ export const Overview: React.FC<OverviewProps> = ({ onNavigate, stats }) => {
               onClick={() => onNavigate('enquiries')}
               className="text-xs text-slate-400 hover:text-slate-200 flex items-center gap-1 font-mono"
             >
-              <span>Bot Simulator &amp; CRM</span>
+              <span>B2B Outreach &amp; Hunter</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>

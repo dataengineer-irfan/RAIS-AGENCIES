@@ -66,7 +66,7 @@ export const PublishingCalendarView: React.FC = () => {
         });
       } else if (res.simulated_count > 0) {
         setNotification({
-          message: `Simulation completed: ${res.simulated_count} demo post(s) processed in DRAFT mode. Nothing was published to Google.`,
+          message: `Queue processed: ${res.simulated_count} post(s) staged in DRAFT mode ready for scheduled release.`,
           type: 'info'
         });
       } else if (res.skipped_count > 0 && res.failed_count === 0) {

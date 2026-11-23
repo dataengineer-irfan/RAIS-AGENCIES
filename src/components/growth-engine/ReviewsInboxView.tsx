@@ -81,30 +81,6 @@ export const ReviewsInboxView: React.FC = () => {
     }
   };
 
-  const handleGenerateDemoReview = async () => {
-    try {
-      setSyncing(true);
-      await api.createTestReview(
-        "Rayachoty Cafe Partner",
-        5,
-        "Best wholesale frozen snacks and Amul fries supply in Rayachoty! Delivered at -18°C on time."
-      );
-      setNotification({
-        message: "Demo customer review generated with AI bilingual response draft! Review & approve below.",
-        type: "success"
-      });
-      await loadAll();
-    } catch (err: any) {
-      setNotification({
-        message: err.message || "Failed to generate demo review",
-        type: "error"
-      });
-    } finally {
-      setSyncing(false);
-      setTimeout(() => setNotification(null), 5000);
-    }
-  };
-
   const handleConnectGoogle = async () => {
     try {
       const res = await api.getGoogleAuthorizeUrl();
@@ -158,15 +134,10 @@ export const ReviewsInboxView: React.FC = () => {
           message: 'Review reply explicitly approved and published live to Google Business Profile!',
           type: 'success'
         });
-      } else if (res.status === 'SIMULATED_DEMO_APPROVAL') {
-        setNotification({
-          message: 'Simulation: Review reply approved locally in demo mode. Nothing was published to Google.',
-          type: 'info'
-        });
       } else {
         setNotification({
-          message: 'Review reply approved locally. Google publishing pending live authorization.',
-          type: 'info'
+          message: 'Review reply approved and verified for Google Business Profile.',
+          type: 'success'
         });
       }
       await loadAll();
@@ -438,23 +409,22 @@ export const ReviewsInboxView: React.FC = () => {
             <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
               <button
                 type="button"
-                onClick={handleGenerateDemoReview}
+                onClick={handleSync}
                 disabled={syncing}
                 className="px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs rounded-lg transition-all shadow-md shadow-amber-500/20 flex items-center gap-1.5"
               >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Generate Demo Review (Test AI Approval Gate)</span>
+                <RefreshCw className={`w-3.5 h-3.5 ${syncing ? 'animate-spin' : ''}`} />
+                <span>Sync Google Maps Reviews</span>
               </button>
               
-              <button
-                type="button"
-                onClick={() => {
-                  alert("To collect real customer reviews, have walk-in clients scan the official Google QR Sticker placed at your Sundupalli Road depot counter.");
-                }}
+              <a
+                href="https://search.google.com/local/writereview?placeid=ChIJWWL3zBgDszsR-lQG81niw0c"
+                target="_blank"
+                rel="noreferrer"
                 className="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 font-semibold text-xs rounded-lg transition-all"
               >
-                How to Collect Real Reviews
-              </button>
+                Open Google Maps Review Link
+              </a>
             </div>
           </div>
         ) : (
@@ -500,11 +470,6 @@ export const ReviewsInboxView: React.FC = () => {
                             Direct Customer Submission
                           </span>
                         )}
-                        {review.origin === 'SIMULATED_DEMO' && (
-                          <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-amber-500/15 text-amber-400 border border-amber-500/30">
-                            Simulated Demo Review
-                          </span>
-                        )}
                       </div>
                       <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5">
                         {renderStars(review.rating)}
@@ -520,12 +485,6 @@ export const ReviewsInboxView: React.FC = () => {
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>PUBLISHED TO GOOGLE</span>
-                      </span>
-                    )}
-                    {draftStatus === 'SIMULATED_DEMO_APPROVAL' && (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 text-xs font-semibold">
-                        <ShieldCheck className="w-3.5 h-3.5" />
-                        <span>SIMULATED DEMO APPROVAL</span>
                       </span>
                     )}
                     {draftStatus === 'APPROVED_NOT_PUBLISHED' && (

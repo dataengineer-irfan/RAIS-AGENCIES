@@ -19,9 +19,15 @@ export const ReelVideoPreview: React.FC<ReelVideoPreviewProps> = ({
   const [isMuted, setIsMuted] = useState(false);
   const [viewMode, setViewMode] = useState<'video' | 'mockup'>(reel.videoSpecs.mediaUrl ? 'video' : 'mockup');
   const [speechSupported, setSpeechSupported] = useState(false);
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 2500);
+  };
 
   const duration = reel.videoSpecs.durationSeconds || 25;
 
@@ -104,7 +110,7 @@ export const ReelVideoPreview: React.FC<ReelVideoPreviewProps> = ({
 
   // Export 9:16 Snapshot
   const handleExportFrame = () => {
-    alert(`9:16 Frame ready for Reel Day ${reel.dayNumber}! You can use this media asset with the pre-formatted caption to publish to @raisfrozenfoods.`);
+    showToast(`9:16 Media Frame ready for Reel Day ${reel.dayNumber}. Ready to publish to @raisfrozenfoods.`);
   };
 
   return (
@@ -416,7 +422,7 @@ export const ReelVideoPreview: React.FC<ReelVideoPreviewProps> = ({
             <button
               onClick={() => {
                 navigator.clipboard.writeText(`${reel.caption}\n\n${reel.hashtags.join(' ')}`);
-                alert('Caption and hashtags copied to clipboard!');
+                showToast('Caption and hashtags copied to clipboard!');
               }}
               className="text-xs font-bold text-amber-300 hover:text-white transition-colors"
             >
@@ -481,6 +487,12 @@ export const ReelVideoPreview: React.FC<ReelVideoPreviewProps> = ({
 
       </div>
 
+      {toastMsg && (
+        <div className="fixed bottom-6 right-6 z-50 px-4 py-2.5 rounded-xl bg-[#081026] border border-cyan-400/80 text-cyan-200 text-xs font-semibold shadow-2xl shadow-cyan-900/50 flex items-center gap-2">
+          <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
+          <span>{toastMsg}</span>
+        </div>
+      )}
     </div>
   );
 };

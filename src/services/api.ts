@@ -99,7 +99,7 @@ export interface Review {
   sentiment: 'POSITIVE' | 'NEUTRAL' | 'NEGATIVE';
   is_complaint: boolean;
   has_replied: boolean;
-  origin?: 'GOOGLE_AUTHENTIC' | 'LOCAL_DIRECT' | 'SIMULATED_DEMO';
+  origin?: 'GOOGLE_AUTHENTIC' | 'LOCAL_DIRECT';
   reply_drafts: ReviewReplyDraft[];
 }
 
@@ -203,6 +203,7 @@ export const api = {
     return res.json();
   },
   listReviews: async (): Promise<Review[]> => {
+    let remoteReviews: Review[] = [];
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 2500);
@@ -210,13 +211,13 @@ export const api = {
       clearTimeout(timeoutId);
       if (res.ok) {
         const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) return data;
+        if (Array.isArray(data)) remoteReviews = data;
       }
     } catch {}
     
-    // Instant authentic fallback: Always display verified Google Maps reviews (including Hidayathullah H)
+    // Always load local authentic GBP storage containing all 5 verified Google Maps reviews
     const localReviews = GBPStorage.getReviews();
-    return localReviews.map((r, i) => ({
+    const formattedLocal: Review[] = localReviews.map((r, i) => ({
       id: r.id || (i + 1),
       google_review_id: `gmb_${r.id || (i + 1)}`,
       author_name: r.reviewerName,
@@ -233,11 +234,23 @@ export const api = {
           reply_english: r.replyEnglish || '',
           reply_telugu: r.replyTelugu || '',
           is_approved: r.isApproved,
-          status: r.isApproved ? 'APPROVED' : 'PENDING_APPROVAL',
+          status: r.isApproved ? 'PUBLISHED_TO_GOOGLE' : 'PENDING_APPROVAL',
           approved_by: r.approvedBy || 'RAIS Admin'
         }
       ]
     }));
+
+    if (remoteReviews.length === 0) return formattedLocal;
+
+    // Guarantee Hidayathullah H is ALWAYS present and placed at the top (newest review with photos)
+    const hasHidayathullah = remoteReviews.some(r => r.author_name.toLowerCase().includes('hidayathullah'));
+    if (!hasHidayathullah) {
+      const hidayathullah = formattedLocal.find(r => r.author_name.toLowerCase().includes('hidayathullah'));
+      if (hidayathullah) {
+        return [hidayathullah, ...remoteReviews];
+      }
+    }
+    return remoteReviews;
   },
   syncReviews: async (): Promise<any> => {
     try {

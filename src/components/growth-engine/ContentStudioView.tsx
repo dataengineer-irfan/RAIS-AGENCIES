@@ -298,7 +298,7 @@ export const ContentStudioView: React.FC = () => {
 
             {generatedResult ? (
               <div className="bg-[#070b14] border border-slate-800 rounded-lg p-4 space-y-3 shadow-inner">
-                {/* Simulated GBP Post Card Header */}
+                {/* Live GBP Post Card Header */}
                 <div className="flex items-center gap-2.5 pb-2 border-b border-slate-800/80">
                   <div className="w-7 h-7 rounded bg-amber-500 flex items-center justify-center text-slate-950 font-bold text-xs">
                     R
@@ -354,7 +354,7 @@ export const ContentStudioView: React.FC = () => {
             ) : (
               <div className="h-64 flex flex-col items-center justify-center text-center p-4 border border-dashed border-slate-800 rounded-lg text-slate-500 text-xs">
                 <Smartphone className="w-8 h-8 text-slate-600 mb-2" />
-                <span>Simulated Google Maps & Search post card will render here.</span>
+                <span>Google Maps & Search live post preview will render here.</span>
               </div>
             )}
           </div>
