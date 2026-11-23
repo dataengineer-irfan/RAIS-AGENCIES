@@ -217,28 +217,31 @@ export const api = {
     
     // Always load local authentic GBP storage containing all 5 verified Google Maps reviews
     const localReviews = GBPStorage.getReviews();
-    const formattedLocal: Review[] = localReviews.map((r, i) => ({
-      id: r.id || (i + 1),
-      google_review_id: `gmb_${r.id || (i + 1)}`,
-      author_name: r.reviewerName,
-      rating: r.rating,
-      comment: r.comment,
-      create_time: r.date || 'Recent',
-      sentiment: (r.sentiment as any) || 'POSITIVE',
-      is_complaint: false,
-      has_replied: r.hasReplied,
-      origin: 'GOOGLE_AUTHENTIC' as const,
-      reply_drafts: [
-        {
-          id: r.id || (i + 1),
-          reply_english: r.replyEnglish || '',
-          reply_telugu: r.replyTelugu || '',
-          is_approved: r.isApproved,
-          status: r.isApproved ? 'PUBLISHED_TO_GOOGLE' : 'PENDING_APPROVAL',
-          approved_by: r.approvedBy || 'RAIS Admin'
-        }
-      ]
-    }));
+    const formattedLocal: Review[] = localReviews.map((r, i) => {
+      const uniqueId = (r.id || 0) + 100;
+      return {
+        id: uniqueId,
+        google_review_id: `gmb_${uniqueId}`,
+        author_name: r.reviewerName,
+        rating: r.rating,
+        comment: r.comment,
+        create_time: r.date || 'Recent',
+        sentiment: (r.sentiment as any) || 'POSITIVE',
+        is_complaint: false,
+        has_replied: r.hasReplied,
+        origin: 'GOOGLE_AUTHENTIC' as const,
+        reply_drafts: [
+          {
+            id: uniqueId,
+            reply_english: r.replyEnglish || '',
+            reply_telugu: r.replyTelugu || '',
+            is_approved: r.isApproved,
+            status: r.isApproved ? 'PUBLISHED_TO_GOOGLE' : 'PENDING_APPROVAL',
+            approved_by: r.approvedBy || 'RAIS Admin'
+          }
+        ]
+      };
+    });
 
     if (remoteReviews.length === 0) return formattedLocal;
 

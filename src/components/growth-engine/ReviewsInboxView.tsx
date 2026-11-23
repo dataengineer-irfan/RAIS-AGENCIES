@@ -474,7 +474,11 @@ export const ReviewsInboxView: React.FC = () => {
                       <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5">
                         {renderStars(review.rating)}
                         <span>•</span>
-                        <span>{new Date(review.create_time).toLocaleDateString()}</span>
+                        <span>{(() => {
+                          if (!review.create_time) return 'Recent';
+                          const d = new Date(review.create_time);
+                          return isNaN(d.getTime()) ? review.create_time : d.toLocaleDateString();
+                        })()}</span>
                       </div>
                     </div>
                   </div>
