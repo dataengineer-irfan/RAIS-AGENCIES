@@ -15,6 +15,7 @@ import { BusinessInfoManagerView } from '../components/growth-engine/BusinessInf
 import { ReelsStudioView } from '../components/growth-engine/ReelsStudioView';
 import { MetaPublishingView } from '../components/growth-engine/MetaPublishingView';
 import { InstagramEnquiriesView } from '../components/growth-engine/InstagramEnquiriesView';
+import { YouTubeStudioView } from '../components/growth-engine/YouTubeStudioView';
 import { TrafficAnalyticsTab } from '../components/automation/TrafficAnalyticsTab';
 import { api } from '../services/api';
 
@@ -104,6 +105,7 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
         {/* Meta & Instagram Automation Suite */}
         {currentTab === 'reels' && <ReelsStudioView />}
         {currentTab === 'meta_publishing' && <MetaPublishingView />}
+        {currentTab === 'youtube_drive' && <YouTubeStudioView />}
         {currentTab === 'enquiries' && <InstagramEnquiriesView />}
         {currentTab === 'content' && <ContentStudioView />}
         {currentTab === 'calendar' && <PublishingCalendarView />}

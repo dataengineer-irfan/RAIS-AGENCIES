@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   LayoutDashboard, Globe, Sparkles, MessageSquare, 
   Search, Users, BarChart3, Image, UserCheck, ShieldAlert, Settings, AlertTriangle,
-  ArrowLeft, LogOut, Film, Send, CheckCircle2
+  ArrowLeft, LogOut, Film, Send, CheckCircle2, Video
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -38,6 +38,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       items: [
         { id: 'reels', label: '30-Day Reels Studio', icon: Film, badge: '30 Reels' },
         { id: 'meta_publishing', label: 'Meta API & Publishing', icon: Send, badge: '@raisfrozenfoods' },
+        { id: 'youtube_drive', label: 'YouTube & Drive Automation', icon: Video, badge: 'Daily 1x' },
         { id: 'enquiries', label: 'Instagram Enquiries Bot', icon: MessageSquare },
         { id: 'content', label: 'Content Studio & Promos', icon: Sparkles }
       ]

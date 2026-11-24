@@ -54,6 +54,49 @@ export interface PublishCycleResult {
   message?: string;
 }
 
+export interface YouTubeDriveSetting {
+  id?: number;
+  folder_id: string | null;
+  folder_name: string;
+  auto_publish_daily: boolean;
+  daily_publish_hour: number;
+  is_connected: boolean;
+  last_synced_at?: string | null;
+}
+
+export interface YouTubeQueueItem {
+  id: number;
+  drive_file_id?: string | null;
+  file_name: string;
+  product_sku?: string | null;
+  product_name: string;
+  video_title: string;
+  description: string;
+  tags?: string | null;
+  status: 'QUEUED' | 'UPLOADING' | 'PUBLISHED' | 'FAILED';
+  scheduled_for: string;
+  published_at?: string | null;
+  youtube_video_id?: string | null;
+  youtube_url?: string | null;
+  created_at?: string;
+}
+
+export interface YouTubeSyncResult {
+  status: string;
+  new_videos_found: number;
+  total_queued: number;
+  message: string;
+}
+
+export interface YouTubePublishResult {
+  status: string;
+  video_id?: number | null;
+  youtube_video_id?: string | null;
+  youtube_url?: string | null;
+  video_title?: string | null;
+  message: string;
+}
+
 export interface CampaignPost {
   id: number;
   campaign_id: number;
@@ -478,5 +521,56 @@ export const api = {
   publishPostNow: async (postId: number): Promise<any> => {
     const res = await fetch(`${BASE_URL}/campaigns/posts/${postId}/publish-now`, { method: 'POST' });
     return res.json();
+  },
+  getYouTubeSettings: async (): Promise<YouTubeDriveSetting> => {
+    try {
+      const res = await fetch(`${BASE_URL}/youtube/settings`);
+      if (res.ok) return await res.json();
+    } catch (e) {
+      console.warn("YouTube settings fetch error, using default", e);
+    }
+    return {
+      folder_id: null,
+      folder_name: "RAIS_Daily_Promotion_Videos",
+      auto_publish_daily: true,
+      daily_publish_hour: 10,
+      is_connected: false
+    };
+  },
+  updateYouTubeSettings: async (payload: Partial<YouTubeDriveSetting>): Promise<YouTubeDriveSetting> => {
+    const res = await fetch(`${BASE_URL}/youtube/settings`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    return res.json();
+  },
+  listYouTubeQueue: async (): Promise<YouTubeQueueItem[]> => {
+    try {
+      const res = await fetch(`${BASE_URL}/youtube/queue`);
+      if (res.ok) return await res.json();
+    } catch (e) {
+      console.warn("YouTube queue fetch error", e);
+    }
+    return [];
+  },
+  syncGoogleDrive: async (): Promise<YouTubeSyncResult> => {
+    const res = await fetch(`${BASE_URL}/youtube/sync-drive`, { method: 'POST' });
+    return res.json();
+  },
+  publishNextYouTubeVideo: async (): Promise<YouTubePublishResult> => {
+    const res = await fetch(`${BASE_URL}/youtube/publish-next`, { method: 'POST' });
+    return res.json();
+  },
+  publishYouTubeItem: async (itemId: number): Promise<YouTubePublishResult> => {
+    const res = await fetch(`${BASE_URL}/youtube/publish-item/${itemId}`, { method: 'POST' });
+    return res.json();
+  },
+  getYouTubeSetupGuide: async (): Promise<any> => {
+    const res = await fetch(`${BASE_URL}/youtube/setup-guide`);
+    return res.json();
   }
 };
+
+export const growthEngineApi = api;
+export default api;
