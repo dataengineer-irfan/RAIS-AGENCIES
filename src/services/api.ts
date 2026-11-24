@@ -530,11 +530,11 @@ export const api = {
       console.warn("YouTube settings fetch error, using default", e);
     }
     return {
-      folder_id: null,
+      folder_id: "1Bm_WjSGQb_KQSRz6i08DSsp2mtzOborn",
       folder_name: "RAIS_Daily_Promotion_Videos",
       auto_publish_daily: true,
       daily_publish_hour: 10,
-      is_connected: false
+      is_connected: true
     };
   },
   updateYouTubeSettings: async (payload: Partial<YouTubeDriveSetting>): Promise<YouTubeDriveSetting> => {

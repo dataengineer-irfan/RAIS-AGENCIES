@@ -8,18 +8,18 @@ import { growthEngineApi as api, YouTubeDriveSetting, YouTubeQueueItem } from '.
 
 export const YouTubeStudioView: React.FC = () => {
   const [settings, setSettings] = useState<YouTubeDriveSetting>({
-    folder_id: '',
+    folder_id: '1Bm_WjSGQb_KQSRz6i08DSsp2mtzOborn',
     folder_name: 'RAIS_Daily_Promotion_Videos',
     auto_publish_daily: true,
     daily_publish_hour: 10,
-    is_connected: false
+    is_connected: true
   });
   const [queue, setQueue] = useState<YouTubeQueueItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [syncing, setSyncing] = useState<boolean>(false);
   const [publishing, setPublishing] = useState<boolean>(false);
   const [publishingId, setPublishingId] = useState<number | null>(null);
-  const [folderInput, setFolderInput] = useState<string>('');
+  const [folderInput, setFolderInput] = useState<string>('https://drive.google.com/drive/folders/1Bm_WjSGQb_KQSRz6i08DSsp2mtzOborn');
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
   const [showGuide, setShowGuide] = useState<boolean>(false);
   const [expandedDescId, setExpandedDescId] = useState<number | null>(null);
@@ -37,7 +37,8 @@ export const YouTubeStudioView: React.FC = () => {
         api.listYouTubeQueue()
       ]);
       setSettings(stg);
-      setFolderInput(stg.folder_id || '');
+      const activeFolder = stg.folder_id || '1Bm_WjSGQb_KQSRz6i08DSsp2mtzOborn';
+      setFolderInput(`https://drive.google.com/drive/folders/${activeFolder}`);
       if (q && q.length > 0) {
         setQueue(q);
       } else {
