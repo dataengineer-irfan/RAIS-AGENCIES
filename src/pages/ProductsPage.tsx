@@ -40,7 +40,8 @@ const BRAND_BADGES: Record<string, { bg: string; text: string; label: string }> 
   'Meal Time': { bg: '#991b1b', text: '#fca5a5', label: 'MT' },
   'Sudarshan': { bg: '#581c87', text: '#e9d5ff', label: 'SD' },
   'Foodcraft': { bg: '#c2410c', text: '#fed7aa', label: 'FC' },
-  "Spic's": { bg: '#86198f', text: '#f5d0fe', label: 'SP' }
+  "Spic's": { bg: '#86198f', text: '#f5d0fe', label: 'SP' },
+  'Golden Crown': { bg: '#854d0e', text: '#fef08a', label: 'GC' }
 };
 
 export const ProductsPage: React.FC<ProductsPageProps> = ({
@@ -66,7 +67,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   const popularBrands = useMemo(() => {
     return [
       'ITC Master Chef', 'Milky Mist', 'Del Monte', 'Amul', 'Triken', 
-      'Habit', 'Meal Time', 'Sudarshan', 'Foodcraft', "Spic's",
+      'Habit', 'Meal Time', 'Sudarshan', 'Foodcraft', "Spic's", 'Golden Crown',
       'Foodrite', 'MANAMA', 'VKL', 'Bake Fresh', 'Signature'
     ];
   }, []);

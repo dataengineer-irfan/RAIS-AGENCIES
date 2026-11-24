@@ -57,6 +57,7 @@ export function getBrandBadge(brand: string, name: string): { label: string; bg:
   if (combined.includes('sudarshan')) return { label: 'SD', bg: '#7c3aed', text: '#ffffff' };
   if (combined.includes('foodcraft')) return { label: 'FC', bg: '#d97706', text: '#ffffff' };
   if (combined.includes('spic')) return { label: 'SP', bg: '#c026d3', text: '#ffffff' };
+  if (combined.includes('golden crown')) return { label: 'GC', bg: '#ca8a04', text: '#ffffff' };
   return { label: 'R', bg: '#0e7490', text: '#ffffff' };
 }
 
