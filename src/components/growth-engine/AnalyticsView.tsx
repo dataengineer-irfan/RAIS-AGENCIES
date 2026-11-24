@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
   BarChart3, TrendingUp, Phone, Navigation, Globe, 
-  Search, Eye, RefreshCw, Calendar, AlertCircle, CheckCircle2, ShieldAlert
+  Search, Eye, RefreshCw, Calendar, AlertCircle, CheckCircle2, ShieldAlert,
+  ExternalLink
 } from 'lucide-react';
 import { api } from '../../services/api';
 
@@ -18,43 +19,24 @@ export const AnalyticsView: React.FC = () => {
   const loadPerformance = async () => {
     try {
       setLoading(true);
-      const [perfRes, statusRes] = await Promise.allSettled([
-        api.getGooglePerformance(),
-        api.getGoogleStatus()
+      const [perfRes] = await Promise.allSettled([
+        api.getGooglePerformance()
       ]);
 
       let res = perfRes.status === 'fulfilled' ? perfRes.value : null;
-      const googleStatus = statusRes.status === 'fulfilled' ? statusRes.value : null;
 
-      if ((!res || res.status === 'NOT_CONNECTED') && (googleStatus?.connected || googleStatus?.status === 'CONNECTED')) {
-        res = await api.getGooglePerformance('LIVE_DATA_AVAILABLE');
-      }
-
-      if (!res || res.status === 'NOT_CONNECTED' || !res.metrics) {
+      // Pure authenticity: strictly NO fake or mock fallback metrics
+      if (!res || !res.metrics || res.status === 'NOT_CONNECTED') {
         res = {
-          status: 'LIVE_DATA_AVAILABLE',
-          is_live: true,
+          status: 'NOT_CONNECTED',
+          is_live: false,
           is_simulated: false,
-          source: 'Google Business Profile Performance API (Authenticated Live)',
+          source: 'Google Business Profile API (Pending OAuth Connection)',
           date_range: 'Past 30 Days',
-          metrics: {
-            search_impressions_mobile: 140,
-            search_impressions_desktop: 35,
-            maps_impressions_mobile: 210,
-            maps_impressions_desktop: 25,
-            website_clicks: 42,
-            call_clicks: 18,
-            direction_requests: 22,
-            total_interactions: 82
-          },
-          search_keywords_top: [
-            { term: 'frozen food rayachoty', impressions: 85 },
-            { term: 'mozzarella cheese wholesale', impressions: 55 },
-            { term: 'french fries wholesale rayachoti', impressions: 40 },
-            { term: 'burger patties rayachoti', impressions: 30 }
-          ],
-          notice: 'LIVE DATA: Authenticated official Google Business Profile Performance API metrics for RAIS Agencies (locations/17901714523973178723).',
-          actionable_instruction: 'Live telemetry synchronizing with Google Maps.'
+          metrics: null,
+          search_keywords_top: [],
+          notice: 'Google Cloud OAuth credentials not authorized. Telemetry metrics remain unavailable (—) until connected. Zero mock data is presented as genuine.',
+          actionable_instruction: 'Connect your Google Cloud OAuth credentials to stream real Google Maps performance.'
         };
       }
 
@@ -62,9 +44,9 @@ export const AnalyticsView: React.FC = () => {
     } catch (err: any) {
       console.error('Failed to load performance metrics', err);
       setData({
-        status: 'API_ERROR',
+        status: 'NOT_CONNECTED',
         metrics: null,
-        error_message: err.message || 'Failed to connect to backend telemetry service.'
+        error_message: err.message || 'Google Business Profile API not connected.'
       });
     } finally {
       setLoading(false);
@@ -326,6 +308,62 @@ export const AnalyticsView: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Actionable Setup Card when Not Connected */}
+      {currentState === 'NOT_CONNECTED' && (
+        <div className="bg-[#0f172a] border border-amber-500/30 rounded-xl p-6 space-y-4">
+          <div className="flex items-center gap-2">
+            <ShieldAlert className="w-5 h-5 text-amber-400" />
+            <h2 className="text-base font-bold text-white">How to Stream Genuine Google Maps Telemetry for RAIS Agencies</h2>
+          </div>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            All telemetry metrics above strictly display <span className="font-mono text-amber-400 font-bold">—</span> because we adhere to a zero mock data guarantee. To stream genuine metrics directly from Google Maps into this dashboard:
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
+            <div className="p-3.5 bg-[#070b14] border border-slate-800 rounded-lg space-y-1.5">
+              <div className="flex items-center gap-2 text-amber-400 text-xs font-bold">
+                <span className="w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center font-mono">1</span>
+                <span>Enable Google API</span>
+              </div>
+              <p className="text-[11px] text-slate-400">
+                In Google Cloud Console (project <strong className="text-slate-300">RAIS Growth Engine</strong>), search for and enable <strong className="text-slate-300">Google Business Profile Performance API</strong>.
+              </p>
+            </div>
+            <div className="p-3.5 bg-[#070b14] border border-slate-800 rounded-lg space-y-1.5">
+              <div className="flex items-center gap-2 text-amber-400 text-xs font-bold">
+                <span className="w-5 h-5 rounded-full bg-amber-500/20 flex items-center justify-center font-mono">2</span>
+                <span>Connect Google Account</span>
+              </div>
+              <p className="text-[11px] text-slate-400">
+                Authorize the Google Account that manages the listing <code className="text-amber-300">locations/17901714523973178723</code> in your Growth Engine Admin settings.
+              </p>
+            </div>
+            <div className="p-3.5 bg-[#070b14] border border-slate-800 rounded-lg space-y-1.5">
+              <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold">
+                <span className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center font-mono">3</span>
+                <span>Live Data Sync</span>
+              </div>
+              <p className="text-[11px] text-slate-400">
+                Google will automatically sync real search queries, direction requests, and phone calls to 9347453135 with daily refreshes.
+              </p>
+            </div>
+          </div>
+          <div className="pt-2 flex flex-wrap items-center gap-3">
+            <a
+              href="https://console.cloud.google.com/apis/library/businessprofileperformance.googleapis.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-lg flex items-center gap-1.5 transition-colors shadow-md"
+            >
+              <span>Enable Business Profile Performance API in Google Cloud</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+            <span className="text-xs text-slate-400">
+              Listing: <strong className="text-slate-200">RAIS Agencies Rayachoty (Beside Indel Money Bank)</strong>
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
