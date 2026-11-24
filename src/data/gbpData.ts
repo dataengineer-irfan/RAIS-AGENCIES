@@ -55,6 +55,8 @@ export const VERIFIED_BUSINESS_FACTS = {
   instagram: '@raisfrozenfoods',
   primaryCategory: 'Frozen food store',
   rating: 5.0,
+  placeId: 'ChIJWWL3zBgDszsR-lQG81niw0c',
+  directReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJWWL3zBgDszsR-lQG81niw0c',
   operatingHours: 'Open 24 hours',
   gmbUrl: 'https://www.google.com/maps/place/RAIS+Agencies/@14.059359,78.759402,17z/data=!3m1!4b1!4m6!3m5!1s0x3bb30318ccf76259:0x47c3e259f30654fa!8m2!3d14.059359!4d78.759402!16s%2Fg%2F11npc8m4rr',
   secondaryCategories: [
@@ -75,7 +77,19 @@ export const INITIAL_GBP_SKUS: GBPSkuItem[] = [
   { sku: 'RAIS-PB-10', name: 'Commercial Pizza Base 10 Inch', brand: 'RAIS Bakery', category: 'Bakery & Bases', packSize: '5 PCS PACKET', inStock: true },
   { sku: 'RAIS-PKG-BP40', name: 'Food-Grade OGR Butter Paper 40 GSM', brand: 'Packaging Solutions', category: 'Packaging', packSize: '10x10 & 12x12 Cut Sheets', inStock: true },
   { sku: 'RAIS-PKG-PB10', name: 'Corrugated Thermal Pizza Box 10 Inch', brand: 'Packaging Solutions', category: 'Packaging', packSize: '50 PCS BUNDLE', inStock: true },
-  { sku: 'RAIS-DM-MAYO', name: 'Eggless Burger Mayonnaise', brand: 'Del Monte', category: 'Sauces', packSize: '1 KG POUCH', inStock: true }
+  { sku: 'RAIS-DM-MAYO', name: 'Eggless Burger Mayonnaise', brand: 'Del Monte', category: 'Sauces', packSize: '1 KG POUCH', inStock: true },
+  { sku: 'RAIS-SUD-CRM', name: 'Sudarshan Dairy Fresh Cream', brand: 'Sudarshan', category: 'Cheese & Dairy', packSize: '1L PACK', inStock: true },
+  { sku: 'RAIS-HBT-BCORN', name: 'Habit Canned Whole Baby Corn', brand: 'Habit', category: 'Canned Veg & Toppings', packSize: '800G TIN', inStock: true },
+  { sku: 'RAIS-HBT-MUSH', name: 'Habit Canned Button Mushroom', brand: 'Habit', category: 'Canned Veg & Toppings', packSize: '800G TIN', inStock: true },
+  { sku: 'RAIS-DM-JALA', name: 'Del Monte Sliced Jalapeños', brand: 'Del Monte', category: 'Gourmet Toppings', packSize: '3 KG TIN / 1 KG POUCH', inStock: true },
+  { sku: 'RAIS-MT-SOYA', name: 'Meal Time Dark Soya Sauce', brand: 'Meal Time', category: 'Indo-Chinese Sauces', packSize: '1 KG / 5L CAN', inStock: true },
+  { sku: 'RAIS-MT-RCHIL', name: 'Meal Time Red Chilli Sauce', brand: 'Meal Time', category: 'Indo-Chinese Sauces', packSize: '1 KG / 5L CAN', inStock: true },
+  { sku: 'RAIS-MT-GCHIL', name: 'Meal Time Green Chilli Sauce', brand: 'Meal Time', category: 'Indo-Chinese Sauces', packSize: '1 KG / 5L CAN', inStock: true },
+  { sku: 'RAIS-SPC-CULN', name: 'Spic\'s Culinary Sauce', brand: 'Spic\'s', category: 'Finishing Sauces', packSize: '1 KG POUCH', inStock: true },
+  { sku: 'RAIS-SPC-HCHIL', name: 'Spic\'s Hot Chilli Sauce', brand: 'Spic\'s', category: 'Finishing Sauces', packSize: '5 KG BULK', inStock: true },
+  { sku: 'RAIS-MT-VNGR', name: 'Commercial Synthetic White Vinegar', brand: 'Commercial Kitchen', category: 'Condiments', packSize: '1L BOTTLE / 5L CAN', inStock: true },
+  { sku: 'RAIS-DM-CHOC', name: 'Del Monte Rich Chocolate Syrup', brand: 'Del Monte', category: 'Syrups & Desserts', packSize: '1 KG BOTTLE', inStock: true },
+  { sku: 'RAIS-FC-CHOC', name: 'Foodcraft Commercial Chocolate Syrup', brand: 'Foodcraft', category: 'Syrups & Desserts', packSize: '1 KG BOTTLE / 5 KG CAN', inStock: true }
 ];
 
 // Authentic Google Maps customer reviews for RAIS Agencies

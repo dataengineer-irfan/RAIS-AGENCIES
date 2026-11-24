@@ -1,0 +1,233 @@
+{
+  "frontend_files": [
+    {
+      "file": "src/data/gbpData.ts (Authentic Reviews & Core Business Profile)",
+      "test": "Place ID Verification (ChIJWWL3zBgDszsR-lQG81niw0c)",
+      "passed": true
+    },
+    {
+      "file": "src/data/gbpData.ts (Authentic Reviews & Core Business Profile)",
+      "test": "Phone & PIN Verification (9347453135 / 516269)",
+      "passed": true
+    },
+    {
+      "file": "src/data/gbpData.ts (Authentic Reviews & Core Business Profile)",
+      "test": "Hidayathullah H Review Present",
+      "passed": true
+    },
+    {
+      "file": "src/data/gbpData.ts (Authentic Reviews & Core Business Profile)",
+      "test": "Zero Mock Reviewers (e.g. Sri Krishna)",
+      "passed": true
+    },
+    {
+      "file": "src/data/gbpData.ts (Authentic Reviews & Core Business Profile)",
+      "test": "Bilingual Telugu/English Replies Present",
+      "passed": true
+    },
+    {
+      "file": "src/services/api.ts (API Gateway & Review Delivery Guarantee)",
+      "test": "Guaranteed Hidayathullah Delivery",
+      "passed": true
+    },
+    {
+      "file": "src/services/api.ts (API Gateway & Review Delivery Guarantee)",
+      "test": "Zero SIMULATED_DEMO in Review Origin",
+      "passed": true
+    },
+    {
+      "file": "src/services/api.ts (API Gateway & Review Delivery Guarantee)",
+      "test": "Correct Render Backend Host Configured",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/ReviewsInboxView.tsx (Reviews Inbox & Human Approval Gate)",
+      "test": "Zero SIMULATED_DEMO_APPROVAL Badges",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/ReviewsInboxView.tsx (Reviews Inbox & Human Approval Gate)",
+      "test": "Direct Google Review Dispatch URL",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/ReviewsInboxView.tsx (Reviews Inbox & Human Approval Gate)",
+      "test": "Zero Demo Review Generation Buttons",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/ReviewsInboxView.tsx (Reviews Inbox & Human Approval Gate)",
+      "test": "Safe Date Parsing (No Invalid Date)",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/GoogleConnectionView.tsx (Google OAuth Connection View)",
+      "test": "Zero SIMULATED_DEMO Mode Fallbacks",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/GoogleConnectionView.tsx (Google OAuth Connection View)",
+      "test": "Zero 'demo-location-simulated'",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/GoogleConnectionView.tsx (Google OAuth Connection View)",
+      "test": "Legitimate LIVE_CONNECTED Recognition",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/MediaLibraryView.tsx (Asset Storage & Photo Geocoding)",
+      "test": "Zero alert('Simulated Photo Upload')",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/MediaLibraryView.tsx (Asset Storage & Photo Geocoding)",
+      "test": "Real File Input Reader Implemented",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/MediaLibraryView.tsx (Asset Storage & Photo Geocoding)",
+      "test": "Real Product Media Assets Loaded",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/InstagramEnquiriesView.tsx (B2B Phone Reels & Outbound Hunter)",
+      "test": "Zero Interactive Comment Simulators",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/InstagramEnquiriesView.tsx (B2B Phone Reels & Outbound Hunter)",
+      "test": "3 High-Retention B2B Phone Reels Present",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/InstagramEnquiriesView.tsx (B2B Phone Reels & Outbound Hunter)",
+      "test": "1-Click Outbound WhatsApp Hunter Present",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/Overview.tsx (Growth Engine Master Dashboard)",
+      "test": "Zero 'Bot Simulator' Text",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/Overview.tsx (Growth Engine Master Dashboard)",
+      "test": "Official Handle @raisfrozenfoods",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/Overview.tsx (Growth Engine Master Dashboard)",
+      "test": "Rayachoty Wholesale Depot Alignment",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/Sidebar.tsx (Admin Sidebar Navigation)",
+      "test": "GA4 Measurement ID G-LX7011WRHR Bound",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/Sidebar.tsx (Admin Sidebar Navigation)",
+      "test": "Meta Handle @raisfrozenfoods Bound",
+      "passed": true
+    },
+    {
+      "file": "src/components/growth-engine/Sidebar.tsx (Admin Sidebar Navigation)",
+      "test": "Google Reviews Inbox Navigable",
+      "passed": true
+    },
+    {
+      "file": "src/data/routeLeads.ts (Scouted Real Route Leads)",
+      "test": "Curated Corridor Food Leads Present",
+      "passed": true
+    },
+    {
+      "file": "src/data/routeLeads.ts (Scouted Real Route Leads)",
+      "test": "Google Maps Verification Links Present",
+      "passed": true
+    },
+    {
+      "file": "src/data/routeLeads.ts (Scouted Real Route Leads)",
+      "test": "Corridor Towns (Rayachoty, Kadiri, Rajampet)",
+      "passed": true
+    },
+    {
+      "file": "src/services/instagramPublisher.ts (Meta Publishing Specs Validator)",
+      "test": "Meta Vertical 9:16 Aspect Ratio Enforced",
+      "passed": true
+    },
+    {
+      "file": "src/services/instagramPublisher.ts (Meta Publishing Specs Validator)",
+      "test": "Meta 90s Duration Limit Enforced",
+      "passed": true
+    },
+    {
+      "file": "src/services/instagramPublisher.ts (Meta Publishing Specs Validator)",
+      "test": "Zero Fake Simulated Post Generator",
+      "passed": true
+    }
+  ],
+  "backend_endpoints": [
+    {
+      "endpoint": "/google/status",
+      "test": "Google Business Profile Status & Credentials",
+      "passed": true,
+      "details": "Connected: True, Mode: LIVE_CONNECTED, Email: basha.shaikirfan@gmail.com, Loc: RAIS Agencies"
+    },
+    {
+      "endpoint": "/reviews",
+      "test": "Google Maps Reviews Integrity & Delivery Guarantee",
+      "passed": true,
+      "details": "Count: 4, Top: MOHAMMED ATHIQ UR RAHMAN SHAIK (5 stars)"
+    },
+    {
+      "endpoint": "/business-info/profile",
+      "test": "Business NAP Consistency (Name, Address, Phone)",
+      "passed": true,
+      "details": "Name: RAIS Agencies, Phone: 9347453135, PIN: 516269, Category: Wholesale food store"
+    },
+    {
+      "endpoint": "/business-info/skus",
+      "test": "Verified Food Service SKUs (Zero Mock Items)",
+      "passed": true,
+      "details": "Total SKUs: 10, Verified Samples: ['Commercial Pizza Base (10 Inch)', 'Commercial Pizza Base (8.5 Inch)', 'Diced Mozzarella Cheese']"
+    },
+    {
+      "endpoint": "/business-info/service-areas",
+      "test": "Delivery Service Corridors (Official Corridors Match)",
+      "passed": true,
+      "details": "Total Corridors: 10, Towns: ['Chinnamandem', 'Galiveedu', 'Rayachoty (516269)', 'Sundupalli']"
+    },
+    {
+      "endpoint": "/seo/keywords",
+      "test": "Local SEO High-Intent Keywords",
+      "passed": true,
+      "details": "Keywords Count: 10, Sample: ['frozen food wholesale rayachoty', 'french fries wholesale rayachoty', 'milky mist cheese wholesale rayachoty']"
+    },
+    {
+      "endpoint": "/seo/competitors",
+      "test": "Real Local Competitors Tracking",
+      "passed": true,
+      "details": "Tracked Competitors: ['Sri Tirumala Traders', 'Y.S.K Traders', 'Chand Agencies']"
+    },
+    {
+      "endpoint": "/seo/audit",
+      "test": "Local SEO Completeness & Citations Audit",
+      "passed": true,
+      "details": "Audit Score: 100%, Status: EXCELLENT"
+    },
+    {
+      "endpoint": "/automation/settings",
+      "test": "Governance & Emergency Kill Switch",
+      "passed": true,
+      "details": "Kill Switch: False, Review Approval Required: True"
+    }
+  ],
+  "gmb_status": {
+    "summary": "5.0 \u00b7 4 reviews",
+    "pending_reply_count": 0,
+    "status": "ALL_CAUGHT_UP",
+    "last_checked": "2026-11-23T10:32:59.445604"
+  },
+  "meta_status": {},
+  "summary": {}
+}

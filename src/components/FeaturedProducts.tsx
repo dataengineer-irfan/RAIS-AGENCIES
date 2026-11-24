@@ -52,6 +52,11 @@ export function getBrandBadge(brand: string, name: string): { label: string; bg:
   if (combined.includes('chilli fill')) return { label: 'CF', bg: '#e11d48', text: '#ffffff' };
   if (combined.includes('amul')) return { label: 'AM', bg: '#2563eb', text: '#ffffff' };
   if (combined.includes('mccain')) return { label: 'MC', bg: '#b45309', text: '#ffffff' };
+  if (combined.includes('habit')) return { label: 'HB', bg: '#059669', text: '#ffffff' };
+  if (combined.includes('meal time')) return { label: 'MT', bg: '#b91c1c', text: '#ffffff' };
+  if (combined.includes('sudarshan')) return { label: 'SD', bg: '#7c3aed', text: '#ffffff' };
+  if (combined.includes('foodcraft')) return { label: 'FC', bg: '#d97706', text: '#ffffff' };
+  if (combined.includes('spic')) return { label: 'SP', bg: '#c026d3', text: '#ffffff' };
   return { label: 'R', bg: '#0e7490', text: '#ffffff' };
 }
 
@@ -119,7 +124,8 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
         item.name.toLowerCase().includes(q) ||
         item.brand.toLowerCase().includes(q) ||
         item.sku.toLowerCase().includes(q) ||
-        item.categoryName.toLowerCase().includes(q);
+        item.categoryName.toLowerCase().includes(q) ||
+        (item.description && item.description.toLowerCase().includes(q));
       return matchesCategory && matchesBrand && matchesSearch;
     });
   }, [selectedCategory, selectedBrand, searchQuery]);
@@ -320,7 +326,7 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search e.g. momos, nuggets, fries, mayo..."
+                placeholder="Search e.g. jalapeno, baby corn, mushroom, soya sauce, fresh cream, fries..."
                 className="w-full pl-10 pr-4 py-2.5 bg-[#0f1c3f]/90 border border-cyan-400/30 rounded-xl text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300 transition-all shadow-inner"
               />
               {searchQuery && (

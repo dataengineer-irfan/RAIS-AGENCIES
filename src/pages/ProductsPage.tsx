@@ -35,7 +35,12 @@ const BRAND_BADGES: Record<string, { bg: string; text: string; label: string }> 
   'RAIS Select': { bg: '#0369a1', text: '#bae6fd', label: 'RS' },
   'RAIS Spices': { bg: '#b45309', text: '#fde68a', label: 'SP' },
   'RAIS Beverages': { bg: '#0284c7', text: '#e0f2fe', label: 'BV' },
-  'RAIS Fresh': { bg: '#047857', text: '#a7f3d0', label: 'RF' }
+  'RAIS Fresh': { bg: '#047857', text: '#a7f3d0', label: 'RF' },
+  'Habit': { bg: '#065f46', text: '#a7f3d0', label: 'HB' },
+  'Meal Time': { bg: '#991b1b', text: '#fca5a5', label: 'MT' },
+  'Sudarshan': { bg: '#581c87', text: '#e9d5ff', label: 'SD' },
+  'Foodcraft': { bg: '#c2410c', text: '#fed7aa', label: 'FC' },
+  "Spic's": { bg: '#86198f', text: '#f5d0fe', label: 'SP' }
 };
 
 export const ProductsPage: React.FC<ProductsPageProps> = ({
@@ -59,7 +64,11 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   }, []);
 
   const popularBrands = useMemo(() => {
-    return ['ITC Master Chef', 'Milky Mist', 'Del Monte', 'Amul', 'Triken', 'Foodrite', 'MANAMA', 'VKL', 'Bake Fresh', 'Signature'];
+    return [
+      'ITC Master Chef', 'Milky Mist', 'Del Monte', 'Amul', 'Triken', 
+      'Habit', 'Meal Time', 'Sudarshan', 'Foodcraft', "Spic's",
+      'Foodrite', 'MANAMA', 'VKL', 'Bake Fresh', 'Signature'
+    ];
   }, []);
 
   const filtered = useMemo(() => {
@@ -72,7 +81,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
         item.name.toLowerCase().includes(q) ||
         item.brand.toLowerCase().includes(q) ||
         item.sku.toLowerCase().includes(q) ||
-        item.categoryName.toLowerCase().includes(q);
+        item.categoryName.toLowerCase().includes(q) ||
+        (item.description && item.description.toLowerCase().includes(q));
       return matchCat && matchBrand && matchSearch;
     }).sort((a, b) => {
       if (sortBy === 'name-desc') return b.name.localeCompare(a.name);
@@ -174,7 +184,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search products, brands, SKU (e.g. momos, fries, mayo)..."
+                placeholder="Search products, brands, SKU (e.g. jalapeno, baby corn, mushroom, soya sauce, fresh cream)..."
                 className="w-full pl-10 pr-4 py-2.5 bg-[#081026] border border-cyan-400/30 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300 transition-all shadow-inner"
               />
               {search && (

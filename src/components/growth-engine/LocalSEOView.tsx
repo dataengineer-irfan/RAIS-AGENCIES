@@ -3,10 +3,10 @@ import {
   Search, CheckCircle2, AlertTriangle, ShieldCheck, 
   TrendingUp, RefreshCw, Check, Info, MapPin
 } from 'lucide-react';
-import { api, KeywordTarget } from '../../services/api';
+import { api, KeywordTarget, COMMERCIAL_TARGET_KEYWORDS } from '../../services/api';
 
 export const LocalSEOView: React.FC = () => {
-  const [keywords, setKeywords] = useState<KeywordTarget[]>([]);
+  const [keywords, setKeywords] = useState<KeywordTarget[]>(COMMERCIAL_TARGET_KEYWORDS);
   const [audit, setAudit] = useState<any>(null);
   const [qnaData, setQnaData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -70,7 +70,7 @@ export const LocalSEOView: React.FC = () => {
         {[
           { id: 'keywords', label: `Target Keywords (${keywords.length})` },
           { id: 'audit', label: 'GBP Profile Audit' },
-          { id: 'qna', label: `Google Q&A / Ask Maps AI (${qnaData?.total_entries || 5})` },
+          { id: 'qna', label: `Google Q&A / Ask Maps AI (${qnaData?.total_entries || 6})` },
           { id: 'guidelines', label: 'Documented Ranking Factors vs Myths' }
         ].map((t) => (
           <button
@@ -292,6 +292,13 @@ export const LocalSEOView: React.FC = () => {
                 answer: "Our depot is open Monday through Saturday from 8:00 AM to 9:30 PM, and on Sunday from 8:00 AM to 2:00 PM for commercial kitchen pickups and scheduled route dispatches.",
                 category: "Operating Hours",
                 target_keywords: ["rais agencies depot hours rayachoty", "wholesale food pickup rayachoty"]
+              },
+              {
+                id: 6,
+                question: "Do you supply pizza toppings, Chinese cooking sauces, fresh cream, and syrups like Del Monte, Habit, and Sudarshan in Rayachoty?",
+                answer: "Yes! RAIS Agencies stocks commercial tins of Del Monte sliced jalapeños (3kg tin), Habit canned whole baby corn & button mushrooms (800g), Meal Time dark soya, green chilli & red chilli sauces, Spic's culinary and hot chilli sauces, synthetic white vinegar, Sudarshan rich dairy fresh cream (1L), and Del Monte & Foodcraft rich chocolate syrups at wholesale trade pricing.",
+                category: "Sauces, Toppings & Dairy",
+                target_keywords: ["sliced jalapenos wholesale rayachoty", "habit baby corn button mushroom wholesale rayachoty", "meal time dark soya sauce red chilli sauce rayachoty", "sudarshan fresh cream wholesale rayachoty", "delmonte foodcraft chocolate syrup rayachoty"]
               }
             ]).map((q: any) => (
               <div key={q.id} className="bg-[#0f172a] border border-slate-800 rounded-xl p-5 space-y-3">

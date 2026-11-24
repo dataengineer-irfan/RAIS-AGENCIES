@@ -58,11 +58,14 @@ export const ContentStudioView: React.FC = () => {
   };
 
   const presetThemes = [
-    { title: 'Cafe Mozzarella Melt', sku: 'MM-MOZ-DIC-1KG', desc: 'Milky Mist diced cheese stretch for cafes & pizza makers' },
-    { title: 'Crispy French Fries Stock', sku: 'FF-PREM-25KG', desc: 'Premium 6mm/9mm fries for QSRs & fast food' },
-    { title: 'Shawarma Butter Paper', sku: 'BP-40GSM-1000P', desc: '40 GSM greaseproof packaging for rolls & wraps' },
-    { title: 'Chicken Popcorn & Nuggets', sku: 'CH-NUG-1KG', desc: 'Crispy finger food appetizers for evening cafe rush' },
-    { title: 'Stone-Baked Pizza Bases', sku: 'PB-85IN-5P', desc: '8.5 & 10 inch bases for commercial pizzerias' }
+    { title: 'Cafe Mozzarella Melt', sku: 'RAIS-MM-MOZZ', desc: 'Milky Mist diced cheese stretch for cafes & pizza makers' },
+    { title: 'Crispy French Fries Stock', sku: 'RAIS-AMUL-FF6', desc: 'Premium 6mm/9mm fries for QSRs & fast food' },
+    { title: 'Chinese Cafe Sauces Combo', sku: 'RAIS-MT-SOYA', desc: 'Meal Time Dark Soya, Green/Red Chilli Sauce & White Vinegar' },
+    { title: 'Pizzeria Toppings Pack', sku: 'RAIS-HBT-BCORN', desc: 'Habit Baby Corn, Button Mushrooms & Del Monte Sliced Jalapeños' },
+    { title: 'Thick Shake & Dessert Line', sku: 'RAIS-DM-CHOC', desc: 'Del Monte & Foodcraft Chocolate Syrups with Sudarshan Fresh Cream' },
+    { title: 'Spic\'s Culinary & Chilli Line', sku: 'RAIS-SPC-CULN', desc: 'Commercial culinary sauces & bulk 5kg hot chilli sauces' },
+    { title: 'Shawarma Butter Paper', sku: 'RAIS-PKG-BP40', desc: '40 GSM greaseproof packaging for rolls & wraps' },
+    { title: 'Stone-Baked Pizza Bases', sku: 'RAIS-PB-85', desc: '8.5 & 10 inch bases for commercial pizzerias' }
   ];
 
   return (
@@ -90,7 +93,7 @@ export const ContentStudioView: React.FC = () => {
         <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">
           Quick Commercial Prompts:
         </label>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
           {presetThemes.map((pt, idx) => (
             <button
               key={idx}

@@ -47,7 +47,7 @@ const RAW_CATEGORIES: CategoryItem[] = [
     code: 'DAIRY',
     name: 'Dairy Essentials & Sweet Corn',
     description: 'Commercial mozzarella cheese (1kg/2kg), paneer cubes, butter, fresh cream & American sweet corn',
-    itemCount: 8,
+    itemCount: 9,
     accent: 'from-yellow-500/20 to-amber-500/20',
     iconName: 'Milk',
     image: '/images/ref-assets/cat_cheese_ice.png'
@@ -65,7 +65,7 @@ const RAW_CATEGORIES: CategoryItem[] = [
     code: 'SAUCES',
     name: 'Gourmet Sauces & Mayonnaise',
     description: 'Del Monte & Foodrite mayos, ketchup cans (5kg), pizza pasta sauces, tandoori spreads & condiments',
-    itemCount: 24,
+    itemCount: 27,
     accent: 'from-red-500/20 to-rose-500/20',
     iconName: 'Droplets',
     image: '/images/ref-assets/cat_sauces_ice.png'
@@ -74,7 +74,7 @@ const RAW_CATEGORIES: CategoryItem[] = [
     code: 'SYRUPS',
     name: 'Mojito Syrups & Fruit Crushes',
     description: 'MANAMA bar syrups (Blue Curacao, Chilli Guava, Green Apple) & Foodrite dessert fruit crushes',
-    itemCount: 12,
+    itemCount: 14,
     accent: 'from-cyan-500/20 to-blue-500/20',
     iconName: 'Wine',
     image: '/images/ref-assets/cat_mojitos_ice.png'
@@ -470,6 +470,19 @@ const RAW_PRODUCTS: ProductItem[] = [
     description: 'Verified commercial wholesale supply from Fresh Agro. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
   },
   {
+    sku: 'DAIRY-009',
+    categoryCode: 'DAIRY',
+    categoryName: 'Dairy Essentials & Sweet Corn',
+    name: "Sudarshan Fresh Cream (1L)",
+    brand: 'Sudarshan',
+    pack: '1L Pouch',
+    hsn: '04029110',
+    price: 210.0,
+    image: '/assets/products/enhanced_dairy-001.jpg',
+    isFeatured: true,
+    description: 'Rich culinary dairy fresh cream from Sudarshan for butter chicken gravies, restaurant paneer curries, white sauce pasta, and cafe desserts. Fresh cream sudarshan dairy cream.'
+  },
+  {
     sku: 'BAKERY-001',
     categoryCode: 'BAKERY',
     categoryName: 'Bakery, Buns & Pizza Bases',
@@ -551,40 +564,40 @@ const RAW_PRODUCTS: ProductItem[] = [
     sku: 'SAUCES-002',
     categoryCode: 'SAUCES',
     categoryName: 'Gourmet Sauces & Mayonnaise',
-    name: "Canned Baby Corn (800g)",
-    brand: 'Del Monte / Agro',
-    pack: '800g',
-    hsn: '21039090',
-    price: undefined,
+    name: "Habit Canned Whole Baby Corn (800g)",
+    brand: 'Habit',
+    pack: '800g Tin',
+    hsn: '20058000',
+    price: 165.0,
     image: '/assets/products/enhanced_sauces-002.jpg',
-    isFeatured: false,
-    description: 'Verified commercial wholesale supply from Del Monte / Agro. Pack size: 800g. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
+    isFeatured: true,
+    description: 'Crisp tender whole baby corn in brine from Habit. Essential for Chinese wok dishes, pizza toppings, fried rice, manchurian, and cafe stir-fry. Habit baby cor.'
   },
   {
     sku: 'SAUCES-003',
     categoryCode: 'SAUCES',
     categoryName: 'Gourmet Sauces & Mayonnaise',
-    name: "Canned Button Mushroom (800g)",
-    brand: 'Del Monte / Agro',
-    pack: '800g',
-    hsn: '21039090',
-    price: undefined,
+    name: "Habit Canned Button Mushroom (800g)",
+    brand: 'Habit',
+    pack: '800g Tin',
+    hsn: '20031000',
+    price: 185.0,
     image: '/assets/products/enhanced_sauces-003.jpg',
-    isFeatured: false,
-    description: 'Verified commercial wholesale supply from Del Monte / Agro. Pack size: 800g. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
+    isFeatured: true,
+    description: 'Premium whole button mushrooms in brine from Habit. Ready-to-slice topping for commercial pizzerias, pastas, burger stuffing, and continental gravies. Habit button musroom.'
   },
   {
     sku: 'SAUCES-004',
     categoryCode: 'SAUCES',
     categoryName: 'Gourmet Sauces & Mayonnaise',
-    name: "Culinary sauce (1 KG)",
-    brand: 'Commercial Food Service',
-    pack: '1 KG',
+    name: "Spic's Culinary Sauce (1 KG)",
+    brand: "Spic's",
+    pack: '1 KG Pouch',
     hsn: '21039090',
-    price: 225.0,
+    price: 180.0,
     image: '/assets/products/enhanced_sauces-004.jpg',
-    isFeatured: false,
-    description: 'Verified commercial wholesale supply from Commercial Food Service. Pack size: 1 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
+    isFeatured: true,
+    description: "Chef-grade finishing culinary sauce from Spic's for sizzling platters, continental kitchen marinades, and cafe gravies. Spics curilinary sause."
   },
   {
     sku: 'SAUCES-005',
@@ -657,12 +670,12 @@ const RAW_PRODUCTS: ProductItem[] = [
     categoryName: 'Gourmet Sauces & Mayonnaise',
     name: "Del Monte Sliced Jalapenos (3kg)",
     brand: 'Del Monte',
-    pack: '3kg',
-    hsn: '21039090',
-    price: undefined,
+    pack: '3kg Tin',
+    hsn: '20059900',
+    price: 420.0,
     image: '/assets/products/enhanced_sauces-010.jpg',
-    isFeatured: false,
-    description: 'Verified commercial wholesale supply from Del Monte. Pack size: 3kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
+    isFeatured: true,
+    description: 'Spicy tangy sliced pickled jalapeños from Del Monte for commercial pizza kitchens, loaded nachos, submarine sandwiches, and cafe burgers. Jalapeno sliced.'
   },
   {
     sku: 'SAUCES-011',
@@ -785,14 +798,14 @@ const RAW_PRODUCTS: ProductItem[] = [
     sku: 'SAUCES-020',
     categoryCode: 'SAUCES',
     categoryName: 'Gourmet Sauces & Mayonnaise',
-    name: "Spic's Chilli Sauce (5 KG)",
+    name: "Spic's Hot Chilli Sauce (5 KG)",
     brand: "Spic's",
-    pack: '5 KG',
+    pack: '5 KG Jar',
     hsn: '21039090',
-    price: 230.0,
+    price: 260.0,
     image: '/assets/products/enhanced_sauces-020.jpg',
-    isFeatured: false,
-    description: 'Verified commercial wholesale supply from Spic\'s. Pack size: 5 KG. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
+    isFeatured: true,
+    description: "Extra pungent bulk commercial hot chilli sauce from Spic's for Indo-Chinese wok cooking, fast food noodles, and dipping counters. Spics chilli sause."
   },
   {
     sku: 'SAUCES-021',
@@ -824,14 +837,14 @@ const RAW_PRODUCTS: ProductItem[] = [
     sku: 'SAUCES-023',
     categoryCode: 'SAUCES',
     categoryName: 'Gourmet Sauces & Mayonnaise',
-    name: "Commercial White Vinegar (1 L)",
-    brand: 'Commercial Food Service',
-    pack: '1 Ltr',
-    hsn: '21039090',
-    price: 24.0,
+    name: "Commercial Synthetic White Vinegar (1 L)",
+    brand: 'Meal Time / Foodrite',
+    pack: '1 L Bottle',
+    hsn: '22090000',
+    price: 28.0,
     image: '/assets/products/enhanced_sauces-023.jpg',
-    isFeatured: false,
-    description: 'Verified commercial wholesale supply from Commercial Food Service. Pack size: 1 Ltr. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
+    isFeatured: true,
+    description: 'High purity commercial synthetic white vinegar for Chinese fast food marinations, noodles, manchurian gravies, and pickling. White vinegar veniger.'
   },
   {
     sku: 'SAUCES-024',
@@ -845,6 +858,45 @@ const RAW_PRODUCTS: ProductItem[] = [
     image: '/assets/products/enhanced_sauces-024.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Commercial Grade. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
+  },
+  {
+    sku: 'SAUCES-025',
+    categoryCode: 'SAUCES',
+    categoryName: 'Gourmet Sauces & Mayonnaise',
+    name: "Meal Time Dark Soya Sauce (1kg)",
+    brand: 'Meal Time',
+    pack: '1kg Bottle',
+    hsn: '21031000',
+    price: 85.0,
+    image: '/assets/products/enhanced_sauces-015.jpg',
+    isFeatured: true,
+    description: 'Rich dark color and savory umami profile from Meal Time for authentic Indo-Chinese fried rice, noodles, and manchurian gravy. Meal time dark soya sause.'
+  },
+  {
+    sku: 'SAUCES-026',
+    categoryCode: 'SAUCES',
+    categoryName: 'Gourmet Sauces & Mayonnaise',
+    name: "Meal Time Red Chilli Sauce (1kg)",
+    brand: 'Meal Time',
+    pack: '1kg Bottle',
+    hsn: '21039090',
+    price: 75.0,
+    image: '/assets/products/enhanced_sauces-016.jpg',
+    isFeatured: true,
+    description: 'Sharp tangy and spicy red chilli condiment from Meal Time for street fast food counters, momo dips, wraps, and rolls. Meal time red chilli sause.'
+  },
+  {
+    sku: 'SAUCES-027',
+    categoryCode: 'SAUCES',
+    categoryName: 'Gourmet Sauces & Mayonnaise',
+    name: "Meal Time Green Chilli Sauce (1kg)",
+    brand: 'Meal Time',
+    pack: '1kg Bottle',
+    hsn: '21039090',
+    price: 75.0,
+    image: '/assets/products/enhanced_sauces-016.jpg',
+    isFeatured: true,
+    description: 'Zesty green pepper sauce from Meal Time for Indo-Chinese cooking, chaat counters, and snack seasoning. Meal time green chilli sause.'
   },
   {
     sku: 'SYRUPS-001',
@@ -1001,6 +1053,32 @@ const RAW_PRODUCTS: ProductItem[] = [
     image: '/assets/products/enhanced_syrups-012.jpg',
     isFeatured: false,
     description: 'Verified commercial wholesale supply from Foodrite. Pack size: 1kg. Guaranteed cold-chain & delivery across Rayachoty & Annamayya District.'
+  },
+  {
+    sku: 'SYRUPS-013',
+    categoryCode: 'SYRUPS',
+    categoryName: 'Mojito Syrups & Fruit Crushes',
+    name: "Del Monte Rich Chocolate Syrup (1kg)",
+    brand: 'Del Monte',
+    pack: '1kg Squeeze Bottle',
+    hsn: '21069099',
+    price: 240.0,
+    image: '/assets/products/enhanced_syrups-012.jpg',
+    isFeatured: true,
+    description: 'Smooth decadent rich chocolate syrup from Del Monte for cafe cold coffees, thick milkshakes, sundae ice creams, and waffle toppings. Chocolate syrup delmonte.'
+  },
+  {
+    sku: 'SYRUPS-014',
+    categoryCode: 'SYRUPS',
+    categoryName: 'Mojito Syrups & Fruit Crushes',
+    name: "Foodcraft Commercial Chocolate Syrup (1kg)",
+    brand: 'Foodcraft',
+    pack: '1kg Bottle',
+    hsn: '21069099',
+    price: 195.0,
+    image: '/assets/products/enhanced_syrups-012.jpg',
+    isFeatured: true,
+    description: 'High-yield commercial chocolate syrup from Foodcraft for juice centers, bakery cake drizzles, and thick shake preparation. Chocolate syrup foodcraft.'
   },
   {
     sku: 'SPICES-001',
