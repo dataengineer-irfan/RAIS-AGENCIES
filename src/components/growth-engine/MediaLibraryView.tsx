@@ -19,11 +19,11 @@ interface MediaItem {
 const INITIAL_MEDIA_ASSETS: MediaItem[] = [
   {
     id: 1,
-    title: 'Commercial Deep Freezer Inventory',
+    title: 'Commercial Deep Freezer Inventory Fleet',
     category: 'Cold Storage',
-    filename: 'triken_chicken_momos_freezer_rack.jpg',
-    imageUrl: assetUrl('/assets/enhanced_insta_photos/01_Frozen_Chicken/triken_chicken_momos_freezer_rack.jpg'),
-    description: '-18°C cold-chain deep freezers holding verified Triken momos & french fries inventory.',
+    filename: 'commercial_chest_freezers_row.jpg',
+    imageUrl: assetUrl('/assets/enhanced_insta_photos/08_Depot_Facility/commercial_chest_freezers_row.jpg'),
+    description: '-18°C cold-chain deep freezers holding verified Triken momos, chicken nuggets & french fries inventory.',
     is_verified_genuine: true,
     uploaded_to_gbp: true
   },
@@ -31,69 +31,169 @@ const INITIAL_MEDIA_ASSETS: MediaItem[] = [
     id: 2,
     title: 'Milky Mist Diced Mozzarella (1kg & 2kg)',
     category: 'Dairy Products',
-    filename: 'milky_mist_mozzarella.jpg',
-    imageUrl: assetUrl('/assets/products/milky_mist_mozzarella.jpg'),
+    filename: 'enhanced_dairy-004.jpg',
+    imageUrl: assetUrl('/assets/products/enhanced_dairy-004.jpg'),
     description: 'Authentic high-stretch mozzarella cheese pouches ready for pizza and cafe supply.',
     is_verified_genuine: true,
     uploaded_to_gbp: true
   },
   {
     id: 3,
-    title: 'Golden Crispy French Fries (6mm & 9mm)',
+    title: 'Amul French Fries (9mm Regular Cut)',
     category: 'Frozen Foods',
-    filename: 'amul_french_fries.jpg',
-    imageUrl: assetUrl('/assets/products/amul_french_fries.jpg'),
-    description: 'Grade-A 6mm shoestring & 9mm regular commercial fries for QSR kitchens.',
+    filename: 'amul_french_fries_9mm.jpg',
+    imageUrl: assetUrl('/assets/enhanced_insta_photos/02_Veg_Snacks/amul_french_fries_9mm.jpg'),
+    description: 'Grade-A 9mm regular cut crispy fries with low oil absorption for QSR kitchens.',
     is_verified_genuine: true,
     uploaded_to_gbp: true
   },
   {
     id: 4,
-    title: 'Triken Chicken Momos & Nuggets',
-    category: 'Snacks',
-    filename: 'triken_chicken_momos.jpg',
-    imageUrl: assetUrl('/assets/products/triken_chicken_momos.jpg'),
-    description: 'Authentic thin-wrapper chicken momos and crispy nuggets stored in sub-zero freezers.',
+    title: 'McCain French Fries (2.5kg Commercial Pack)',
+    category: 'Frozen Foods',
+    filename: 'mccain_french_fries_2_5kg.jpg',
+    imageUrl: assetUrl('/assets/products/mccain_french_fries_2_5kg.jpg'),
+    description: 'Bulk 2.5kg McCain commercial french fries for high-volume fryers and fast food counters.',
     is_verified_genuine: true,
     uploaded_to_gbp: true
   },
   {
     id: 5,
-    title: 'Printed Pizza Takeaway Boxes (10 Inch)',
-    category: 'Packaging',
-    filename: 'pizza_boxes_corrugated.jpg',
-    imageUrl: assetUrl('/assets/products/pizza_boxes_corrugated.jpg'),
-    description: 'Heavy 3-ply corrugated thermal pizza delivery boxes that retain heat during transit.',
+    title: 'Triken Chicken Momos (1kg Cold-Chain Pack)',
+    category: 'Frozen Foods',
+    filename: 'triken_chicken_momos_pack_details.jpg',
+    imageUrl: assetUrl('/assets/products/triken_chicken_momos_pack_details.jpg'),
+    description: 'Authentic thin-wrapper chicken momos stored in sub-zero freezers for cafes & food courts.',
     is_verified_genuine: true,
     uploaded_to_gbp: true
   },
   {
     id: 6,
-    title: 'Food-Grade OGR Butter Paper 40 GSM',
-    category: 'Packaging',
-    filename: 'butter_paper_40gsm.jpg',
-    imageUrl: assetUrl('/assets/products/butter_paper_40gsm.jpg'),
-    description: 'Greaseproof wrapping paper sheets for burgers, shawarmas, and fried chicken.',
+    title: 'Meal Time Dark Soya Sauce (5kg Depot Can)',
+    category: 'Sauces & Canned',
+    filename: 'enhanced_sauces-025.jpg',
+    imageUrl: assetUrl('/assets/products/enhanced_sauces-025.jpg'),
+    description: 'Authentic 5kg bulk can of Meal Time Dark Soya Sauce for Chinese kitchens, fried rice, and noodles.',
     is_verified_genuine: true,
     uploaded_to_gbp: true
   },
   {
     id: 7,
-    title: 'Commercial Pizza Bases (8.5 & 10 Inch)',
-    category: 'Bakery',
-    filename: 'pizza_base_commercial.jpg',
-    imageUrl: assetUrl('/assets/products/pizza_base_commercial.jpg'),
-    description: 'Double-proofed commercial pizza crusts for fast-food cafes & pizzerias.',
+    title: 'Meal Time Green Chilli Sauce (5kg Depot Can)',
+    category: 'Sauces & Canned',
+    filename: 'enhanced_sauces-027.jpg',
+    imageUrl: assetUrl('/assets/products/enhanced_sauces-027.jpg'),
+    description: 'Commercial 5kg bulk can of Meal Time Green Chilli Sauce for fast food and street food kitchens.',
     is_verified_genuine: true,
     uploaded_to_gbp: true
   },
   {
     id: 8,
-    title: 'Burger Clamshell & Pastry Boxes',
+    title: 'Del Monte Sliced Jalapeños (3kg Foodservice Tin)',
+    category: 'Sauces & Canned',
+    filename: 'enhanced_sauces-010.jpg',
+    imageUrl: assetUrl('/assets/products/enhanced_sauces-010.jpg'),
+    description: 'Crispy pickled sliced jalapeños for burger toppings, gourmet pizzas, and loaded nachos.',
+    is_verified_genuine: true,
+    uploaded_to_gbp: true
+  },
+  {
+    id: 9,
+    title: 'Habit Canned Mushrooms & Baby Corn',
+    category: 'Sauces & Canned',
+    filename: 'enhanced_syrups-004.jpg',
+    imageUrl: assetUrl('/assets/products/enhanced_syrups-004.jpg'),
+    description: 'Commercial canned button mushrooms and tender baby corn for pizza toppings and continental gravies.',
+    is_verified_genuine: true,
+    uploaded_to_gbp: true
+  },
+  {
+    id: 10,
+    title: 'Golden Crown Japanese Panko Bread Crumbs (1kg)',
+    category: 'Bakery',
+    filename: 'enhanced_sauces-024.jpg',
+    imageUrl: assetUrl('/assets/products/enhanced_sauces-024.jpg'),
+    description: 'Flaky Japanese style panko crumbs for extra-crispy fried chicken, paneer cutlets, and nuggets.',
+    is_verified_genuine: true,
+    uploaded_to_gbp: true
+  },
+  {
+    id: 11,
+    title: 'Fresh2Go 8.5" Tortilla Wraps',
+    category: 'Bakery',
+    filename: 'fresh2go_tortilla_wrap_8_5_inch.jpg',
+    imageUrl: assetUrl('/assets/enhanced_insta_photos/05_Bakery_Breading/fresh2go_tortilla_wrap_8_5_inch.jpg'),
+    description: 'Soft, tear-resistant commercial tortilla wraps for Mexican wraps, shawarmas, and rolls.',
+    is_verified_genuine: true,
+    uploaded_to_gbp: true
+  },
+  {
+    id: 12,
+    title: 'Printed Pizza Takeaway Boxes (8x8 & 10x10)',
     category: 'Packaging',
-    filename: 'burger_boxes_takeaway.jpg',
-    imageUrl: assetUrl('/assets/products/burger_boxes_takeaway.jpg'),
-    description: 'Authentic printed 4x4 burger boxes and pastry packaging for local takeaway cafes.',
+    filename: 'pizza_boxes_8x8_printed_plain_flat.jpg',
+    imageUrl: assetUrl('/assets/enhanced_insta_photos/07_Packaging_Disposables/pizza_boxes_8x8_printed_plain_flat.jpg'),
+    description: 'Heavy 3-ply corrugated thermal pizza delivery boxes in plain and custom printed designs.',
+    is_verified_genuine: true,
+    uploaded_to_gbp: true
+  },
+  {
+    id: 13,
+    title: 'Burger Clamshell & Pastry Boxes (4x4)',
+    category: 'Packaging',
+    filename: 'rais_authentic_burger_boxes_clamshells.jpg',
+    imageUrl: assetUrl('/images/rais_authentic_burger_boxes_clamshells.jpg'),
+    description: 'Authentic printed 4x4 food-grade burger boxes and pastry clamshell packaging.',
+    is_verified_genuine: true,
+    uploaded_to_gbp: true
+  },
+  {
+    id: 14,
+    title: 'Fried Chicken Takeaway Buckets',
+    category: 'Packaging',
+    filename: 'fried_chicken_buckets_carton_display.jpg',
+    imageUrl: assetUrl('/assets/enhanced_insta_photos/07_Packaging_Disposables/fried_chicken_buckets_carton_display.jpg'),
+    description: 'Oil-resistant printed fried chicken buckets with vented lids for takeaway fried chicken counters.',
+    is_verified_genuine: true,
+    uploaded_to_gbp: true
+  },
+  {
+    id: 15,
+    title: 'White Plastic Takeaway Containers & Lids',
+    category: 'Packaging',
+    filename: 'white_plastic_takeaway_containers_stacks.jpg',
+    imageUrl: assetUrl('/assets/enhanced_insta_photos/07_Packaging_Disposables/white_plastic_takeaway_containers_stacks.jpg'),
+    description: 'Microwave-safe round takeaway bowls and spill-proof containers for curries and gravies.',
+    is_verified_genuine: true,
+    uploaded_to_gbp: true
+  },
+  {
+    id: 16,
+    title: 'Rich Dairy Fresh Cream (Foodservice Pack)',
+    category: 'Dairy Products',
+    filename: 'madhusudan_fresh_cream_carton_fruit_bowl.jpg',
+    imageUrl: assetUrl('/assets/enhanced_insta_photos/03_Dairy_Cheese/madhusudan_fresh_cream_carton_fruit_bowl.jpg'),
+    description: 'High-fat dairy fresh cream for restaurant butter chicken, paneer gravies, and cafe pastas.',
+    is_verified_genuine: true,
+    uploaded_to_gbp: true
+  },
+  {
+    id: 17,
+    title: 'Milky Mist Mozzarella 2kg Commercial Pouch',
+    category: 'Dairy Products',
+    filename: 'milky_mist_mozzarella_2kg_pack_studio.jpg',
+    imageUrl: assetUrl('/assets/enhanced_insta_photos/03_Dairy_Cheese/milky_mist_mozzarella_2kg_pack_studio.jpg'),
+    description: '2kg bulk pouch of Milky Mist mozzarella cheese for commercial high-output pizzerias.',
+    is_verified_genuine: true,
+    uploaded_to_gbp: true
+  },
+  {
+    id: 18,
+    title: 'RAIS Agencies Depot Storefront & Hub',
+    category: 'Cold Storage',
+    filename: 'rais_storefront_official.jpg',
+    imageUrl: assetUrl('/images/ref-assets/rais_storefront_official.jpg'),
+    description: 'Official wholesale distribution center Beside Indel Money Bank, Sundupalli Road, Rayachoty.',
     is_verified_genuine: true,
     uploaded_to_gbp: true
   }
@@ -105,7 +205,9 @@ export const MediaLibraryView: React.FC = () => {
     try {
       const stored = localStorage.getItem('rais_custom_media_assets');
       if (stored) {
-        return [...JSON.parse(stored), ...INITIAL_MEDIA_ASSETS];
+        const parsed = JSON.parse(stored);
+        const validCustom = parsed.filter((item: any) => item && item.id > 100 && (item.imageUrl?.startsWith('data:') || item.imageUrl?.startsWith('http')));
+        return [...validCustom, ...INITIAL_MEDIA_ASSETS];
       }
     } catch {}
     return INITIAL_MEDIA_ASSETS;
@@ -113,7 +215,7 @@ export const MediaLibraryView: React.FC = () => {
   const [copiedId, setCopiedId] = useState<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const categories = ['ALL', 'Cold Storage', 'Dairy Products', 'Frozen Foods', 'Snacks', 'Bakery', 'Packaging'];
+  const categories = ['ALL', 'Cold Storage', 'Dairy Products', 'Frozen Foods', 'Sauces & Canned', 'Bakery', 'Packaging'];
 
   const filteredAssets = selectedCategory === 'ALL' 
     ? mediaList 
