@@ -129,7 +129,7 @@ export const TrafficAnalyticsTab: React.FC = () => {
             </div>
           </div>
           <div className="text-3xl font-black text-white tracking-tight">
-            {cloudHits.totalHits > 0 ? cloudHits.totalHits.toLocaleString() : (pageViewEvents > 0 ? pageViewEvents : 1)}
+            {cloudHits.totalHits > 0 ? cloudHits.totalHits.toLocaleString() : (pageViewEvents > 0 ? pageViewEvents : 0)}
           </div>
           <p className="text-[11px] text-cyan-300/80 mt-1 flex items-center gap-1 font-semibold">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -147,7 +147,7 @@ export const TrafficAnalyticsTab: React.FC = () => {
             </div>
           </div>
           <div className="text-3xl font-black text-white tracking-tight">
-            {cloudHits.catalogueHits > 0 ? cloudHits.catalogueHits.toLocaleString() : (catalogueOpens > 0 ? catalogueOpens : 1)}
+            {cloudHits.catalogueHits > 0 ? cloudHits.catalogueHits.toLocaleString() : (catalogueOpens > 0 ? catalogueOpens : 0)}
           </div>
           <p className="text-[11px] text-amber-300/80 mt-1 font-semibold">
             90-SKU Digital Price List Views
@@ -164,10 +164,10 @@ export const TrafficAnalyticsTab: React.FC = () => {
             </div>
           </div>
           <div className="text-3xl font-black text-white tracking-tight">
-            {totalReelViews > 0 ? totalReelViews.toLocaleString() : '1,420+'}
+            {totalReelViews > 0 ? totalReelViews.toLocaleString() : 0}
           </div>
           <p className="text-[11px] text-pink-300/80 mt-1 font-semibold">
-            Across 30 Master Reels
+            {totalReelViews > 0 ? 'Across 30 Master Reels' : 'Log reel views below to track'}
           </p>
         </div>
 
@@ -208,7 +208,7 @@ export const TrafficAnalyticsTab: React.FC = () => {
               { label: 'Instagram Bio Link (@raisfrozenfoods)', count: sourceCounts['Instagram'] || 0, color: 'bg-pink-500', icon: '📸' },
               { label: 'WhatsApp Broadcasts & Direct Shares', count: sourceCounts['WhatsApp'] || 0, color: 'bg-emerald-500', icon: '💬' },
               { label: 'Catalogue HTML Backlinks', count: sourceCounts['Catalogue Link'] || 0, color: 'bg-amber-500', icon: '📄' },
-              { label: 'Direct Rayachoty Local Search / QR Codes', count: sourceCounts['Google / Direct'] || (totalEvents === 0 ? 1 : 0), color: 'bg-blue-500', icon: '🔍' },
+              { label: 'Direct Rayachoty Local Search / QR Codes', count: sourceCounts['Google / Direct'] || 0, color: 'bg-blue-500', icon: '🔍' },
             ].map((src, i) => {
               const max = Math.max(totalEvents, 1);
               const pct = Math.min(100, Math.round((src.count / max) * 100));
@@ -222,7 +222,7 @@ export const TrafficAnalyticsTab: React.FC = () => {
                     <span className="text-white font-mono font-bold">{src.count} visits ({pct}%)</span>
                   </div>
                   <div className="w-full h-2 rounded-full bg-slate-900 overflow-hidden">
-                    <div className={`h-full ${src.color} rounded-full transition-all duration-500`} style={{ width: `${Math.max(pct, 4)}%` }} />
+                    <div className={`h-full ${src.color} rounded-full transition-all duration-500`} style={{ width: `${src.count > 0 ? Math.max(pct, 4) : 0}%` }} />
                   </div>
                 </div>
               );
@@ -254,19 +254,9 @@ export const TrafficAnalyticsTab: React.FC = () => {
                 </div>
               ))
             ) : (
-              <div className="space-y-2">
-                {[
-                  { name: 'Triken Chicken Momos', cat: 'Chicken Items', views: '14 inquiries' },
-                  { name: 'Amul French Fries 6mm', cat: 'Veg Items', views: '28 inquiries' },
-                  { name: 'Milky Mist Mozzarella Diced Cheese (1kg & 2kg)', cat: 'Cheese & Slices', views: '22 inquiries' },
-                  { name: 'Del Monte Tomato Ketchup', cat: 'Ketchup & Sauces', views: '17 inquiries' },
-                  { name: 'Burger Box 4x4 & Pizza Boxes', cat: 'Packaging', views: '19 inquiries' }
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center justify-between p-2.5 rounded-xl bg-[#081026] border border-cyan-500/15 text-xs">
-                    <span className="font-semibold text-slate-200">#{idx+1} {item.name}</span>
-                    <span className="text-amber-400 font-mono font-bold">{item.views}</span>
-                  </div>
-                ))}
+              <div className="py-8 text-center space-y-2">
+                <div className="text-slate-500 text-sm font-semibold">No SKU views tracked yet</div>
+                <div className="text-slate-600 text-xs">Product views from your website will appear here as buyers browse the catalogue</div>
               </div>
             )}
           </div>
@@ -308,9 +298,9 @@ export const TrafficAnalyticsTab: React.FC = () => {
             <tbody className="divide-y divide-slate-800/60">
               {REELS_30_DAYS.slice(0, 10).map((reel) => {
                 const stat = reelStats[reel.id] || {
-                  views: reel.status === 'published' ? 710 : 0,
-                  likes: reel.status === 'published' ? 84 : 0,
-                  inquiries: reel.status === 'published' ? 12 : 0
+                  views: 0,
+                  likes: 0,
+                  inquiries: 0
                 };
                 const isEditing = editingReelId === reel.id;
                 const isTelugu = reel.title.includes('Telugu');
