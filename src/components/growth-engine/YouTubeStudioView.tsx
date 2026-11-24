@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Video, FolderSync, Play, CheckCircle2, Clock, AlertCircle, 
   ExternalLink, Sparkles, HelpCircle, RefreshCw, Key, ShieldCheck,
-  ChevronDown, ChevronUp, Copy, Check, Send
+  ChevronDown, ChevronUp, Copy, Check, Send, Trash2
 } from 'lucide-react';
 import { growthEngineApi as api, YouTubeDriveSetting, YouTubeQueueItem } from '../../services/api';
 
@@ -39,76 +39,22 @@ export const YouTubeStudioView: React.FC = () => {
       setSettings(stg);
       const activeFolder = stg.folder_id || '1Bm_WjSGQb_KQSRz6i08DSsp2mtzOborn';
       setFolderInput(`https://drive.google.com/drive/folders/${activeFolder}`);
-      if (q && q.length > 0) {
-        setQueue(q);
-      } else {
-        // Fallback default scheduled depot items if backend is offline/fresh
-        const now = new Date();
-        setQueue([
-          {
-            id: 1,
-            file_name: "Meal_Time_Dark_Soya_and_Green_Chilli_5kg.mp4",
-            product_sku: "SAUCES-025",
-            product_name: "Meal Time Dark Soya & Green Chilli Sauce (5kg)",
-            video_title: "Meal Time Dark Soya & Green Chilli Sauce 5kg Bulk Depot | RAIS Agencies Rayachoty",
-            description: "Commercial 5kg bulk cans of Meal Time Dark Soya Sauce & Green Chilli Sauce for fast food kitchens, fried rice, noodles, and manchurian counters in Rayachoty and nearby corridors.\n\n📍 Depot: Beside Indel Money Bank, Sundupalli Road, Rayachoty – 516269\n📞 WhatsApp Wholesale Order: https://wa.me/919347453135?text=Hi+RAIS+Agencies,+interested+in+Meal+Time+5kg+sauces\n🚚 Scheduled Route Logistics: Rayachoty, Sundupalli, Galiveedu, Kadiri, Chinnamandem, Kalakada, Mahal, Madanapalle, Kadapa, and Rajampet",
-            tags: "Rayachoty,MealTime,DarkSoyaSauce,GreenChilliSauce,RestaurantSupplies,FastFoodWholesale,Shorts",
-            status: "PUBLISHED",
-            scheduled_for: new Date(now.getTime() - 86400000).toISOString(),
-            published_at: new Date(now.getTime() - 86400000).toISOString(),
-            youtube_video_id: "dQw4w9WgXcQ",
-            youtube_url: "https://youtube.com/shorts/dQw4w9WgXcQ"
-          },
-          {
-            id: 2,
-            file_name: "Milky_Mist_Mozzarella_Cheese_1kg.mp4",
-            product_sku: "DAIRY-004",
-            product_name: "Milky Mist Diced Mozzarella (1kg & 2kg)",
-            video_title: "High-Stretch Milky Mist Mozzarella Cheese for Rayachoty Pizza Cafes 🍕 | RAIS Agencies",
-            description: "Fresh -18°C cold-chain Milky Mist diced mozzarella cheese for pizzerias, cafes, and bakeries. Superior melt, golden browning, and maximum stretch at bulk depot rates.\n\n📍 Depot: Beside Indel Money Bank, Sundupalli Road, Rayachoty – 516269\n📞 WhatsApp Trade Order: https://wa.me/919347453135?text=Hi+RAIS+Agencies,+interested+in+Milky+Mist+Mozzarella\n🚚 Delivery Routes: Rayachoty, Sundupalli, Galiveedu, Kadiri, Chinnamandem, Kalakada, Mahal, Madanapalle, Kadapa, and Rajampet",
-            tags: "MilkyMist,MozzarellaCheese,PizzaSupplies,Rayachoty,ColdChainWholesale,Shorts",
-            status: "QUEUED",
-            scheduled_for: new Date(now.getTime() + 86400000).toISOString()
-          },
-          {
-            id: 3,
-            file_name: "Del_Monte_Sliced_Jalapenos_3kg.mp4",
-            product_sku: "SAUCES-010",
-            product_name: "Del Monte Sliced Jalapeños (3kg Tin)",
-            video_title: "Del Monte Sliced Pickled Jalapeños for Pizza & Burger Counters | RAIS Agencies",
-            description: "Crispy, spicy, and tangy Del Monte sliced pickled jalapeños in commercial 3kg tins. Ready stock for loaded nachos, gourmet burgers, submarine sandwiches, and pizza toppings in Rayachoty.\n\n📍 Depot: Beside Indel Money Bank, Sundupalli Road, Rayachoty – 516269\n📞 WhatsApp Order: https://wa.me/919347453135?text=Hi+RAIS+Agencies,+interested+in+Del+Monte+Jalapenos\n🚚 Delivery Routes: Rayachoty, Sundupalli, Galiveedu, Kadiri, Chinnamandem, Kalakada, Mahal, Madanapalle, Kadapa, and Rajampet",
-            tags: "DelMonte,SlicedJalapenos,PizzaToppings,BurgerSupplies,RayachotyWholesale,Shorts",
-            status: "QUEUED",
-            scheduled_for: new Date(now.getTime() + 2 * 86400000).toISOString()
-          },
-          {
-            id: 4,
-            file_name: "Golden_Crown_Panko_Bread_Crumbs_1kg.mp4",
-            product_sku: "SAUCES-024",
-            product_name: "Golden Crown Panko Bread Crumbs (1kg)",
-            video_title: "Original Japanese Panko Bread Crumbs for Crispy Fried Chicken | RAIS Agencies Rayachoty",
-            description: "Golden Crown Japanese style flaky panko bread crumbs for crunchy fried chicken, nuggets, and paneer cutlets. Stays ultra-crisp longer without absorbing excess oil.\n\n📍 Depot: Beside Indel Money Bank, Sundupalli Road, Rayachoty – 516269\n📞 WhatsApp Order: https://wa.me/919347453135?text=Hi+RAIS+Agencies,+interested+in+Panko+Breadcrumbs\n🚚 Delivery Routes: Rayachoty, Sundupalli, Galiveedu, Kadiri, Chinnamandem, Kalakada, Mahal, Madanapalle, Kadapa, and Rajampet",
-            tags: "GoldenCrown,PankoBreadCrumbs,FriedChicken,QSRSupplies,Rayachoty,Shorts",
-            status: "QUEUED",
-            scheduled_for: new Date(now.getTime() + 3 * 86400000).toISOString()
-          },
-          {
-            id: 5,
-            file_name: "Sudarshan_Fresh_Cream_1L.mp4",
-            product_sku: "DAIRY-009",
-            product_name: "Sudarshan Dairy Fresh Cream (1L)",
-            video_title: "Rich Sudarshan Dairy Fresh Cream for Restaurant Curries & Pastas | RAIS Agencies",
-            description: "Premium rich dairy fresh cream from Sudarshan for butter chicken gravies, restaurant paneer curries, white sauce pastas, and cafe milkshakes. Certified refrigerated delivery across Annamayya District.\n\n📍 Depot: Beside Indel Money Bank, Sundupalli Road, Rayachoty – 516269\n📞 WhatsApp Order: https://wa.me/919347453135?text=Hi+RAIS+Agencies,+interested+in+Sudarshan+Fresh+Cream\n🚚 Delivery Routes: Rayachoty, Sundupalli, Galiveedu, Kadiri, Chinnamandem, Kalakada, Mahal, Madanapalle, Kadapa, and Rajampet",
-            tags: "Sudarshan,FreshCream,DairyWholesale,Rayachoty,RestaurantSupplies,Shorts",
-            status: "QUEUED",
-            scheduled_for: new Date(now.getTime() + 4 * 86400000).toISOString()
-          }
-        ]);
-      }
+      setQueue(q || []);
     } catch (err) {
       console.error('Failed to load YouTube automation data', err);
+      setQueue([]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleClearQueue = async () => {
+    try {
+      await api.clearYouTubeQueue();
+      setQueue([]);
+    } catch (err) {
+      console.error('Failed to clear queue', err);
+      setQueue([]);
     }
   };
 
@@ -222,6 +168,17 @@ export const YouTubeStudioView: React.FC = () => {
               <RefreshCw className={`w-4 h-4 text-cyan-400 ${syncing ? 'animate-spin' : ''}`} />
               <span>{syncing ? 'Scanning Drive...' : 'Sync Drive Now'}</span>
             </button>
+
+            {queue.length > 0 && (
+              <button
+                onClick={handleClearQueue}
+                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-rose-950 text-rose-300 text-xs font-bold border border-rose-500/30 transition-all shadow"
+                title="Wipe queue items"
+              >
+                <Trash2 className="w-4 h-4 text-rose-400" />
+                <span>Clear Queue</span>
+              </button>
+            )}
 
             <button
               onClick={handlePublishNext}

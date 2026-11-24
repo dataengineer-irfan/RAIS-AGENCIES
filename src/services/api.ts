@@ -566,6 +566,10 @@ export const api = {
     const res = await fetch(`${BASE_URL}/youtube/publish-item/${itemId}`, { method: 'POST' });
     return res.json();
   },
+  clearYouTubeQueue: async (): Promise<any> => {
+    const res = await fetch(`${BASE_URL}/youtube/queue/clear`, { method: 'DELETE' });
+    return res.json();
+  },
   getYouTubeSetupGuide: async (): Promise<any> => {
     const res = await fetch(`${BASE_URL}/youtube/setup-guide`);
     return res.json();
