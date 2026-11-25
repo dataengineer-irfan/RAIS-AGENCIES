@@ -131,20 +131,20 @@ export const MetaConnectCard: React.FC<MetaConnectCardProps> = ({
       </div>
 
       {isConnected && metaStatus && (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/25 text-xs">
-          <div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/25 text-xs">
+          <div className="min-w-0">
             <div className="text-slate-400 text-[11px] uppercase font-mono">Facebook Page</div>
-            <div className="text-white font-bold mt-0.5">{metaStatus.page_name || 'Verified Page'}</div>
-            <div className="text-blue-300 font-mono text-[11px]">ID: {metaStatus.page_id || 'Auto'}</div>
+            <div className="text-white font-bold mt-0.5 break-words">{metaStatus.page_name || 'Verified Page'}</div>
+            <div className="text-blue-300 font-mono text-[11px] break-all">ID: {metaStatus.page_id || 'Auto'}</div>
           </div>
-          <div>
+          <div className="min-w-0">
             <div className="text-slate-400 text-[11px] uppercase font-mono">Linked Instagram</div>
-            <div className="text-white font-bold mt-0.5">
+            <div className="text-white font-bold mt-0.5 break-all">
               {metaStatus.ig_username ? `@${metaStatus.ig_username}` : 'Linked IG Business'}
             </div>
-            <div className="text-pink-300 font-mono text-[11px]">IG ID: {metaStatus.ig_user_id || 'Pending Link'}</div>
+            <div className="text-pink-300 font-mono text-[11px] break-all">IG ID: {metaStatus.ig_user_id || 'Pending Link'}</div>
           </div>
-          <div>
+          <div className="min-w-0">
             <div className="text-slate-400 text-[11px] uppercase font-mono">Token Storage</div>
             <div className="text-emerald-300 font-bold mt-0.5 uppercase">{metaStatus.source} (Encrypted)</div>
             <div className="text-slate-400 text-[11px]">Graph API v21.0 Verified</div>

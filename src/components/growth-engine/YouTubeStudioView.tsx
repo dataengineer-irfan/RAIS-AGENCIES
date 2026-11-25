@@ -16,10 +16,16 @@ export const YouTubeStudioView: React.FC = () => {
     auto_publish_daily: false,
     auto_publish_instagram: true,
     auto_publish_facebook: true,
+    auto_post_immediately: true,
+    auto_first_comment: true,
+    gemini_connected: false,
     daily_publish_hour: 10,
     is_connected: false,
     oauth_connected: false
   });
+  const [geminiKeyInput, setGeminiKeyInput] = useState<string>('');
+  const [autoRunning, setAutoRunning] = useState<boolean>(false);
+  const [analyzingId, setAnalyzingId] = useState<number | null>(null);
   const [metaStatus, setMetaStatus] = useState<MetaStatus | null>(null);
   const [queue, setQueue] = useState<YouTubeQueueItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -81,12 +87,16 @@ export const YouTubeStudioView: React.FC = () => {
         folder_name: settings.folder_name,
         auto_publish_daily: settings.auto_publish_daily,
         auto_publish_instagram: settings.auto_publish_instagram ?? true,
-        auto_publish_facebook: settings.auto_publish_facebook ?? true
+        auto_publish_facebook: settings.auto_publish_facebook ?? true,
+        auto_post_immediately: settings.auto_post_immediately ?? true,
+        auto_first_comment: settings.auto_first_comment ?? true,
+        ...(geminiKeyInput.trim() ? { gemini_api_key: geminiKeyInput.trim() } : {})
       });
       setSettings(updated);
+      setGeminiKeyInput('');
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 3000);
-      showNotice('Drive & multi-platform settings saved.', 'success');
+      showNotice('Drive, Auto-Pilot & Video AI settings saved.', 'success');
     } catch (err: any) {
       showNotice(err?.message || 'Failed to save Drive folder settings.', 'error');
     }
@@ -117,6 +127,34 @@ export const YouTubeStudioView: React.FC = () => {
       showNotice(err?.message || 'Publish next failed.', 'error');
     } finally {
       setPublishing(false);
+    }
+  };
+
+  const handleRunAutoPilot = async () => {
+    setAutoRunning(true);
+    try {
+      const res = await api.runYouTubeAutoPilot();
+      const updatedQueue = await api.listYouTubeQueue();
+      setQueue(updatedQueue);
+      showNotice(res.message || 'Auto-Pilot finished.', res.errors?.length && !res.published_count ? 'error' : 'success');
+    } catch (err: any) {
+      showNotice(err?.message || 'Auto-Pilot run failed.', 'error');
+    } finally {
+      setAutoRunning(false);
+    }
+  };
+
+  const handleAnalyzeItem = async (id: number) => {
+    setAnalyzingId(id);
+    try {
+      await api.analyzeYouTubeQueueItem(id);
+      const updatedQueue = await api.listYouTubeQueue();
+      setQueue(updatedQueue);
+      showNotice('Refreshed viral hook caption, hashtags & first comment for this video.', 'success');
+    } catch (err: any) {
+      showNotice(err?.message || 'Video analysis failed.', 'error');
+    } finally {
+      setAnalyzingId(null);
     }
   };
 
@@ -262,11 +300,20 @@ export const YouTubeStudioView: React.FC = () => {
 
             <button
               onClick={handleSyncDrive}
-              disabled={syncing}
+              disabled={syncing || autoRunning}
               className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition-all disabled:opacity-50"
             >
               <RefreshCw className={`w-4 h-4 text-cyan-400 ${syncing ? 'animate-spin' : ''}`} />
-              <span>{syncing ? 'Scanning Drive...' : 'Sync Drive Now'}</span>
+              <span>{syncing ? 'Scanning Drive...' : 'Sync Drive'}</span>
+            </button>
+
+            <button
+              onClick={handleRunAutoPilot}
+              disabled={autoRunning || syncing}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 hover:brightness-110 text-slate-950 text-xs font-extrabold transition-all shadow-lg shadow-amber-500/20 disabled:opacity-50"
+            >
+              <Sparkles className={`w-4 h-4 ${autoRunning ? 'animate-spin' : ''}`} />
+              <span>{autoRunning ? 'Auto-Publishing All...' : 'Auto-Sync & Post Now'}</span>
             </button>
 
             {queue.length > 0 && (
@@ -545,6 +592,56 @@ export const YouTubeStudioView: React.FC = () => {
                   Facebook Page
                 </label>
               </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="auto-pilot-now"
+                  checked={settings.auto_post_immediately ?? true}
+                  onChange={(e) => setSettings({ ...settings, auto_post_immediately: e.target.checked })}
+                  className="rounded border-slate-700 text-amber-500 focus:ring-0"
+                />
+                <label htmlFor="auto-pilot-now" className="text-xs text-amber-300 font-semibold cursor-pointer">
+                  100% Auto-Pilot (Auto-Post New Drive Clips)
+                </label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="auto-first-comment"
+                  checked={settings.auto_first_comment ?? true}
+                  onChange={(e) => setSettings({ ...settings, auto_first_comment: e.target.checked })}
+                  className="rounded border-slate-700 text-emerald-500 focus:ring-0"
+                />
+                <label htmlFor="auto-first-comment" className="text-xs text-emerald-300 font-semibold cursor-pointer">
+                  Auto First Comment (Location + WhatsApp + Hashtags)
+                </label>
+              </div>
+            </div>
+
+            <div className="pt-2 space-y-1">
+              <div className="flex items-center justify-between text-[11px]">
+                <label className="text-slate-300 font-semibold flex items-center gap-1.5">
+                  <span>Gemini Video Vision API Key (Watches Videos -&gt; Writes Custom Viral Hook):</span>
+                  <span className={`px-1.5 py-0.5 rounded font-mono text-[10px] ${settings.gemini_connected ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}`}>
+                    {settings.gemini_connected ? 'ACTIVE' : 'Optional Key'}
+                  </span>
+                </label>
+                <a
+                  href="https://aistudio.google.com/apikey"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-cyan-400 hover:underline flex items-center gap-0.5"
+                >
+                  Get Free Key <ExternalLink className="w-2.5 h-2.5" />
+                </a>
+              </div>
+              <input
+                type="password"
+                value={geminiKeyInput}
+                onChange={(e) => setGeminiKeyInput(e.target.value)}
+                placeholder={settings.gemini_connected ? 'Gemini key saved & encrypted (paste new key to replace)' : 'Paste AIza... key and click Save Folder Settings'}
+                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-amber-500 font-mono"
+              />
             </div>
           </div>
         </div>
@@ -710,8 +807,18 @@ export const YouTubeStudioView: React.FC = () => {
                         onClick={() => setExpandedDescId(isExpanded ? null : item.id)}
                         className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1 transition-all"
                       >
-                        <span>Description</span>
+                        <span>Caption &amp; Comment</span>
                         {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+                      </button>
+
+                      <button
+                        onClick={() => handleAnalyzeItem(item.id)}
+                        disabled={analyzingId === item.id}
+                        title="Re-analyze video & regenerate viral hook, caption, and pinned first comment"
+                        className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-semibold flex items-center gap-1 transition-all disabled:opacity-50"
+                      >
+                        <RefreshCw className={`w-3 h-3 ${analyzingId === item.id ? 'animate-spin' : ''}`} />
+                        <span>{analyzingId === item.id ? 'Analyzing...' : 'Refresh Hook'}</span>
                       </button>
 
                       {item.drive_file_id && (
@@ -761,13 +868,30 @@ export const YouTubeStudioView: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Expandable Description Details */}
+                  {/* Expandable Description & Auto First Comment Details */}
                   {isExpanded && (
-                    <div className="mt-3 pt-3 border-t border-slate-800/80 space-y-2 text-xs animate-in fade-in duration-150">
-                      <div className="text-slate-400 font-semibold">Auto-Generated YouTube Description:</div>
+                    <div className="mt-3 pt-3 border-t border-slate-800/80 space-y-2.5 text-xs animate-in fade-in duration-150">
+                      <div className="text-slate-400 font-semibold flex items-center justify-between">
+                        <span>Viral Hook Caption (YT Shorts / IG Reels / FB Page):</span>
+                        {item.ai_analyzed && (
+                          <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-mono">
+                            Gemini Video AI
+                          </span>
+                        )}
+                      </div>
                       <div className="bg-slate-900 border border-slate-800 p-3 rounded-lg text-slate-300 whitespace-pre-line font-mono text-[11px] leading-relaxed">
                         {item.description}
                       </div>
+                      {item.first_comment && (
+                        <>
+                          <div className="text-slate-400 font-semibold">
+                            Auto First Comment (Location + WhatsApp + Hashtags):
+                          </div>
+                          <div className="bg-emerald-950/20 border border-emerald-500/25 p-3 rounded-lg text-emerald-200 whitespace-pre-line font-mono text-[11px] leading-relaxed">
+                            {item.first_comment}
+                          </div>
+                        </>
+                      )}
                       {item.tags && (
                         <div className="flex flex-wrap items-center gap-1.5 pt-1">
                           <span className="text-slate-500 text-[11px] font-semibold">Tags:</span>

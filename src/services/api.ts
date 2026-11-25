@@ -60,6 +60,10 @@ export interface YouTubeDriveSetting {
   auto_publish_daily: boolean;
   auto_publish_instagram?: boolean;
   auto_publish_facebook?: boolean;
+  auto_post_immediately?: boolean;
+  auto_first_comment?: boolean;
+  gemini_connected?: boolean;
+  gemini_api_key?: string;
   daily_publish_hour: number;
   is_connected: boolean;
   oauth_connected?: boolean;
@@ -75,6 +79,10 @@ export interface YouTubeQueueItem {
   product_name: string;
   video_title: string;
   description: string;
+  first_comment?: string | null;
+  ig_comment_id?: string | null;
+  fb_comment_id?: string | null;
+  ai_analyzed?: boolean;
   tags?: string | null;
   status: 'QUEUED' | 'UPLOADING' | 'PUBLISHED' | 'FAILED';
   scheduled_for: string;
@@ -754,6 +762,22 @@ export const api = {
   },
   getDriveDownloadUrl: (driveFileId: string): string => {
     return `${BASE_URL}/youtube/download-drive/${encodeURIComponent(driveFileId)}`;
+  },
+  runYouTubeAutoPilot: async (): Promise<any> => {
+    const res = await fetch(`${BASE_URL}/youtube/auto-run`, { method: 'POST' });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Auto-Pilot run failed`);
+    }
+    return data;
+  },
+  analyzeYouTubeQueueItem: async (itemId: number): Promise<YouTubeQueueItem> => {
+    const res = await fetch(`${BASE_URL}/youtube/queue/${itemId}/analyze`, { method: 'POST' });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Video analysis failed`);
+    }
+    return data;
   }
 };
 
