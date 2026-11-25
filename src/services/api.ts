@@ -58,6 +58,8 @@ export interface YouTubeDriveSetting {
   folder_id: string | null;
   folder_name: string;
   auto_publish_daily: boolean;
+  auto_publish_instagram?: boolean;
+  auto_publish_facebook?: boolean;
   daily_publish_hour: number;
   is_connected: boolean;
   oauth_connected?: boolean;
@@ -79,7 +81,37 @@ export interface YouTubeQueueItem {
   published_at?: string | null;
   youtube_video_id?: string | null;
   youtube_url?: string | null;
+  ig_status?: 'PENDING' | 'PUBLISHED' | 'FAILED' | string;
+  ig_media_id?: string | null;
+  ig_url?: string | null;
+  ig_published_at?: string | null;
+  ig_error?: string | null;
+  fb_status?: 'PENDING' | 'PUBLISHED' | 'FAILED' | string;
+  fb_video_id?: string | null;
+  fb_url?: string | null;
+  fb_published_at?: string | null;
+  fb_error?: string | null;
   created_at?: string;
+}
+
+export interface MetaStatus {
+  status: 'NOT_CONNECTED' | 'CONNECTED' | 'TOKEN_INVALID' | string;
+  connected: boolean;
+  page_id?: string | null;
+  page_name?: string | null;
+  ig_user_id?: string | null;
+  ig_username?: string | null;
+  source: string;
+  message: string;
+  token_verified_at?: string | null;
+}
+
+export interface MultiPublishResult {
+  status: 'SUCCESS' | 'PARTIAL' | 'ERROR' | string;
+  item_id: number;
+  results: Record<string, any>;
+  errors: string[];
+  item?: YouTubeQueueItem;
 }
 
 export interface YouTubeSyncResult {
@@ -643,6 +675,85 @@ export const api = {
       throw new Error(`HTTP ${res.status}: Failed to load setup guide`);
     }
     return res.json();
+  },
+  getMetaStatus: async (): Promise<MetaStatus> => {
+    try {
+      const res = await fetch(`${BASE_URL}/meta/status`);
+      if (res.ok) return await res.json();
+    } catch (e) {
+      console.warn("Meta status fetch error", e);
+    }
+    return {
+      status: 'NOT_CONNECTED',
+      connected: false,
+      page_id: null,
+      page_name: null,
+      ig_user_id: null,
+      ig_username: null,
+      source: 'none',
+      message: 'Backend unavailable or Meta Page Access Token not connected yet.',
+      token_verified_at: null
+    };
+  },
+  connectMeta: async (payload: { access_token: string; page_id?: string; ig_user_id?: string }): Promise<MetaStatus> => {
+    const res = await fetch(`${BASE_URL}/meta/connect`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Meta connection verification failed`);
+    }
+    return data;
+  },
+  disconnectMeta: async (): Promise<any> => {
+    const res = await fetch(`${BASE_URL}/meta/disconnect`, { method: 'DELETE' });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Failed to disconnect Meta account`);
+    }
+    return data;
+  },
+  getMetaSetupGuide: async (): Promise<any> => {
+    const res = await fetch(`${BASE_URL}/meta/setup-guide`);
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}: Failed to load Meta setup guide`);
+    }
+    return res.json();
+  },
+  publishMetaDriveItem: async (
+    itemId: number,
+    platforms: string[] = ['instagram', 'facebook']
+  ): Promise<MultiPublishResult> => {
+    const res = await fetch(`${BASE_URL}/meta/publish-item/${itemId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ platforms })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Meta publishing failed`);
+    }
+    return data;
+  },
+  publishMultiPlatformItem: async (
+    itemId: number,
+    platforms?: string[]
+  ): Promise<MultiPublishResult> => {
+    const res = await fetch(`${BASE_URL}/youtube/publish-multi/${itemId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: platforms ? JSON.stringify({ platforms }) : JSON.stringify({ platforms: ['youtube', 'instagram', 'facebook'] })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Multi-platform publishing failed`);
+    }
+    return data;
+  },
+  getDriveDownloadUrl: (driveFileId: string): string => {
+    return `${BASE_URL}/youtube/download-drive/${encodeURIComponent(driveFileId)}`;
   }
 };
 

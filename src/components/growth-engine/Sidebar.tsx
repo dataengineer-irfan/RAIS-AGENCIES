@@ -41,8 +41,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
       heading: 'VIDEO & OUTREACH TOOLS',
       items: [
         { id: 'reels', label: 'Reels Video Studio', icon: Film, badge: `${totalReelsCount} MP4s` },
-        { id: 'meta_publishing', label: 'Instagram Manual Dispatch', icon: Send, badge: '@raisfrozenfoods' },
-        { id: 'youtube_drive', label: 'YouTube & Drive Automation', icon: Video, badge: 'Daily 1x' },
+        { id: 'meta_publishing', label: 'Instagram & FB Dispatch', icon: Send, badge: '@raisfrozenfoods' },
+        { id: 'youtube_drive', label: 'Drive -> YT, IG & FB', icon: Video, badge: 'Multi-Post' },
         { id: 'enquiries', label: 'WhatsApp B2B Outreach', icon: MessageSquare },
         { id: 'content', label: 'Content Studio & Promos', icon: Sparkles }
       ]

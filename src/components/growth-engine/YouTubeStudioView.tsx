@@ -2,24 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { 
   Video, FolderSync, Play, CheckCircle2, Clock, AlertCircle, 
   ExternalLink, Sparkles, HelpCircle, RefreshCw, Key, ShieldCheck,
-  ChevronDown, ChevronUp, Copy, Check, Send, Trash2
+  ChevronDown, ChevronUp, Copy, Check, Send, Trash2,
+  Instagram, Facebook, Share2
 } from 'lucide-react';
-import { growthEngineApi as api, YouTubeDriveSetting, YouTubeQueueItem } from '../../services/api';
+import { growthEngineApi as api, MetaStatus, YouTubeDriveSetting, YouTubeQueueItem } from '../../services/api';
+import { shareOrDownloadForWhatsAppStatus } from '../../utils/whatsappShare';
+import { MetaConnectCard } from './MetaConnectCard';
 
 export const YouTubeStudioView: React.FC = () => {
   const [settings, setSettings] = useState<YouTubeDriveSetting>({
     folder_id: '1Bm_WjSGQb_KQSRz6i08DSsp2mtzOborn',
     folder_name: 'RAIS_Daily_Promotion_Videos',
     auto_publish_daily: false,
+    auto_publish_instagram: true,
+    auto_publish_facebook: true,
     daily_publish_hour: 10,
     is_connected: false,
     oauth_connected: false
   });
+  const [metaStatus, setMetaStatus] = useState<MetaStatus | null>(null);
   const [queue, setQueue] = useState<YouTubeQueueItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [syncing, setSyncing] = useState<boolean>(false);
   const [publishing, setPublishing] = useState<boolean>(false);
   const [publishingId, setPublishingId] = useState<number | null>(null);
+  const [sharingId, setSharingId] = useState<number | null>(null);
   const [folderInput, setFolderInput] = useState<string>('https://drive.google.com/drive/folders/1Bm_WjSGQb_KQSRz6i08DSsp2mtzOborn');
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
   const [notice, setNotice] = useState<{ text: string; type: 'success' | 'error' | 'info' } | null>(null);
@@ -39,11 +46,13 @@ export const YouTubeStudioView: React.FC = () => {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [stg, q] = await Promise.all([
+      const [stg, q, meta] = await Promise.all([
         api.getYouTubeSettings(),
-        api.listYouTubeQueue()
+        api.listYouTubeQueue(),
+        api.getMetaStatus()
       ]);
       setSettings(stg);
+      setMetaStatus(meta);
       const activeFolder = stg.folder_id || '1Bm_WjSGQb_KQSRz6i08DSsp2mtzOborn';
       setFolderInput(`https://drive.google.com/drive/folders/${activeFolder}`);
       setQueue(q || []);
@@ -70,12 +79,14 @@ export const YouTubeStudioView: React.FC = () => {
       const updated = await api.updateYouTubeSettings({
         folder_id: folderInput,
         folder_name: settings.folder_name,
-        auto_publish_daily: settings.auto_publish_daily
+        auto_publish_daily: settings.auto_publish_daily,
+        auto_publish_instagram: settings.auto_publish_instagram ?? true,
+        auto_publish_facebook: settings.auto_publish_facebook ?? true
       });
       setSettings(updated);
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 3000);
-      showNotice('Drive folder settings saved.', 'success');
+      showNotice('Drive & multi-platform settings saved.', 'success');
     } catch (err: any) {
       showNotice(err?.message || 'Failed to save Drive folder settings.', 'error');
     }
@@ -123,6 +134,68 @@ export const YouTubeStudioView: React.FC = () => {
     }
   };
 
+  const handlePublishMeta = async (id: number, platforms: string[] = ['instagram', 'facebook']) => {
+    setPublishingId(id);
+    try {
+      const res = await api.publishMetaDriveItem(id, platforms);
+      const updatedQueue = await api.listYouTubeQueue();
+      setQueue(updatedQueue);
+      if (res.status === 'PARTIAL') {
+        showNotice(`Partial Meta publish: ${res.errors.join(' | ')}`, 'info');
+      } else {
+        showNotice(`Published to ${Object.keys(res.results).join(' & ')} successfully!`, 'success');
+      }
+    } catch (err: any) {
+      await loadData();
+      showNotice(err?.message || 'Meta IG/FB publishing failed.', 'error');
+    } finally {
+      setPublishingId(null);
+    }
+  };
+
+  const handlePublishMulti = async (id: number) => {
+    setPublishingId(id);
+    try {
+      const res = await api.publishMultiPlatformItem(id);
+      const updatedQueue = await api.listYouTubeQueue();
+      setQueue(updatedQueue);
+      const okChannels = Object.keys(res.results || {});
+      if (res.errors?.length) {
+        showNotice(`Published to [${okChannels.join(', ') || 'none'}]. Warnings: ${res.errors.join(' | ')}`, okChannels.length ? 'info' : 'error');
+      } else {
+        showNotice(`Auto-posted cleanly across ${okChannels.join(', ').toUpperCase()}!`, 'success');
+      }
+    } catch (err: any) {
+      await loadData();
+      showNotice(err?.message || 'Multi-platform publish failed.', 'error');
+    } finally {
+      setPublishingId(null);
+    }
+  };
+
+  const handleShareWhatsAppStatus = async (item: YouTubeQueueItem) => {
+    if (!item.drive_file_id) {
+      showNotice('Sync this item from Google Drive first before sharing to WhatsApp Status.', 'error');
+      return;
+    }
+    setSharingId(item.id);
+    try {
+      const caption = `${item.video_title}\n\n${item.description}\n\nWhatsApp Order: 9347453135 | RAIS Agencies Rayachoty`;
+      const outcome = await shareOrDownloadForWhatsAppStatus({
+        videoUrl: api.getDriveDownloadUrl(item.drive_file_id),
+        filename: item.file_name,
+        captionText: caption,
+      });
+      if (outcome.method !== 'cancelled') {
+        showNotice(outcome.message, 'success');
+      }
+    } catch (err: any) {
+      showNotice(err?.message || 'Could not download MP4 for WhatsApp Status share.', 'error');
+    } finally {
+      setSharingId(null);
+    }
+  };
+
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
     setCopiedText(label);
@@ -130,6 +203,8 @@ export const YouTubeStudioView: React.FC = () => {
   };
 
   const publishedCount = queue.filter(q => q.status === 'PUBLISHED').length;
+  const igPublishedCount = queue.filter(q => q.ig_status === 'PUBLISHED').length;
+  const fbPublishedCount = queue.filter(q => q.fb_status === 'PUBLISHED').length;
   const queuedCount = queue.filter(q => q.status === 'QUEUED').length;
 
   return (
@@ -140,23 +215,22 @@ export const YouTubeStudioView: React.FC = () => {
         
         <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
           <div className="space-y-1.5">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-red-500/20 text-red-400 border border-red-500/30 flex items-center gap-1.5">
                 <Video className="w-3.5 h-3.5" />
-                YouTube Shorts & Google Drive Automation
+                Unified Drive -&gt; YouTube, Instagram, Facebook &amp; WA Share
               </span>
               <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
                 <Clock className="w-3.5 h-3.5" />
-                Cadence: Daily 1x (10:00 AM IST)
+                Auto-Sync Pipeline
               </span>
             </div>
             <h1 className="text-2xl font-black text-white tracking-tight">
-              Automated Video Publishing Pipeline
+              Unified Video Distribution Pipeline (Drive to YT + IG + FB)
             </h1>
             <p className="text-slate-400 text-sm max-w-2xl leading-relaxed">
-              Upload your promotional product clips to your linked Google Drive folder. The engine extracts the video, 
-              auto-generates commercial B2B metadata with wholesale WhatsApp ordering links and depot location, 
-              and schedules daily 1-by-1 release to your YouTube channel.
+              Upload one product MP4 into Google Drive. Publish cleanly to YouTube Shorts, Instagram Reels (<span className="text-pink-400 font-mono">@raisfrozenfoods</span>),
+              and your linked Facebook Page, or share safely to WhatsApp Status in 1 tap.
             </p>
           </div>
 
@@ -255,9 +329,13 @@ export const YouTubeStudioView: React.FC = () => {
           </div>
 
           <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-3.5">
-            <div className="text-slate-400 text-xs font-medium">Published to Channel</div>
-            <div className="text-emerald-400 font-extrabold text-lg mt-0.5">{publishedCount} Videos</div>
-            <div className="text-[11px] text-slate-400 mt-1">Live on YouTube Shorts</div>
+            <div className="text-slate-400 text-xs font-medium">Published Across Channels</div>
+            <div className="text-emerald-400 font-extrabold text-sm mt-1">
+              YT {publishedCount} · IG {igPublishedCount} · FB {fbPublishedCount}
+            </div>
+            <div className="text-[11px] text-slate-400 mt-1">
+              {metaStatus?.connected ? `Meta Live: @${metaStatus.ig_username || 'Linked'}` : 'Meta Token Needed for IG + FB'}
+            </div>
           </div>
         </div>
       </div>
@@ -430,21 +508,54 @@ export const YouTubeStudioView: React.FC = () => {
               placeholder="RAIS_Daily_Promotion_Videos"
               className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-blue-500 transition-all"
             />
-            <div className="flex items-center gap-2 pt-1">
-              <input
-                type="checkbox"
-                id="auto-daily"
-                checked={settings.auto_publish_daily}
-                onChange={(e) => setSettings({ ...settings, auto_publish_daily: e.target.checked })}
-                className="rounded border-slate-700 text-blue-600 focus:ring-0"
-              />
-              <label htmlFor="auto-daily" className="text-xs text-slate-300 cursor-pointer">
-                Auto-publish 1 video daily at 10:00 AM IST
-              </label>
+            <div className="flex flex-wrap items-center gap-4 pt-1">
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="auto-daily"
+                  checked={settings.auto_publish_daily}
+                  onChange={(e) => setSettings({ ...settings, auto_publish_daily: e.target.checked })}
+                  className="rounded border-slate-700 text-blue-600 focus:ring-0"
+                />
+                <label htmlFor="auto-daily" className="text-xs text-slate-300 cursor-pointer">
+                  YouTube Shorts (Daily)
+                </label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="auto-ig"
+                  checked={settings.auto_publish_instagram ?? true}
+                  onChange={(e) => setSettings({ ...settings, auto_publish_instagram: e.target.checked })}
+                  className="rounded border-slate-700 text-pink-600 focus:ring-0"
+                />
+                <label htmlFor="auto-ig" className="text-xs text-pink-300 cursor-pointer">
+                  Instagram Reels
+                </label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="auto-fb"
+                  checked={settings.auto_publish_facebook ?? true}
+                  onChange={(e) => setSettings({ ...settings, auto_publish_facebook: e.target.checked })}
+                  className="rounded border-slate-700 text-blue-500 focus:ring-0"
+                />
+                <label htmlFor="auto-fb" className="text-xs text-blue-300 cursor-pointer">
+                  Facebook Page
+                </label>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Shared Meta (Instagram + Facebook Page) Token Connection Panel */}
+      <MetaConnectCard
+        metaStatus={metaStatus}
+        onStatusChanged={setMetaStatus}
+        onNotice={showNotice}
+      />
 
       {/* Video Release Queue & Scheduled Inventory */}
       <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
@@ -528,11 +639,73 @@ export const YouTubeStudioView: React.FC = () => {
                               : `Scheduled: Day ${idx + 1} (${new Date(item.scheduled_for).toLocaleDateString('en-IN')})`}
                           </span>
                         </div>
+
+                        {/* Cross-Platform Status Badges */}
+                        <div className="flex flex-wrap items-center gap-2 pt-1">
+                          {item.youtube_url ? (
+                            <a
+                              href={item.youtube_url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/25"
+                            >
+                              <Video className="w-3 h-3" /> YT Live <ExternalLink className="w-2.5 h-2.5" />
+                            </a>
+                          ) : (
+                            <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-400 border border-slate-700">
+                              YT: {item.status}
+                            </span>
+                          )}
+
+                          {item.ig_url ? (
+                            <a
+                              href={item.ig_url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-pink-500/15 text-pink-300 border border-pink-500/30 hover:bg-pink-500/25"
+                            >
+                              <Instagram className="w-3 h-3" /> IG Live <ExternalLink className="w-2.5 h-2.5" />
+                            </a>
+                          ) : (
+                            <span
+                              title={item.ig_error || ''}
+                              className={`px-2 py-0.5 rounded text-[10px] font-mono border ${
+                                item.ig_status === 'FAILED'
+                                  ? 'bg-rose-500/15 text-rose-300 border-rose-500/30'
+                                  : 'bg-slate-800 text-slate-400 border-slate-700'
+                              }`}
+                            >
+                              IG: {item.ig_status || 'PENDING'}
+                            </span>
+                          )}
+
+                          {item.fb_url ? (
+                            <a
+                              href={item.fb_url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/15 text-blue-300 border border-blue-500/30 hover:bg-blue-500/25"
+                            >
+                              <Facebook className="w-3 h-3" /> FB Live <ExternalLink className="w-2.5 h-2.5" />
+                            </a>
+                          ) : (
+                            <span
+                              title={item.fb_error || ''}
+                              className={`px-2 py-0.5 rounded text-[10px] font-mono border ${
+                                item.fb_status === 'FAILED'
+                                  ? 'bg-rose-500/15 text-rose-300 border-rose-500/30'
+                                  : 'bg-slate-800 text-slate-400 border-slate-700'
+                              }`}
+                            >
+                              FB: {item.fb_status || 'PENDING'}
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
 
                     {/* Action Controls */}
-                    <div className="flex items-center gap-2 self-end md:self-auto flex-shrink-0">
+                    <div className="flex flex-wrap items-center gap-2 self-end md:self-auto flex-shrink-0">
                       <button
                         onClick={() => setExpandedDescId(isExpanded ? null : item.id)}
                         className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1 transition-all"
@@ -541,28 +714,48 @@ export const YouTubeStudioView: React.FC = () => {
                         {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                       </button>
 
-                      {isPublished ? (
-                        item.youtube_url ? (
-                          <a
-                            href={item.youtube_url}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="px-3 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 text-xs font-bold border border-emerald-500/30 flex items-center gap-1.5 transition-all"
-                          >
-                            <span>Watch on YouTube</span>
-                            <ExternalLink className="w-3.5 h-3.5" />
-                          </a>
-                        ) : (
-                          <span className="text-xs text-emerald-400 font-semibold">Published</span>
-                        )
-                      ) : (
+                      {item.drive_file_id && (
+                        <button
+                          onClick={() => handleShareWhatsAppStatus(item)}
+                          disabled={sharingId === item.id}
+                          title="Safe 1-Tap WhatsApp Status share (mobile Web Share / MP4 download + caption)"
+                          className="px-2.5 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/35 text-emerald-300 text-xs font-bold border border-emerald-500/30 flex items-center gap-1 transition-all disabled:opacity-50"
+                        >
+                          <Share2 className="w-3.5 h-3.5" />
+                          <span>{sharingId === item.id ? 'Loading MP4...' : 'WA Status'}</span>
+                        </button>
+                      )}
+
+                      {(item.ig_status !== 'PUBLISHED' || item.fb_status !== 'PUBLISHED') && (
+                        <button
+                          onClick={() => handlePublishMeta(item.id, ['instagram', 'facebook'])}
+                          disabled={isBeingPublished}
+                          className="px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-pink-600 to-blue-600 hover:brightness-110 text-white text-xs font-bold flex items-center gap-1 transition-all disabled:opacity-50"
+                        >
+                          <Instagram className="w-3.5 h-3.5" />
+                          <span>{isBeingPublished ? 'Posting...' : 'IG + FB'}</span>
+                        </button>
+                      )}
+
+                      {(!isPublished || item.ig_status !== 'PUBLISHED' || item.fb_status !== 'PUBLISHED') && (
+                        <button
+                          onClick={() => handlePublishMulti(item.id)}
+                          disabled={isBeingPublished}
+                          className="px-3 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-extrabold flex items-center gap-1 transition-all shadow disabled:opacity-50"
+                        >
+                          <Sparkles className="w-3.5 h-3.5" />
+                          <span>{isBeingPublished ? 'Publishing...' : 'Post All'}</span>
+                        </button>
+                      )}
+
+                      {!isPublished && (
                         <button
                           onClick={() => handlePublishItem(item.id)}
                           disabled={isBeingPublished}
                           className="px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-md shadow-red-600/20 disabled:opacity-50"
                         >
                           <Play className="w-3.5 h-3.5 fill-white" />
-                          <span>{isBeingPublished ? 'Publishing...' : 'Publish Now'}</span>
+                          <span>{isBeingPublished ? 'Publishing...' : 'YT Only'}</span>
                         </button>
                       )}
                     </div>
