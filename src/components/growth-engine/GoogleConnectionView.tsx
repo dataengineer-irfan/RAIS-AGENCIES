@@ -58,10 +58,10 @@ export const GoogleConnectionView: React.FC = () => {
     }
   };
 
-  const handleConnectGoogle = async () => {
+  const handleConnectGoogle = async (includeYoutube: boolean = false) => {
     try {
       setConnecting(true);
-      const res = await api.getGoogleAuthorizeUrl();
+      const res = await api.getGoogleAuthorizeUrl(includeYoutube);
       if (res.authorization_url) {
         window.location.href = res.authorization_url;
       }
@@ -134,12 +134,12 @@ export const GoogleConnectionView: React.FC = () => {
 
           {!isConnected && (
             <button
-              onClick={handleConnectGoogle}
+              onClick={() => handleConnectGoogle(true)}
               disabled={connecting || currentState === 'NOT_CONFIGURED'}
               className="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold text-xs rounded-lg transition-all shadow-md shadow-blue-500/20 flex items-center gap-2"
             >
               <LogIn className="w-3.5 h-3.5" />
-              <span>{connecting ? 'Redirecting...' : 'Connect Google'}</span>
+              <span>{connecting ? 'Redirecting...' : 'Connect Google (GBP + Drive + YouTube)'}</span>
             </button>
           )}
         </div>

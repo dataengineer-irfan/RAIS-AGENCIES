@@ -3,7 +3,7 @@ import { AutomationStorage } from './automationStorage';
 
 export interface PublishResult {
   success: boolean;
-  mode: 'LIVE' | 'TEST_MODE' | 'MANUAL_REQUIRED';
+  mode: 'MANUAL_CONFIRMED' | 'MANUAL_REQUIRED';
   postId?: string;
   errorMessage?: string;
   auditMessage: string;
@@ -11,10 +11,9 @@ export interface PublishResult {
 
 export class InstagramPublisher {
   /**
-   * Validates Instagram Reel media parameters according to Meta Graph API specifications:
+   * Validates Instagram Reel media parameters according to Meta specifications:
    * - Aspect ratio: 9:16
    * - Max duration: 90 seconds (recommended 15-30s for commercial wholesale reels)
-   * - Recommended resolution: 1080x1920
    */
   static validateReelSpecs(reel: ReelCalendarItem): { valid: boolean; errors: string[] } {
     const errors: string[] = [];
@@ -37,11 +36,14 @@ export class InstagramPublisher {
   }
 
   /**
-   * Publishes or schedules a Reel using the official Meta Graph API interface,
-   * or provides the verified manual publishing fallback if live token is pending.
+   * Records a genuine manual Reel publish after the operator posts on Instagram / Meta Business Suite.
+   * Automated Graph API publishing is blocked until a real Meta Page Access Token backend service is connected.
    */
-  static async publishReel(reel: ReelCalendarItem, isManualConfirm = false): Promise<PublishResult> {
-    // 1. Validation
+  static async publishReel(
+    reel: ReelCalendarItem,
+    isManualConfirm = false,
+    instagramMediaUrl?: string
+  ): Promise<PublishResult> {
     const specCheck = this.validateReelSpecs(reel);
     if (!specCheck.valid) {
       return {
@@ -52,28 +54,22 @@ export class InstagramPublisher {
       };
     }
 
-    // 2. Duplicate Publishing Guard
     if (reel.status === 'published' && !isManualConfirm) {
       return {
         success: false,
         mode: 'MANUAL_REQUIRED',
-        errorMessage: 'This Reel is already published. Duplicate publishing blocked.',
+        errorMessage: 'This Reel is already marked published.',
         auditMessage: `Duplicate publishing prevented for Reel ID ${reel.id} (${reel.title})`
       };
     }
 
-    // 3. Check Live Credentials
-    const integrations = AutomationStorage.getIntegrations();
-    const igIntegration = integrations.find(i => i.service === 'instagram_graph_api');
-    const isLiveConnected = igIntegration && igIntegration.hasValidToken && igIntegration.connectionState === 'LIVE_CONNECTED';
-
-    // 4. If Manual Confirmation (User published via Instagram App or Meta Business Suite)
     if (isManualConfirm) {
+      const cleanUrl = instagramMediaUrl?.trim() || reel.instagramMediaUrl;
       const updatedReel: ReelCalendarItem = {
         ...reel,
         status: 'published',
         publishedAt: new Date().toISOString().replace('T', ' ').substring(0, 19),
-        instagramPostId: `manual_post_${Date.now()}`
+        instagramMediaUrl: cleanUrl
       };
       AutomationStorage.updateReel(updatedReel);
       AutomationStorage.addAuditLog({
@@ -81,60 +77,22 @@ export class InstagramPublisher {
         action: `Manual Reel Publishing Recorded: ${reel.title}`,
         actor: 'Wholesale Depot Operator',
         status: 'SUCCESS',
-        details: `Published to @raisfrozenfoods with CTA keyword ${reel.ctaKeyword}`
+        details: cleanUrl
+          ? `Recorded manual post to @raisfrozenfoods (${cleanUrl})`
+          : `Recorded manual post to @raisfrozenfoods with CTA keyword ${reel.ctaKeyword}`
       });
       return {
         success: true,
-        mode: 'MANUAL_REQUIRED',
-        postId: updatedReel.instagramPostId,
+        mode: 'MANUAL_CONFIRMED',
         auditMessage: 'Manual publish confirmed and recorded in audit log.'
       };
     }
 
-    // 5. If Live API Available
-    if (isLiveConnected) {
-      // In live environment with verified Meta token:
-      // Step A: POST /{ig-user-id}/media?media_type=REELS&video_url=...&caption=...
-      // Step B: Poll container until status_code === 'FINISHED'
-      // Step C: POST /{ig-user-id}/media_publish?creation_id={container_id}
-      try {
-        const livePostId = `ig_reel_${Date.now()}`;
-        const updatedReel: ReelCalendarItem = {
-          ...reel,
-          status: 'published',
-          publishedAt: new Date().toISOString().replace('T', ' ').substring(0, 19),
-          instagramPostId: livePostId
-        };
-        AutomationStorage.updateReel(updatedReel);
-        AutomationStorage.addAuditLog({
-          category: 'PUBLISHING',
-          action: `Published via Instagram Graph API: ${reel.title}`,
-          actor: 'Instagram Graph API Bot',
-          status: 'SUCCESS',
-          details: `Container created and published to @raisfrozenfoods. Post ID: ${livePostId}`
-        });
-        return {
-          success: true,
-          mode: 'LIVE',
-          postId: livePostId,
-          auditMessage: `Reel successfully published via official Instagram Graph API (Post ID: ${livePostId})`
-        };
-      } catch (err: any) {
-        return {
-          success: false,
-          mode: 'LIVE',
-          errorMessage: err.message || 'API request failed',
-          auditMessage: `API publishing failed: ${err.message}`
-        };
-      }
-    }
-
-    // 6. Default Honest Fallback: Account Awaiting Authorization
     return {
       success: false,
       mode: 'MANUAL_REQUIRED',
-      errorMessage: 'Official Instagram Graph API requires authorization. Please use the Manual Publishing workflow or configure your Meta Page Access Token in Settings.',
-      auditMessage: 'Publish requested without active Graph API token. Fallback to manual publishing workflow.'
+      errorMessage: 'Direct Meta Graph API auto-posting is not configured. Download the 9:16 MP4 and use the Publishing Pack to post manually on Instagram.',
+      auditMessage: 'Automated Graph API unavailable; manual publishing workflow required.'
     };
   }
 

@@ -472,7 +472,7 @@ export const ReelVideoPreview: React.FC<ReelVideoPreviewProps> = ({
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-sky-500 text-slate-950 font-bold text-xs shadow-lg hover:scale-[1.02] transition-all"
             >
               <Clock className="w-4 h-4" />
-              <span>Schedule / Publish Now</span>
+              <span>Check Dispatch Status</span>
             </button>
           )}
 

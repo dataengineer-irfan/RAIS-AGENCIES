@@ -41,6 +41,7 @@ export const AutomationControlView: React.FC<AutomationProps> = ({
   };
 
   const handleToggleKillSwitch = async () => {
+    if (!settings) return;
     try {
       setToggling(true);
       const nextState = !killSwitchActive;
@@ -85,6 +86,15 @@ export const AutomationControlView: React.FC<AutomationProps> = ({
         </div>
       </div>
 
+      {!loading && !settings && (
+        <div className="p-4 bg-rose-500/10 border border-rose-500/30 rounded-xl flex items-center gap-3 text-xs text-rose-300">
+          <AlertTriangle className="w-5 h-5 flex-shrink-0 text-rose-400" />
+          <span>
+            <strong>Backend Unreachable:</strong> Live safety settings and audit logs cannot be loaded while the backend service is offline.
+          </span>
+        </div>
+      )}
+
       {/* EMERGENCY KILL SWITCH PANEL */}
       <div className={`p-6 rounded-xl border transition-all ${
         killSwitchActive 
@@ -94,9 +104,11 @@ export const AutomationControlView: React.FC<AutomationProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className={`w-3 h-3 rounded-full ${killSwitchActive ? 'bg-red-500 animate-ping' : 'bg-emerald-400'}`}></span>
+              <span className={`w-3 h-3 rounded-full ${
+                !settings ? 'bg-slate-500' : killSwitchActive ? 'bg-red-500 animate-ping' : 'bg-emerald-400'
+              }`}></span>
               <h2 className="text-base font-bold text-white">
-                Master Emergency Kill Switch: {killSwitchActive ? 'ENGAGED (SYSTEM HALTED)' : 'DISENGAGED (SYSTEM ARMED)'}
+                Master Emergency Kill Switch: {!settings ? 'UNKNOWN (BACKEND OFFLINE)' : killSwitchActive ? 'ENGAGED (SYSTEM HALTED)' : 'DISENGAGED (SYSTEM ARMED)'}
               </h2>
             </div>
             <p className="text-xs text-slate-400 max-w-xl">
@@ -106,8 +118,8 @@ export const AutomationControlView: React.FC<AutomationProps> = ({
 
           <button
             onClick={handleToggleKillSwitch}
-            disabled={toggling}
-            className={`px-5 py-2.5 rounded-lg text-xs font-black tracking-wide uppercase transition-all shadow-md ${
+            disabled={toggling || !settings}
+            className={`px-5 py-2.5 rounded-lg text-xs font-black tracking-wide uppercase transition-all shadow-md disabled:opacity-40 disabled:cursor-not-allowed ${
               killSwitchActive
                 ? 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-emerald-500/20'
                 : 'bg-red-600 hover:bg-red-500 text-white shadow-red-600/20'
@@ -181,7 +193,7 @@ export const AutomationControlView: React.FC<AutomationProps> = ({
             <div className="p-3 bg-[#070b14] border border-slate-800 rounded-lg">
               <span className="text-slate-400 block mb-1">Recommended Posting Frequency</span>
               <div className="text-sm font-bold text-white">
-                {settings?.posting_frequency_days || 'Monday, Wednesday, Friday'}
+                {settings?.posting_frequency_days || '—'}
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
                 Aligns with restaurant kitchen inventory restocking cycles before weekends.
@@ -191,7 +203,7 @@ export const AutomationControlView: React.FC<AutomationProps> = ({
             <div className="p-3 bg-[#070b14] border border-slate-800 rounded-lg">
               <span className="text-slate-400 block mb-1">Optimal Publishing Window</span>
               <div className="text-sm font-bold text-amber-400 font-mono">
-                {settings?.preferred_post_time || '10:30 AM IST'}
+                {settings?.preferred_post_time || '—'}
               </div>
               <p className="text-[11px] text-slate-500 mt-1">
                 Catches cafe owners and QSR chefs before lunch service preparation.

@@ -16,12 +16,11 @@ const INITIAL_INTEGRATIONS: IntegrationStatus[] = [
   {
     service: 'instagram_graph_api',
     name: 'Instagram Graph API (Meta for Developers)',
-    connectionState: 'LIVE_CONNECTED',
+    connectionState: 'NOT_CONNECTED',
     accountName: '@raisfrozenfoods',
     accountId: '29157923917158606',
-    hasValidToken: true,
-    lastVerifiedAt: '2026-10-27 16:03:34',
-    details: 'Verified Live Meta Instagram Graph API connection for @raisfrozenfoods. 2 Master Reels published live on feed with verified comments.'
+    hasValidToken: false,
+    details: 'Meta Graph API automation token is not configured in backend. 2 Reels published manually on @raisfrozenfoods; use Publishing Pack to dispatch the remaining compiled 9:16 MP4s.'
   },
   {
     service: 'whatsapp_order_desk',
@@ -29,16 +28,14 @@ const INITIAL_INTEGRATIONS: IntegrationStatus[] = [
     connectionState: 'LIVE_CONNECTED',
     accountName: '+91 9347453135',
     hasValidToken: true,
-    lastVerifiedAt: '2026-10-27 16:30:00',
-    details: 'Direct customer & B2B order desk for Rayachoty. Receives quotation requisitions, instant wholesale bills, and delivery inquiries.'
+    details: 'Direct customer & B2B order desk for Rayachoty (wa.me/919347453135). Receives storefront quote requisitions and wholesale inquiries.'
   },
   {
     service: 'cold_storage_depot',
     name: 'Rayachoty Cold Storage Depot Hub',
     connectionState: 'LIVE_CONNECTED',
-    accountName: 'Near Reddies Colony, Rayachoty (516269)',
+    accountName: 'Beside Indel Bank, Sundupalli Road, Rayachoty (516269)',
     hasValidToken: true,
-    lastVerifiedAt: '2026-10-27 16:30:00',
     details: 'Primary commercial distribution hub. -18°C deep freeze storage, wholesale billing, and daily commercial dispatch.'
   }
 ];
@@ -50,11 +47,14 @@ export class AutomationStorage {
       const data = localStorage.getItem(STORAGE_KEYS.REELS);
       if (data) {
         const parsed: ReelCalendarItem[] = JSON.parse(data);
-        // Ensure slot-01 and slot-02 reflect their verified published state
         return parsed.map(r => {
+          const canonical = REELS_30_DAYS.find(c => c.id === r.id);
           if (r.id === 'reel-slot-01' || r.id === 'reel-slot-02') {
-            const canonical = REELS_30_DAYS.find(c => c.id === r.id);
             return canonical || r;
+          }
+          // Migrate legacy static 'scheduled' placeholder dates to honest 'draft' unless user published/approved
+          if (r.status === 'scheduled' && canonical && canonical.status === 'draft') {
+            return { ...r, status: 'draft' };
           }
           return r;
         });
@@ -200,39 +200,15 @@ export class AutomationStorage {
   static getAuditLogs(): AuditLogEntry[] {
     try {
       const data = localStorage.getItem(STORAGE_KEYS.AUDIT_LOGS);
-      if (data) return JSON.parse(data);
+      if (data) {
+        const parsed: AuditLogEntry[] = JSON.parse(data);
+        // Purge any legacy static placeholder audit logs
+        return parsed.filter(l => !['log-live-01', 'log-live-02', 'log-auth-01'].includes(l.id));
+      }
     } catch (e) {
       console.warn('Storage read failed for audit logs', e);
     }
-    return [
-      {
-        id: 'log-live-02',
-        timestamp: '2026-10-27 16:03:34',
-        category: 'PUBLISHING',
-        action: 'Reel Published: Day 1 Slot 2 (Hindi) — Triken Chicken Momos',
-        actor: 'Instagram Automation Core',
-        status: 'SUCCESS',
-        details: 'Live on @raisfrozenfoods (Post ID: 18129191809865321). Top comment with Rayachoty WhatsApp & Catalogue link verified.'
-      },
-      {
-        id: 'log-live-01',
-        timestamp: '2026-10-27 16:02:25',
-        category: 'PUBLISHING',
-        action: 'Reel Published: Day 1 Slot 1 (Telugu) — Triken Chicken Momos',
-        actor: 'Instagram Automation Core',
-        status: 'SUCCESS',
-        details: 'Live on @raisfrozenfoods (Post ID: 18149436067564831). Top comment with Rayachoty WhatsApp & Catalogue link verified.'
-      },
-      {
-        id: 'log-auth-01',
-        timestamp: '2026-10-27 15:30:00',
-        category: 'SECURITY',
-        action: 'Wholesale Depot System Initialized',
-        actor: 'RAIS Core',
-        status: 'SUCCESS',
-        details: 'Loaded 30-Day Bilingual Reels Campaign with 3D Presenter Ayesha (Rayachoty 516269)'
-      }
-    ];
+    return [];
   }
 
   static addAuditLog(entry: Omit<AuditLogEntry, 'id' | 'timestamp'>): void {

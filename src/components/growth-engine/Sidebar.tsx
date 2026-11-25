@@ -9,6 +9,8 @@ interface SidebarProps {
   currentTab: string;
   setCurrentTab: (tab: string) => void;
   killSwitchActive: boolean;
+  googleConnected?: boolean;
+  totalReelsCount?: number;
   onBackToHome?: () => void;
   onLogout?: () => void;
 }
@@ -17,15 +19,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
   currentTab, 
   setCurrentTab, 
   killSwitchActive,
+  googleConnected = false,
+  totalReelsCount = 30,
   onBackToHome,
   onLogout
 }) => {
   const sections = [
     {
-      heading: 'GOOGLE GROWTH (APPROVED 300 QPM)',
+      heading: 'GOOGLE BUSINESS SUITE',
       items: [
         { id: 'overview', label: 'Overview', icon: LayoutDashboard },
-        { id: 'google', label: 'Google Business Profile', icon: Globe, badge: 'Approved' },
+        { id: 'google', label: 'Google Business Profile', icon: Globe, badge: googleConnected ? 'Connected' : 'Setup' },
         { id: 'reviews', label: 'Google Reviews Inbox', icon: MessageSquare },
         { id: 'seo', label: 'Local SEO & Keywords', icon: Search },
         { id: 'competitors', label: 'Competitor Tracker', icon: Users },
@@ -34,12 +38,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
       ]
     },
     {
-      heading: 'META & INSTAGRAM AUTOMATION',
+      heading: 'VIDEO & OUTREACH TOOLS',
       items: [
-        { id: 'reels', label: '30-Day Reels Studio', icon: Film, badge: '30 Reels' },
-        { id: 'meta_publishing', label: 'Meta API & Publishing', icon: Send, badge: '@raisfrozenfoods' },
+        { id: 'reels', label: 'Reels Video Studio', icon: Film, badge: `${totalReelsCount} MP4s` },
+        { id: 'meta_publishing', label: 'Instagram Manual Dispatch', icon: Send, badge: '@raisfrozenfoods' },
         { id: 'youtube_drive', label: 'YouTube & Drive Automation', icon: Video, badge: 'Daily 1x' },
-        { id: 'enquiries', label: 'Instagram Enquiries Bot', icon: MessageSquare },
+        { id: 'enquiries', label: 'WhatsApp B2B Outreach', icon: MessageSquare },
         { id: 'content', label: 'Content Studio & Promos', icon: Sparkles }
       ]
     },
@@ -126,8 +130,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   </div>
                   {item.badge && (
                     <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded flex-shrink-0 ${
-                      item.badge === 'Approved' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' :
-                      item.badge.includes('Reels') ? 'bg-pink-500/20 text-pink-300 border border-pink-500/30' :
+                      item.badge === 'Connected' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' :
+                      item.badge === 'Setup' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' :
+                      item.badge.includes('MP4') ? 'bg-pink-500/20 text-pink-300 border border-pink-500/30' :
                       'bg-purple-500/20 text-purple-300 border border-purple-500/30'
                     }`}>
                       {item.badge}

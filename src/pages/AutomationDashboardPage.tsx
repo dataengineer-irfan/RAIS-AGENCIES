@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sidebar } from '../components/growth-engine/Sidebar';
-import { Overview } from '../components/growth-engine/Overview';
+import { Overview, OverviewStats } from '../components/growth-engine/Overview';
 import { GoogleConnectionView } from '../components/growth-engine/GoogleConnectionView';
 import { ContentStudioView } from '../components/growth-engine/ContentStudioView';
 import { PublishingCalendarView } from '../components/growth-engine/PublishingCalendarView';
@@ -18,6 +18,7 @@ import { InstagramEnquiriesView } from '../components/growth-engine/InstagramEnq
 import { YouTubeStudioView } from '../components/growth-engine/YouTubeStudioView';
 import { TrafficAnalyticsTab } from '../components/automation/TrafficAnalyticsTab';
 import { api } from '../services/api';
+import { AutomationStorage } from '../services/automationStorage';
 
 interface AutomationDashboardPageProps {
   onLogout?: () => void;
@@ -30,12 +31,17 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
 }) => {
   const [currentTab, setCurrentTab] = useState<string>('overview');
   const [killSwitchActive, setKillSwitchActive] = useState<boolean>(false);
-  const [stats, setStats] = useState({
-    totalCampaigns: 1,
-    pendingReviews: 3,
+  const initialReels = AutomationStorage.getReels();
+  const [stats, setStats] = useState<OverviewStats>({
+    totalCampaigns: 0,
+    pendingReviews: 0,
     totalLeads: 0,
-    seoScore: 95,
-    killSwitchActive: false
+    seoScore: null,
+    killSwitchActive: false,
+    googleConnected: false,
+    googleStatusMode: 'CHECKING',
+    publishedReelsCount: initialReels.filter(r => r.status === 'published').length,
+    totalReelsCount: initialReels.length
   });
 
   useEffect(() => {
@@ -48,27 +54,40 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
 
   const loadAppInitialState = async () => {
     try {
-      const [settings, leads, reviews, seo] = await Promise.allSettled([
+      const [settings, leads, reviews, seo, campaigns, googleStatus] = await Promise.allSettled([
         api.getAutomationSettings(),
         api.listLeads(),
         api.listReviews(),
-        api.getSeoAudit()
+        api.getSeoAudit(),
+        api.listCampaigns(),
+        api.getGoogleStatus()
       ]);
 
-      const isKillSwitch = settings.status === 'fulfilled' ? settings.value.emergency_kill_switch : false;
-      const leadsCount = leads.status === 'fulfilled' ? leads.value.length : 0;
-      const pendingRev = reviews.status === 'fulfilled' 
+      const isKillSwitch = settings.status === 'fulfilled' ? Boolean(settings.value?.emergency_kill_switch) : false;
+      const leadsCount = leads.status === 'fulfilled' && Array.isArray(leads.value) ? leads.value.length : 0;
+      const pendingRev = reviews.status === 'fulfilled' && Array.isArray(reviews.value)
         ? reviews.value.filter(r => !r.has_replied && (!r.reply_drafts || r.reply_drafts.some(d => !d.is_approved))).length 
-        : 2;
-      const seoCompleteness = seo.status === 'fulfilled' ? seo.value.completeness_score : 95;
+        : 0;
+      const seoCompleteness =
+        seo.status === 'fulfilled' && seo.value && typeof seo.value.completeness_score === 'number'
+          ? seo.value.completeness_score
+          : null;
+      const campaignsCount = campaigns.status === 'fulfilled' && Array.isArray(campaigns.value) ? campaigns.value.length : 0;
+      const isGoogleConnected = googleStatus.status === 'fulfilled' ? Boolean(googleStatus.value?.connected) : false;
+      const gMode = googleStatus.status === 'fulfilled' ? (googleStatus.value?.status || 'NOT_CONNECTED') : 'BACKEND_UNREACHABLE';
+      const currentReels = AutomationStorage.getReels();
 
       setKillSwitchActive(isKillSwitch);
       setStats({
-        totalCampaigns: 1,
+        totalCampaigns: campaignsCount,
         pendingReviews: pendingRev,
         totalLeads: leadsCount,
         seoScore: seoCompleteness,
-        killSwitchActive: isKillSwitch
+        killSwitchActive: isKillSwitch,
+        googleConnected: isGoogleConnected,
+        googleStatusMode: gMode,
+        publishedReelsCount: currentReels.filter(r => r.status === 'published').length,
+        totalReelsCount: currentReels.length
       });
     } catch (err) {
       console.warn('Backend offline or initializing', err);
@@ -81,7 +100,9 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
       <Sidebar 
         currentTab={currentTab} 
         setCurrentTab={setCurrentTab} 
-        killSwitchActive={killSwitchActive} 
+        killSwitchActive={killSwitchActive}
+        googleConnected={stats.googleConnected}
+        totalReelsCount={stats.totalReelsCount}
         onBackToHome={onBackToHome}
         onLogout={onLogout}
       />

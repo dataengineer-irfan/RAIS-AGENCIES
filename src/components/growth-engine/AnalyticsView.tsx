@@ -173,6 +173,7 @@ export const AnalyticsView: React.FC = () => {
           <div className="text-2xl font-black text-white">{formatMetric(totalViews)}</div>
           <div className="text-[11px] text-slate-500 mt-2">
             {currentState === 'NOT_CONNECTED' && 'Unavailable (OAuth Not Connected)'}
+            {currentState === 'API_ACCESS_NOT_APPROVED' && 'Unavailable (API Pending Google Approval)'}
             {currentState === 'API_ERROR' && 'Unavailable (API Error)'}
             {currentState === 'CONNECTED_BUT_NO_DATA' && '0 views reported by Google'}
             {currentState === 'LIVE_DATA_AVAILABLE' && 'Verified views across Search & Maps'}
@@ -188,6 +189,7 @@ export const AnalyticsView: React.FC = () => {
           <div className="text-2xl font-black text-white">{formatMetric(metrics?.call_clicks, 'Calls')}</div>
           <div className="text-[11px] text-slate-500 mt-2">
             {currentState === 'NOT_CONNECTED' && 'Unavailable (OAuth Not Connected)'}
+            {currentState === 'API_ACCESS_NOT_APPROVED' && 'Unavailable (API Pending Google Approval)'}
             {currentState === 'API_ERROR' && 'Unavailable (API Error)'}
             {currentState === 'CONNECTED_BUT_NO_DATA' && '0 call clicks reported by Google'}
             {currentState === 'LIVE_DATA_AVAILABLE' && 'Customer call clicks from profile'}
@@ -203,6 +205,7 @@ export const AnalyticsView: React.FC = () => {
           <div className="text-2xl font-black text-white">{formatMetric(metrics?.direction_requests, 'Visits')}</div>
           <div className="text-[11px] text-slate-500 mt-2">
             {currentState === 'NOT_CONNECTED' && 'Unavailable (OAuth Not Connected)'}
+            {currentState === 'API_ACCESS_NOT_APPROVED' && 'Unavailable (API Pending Google Approval)'}
             {currentState === 'API_ERROR' && 'Unavailable (API Error)'}
             {currentState === 'CONNECTED_BUT_NO_DATA' && '0 directions requested from Google Maps'}
             {currentState === 'LIVE_DATA_AVAILABLE' && 'Customer navigation requests to hub'}
@@ -218,6 +221,7 @@ export const AnalyticsView: React.FC = () => {
           <div className="text-2xl font-black text-white">{formatMetric(metrics?.website_clicks, 'Clicks')}</div>
           <div className="text-[11px] text-slate-500 mt-2">
             {currentState === 'NOT_CONNECTED' && 'Unavailable (OAuth Not Connected)'}
+            {currentState === 'API_ACCESS_NOT_APPROVED' && 'Unavailable (API Pending Google Approval)'}
             {currentState === 'API_ERROR' && 'Unavailable (API Error)'}
             {currentState === 'CONNECTED_BUT_NO_DATA' && '0 web clicks reported by Google'}
             {currentState === 'LIVE_DATA_AVAILABLE' && 'Clicks to dataengineer-irfan.github.io'}

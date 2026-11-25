@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { CustomerLead, LeadStatus } from '../../data/automationTypes';
-import { AutomationStorage } from '../../services/automationStorage';
 import { 
-  MessageSquare, Send, Users, Sparkles, Search, Copy, Check, 
-  Flame, ShieldCheck, Video, ExternalLink, Share2, MapPin
+  MessageSquare, Sparkles, Copy, Check, 
+  Flame, Video, ExternalLink, Share2, MapPin, UserPlus
 } from 'lucide-react';
 import { REAL_SCOUTED_ROUTE_LEADS } from '../../data/routeLeads';
+import { api } from '../../services/api';
 
 interface ReelScript {
   id: string;
@@ -52,16 +51,15 @@ const B2B_REEL_SCRIPTS: ReelScript[] = [
 ];
 
 export const InstagramEnquiriesView: React.FC = () => {
-  const [leads, setLeads] = useState<CustomerLead[]>(() => AutomationStorage.getLeads());
-  const [leadStatusFilter, setLeadStatusFilter] = useState<string>('ALL');
-  const [leadSearch, setLeadSearch] = useState<string>('');
   const [selectedScriptId, setSelectedScriptId] = useState<string>('margin-leak');
   const [copiedState, setCopiedState] = useState<string | null>(null);
 
   // Quick B2B Outreach Generator State
   const [targetBusinessName, setTargetBusinessName] = useState<string>('Tummy Things Cafe');
   const [targetRoute, setTargetRoute] = useState<string>('Rayachoty');
-  const [targetPhone, setTargetPhone] = useState<string>('9347453135');
+  const [targetPhone, setTargetPhone] = useState<string>('');
+  const [crmSaving, setCrmSaving] = useState<boolean>(false);
+  const [crmMessage, setCrmSavingMsg] = useState<string | null>(null);
   const [customOutreachMsg, setCustomOutreachMsg] = useState<string>(
     'Namaste Tummy Things Cafe team! 🙏 RAIS Agencies is Rayachoty\'s direct wholesale distributor for Milky Mist mozzarella cheese, French fries, and heavy pizza/burger packaging beside Indel Bank. Can we drop off a free sample pack of our 6mm fries & butter paper for your kitchen?'
   );
@@ -74,13 +72,40 @@ export const InstagramEnquiriesView: React.FC = () => {
     setTimeout(() => setCopiedState(null), 2500);
   };
 
-  const handleSelectLeadForOutreach = (businessName: string, location: string, proposal: string) => {
+  const handleSelectLeadForOutreach = (businessName: string, location: string, proposal: string, phone?: string) => {
     setTargetBusinessName(businessName);
     setTargetRoute(location);
+    if (phone && phone !== '9347453135') setTargetPhone(phone);
     setCustomOutreachMsg(proposal);
   };
 
-  const quotePendingCount = leads.filter(l => l.status === 'Quote Pending').length;
+  const cleanDigits = targetPhone.replace(/\D/g, '');
+  const isValidExternalPhone = cleanDigits.length >= 10 && !cleanDigits.endsWith('9347453135');
+
+  const handleSaveToCrm = async () => {
+    if (!targetBusinessName.trim() || !isValidExternalPhone) {
+      setCrmSavingMsg('Enter a valid customer 10-digit WhatsApp number before saving to B2B CRM.');
+      setTimeout(() => setCrmSavingMsg(null), 4000);
+      return;
+    }
+    try {
+      setCrmSaving(true);
+      await api.createLead({
+        business_name: targetBusinessName.trim(),
+        phone: cleanDigits.slice(-10),
+        business_type: 'Cafe',
+        location: targetRoute,
+        product_interest: customOutreachMsg.slice(0, 200),
+        status: 'CONTACTED'
+      });
+      setCrmSavingMsg(`Saved "${targetBusinessName}" to B2B Leads CRM!`);
+    } catch (err: any) {
+      setCrmSavingMsg(err.message || 'Could not reach backend CRM.');
+    } finally {
+      setCrmSaving(false);
+      setTimeout(() => setCrmSavingMsg(null), 4000);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -92,13 +117,13 @@ export const InstagramEnquiriesView: React.FC = () => {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-bold text-white">B2B Instagram Virality &amp; Direct WhatsApp Outreach</h2>
+              <h2 className="text-xl font-bold text-white">WhatsApp B2B Outreach &amp; Reel Scripts Studio</h2>
               <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30 font-mono">
-                ₹0 Ad Spend Engine
+                Manual Outreach Tool
               </span>
             </div>
             <p className="text-xs text-slate-400 mt-0.5">
-              High-converting short-form Reels scripts for Telugu/English and direct 1-tap WhatsApp sample proposals for Rayachoty and route cafes
+              Telugu/English short-form Reels scripts and personalized 1-tap WhatsApp sample proposals for Rayachoty &amp; corridor kitchens
             </p>
           </div>
         </div>
@@ -218,11 +243,11 @@ export const InstagramEnquiriesView: React.FC = () => {
               <span>Direct Outbound WhatsApp Hunter (Free Sample Box Proposal)</span>
             </h3>
             <p className="text-xs text-slate-400 mt-0.5">
-              Send a zero-friction sample box invitation to any local restaurant or cafe. High 80%+ response rate.
+              Compose and launch a personalized sample box WhatsApp invitation to any local restaurant or cafe.
             </p>
           </div>
           <span className="text-[11px] font-mono font-bold px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
-            Proven Script
+            Sample Outreach
           </span>
         </div>
 
@@ -249,12 +274,13 @@ export const InstagramEnquiriesView: React.FC = () => {
             </select>
           </div>
           <div>
-            <label className="text-[11px] font-semibold text-slate-400 block mb-1">Phone / WhatsApp</label>
+            <label className="text-[11px] font-semibold text-slate-400 block mb-1">Customer WhatsApp Number *</label>
             <input
               type="text"
               value={targetPhone}
               onChange={(e) => setTargetPhone(e.target.value)}
-              className="w-full px-3 py-2 bg-[#070b14] border border-slate-700 rounded-lg text-xs text-white font-mono"
+              placeholder="Enter 10-digit outlet phone"
+              className="w-full px-3 py-2 bg-[#070b14] border border-slate-700 rounded-lg text-xs text-white font-mono placeholder-slate-600"
             />
           </div>
         </div>
@@ -269,19 +295,38 @@ export const InstagramEnquiriesView: React.FC = () => {
           />
         </div>
 
+        {crmMessage && (
+          <div className="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-medium">
+            {crmMessage}
+          </div>
+        )}
+
         <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
           <span className="text-[11px] text-slate-400">
-            Tip: Click any scouted establishment below to auto-fill this outreach form.
+            Enter the outlet&apos;s phone number, or click a scouted establishment below to auto-fill its details.
           </span>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={handleSaveToCrm}
+              disabled={crmSaving}
+              className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-bold text-xs rounded-lg transition-all flex items-center gap-1.5"
+            >
+              <UserPlus className="w-3.5 h-3.5 text-amber-400" />
+              <span>{crmSaving ? 'Saving...' : 'Save to B2B CRM'}</span>
+            </button>
             <a
-              href={`https://wa.me/91${targetPhone.replace(/\D/g, '')}?text=${encodeURIComponent(customOutreachMsg)}`}
+              href={
+                isValidExternalPhone
+                  ? `https://wa.me/${cleanDigits.length === 10 ? '91' + cleanDigits : cleanDigits}?text=${encodeURIComponent(customOutreachMsg)}`
+                  : `https://wa.me/?text=${encodeURIComponent(customOutreachMsg)}`
+              }
               target="_blank"
               rel="noreferrer"
               className="px-5 py-2.5 bg-[#25D366] hover:bg-[#1ebe5b] text-white font-bold text-xs rounded-lg transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-950/40"
             >
               <MessageSquare className="w-4 h-4 fill-white" />
-              <span>Open in WhatsApp &amp; Send Proposal</span>
+              <span>{isValidExternalPhone ? 'Open in WhatsApp & Send Proposal' : 'Open WhatsApp Contact Picker'}</span>
             </a>
           </div>
         </div>

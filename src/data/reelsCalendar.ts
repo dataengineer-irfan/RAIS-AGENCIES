@@ -98,7 +98,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc02_telugu_02_midnight_hunger.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -129,7 +129,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc02_hindi_02_midnight_hunger.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -160,7 +160,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc03_telugu_03_cricket_match.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -191,7 +191,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc03_hindi_03_cricket_match.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -222,7 +222,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc04_telugu_04_after_school_hunger.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -253,7 +253,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc04_hindi_04_after_school_hunger.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -284,7 +284,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc05_telugu_05_friends_arrive.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -315,7 +315,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc05_hindi_05_friends_arrive.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -346,7 +346,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc06_telugu_06_busy_day_convenience.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -377,7 +377,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc06_hindi_06_busy_day_convenience.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -408,7 +408,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc07_telugu_07_birthday_party.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -439,7 +439,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc07_hindi_07_birthday_party.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -470,7 +470,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc08_telugu_08_restaurant_rush_hour.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -501,7 +501,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc08_hindi_08_restaurant_rush_hour.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -532,7 +532,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc09_telugu_09_burger_shop_transformation.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -563,7 +563,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc09_hindi_09_burger_shop_transformation.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -594,7 +594,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc10_telugu_10_summer_refreshment.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -625,7 +625,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc10_hindi_10_summer_refreshment.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -656,7 +656,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc11_telugu_11_the_irresistible_crunch.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -687,7 +687,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc11_hindi_11_the_irresistible_crunch.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -718,7 +718,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc12_telugu_12_restaurant_stock_planning.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -749,7 +749,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc12_hindi_12_restaurant_stock_planning.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -780,7 +780,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc13_telugu_13_weekend_movie_night.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -811,7 +811,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc13_hindi_13_weekend_movie_night.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -842,7 +842,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc14_telugu_14_packaging_matters.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -873,7 +873,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc14_hindi_14_packaging_matters.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -904,7 +904,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc15_telugu_15_meet_your_food_partner.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   },
   {
@@ -935,7 +935,7 @@ export const REELS_30_DAYS: ReelCalendarItem[] = [
       audioMood: 'Cinematic commercial with synchronized speech and music fade',
       mediaUrl: assetUrl('/videos/final_30_reels/sc15_hindi_15_meet_your_food_partner.mp4')
     },
-    status: 'scheduled',
+    status: 'draft',
     retryCount: 0
   }
 ];

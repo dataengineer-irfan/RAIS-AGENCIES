@@ -5,6 +5,44 @@ import {
 } from 'lucide-react';
 import { api, KeywordTarget, COMMERCIAL_TARGET_KEYWORDS } from '../../services/api';
 
+const DEFAULT_QNA_LIST = [
+  {
+    id: 1,
+    question: "What is the delivery radius for frozen food from your Rayachoty depot?",
+    answer: "We deliver daily across Rayachoty town (516269) and operate scheduled route logistics to all 10 surrounding supply corridors: Sundupalli, Galiveedu, Kadiri, Chinnamandem, Kalakada, Mahal, Madanapalle, Kadapa, and Rajampet with guaranteed -18°C continuous cold chain storage.",
+    category: "Cold Chain & Logistics",
+    target_keywords: ["frozen food wholesale rayachoty", "refrigerated delivery annamayya district"]
+  },
+  {
+    id: 2,
+    question: "Do you supply Milky Mist mozzarella cheese and Amul French fries to cafes in bulk wholesale cartons?",
+    answer: "Yes. RAIS Agencies is a commercial wholesale supplier in Rayachoty. We stock 1kg & 2kg Milky Mist diced mozzarella cheese (high stretch), Amul 6mm shoestring & Hup Hup 9mm french fries, Triken frozen chicken momos, and burger patties at direct wholesale trade rates.",
+    category: "Commercial Food Products",
+    target_keywords: ["milky mist cheese wholesale rayachoty", "french fries wholesale rayachoty", "triken chicken momos wholesale"]
+  },
+  {
+    id: 3,
+    question: "Where is your wholesale depot located in Rayachoty and what is your contact number?",
+    answer: "Our central commercial depot is located beside Indel Money Bank, Sundupalli Road, Near Reddies Colony, Rayachoty – 516269, Annamayya District, Andhra Pradesh. For trade pricing, bulk carton orders, or kitchen delivery, WhatsApp or call 9347453135.",
+    category: "Depot Location & Contact",
+    target_keywords: ["frozen food supplier rayachoty", "sundupalli road rayachoty wholesale"]
+  },
+  {
+    id: 4,
+    question: "Do you sell corrugated pizza boxes and greaseproof food packaging materials?",
+    answer: "Yes. We stock commercial 3-ply corrugated pizza takeaway boxes in 7, 8, 9, 10, and 12-inch sizes with ventilation flutes, kraft burger clamshell boxes, and certified 40 GSM oil and grease-resistant (OGR) butter paper wrapping sheets for shawarmas, burgers, and rolls.",
+    category: "Packaging Solutions",
+    target_keywords: ["pizza boxes wholesale rayachoty", "butter paper supplier rayachoty", "kraft burger boxes"]
+  },
+  {
+    id: 5,
+    question: "What are your wholesale depot operating and order dispatch hours?",
+    answer: "Our depot is open Monday through Saturday from 8:00 AM to 9:30 PM, and on Sunday from 8:00 AM to 2:00 PM for commercial kitchen pickups and scheduled route dispatches.",
+    category: "Operating Hours",
+    target_keywords: ["rais agencies depot hours rayachoty", "wholesale food pickup rayachoty"]
+  }
+];
+
 export const LocalSEOView: React.FC = () => {
   const [keywords, setKeywords] = useState<KeywordTarget[]>(COMMERCIAL_TARGET_KEYWORDS);
   const [audit, setAudit] = useState<any>(null);
@@ -12,6 +50,10 @@ export const LocalSEOView: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [activeTab, setActiveTab] = useState<'keywords' | 'audit' | 'guidelines' | 'qna'>('keywords');
   const [copiedId, setCopiedId] = useState<number | null>(null);
+
+  const qnaList = qnaData?.qna_list && Array.isArray(qnaData.qna_list) && qnaData.qna_list.length > 0
+    ? qnaData.qna_list
+    : DEFAULT_QNA_LIST;
 
   useEffect(() => {
     loadData();
@@ -52,7 +94,9 @@ export const LocalSEOView: React.FC = () => {
         <div className="flex items-center gap-3">
           <div className="px-3 py-1.5 bg-[#070b14] border border-slate-800 rounded-lg text-xs flex items-center gap-2">
             <span className="text-slate-400">SEO Completeness:</span>
-            <span className="font-bold text-emerald-400">{audit?.completeness_score || 95}%</span>
+            <span className={`font-bold ${typeof audit?.completeness_score === 'number' ? 'text-emerald-400' : 'text-amber-400'}`}>
+              {typeof audit?.completeness_score === 'number' ? `${audit.completeness_score}%` : 'Unavailable'}
+            </span>
           </div>
           <button
             onClick={loadData}
@@ -70,7 +114,7 @@ export const LocalSEOView: React.FC = () => {
         {[
           { id: 'keywords', label: `Target Keywords (${keywords.length})` },
           { id: 'audit', label: 'GBP Profile Audit' },
-          { id: 'qna', label: `Google Q&A / Ask Maps AI (${qnaData?.total_entries || 6})` },
+          { id: 'qna', label: `Google Q&A / Ask Maps AI (${qnaList.length})` },
           { id: 'guidelines', label: 'Documented Ranking Factors vs Myths' }
         ].map((t) => (
           <button
@@ -154,31 +198,41 @@ export const LocalSEOView: React.FC = () => {
               </p>
             </div>
             <div className="text-right">
-              <span className="text-2xl font-black text-emerald-400">{audit?.completeness_score || 95}%</span>
-              <div className="text-[10px] text-slate-400 uppercase font-semibold">Profile Health</div>
+              <span className={`text-2xl font-black ${typeof audit?.completeness_score === 'number' ? 'text-emerald-400' : 'text-amber-400'}`}>
+                {typeof audit?.completeness_score === 'number' ? `${audit.completeness_score}%` : '—'}
+              </span>
+              <div className="text-[10px] text-slate-400 uppercase font-semibold">
+                {typeof audit?.completeness_score === 'number' ? 'Profile Health' : 'Backend Audit Offline'}
+              </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {audit?.audit_items?.map((item: any, idx: number) => (
-              <div 
-                key={idx}
-                className="p-3.5 bg-[#070b14] border border-slate-800 rounded-lg flex items-start gap-3"
-              >
-                {item.passed ? (
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                ) : (
-                  <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
-                )}
-                <div>
-                  <div className="text-xs font-bold text-white">{item.check}</div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">
-                    Impact: <span className="font-semibold text-slate-300">{item.impact}</span>
+          {!audit?.audit_items || audit.audit_items.length === 0 ? (
+            <div className="p-6 bg-[#070b14] border border-slate-800 rounded-lg text-center text-xs text-slate-400">
+              Live SEO profile audit is unavailable while the backend API is unreachable. Click Refresh once the backend service is awake.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {audit.audit_items.map((item: any, idx: number) => (
+                <div 
+                  key={idx}
+                  className="p-3.5 bg-[#070b14] border border-slate-800 rounded-lg flex items-start gap-3"
+                >
+                  {item.passed ? (
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                  ) : (
+                    <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+                  )}
+                  <div>
+                    <div className="text-xs font-bold text-white">{item.check}</div>
+                    <div className="text-[11px] text-slate-400 mt-0.5">
+                      Impact: <span className="font-semibold text-slate-300">{item.impact}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
@@ -257,50 +311,7 @@ export const LocalSEOView: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-4">
-            {(qnaData?.qna_list || [
-              {
-                id: 1,
-                question: "What is the delivery radius for frozen food from your Rayachoty depot?",
-                answer: "We deliver daily across Rayachoty town (516269) and operate scheduled route logistics to all 10 surrounding supply corridors: Sundupalli, Galiveedu, Kadiri, Chinnamandem, Kalakada, Mahal, Madanapalle, Kadapa, and Rajampet with guaranteed -18°C continuous cold chain storage.",
-                category: "Cold Chain & Logistics",
-                target_keywords: ["frozen food wholesale rayachoty", "refrigerated delivery annamayya district"]
-              },
-              {
-                id: 2,
-                question: "Do you supply Milky Mist mozzarella cheese and Amul French fries to cafes in bulk wholesale cartons?",
-                answer: "Yes. RAIS Agencies is an authorized commercial wholesale supplier in Rayachoty. We stock 1kg & 2kg Milky Mist diced mozzarella cheese (high stretch), Amul 6mm shoestring & Hup Hup 9mm french fries, Triken frozen chicken momos, and burger patties at direct wholesale trade rates.",
-                category: "Commercial Food Products",
-                target_keywords: ["milky mist cheese wholesale rayachoty", "french fries wholesale rayachoty", "triken chicken momos wholesale"]
-              },
-              {
-                id: 3,
-                question: "Where is your wholesale depot located in Rayachoty and what is your contact number?",
-                answer: "Our central commercial depot is located beside Indel Money Bank, Sundupalli Road, Near Reddies Colony, Rayachoty – 516269, Annamayya District, Andhra Pradesh. For trade pricing, bulk carton orders, or kitchen delivery, WhatsApp or call 9347453135.",
-                category: "Depot Location & Contact",
-                target_keywords: ["frozen food supplier rayachoty", "sundupalli road rayachoty wholesale"]
-              },
-              {
-                id: 4,
-                question: "Do you sell corrugated pizza boxes and greaseproof food packaging materials?",
-                answer: "Yes. We stock commercial 3-ply corrugated pizza takeaway boxes in 7, 8, 9, 10, and 12-inch sizes with ventilation flutes, kraft burger clamshell boxes, and certified 40 GSM oil and grease-resistant (OGR) butter paper wrapping sheets for shawarmas, burgers, and rolls.",
-                category: "Packaging Solutions",
-                target_keywords: ["pizza boxes wholesale rayachoty", "butter paper supplier rayachoty", "kraft burger boxes"]
-              },
-              {
-                id: 5,
-                question: "What are your wholesale depot operating and order dispatch hours?",
-                answer: "Our depot is open Monday through Saturday from 8:00 AM to 9:30 PM, and on Sunday from 8:00 AM to 2:00 PM for commercial kitchen pickups and scheduled route dispatches.",
-                category: "Operating Hours",
-                target_keywords: ["rais agencies depot hours rayachoty", "wholesale food pickup rayachoty"]
-              },
-              {
-                id: 6,
-                question: "Do you supply pizza toppings, Chinese cooking sauces, fresh cream, and syrups like Del Monte, Habit, and Sudarshan in Rayachoty?",
-                answer: "Yes! RAIS Agencies stocks commercial tins of Del Monte sliced jalapeños (3kg tin), Habit canned whole baby corn & button mushrooms (800g), Meal Time dark soya, green chilli & red chilli sauces, Spic's culinary and hot chilli sauces, synthetic white vinegar, Sudarshan rich dairy fresh cream (1L), and Del Monte & Foodcraft rich chocolate syrups at wholesale trade pricing.",
-                category: "Sauces, Toppings & Dairy",
-                target_keywords: ["sliced jalapenos wholesale rayachoty", "habit baby corn button mushroom wholesale rayachoty", "meal time dark soya sauce red chilli sauce rayachoty", "sudarshan fresh cream wholesale rayachoty", "delmonte foodcraft chocolate syrup rayachoty"]
-              }
-            ]).map((q: any) => (
+            {qnaList.map((q: any) => (
               <div key={q.id} className="bg-[#0f172a] border border-slate-800 rounded-xl p-5 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400 px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">

@@ -1,5 +1,4 @@
 import { GBPStorage } from './gbpStorage';
-import { REAL_SCOUTED_ROUTE_LEADS } from '../data/routeLeads';
 
 const API_HOST = (import.meta as any).env?.VITE_GROWTH_ENGINE_API_URL || 'https://rais-growth-backend.onrender.com';
 const BASE_URL = `${API_HOST.replace(/\/$/, '')}/api/v1`;
@@ -61,7 +60,9 @@ export interface YouTubeDriveSetting {
   auto_publish_daily: boolean;
   daily_publish_hour: number;
   is_connected: boolean;
+  oauth_connected?: boolean;
   last_synced_at?: string | null;
+  backend_offline?: boolean;
 }
 
 export interface YouTubeQueueItem {
@@ -324,24 +325,23 @@ export const api = {
     return remoteReviews;
   },
   syncReviews: async (): Promise<any> => {
-    try {
-      const res = await fetch(`${BASE_URL}/reviews/sync`, { method: 'POST' });
-      return await res.json();
-    } catch {
-      return { status: 'SUCCESS', new_reviews_synced: 1, message: 'Synchronized with authentic Google Maps reviews' };
+    const res = await fetch(`${BASE_URL}/reviews/sync`, { method: 'POST' });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || `HTTP ${res.status}: Failed to sync reviews with Google`);
     }
+    return await res.json();
   },
   createTestReview: async (authorName?: string, rating?: number, comment?: string): Promise<any> => {
     const params = new URLSearchParams();
     if (authorName) params.append('author_name', authorName);
     if (rating) params.append('rating', rating.toString());
     if (comment) params.append('comment', comment);
-    try {
-      const res = await fetch(`${BASE_URL}/reviews/test-review?${params.toString()}`, { method: 'POST' });
-      return await res.json();
-    } catch {
-      return { status: 'SUCCESS', message: 'Test review draft created locally' };
+    const res = await fetch(`${BASE_URL}/reviews/test-review?${params.toString()}`, { method: 'POST' });
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}: Backend failed to create review draft`);
     }
+    return await res.json();
   },
   approveReviewReply: async (draftId: number, replyText: string, approverName: string = 'Admin'): Promise<any> => {
     GBPStorage.approveReviewReply(draftId, replyText, approverName);
@@ -351,15 +351,23 @@ export const api = {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ reply_text: replyText, approver_name: approverName })
       });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.detail || `HTTP ${res.status}`);
+      }
       return await res.json();
     } catch {
-      return { status: 'PUBLISHED_TO_GOOGLE', message: 'Review reply approved and verified for Google Business Profile' };
+      return {
+        status: 'APPROVED_NOT_PUBLISHED',
+        is_published_to_google: false,
+        message: 'Saved local draft approval only. Backend unreachable — NOT published to Google Business Profile.'
+      };
     }
   },
   getGoogleStatus: async (): Promise<any> => {
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2000);
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
       const res = await fetch(`${BASE_URL}/google/status`, { signal: controller.signal });
       clearTimeout(timeoutId);
       if (res.ok) {
@@ -367,17 +375,22 @@ export const api = {
       }
     } catch {}
     return {
-      status: 'APPROVED',
-      connected: true,
-      account_name: 'rais.frozenfoods@gmail.com',
-      location_name: 'locations/17901714523973178723',
-      location_title: 'RAIS Agencies',
-      rating: 5.0,
-      review_count: 4
+      status: 'API_ERROR',
+      connected: false,
+      mode: 'BACKEND_UNREACHABLE',
+      is_verified: false,
+      is_live: false,
+      is_simulated: false,
+      account_id: null,
+      location_id: null,
+      account_email: null,
+      location_name: null,
+      message: 'Backend service is unreachable. Cannot verify Google Business Profile connection.'
     };
   },
-  getGoogleAuthorizeUrl: async (): Promise<{ authorization_url: string; state: string }> => {
-    const res = await fetch(`${BASE_URL}/google/authorize`);
+  getGoogleAuthorizeUrl: async (includeYoutube: boolean = false): Promise<{ authorization_url: string; state: string }> => {
+    const query = includeYoutube ? '?include_youtube=true' : '';
+    const res = await fetch(`${BASE_URL}/google/authorize${query}`);
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
       throw new Error(err.detail || `HTTP ${res.status}: Failed to get Google authorization URL`);
@@ -391,7 +404,28 @@ export const api = {
       if (!res.ok) {
         return { status: 'API_ERROR', is_live: false, metrics: null, error_message: `HTTP ${res.status}: ${res.statusText}` };
       }
-      return await res.json();
+      const data = await res.json();
+      // Reject unverified static mock numbers from legacy backend versions (<1.0.4)
+      if (
+        !data.api_verified &&
+        data.metrics &&
+        data.metrics.search_impressions_mobile === 140 &&
+        data.metrics.maps_impressions_mobile === 210 &&
+        data.metrics.website_clicks === 42
+      ) {
+        return {
+          status: 'NOT_CONNECTED',
+          is_live: false,
+          is_simulated: false,
+          metrics: null,
+          search_keywords_top: [],
+          source: 'None (Google Business Profile Performance API Not Verified)',
+          date_range: 'Past 30 Days',
+          notice: 'Live Google Performance API metrics require an active OAuth session with businessprofileperformance.googleapis.com enabled.',
+          actionable_instruction: 'Enable Google Business Profile Performance API in Google Cloud Console and re-authorize Google OAuth.'
+        };
+      }
+      return data;
     } catch (err: any) {
       return { status: 'API_ERROR', is_live: false, metrics: null, error_message: err.message || 'Backend service unreachable' };
     }
@@ -420,10 +454,32 @@ export const api = {
       const res = await fetch(`${BASE_URL}/seo/competitors`);
       if (res.ok) return await res.json();
     } catch {}
-    return [
-      { id: 1, competitor_name: "Sri Tirumala Traders", location_area: "Rayachoty Market Hub", public_category: "Plastic & Disposable Goods", rating: 4.1, review_count: 24, verified_status: "UNVERIFIED_CLAIM", notes: "Traders dealing in plastic boxes and catering disposables." },
-      { id: 2, competitor_name: "Kadapa Cold Store Traders", location_area: "Kadapa (52km away)", public_category: "General Frozen Meat & Peas", rating: 4.3, review_count: 48, verified_status: "UNVERIFIED_CLAIM", notes: "Regional cold storage unit with limited Rayachoty local delivery." }
-    ];
+    return [];
+  },
+  createCompetitor: async (payload: {
+    competitor_name: string;
+    location_area: string;
+    public_category?: string;
+    rating?: number | null;
+    review_count?: number;
+    notes?: string;
+  }): Promise<Competitor> => {
+    const res = await fetch(`${BASE_URL}/seo/competitors`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || `HTTP ${res.status}: Failed to save competitor`);
+    }
+    return res.json();
+  },
+  deleteCompetitor: async (id: number): Promise<void> => {
+    const res = await fetch(`${BASE_URL}/seo/competitors/${id}`, { method: 'DELETE' });
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}: Failed to delete competitor`);
+    }
   },
   getSeoAudit: async (): Promise<any> => {
     try {
@@ -431,38 +487,23 @@ export const api = {
       if (res.ok) return await res.json();
     } catch {}
     return {
-      status: "HEALTHY",
-      overall_score: 95,
-      audit_items: [
-        { pillar: "RELEVANCE", check: "Primary Category locked to 'Wholesale food store'", passed: true, impact: "Critical" },
-        { pillar: "RELEVANCE", check: "OfferCatalog schema contains all 96 verified SKUs with 0 price leaks", passed: true, impact: "High" },
-        { pillar: "PROXIMITY", check: "Geographic coordinate anchor exact match (14.0584° N, 78.7513° E)", passed: true, impact: "Critical" },
-        { pillar: "PROMINENCE", check: "Official Google review rating 5.0 with 0 unreplied reviews", passed: true, impact: "Critical" }
-      ]
+      status: 'BACKEND_OFFLINE',
+      completeness_score: null,
+      audit_items: []
     };
   },
   listLeads: async (): Promise<B2BLead[]> => {
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2000);
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
       const res = await fetch(`${BASE_URL}/leads`, { signal: controller.signal });
       clearTimeout(timeoutId);
       if (res.ok) {
         const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) return data;
+        if (Array.isArray(data)) return data;
       }
     } catch {}
-    return REAL_SCOUTED_ROUTE_LEADS.map((item) => ({
-      id: item.id,
-      business_name: item.businessName,
-      contact_person: 'Owner / Head Chef',
-      phone: '9347453135',
-      business_type: item.leadType,
-      location: item.location,
-      product_interest: item.productFit,
-      status: 'NEW' as const,
-      created_at: new Date().toISOString()
-    }));
+    return [];
   },
   createLead: async (data: Partial<B2BLead>): Promise<B2BLead> => {
     const res = await fetch(`${BASE_URL}/leads`, {
@@ -520,21 +561,27 @@ export const api = {
   },
   publishPostNow: async (postId: number): Promise<any> => {
     const res = await fetch(`${BASE_URL}/campaigns/posts/${postId}/publish-now`, { method: 'POST' });
-    return res.json();
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Failed to publish post to Google Business Profile`);
+    }
+    return data;
   },
   getYouTubeSettings: async (): Promise<YouTubeDriveSetting> => {
     try {
       const res = await fetch(`${BASE_URL}/youtube/settings`);
       if (res.ok) return await res.json();
     } catch (e) {
-      console.warn("YouTube settings fetch error, using default", e);
+      console.warn("YouTube settings fetch error", e);
     }
     return {
       folder_id: "1Bm_WjSGQb_KQSRz6i08DSsp2mtzOborn",
       folder_name: "RAIS_Daily_Promotion_Videos",
-      auto_publish_daily: true,
+      auto_publish_daily: false,
       daily_publish_hour: 10,
-      is_connected: true
+      is_connected: false,
+      oauth_connected: false,
+      backend_offline: true
     };
   },
   updateYouTubeSettings: async (payload: Partial<YouTubeDriveSetting>): Promise<YouTubeDriveSetting> => {
@@ -543,7 +590,11 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    return res.json();
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Failed to save YouTube Drive settings`);
+    }
+    return data;
   },
   listYouTubeQueue: async (): Promise<YouTubeQueueItem[]> => {
     try {
@@ -556,22 +607,41 @@ export const api = {
   },
   syncGoogleDrive: async (): Promise<YouTubeSyncResult> => {
     const res = await fetch(`${BASE_URL}/youtube/sync-drive`, { method: 'POST' });
-    return res.json();
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Drive sync endpoint unavailable on backend`);
+    }
+    return data;
   },
   publishNextYouTubeVideo: async (): Promise<YouTubePublishResult> => {
     const res = await fetch(`${BASE_URL}/youtube/publish-next`, { method: 'POST' });
-    return res.json();
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Failed to publish video to YouTube`);
+    }
+    return data;
   },
   publishYouTubeItem: async (itemId: number): Promise<YouTubePublishResult> => {
     const res = await fetch(`${BASE_URL}/youtube/publish-item/${itemId}`, { method: 'POST' });
-    return res.json();
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Failed to publish queued video`);
+    }
+    return data;
   },
   clearYouTubeQueue: async (): Promise<any> => {
     const res = await fetch(`${BASE_URL}/youtube/queue/clear`, { method: 'DELETE' });
-    return res.json();
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Failed to clear queue`);
+    }
+    return data;
   },
   getYouTubeSetupGuide: async (): Promise<any> => {
     const res = await fetch(`${BASE_URL}/youtube/setup-guide`);
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}: Failed to load setup guide`);
+    }
     return res.json();
   }
 };

@@ -97,11 +97,14 @@ export const ReviewsInboxView: React.FC = () => {
   };
 
   const handleGenerateReviewRequest = async () => {
+    const prods = reqProducts.split(',').map((p) => p.trim()).filter(Boolean);
+    const prodList = prods.length > 0 ? prods.join(', ') : 'French Fries, Milky Mist Mozzarella Cheese, Triken Momos';
+    const customer = reqCustomerName.trim() || 'Cafe Partner';
+    const cafe = reqCafeName.trim() || 'Local Eatery';
     try {
-      const prods = reqProducts.split(',').map((p) => p.trim()).filter(Boolean);
       const res = await api.generateReviewRequest({
-        customer_name: reqCustomerName || 'Cafe Partner',
-        cafe_name: reqCafeName || 'Local Eatery',
+        customer_name: customer,
+        cafe_name: cafe,
         mandal_town: reqMandal,
         phone_number: reqPhone,
         products: prods
@@ -112,10 +115,20 @@ export const ReviewsInboxView: React.FC = () => {
         type: 'success'
       });
       setTimeout(() => setNotification(null), 4000);
-    } catch (err: any) {
+    } catch {
+      const directUrl = 'https://search.google.com/local/writereview?placeid=ChIJWWL3zBgDszsR-lQG81niw0c';
+      const suggested = `RAIS Agencies is our trusted wholesale supply partner in ${reqMandal}. Top quality ${prodList} with reliable -18°C cold chain delivery and prompt depot service on Sundupalli Road!`;
+      const msg = `Namaste ${customer} (${cafe}, ${reqMandal})! 🙏\n\nThank you for choosing RAIS Agencies Rayachoty for ${prodList}.\n\nPlease support our depot with a quick Google review:\n⭐ ${directUrl}\n\n"${suggested}"`;
+      const cleanPhone = reqPhone.replace(/\D/g, '');
+      const waPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+      setGeneratedRequest({
+        direct_review_url: directUrl,
+        whatsapp_message: msg,
+        whatsapp_url: waPhone ? `https://wa.me/${waPhone}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`
+      });
       setNotification({
-        message: err.message || 'Failed to generate review request',
-        type: 'error'
+        message: 'Generated offline WhatsApp review invitation link.',
+        type: 'info'
       });
       setTimeout(() => setNotification(null), 4000);
     }
@@ -136,8 +149,8 @@ export const ReviewsInboxView: React.FC = () => {
         });
       } else {
         setNotification({
-          message: 'Review reply approved and verified for Google Business Profile.',
-          type: 'success'
+          message: res.message || 'Review reply draft saved locally (NOT published to Google until OAuth & backend are connected).',
+          type: 'info'
         });
       }
       await loadAll();
@@ -362,9 +375,11 @@ export const ReviewsInboxView: React.FC = () => {
               <AlertCircle className="w-6 h-6 text-amber-400" />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-white">Google Reviews Not Connected</h3>
+              <h3 className="text-sm font-bold text-white">Google Reviews Live Sync Not Connected</h3>
               <p className="text-xs text-slate-400 mt-0.5">
-                Google Business Profile OAuth authorization is required before reviews can be synchronized. Connect your Google account to import authentic customer reviews.
+                {googleStatus?.mode === 'BACKEND_UNREACHABLE'
+                  ? 'Backend is unreachable — showing historical cached Google Maps reviews snapshot. New reviews and reply publishing require backend & Google OAuth.'
+                  : 'Google Business Profile OAuth authorization is required before live reviews can be synced. Existing items below are saved historical Maps snapshots.'}
               </p>
             </div>
           </div>

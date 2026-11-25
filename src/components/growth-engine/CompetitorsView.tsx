@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Users, AlertTriangle, ShieldCheck, CheckCircle2, 
-  RefreshCw, MapPin, Star, Info
+  Users, AlertTriangle, ShieldCheck, Plus, Trash2, X,
+  RefreshCw, MapPin, Star, Info, ExternalLink
 } from 'lucide-react';
 import { api, Competitor } from '../../services/api';
 
 export const CompetitorsView: React.FC = () => {
   const [competitors, setCompetitors] = useState<Competitor[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [saving, setSaving] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [formState, setFormState] = useState({
+    competitor_name: '',
+    location_area: 'Rayachoty',
+    public_category: 'Wholesale / Food Supplies',
+    rating: '',
+    review_count: '',
+    notes: ''
+  });
 
   useEffect(() => {
     loadCompetitors();
@@ -16,12 +27,47 @@ export const CompetitorsView: React.FC = () => {
   const loadCompetitors = async () => {
     try {
       setLoading(true);
+      setErrorMsg(null);
       const data = await api.listCompetitors();
       setCompetitors(data);
-    } catch (err) {
+    } catch (err: any) {
       console.error('Failed to load competitors', err);
+      setErrorMsg(err?.message || 'Failed to load competitors from backend.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleAddCompetitor = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formState.competitor_name.trim() || !formState.location_area.trim()) return;
+    try {
+      setSaving(true);
+      setErrorMsg(null);
+      await api.createCompetitor({
+        competitor_name: formState.competitor_name.trim(),
+        location_area: formState.location_area.trim(),
+        public_category: formState.public_category.trim() || undefined,
+        rating: formState.rating ? parseFloat(formState.rating) : null,
+        review_count: formState.review_count ? parseInt(formState.review_count, 10) : 0,
+        notes: formState.notes.trim() || undefined
+      });
+      setIsModalOpen(false);
+      setFormState({ competitor_name: '', location_area: 'Rayachoty', public_category: 'Wholesale / Food Supplies', rating: '', review_count: '', notes: '' });
+      await loadCompetitors();
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Could not save competitor to backend.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDeleteCompetitor = async (id: number) => {
+    try {
+      await api.deleteCompetitor(id);
+      setCompetitors(prev => prev.filter(c => c.id !== id));
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Could not remove competitor.');
     }
   };
 
@@ -35,11 +81,18 @@ export const CompetitorsView: React.FC = () => {
             <h1 className="text-xl font-bold text-white">Local Competitor Intelligence & Benchmarks</h1>
           </div>
           <p className="text-xs text-slate-400 max-w-2xl">
-            Monitored regional traders across Rayachoty and Kadapa. In accordance with system safety constraints, all external competitor claims are flagged as UNVERIFIED until audited.
+            Manually tracked regional traders across Rayachoty and surrounding towns. Add only field-verified traders and verify ratings directly on Google Maps.
           </p>
         </div>
 
-        <div>
+        <div className="flex items-center gap-2.5">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="px-3.5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg text-xs font-bold flex items-center gap-1.5"
+          >
+            <Plus className="w-3.5 h-3.5" />
+            <span>Add Competitor</span>
+          </button>
           <button
             onClick={loadCompetitors}
             disabled={loading}
@@ -51,11 +104,17 @@ export const CompetitorsView: React.FC = () => {
         </div>
       </div>
 
+      {errorMsg && (
+        <div className="p-3.5 bg-rose-500/10 border border-rose-500/30 rounded-lg text-xs text-rose-300">
+          {errorMsg}
+        </div>
+      )}
+
       {/* Mandatory Compliance Notice */}
       <div className="p-3.5 bg-amber-500/10 border border-amber-500/30 rounded-lg flex items-center gap-3 text-xs text-amber-300">
         <AlertTriangle className="w-5 h-5 flex-shrink-0 text-amber-400" />
         <span>
-          <strong>Strict Verification Policy:</strong> Competitor pricing, stock estimates, and weaknesses are unverified third-party claims. Never use unverified competitor accusations in public marketing.
+          <strong>Strict Verification Policy:</strong> Competitor pricing, stock estimates, and weaknesses are manual field observations unless verified on Google Maps. Never use unverified claims in public marketing.
         </span>
       </div>
 
@@ -65,6 +124,13 @@ export const CompetitorsView: React.FC = () => {
           <div className="col-span-3 p-12 text-center text-xs text-slate-500">
             <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-slate-400" />
             Loading competitor snapshots...
+          </div>
+        ) : competitors.length === 0 ? (
+          <div className="col-span-3 p-10 bg-[#0f172a] border border-slate-800 rounded-xl text-center space-y-2">
+            <p className="text-sm font-bold text-white">No Competitor Snapshots Recorded</p>
+            <p className="text-xs text-slate-400 max-w-md mx-auto">
+              Backend database returned 0 competitors (or backend is currently unreachable). Click &ldquo;Add Competitor&rdquo; above to log a real local supplier observed on Google Maps.
+            </p>
           </div>
         ) : (
           competitors.map((comp) => (
@@ -81,40 +147,151 @@ export const CompetitorsView: React.FC = () => {
                       <span>{comp.location_area}</span>
                     </div>
                   </div>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30 flex-shrink-0">
-                    UNVERIFIED
-                  </span>
+                  <div className="flex items-center gap-1.5 flex-shrink-0">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                      {comp.verified_status === 'VERIFIED' ? 'VERIFIED' : 'UNVERIFIED'}
+                    </span>
+                    <button
+                      onClick={() => handleDeleteCompetitor(comp.id)}
+                      className="p-1 text-slate-500 hover:text-rose-400 transition-colors"
+                      title="Remove competitor"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
 
                 <div className="p-3 bg-[#070b14] rounded-lg border border-slate-800/80 space-y-2 text-xs">
                   <div className="flex justify-between items-center">
                     <span className="text-slate-400">Public Category:</span>
-                    <span className="text-slate-200 font-medium">{comp.public_category || 'General Trader'}</span>
+                    <span className="text-slate-200 font-medium">{comp.public_category || 'Not specified'}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-slate-400">Estimated Rating:</span>
+                    <span className="text-slate-400">Observed Rating:</span>
                     <span className="flex items-center gap-1 text-amber-400 font-bold">
                       <Star className="w-3 h-3 fill-amber-400" />
-                      <span>{comp.rating || 4.0} ({comp.review_count || 12})</span>
+                      <span>
+                        {comp.rating != null ? `${comp.rating}` : '—'} ({comp.review_count != null ? comp.review_count : '—'})
+                      </span>
                     </span>
                   </div>
                 </div>
 
                 {comp.notes && (
                   <div className="mt-3 text-[11px] text-slate-400 leading-relaxed italic">
-                    "{comp.notes}"
+                    &ldquo;{comp.notes}&rdquo;
                   </div>
                 )}
               </div>
 
-              <div className="pt-3 border-t border-slate-800 text-[10px] text-slate-500 flex items-center gap-1">
-                <Info className="w-3 h-3" />
-                <span>Monitored for local search positioning only.</span>
+              <div className="pt-3 border-t border-slate-800 text-[10px] text-slate-500 flex items-center justify-between gap-2">
+                <span className="flex items-center gap-1">
+                  <Info className="w-3 h-3" />
+                  <span>Manual search benchmark</span>
+                </span>
+                <a
+                  href={`https://www.google.com/maps/search/${encodeURIComponent(`${comp.competitor_name} ${comp.location_area}`)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-amber-400 hover:underline flex items-center gap-1 font-semibold"
+                >
+                  <span>Verify on Maps</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </div>
             </div>
           ))
         )}
       </div>
+
+      {/* Add Competitor Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-[#0f172a] border border-slate-800 rounded-xl p-6 max-w-md w-full space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+              <h2 className="text-base font-bold text-white">Add Real Competitor Observation</h2>
+              <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-white">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <form onSubmit={handleAddCompetitor} className="space-y-3 text-xs">
+              <div>
+                <label className="text-slate-300 font-medium block mb-1">Business Name *</label>
+                <input
+                  type="text"
+                  required
+                  value={formState.competitor_name}
+                  onChange={(e) => setFormState({ ...formState, competitor_name: e.target.value })}
+                  placeholder="Exact Google Maps business title"
+                  className="w-full bg-[#070b14] border border-slate-800 rounded-lg p-2 text-white"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-slate-300 font-medium block mb-1">Area *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formState.location_area}
+                    onChange={(e) => setFormState({ ...formState, location_area: e.target.value })}
+                    className="w-full bg-[#070b14] border border-slate-800 rounded-lg p-2 text-white"
+                  />
+                </div>
+                <div>
+                  <label className="text-slate-300 font-medium block mb-1">Category</label>
+                  <input
+                    type="text"
+                    value={formState.public_category}
+                    onChange={(e) => setFormState({ ...formState, public_category: e.target.value })}
+                    className="w-full bg-[#070b14] border border-slate-800 rounded-lg p-2 text-white"
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-slate-300 font-medium block mb-1">Google Maps Rating</label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    min="1"
+                    max="5"
+                    value={formState.rating}
+                    onChange={(e) => setFormState({ ...formState, rating: e.target.value })}
+                    placeholder="Optional"
+                    className="w-full bg-[#070b14] border border-slate-800 rounded-lg p-2 text-white"
+                  />
+                </div>
+                <div>
+                  <label className="text-slate-300 font-medium block mb-1">Review Count</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={formState.review_count}
+                    onChange={(e) => setFormState({ ...formState, review_count: e.target.value })}
+                    placeholder="Optional"
+                    className="w-full bg-[#070b14] border border-slate-800 rounded-lg p-2 text-white"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="text-slate-300 font-medium block mb-1">Notes</label>
+                <textarea
+                  rows={2}
+                  value={formState.notes}
+                  onChange={(e) => setFormState({ ...formState, notes: e.target.value })}
+                  className="w-full bg-[#070b14] border border-slate-800 rounded-lg p-2 text-white resize-none"
+                />
+              </div>
+              <div className="pt-2 flex justify-end gap-2">
+                <button type="button" onClick={() => setIsModalOpen(false)} className="px-3.5 py-2 bg-slate-800 text-slate-300 rounded-lg font-semibold">Cancel</button>
+                <button type="submit" disabled={saving} className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg font-bold">
+                  {saving ? 'Saving...' : 'Save Competitor'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* RAIS Differentiator Box */}
       <div className="bg-[#0f172a] border border-slate-800 rounded-xl p-6">

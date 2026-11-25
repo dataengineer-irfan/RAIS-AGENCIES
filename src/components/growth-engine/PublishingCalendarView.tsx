@@ -39,8 +39,9 @@ export const PublishingCalendarView: React.FC = () => {
     try {
       setActionLoading(true);
       const res = await api.approveCampaign(currentCampaign.id);
+      const count = res.scheduled_posts ?? res.scheduled_posts_count ?? currentCampaign.posts?.length ?? 0;
       setNotification({
-        message: `Campaign explicitly approved! ${res.scheduled_posts_count} posts registered in the scheduled publishing queue.`,
+        message: `Campaign explicitly approved! ${count} posts registered in the scheduled publishing queue.`,
         type: 'success'
       });
       await loadCampaigns();
@@ -112,7 +113,11 @@ export const PublishingCalendarView: React.FC = () => {
             <h1 className="text-xl font-bold text-white">30-Day Launch Publishing Calendar</h1>
           </div>
           <p className="text-xs text-slate-400 max-w-2xl">
-            {currentCampaign ? currentCampaign.title : 'Loading campaign...'} — Imported from Blueprint in strict DRAFT mode. Review every post before approving automated schedule.
+            {loading
+              ? 'Loading campaign from backend...'
+              : currentCampaign
+              ? `${currentCampaign.title} — Imported in strict DRAFT mode. Review every post before approving.`
+              : 'Campaign backend unavailable or no campaigns created yet.'}
           </p>
         </div>
 

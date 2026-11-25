@@ -10,9 +10,10 @@ export const YouTubeStudioView: React.FC = () => {
   const [settings, setSettings] = useState<YouTubeDriveSetting>({
     folder_id: '1Bm_WjSGQb_KQSRz6i08DSsp2mtzOborn',
     folder_name: 'RAIS_Daily_Promotion_Videos',
-    auto_publish_daily: true,
+    auto_publish_daily: false,
     daily_publish_hour: 10,
-    is_connected: true
+    is_connected: false,
+    oauth_connected: false
   });
   const [queue, setQueue] = useState<YouTubeQueueItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -21,9 +22,15 @@ export const YouTubeStudioView: React.FC = () => {
   const [publishingId, setPublishingId] = useState<number | null>(null);
   const [folderInput, setFolderInput] = useState<string>('https://drive.google.com/drive/folders/1Bm_WjSGQb_KQSRz6i08DSsp2mtzOborn');
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
+  const [notice, setNotice] = useState<{ text: string; type: 'success' | 'error' | 'info' } | null>(null);
   const [showGuide, setShowGuide] = useState<boolean>(false);
   const [expandedDescId, setExpandedDescId] = useState<number | null>(null);
   const [copiedText, setCopiedText] = useState<string | null>(null);
+
+  const showNotice = (text: string, type: 'success' | 'error' | 'info') => {
+    setNotice({ text, type });
+    setTimeout(() => setNotice(null), 6000);
+  };
 
   useEffect(() => {
     loadData();
@@ -50,11 +57,11 @@ export const YouTubeStudioView: React.FC = () => {
 
   const handleClearQueue = async () => {
     try {
-      await api.clearYouTubeQueue();
+      const res = await api.clearYouTubeQueue();
       setQueue([]);
-    } catch (err) {
-      console.error('Failed to clear queue', err);
-      setQueue([]);
+      showNotice(res.message || 'Queue cleared.', 'info');
+    } catch (err: any) {
+      showNotice(err?.message || 'Failed to clear queue on backend.', 'error');
     }
   };
 
@@ -68,19 +75,21 @@ export const YouTubeStudioView: React.FC = () => {
       setSettings(updated);
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 3000);
-    } catch (err) {
-      console.error('Error saving settings', err);
+      showNotice('Drive folder settings saved.', 'success');
+    } catch (err: any) {
+      showNotice(err?.message || 'Failed to save Drive folder settings.', 'error');
     }
   };
 
   const handleSyncDrive = async () => {
     setSyncing(true);
     try {
-      await api.syncGoogleDrive();
+      const res = await api.syncGoogleDrive();
       const updatedQueue = await api.listYouTubeQueue();
       setQueue(updatedQueue);
-    } catch (err) {
-      console.error('Sync failed', err);
+      showNotice(res.message, res.status === 'OAUTH_REQUIRED' || res.status === 'ERROR' ? 'error' : 'success');
+    } catch (err: any) {
+      showNotice(err?.message || 'Drive sync failed.', 'error');
     } finally {
       setSyncing(false);
     }
@@ -90,12 +99,11 @@ export const YouTubeStudioView: React.FC = () => {
     setPublishing(true);
     try {
       const res = await api.publishNextYouTubeVideo();
-      if (res.status === 'SUCCESS') {
-        const updatedQueue = await api.listYouTubeQueue();
-        setQueue(updatedQueue);
-      }
-    } catch (err) {
-      console.error('Publish next failed', err);
+      const updatedQueue = await api.listYouTubeQueue();
+      setQueue(updatedQueue);
+      showNotice(res.message, res.status === 'SUCCESS' ? 'success' : 'error');
+    } catch (err: any) {
+      showNotice(err?.message || 'Publish next failed.', 'error');
     } finally {
       setPublishing(false);
     }
@@ -104,11 +112,12 @@ export const YouTubeStudioView: React.FC = () => {
   const handlePublishItem = async (id: number) => {
     setPublishingId(id);
     try {
-      await api.publishYouTubeItem(id);
+      const res = await api.publishYouTubeItem(id);
       const updatedQueue = await api.listYouTubeQueue();
       setQueue(updatedQueue);
-    } catch (err) {
-      console.error('Publish item failed', err);
+      showNotice(res.message, res.status === 'SUCCESS' ? 'success' : 'error');
+    } catch (err: any) {
+      showNotice(err?.message || 'Publish item failed.', 'error');
     } finally {
       setPublishingId(null);
     }
@@ -160,6 +169,23 @@ export const YouTubeStudioView: React.FC = () => {
               <span>{showGuide ? 'Hide Setup Guide' : 'Setup Guide & Keys'}</span>
             </button>
 
+            {!settings.oauth_connected && (
+              <button
+                onClick={async () => {
+                  try {
+                    const res = await api.getGoogleAuthorizeUrl(true);
+                    if (res.authorization_url) window.location.href = res.authorization_url;
+                  } catch (err: any) {
+                    showNotice(err?.message || 'Could not start Google OAuth flow on backend.', 'error');
+                  }
+                }}
+                className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow"
+              >
+                <Key className="w-4 h-4" />
+                <span>Authorize Drive &amp; YouTube</span>
+              </button>
+            )}
+
             <button
               onClick={handleSyncDrive}
               disabled={syncing}
@@ -199,9 +225,17 @@ export const YouTubeStudioView: React.FC = () => {
               {settings.folder_name || 'RAIS_Daily_Promotion_Videos'}
             </div>
             <div className="flex items-center gap-1.5 mt-1.5">
-              <span className={`w-2 h-2 rounded-full ${settings.is_connected ? 'bg-emerald-400' : 'bg-amber-400'}`} />
+              <span className={`w-2 h-2 rounded-full ${
+                settings.backend_offline ? 'bg-rose-400' : settings.oauth_connected ? 'bg-emerald-400' : 'bg-amber-400'
+              }`} />
               <span className="text-[11px] text-slate-400">
-                {settings.is_connected ? 'Connected to Drive' : 'Ready for Folder ID'}
+                {settings.backend_offline
+                  ? 'Backend YouTube API Unavailable'
+                  : settings.oauth_connected
+                  ? 'Google OAuth + Folder Linked'
+                  : settings.is_connected
+                  ? 'Folder Linked (Google OAuth Needed)'
+                  : 'Not Configured'}
               </span>
             </div>
           </div>
@@ -227,6 +261,28 @@ export const YouTubeStudioView: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {notice && (
+        <div className={`p-4 rounded-xl text-xs font-medium flex items-center gap-2 border ${
+          notice.type === 'success'
+            ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-300'
+            : notice.type === 'error'
+            ? 'bg-rose-500/15 border-rose-500/30 text-rose-300'
+            : 'bg-amber-500/15 border-amber-500/30 text-amber-300'
+        }`}>
+          <AlertCircle className="w-4 h-4 flex-shrink-0" />
+          <span>{notice.text}</span>
+        </div>
+      )}
+
+      {!loading && settings.backend_offline && (
+        <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs flex items-center gap-2.5">
+          <AlertCircle className="w-5 h-5 flex-shrink-0 text-amber-400" />
+          <span>
+            <strong>Backend YouTube Endpoints Unavailable:</strong> The live Render backend has not deployed the YouTube &amp; Drive API endpoints yet (or is offline). Deploy backend v1.0.4+ on Render and authorize Google OAuth with Drive &amp; YouTube scopes to enable live syncing.
+          </span>
+        </div>
+      )}
 
       {/* Setup Guide Accordion */}
       {showGuide && (
@@ -298,9 +354,9 @@ export const YouTubeStudioView: React.FC = () => {
                 Under <strong>APIs & Services ➔ Credentials</strong>, verify your OAuth 2.0 Web Client contains this exact Authorized redirect URI:
               </p>
               <div className="bg-slate-900 border border-slate-800 p-2 rounded text-[11px] text-slate-300 break-all font-mono flex items-center justify-between gap-1">
-                <span>https://rais-growth-backend.onrender.com/api/v1/google/oauth2callback</span>
+                <span>https://rais-growth-backend.onrender.com/api/v1/google/callback</span>
                 <button
-                  onClick={() => copyToClipboard('https://rais-growth-backend.onrender.com/api/v1/google/oauth2callback', 'redirect')}
+                  onClick={() => copyToClipboard('https://rais-growth-backend.onrender.com/api/v1/google/callback', 'redirect')}
                   className="p-1 hover:text-white"
                   title="Copy URI"
                 >

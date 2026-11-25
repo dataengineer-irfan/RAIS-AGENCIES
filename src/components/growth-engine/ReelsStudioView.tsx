@@ -7,8 +7,9 @@ import { Film, Check } from 'lucide-react';
 
 export const ReelsStudioView: React.FC = () => {
   const [reels, setReels] = useState<ReelCalendarItem[]>(() => AutomationStorage.getReels());
-  const [selectedReelId, setSelectedReelId] = useState<string>('reel-day-01');
+  const [selectedReelId, setSelectedReelId] = useState<string>('reel-slot-01');
   const [themeFilter, setThemeFilter] = useState<string>('ALL');
+  const [publishNotice, setPublishNotice] = useState<string | null>(null);
 
   const selectedReel = reels.find(r => r.id === selectedReelId) || reels[0];
 
@@ -24,13 +25,18 @@ export const ReelsStudioView: React.FC = () => {
   };
 
   const handlePublishReel = async (reel: ReelCalendarItem) => {
-    await InstagramPublisher.publishReel(reel);
+    const res = await InstagramPublisher.publishReel(reel);
+    setPublishNotice(res.errorMessage || res.auditMessage);
+    setTimeout(() => setPublishNotice(null), 5000);
     setReels(AutomationStorage.getReels());
   };
 
   const filteredReels = themeFilter === 'ALL'
     ? reels
     : reels.filter(r => r.theme === themeFilter);
+
+  const publishedCount = reels.filter(r => r.status === 'published').length;
+  const pendingCount = reels.length - publishedCount;
 
   return (
     <div className="space-y-6">
@@ -39,21 +45,30 @@ export const ReelsStudioView: React.FC = () => {
         <div>
           <h2 className="text-xl font-bold text-white flex items-center gap-2">
             <Film className="w-5 h-5 text-amber-400" />
-            <span>30-Day Instagram Reels Production Studio</span>
+            <span>Reels Video Studio ({reels.length} Compiled MP4s)</span>
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            Official 9:16 vertical commercial video assets produced for @raisfrozenfoods with verified Telugu audio & overlays.
+            9:16 vertical commercial MP4 assets compiled in Telugu &amp; Hindi for @raisfrozenfoods. Download any MP4 below to upload via Meta Business Suite.
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <span className="px-3 py-1 rounded-full text-xs font-bold bg-pink-500/15 text-pink-300 border border-pink-500/30 font-mono">
-            30 Masters Ready
+            {reels.length} Compiled MP4s
           </span>
           <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-mono">
-            {reels.filter(r => r.status === 'published').length} Published Live
+            {publishedCount} Published Live
+          </span>
+          <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30 font-mono">
+            {pendingCount} Pending Dispatch
           </span>
         </div>
       </div>
+
+      {publishNotice && (
+        <div className="p-3.5 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-200 text-xs font-medium">
+          {publishNotice}
+        </div>
+      )}
 
       {/* Theme Filter Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-xl bg-[#0f1c3f]/80 border border-cyan-500/20">

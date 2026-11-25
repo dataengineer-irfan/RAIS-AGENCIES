@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Trash2, Plus, Minus, MessageSquare, CheckCircle, FileText, Send, Sparkles, Star, MapPin } from 'lucide-react';
 import { PRODUCTS, BUSINESS_INFO, ProductItem } from '../data/catalogue';
 import { AutomationStorage } from '../services/automationStorage';
+import { api } from '../services/api';
 
 const REGIONAL_ROUTES = [
   'Rayachoty (Hub 516269)',
@@ -54,20 +55,37 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
   const captureLeadInCRM = (channel: 'whatsapp_direct' | 'website_quote') => {
     try {
       const leadProducts = itemsInQuote.map(i => `${i.product.name} (${i.product.brand}) x ${i.qty}`).join('; ');
+      const buyerPhone = phone.trim();
+      const buyerBiz = businessName.trim() || 'Direct Storefront Buyer';
+      const buyerLoc = deliveryArea.trim() || 'Rayachoty (516269)';
+
       AutomationStorage.addLead({
         source: channel,
         customerName: customerName.trim() || 'Storefront Buyer',
-        businessName: businessName.trim() || 'Rayachoty Business',
+        businessName: buyerBiz,
         businessType: 'Hotel / Restaurant',
         productInterest: leadProducts || 'Wholesale Catalogue Order',
         requiredQuantity: `${totalUnits} Units (${itemsInQuote.length} Items)`,
-        deliveryLocation: deliveryArea.trim() || 'Rayachoty (516269)',
-        phone: phone.trim() || BUSINESS_INFO.whatsappNumber,
+        deliveryLocation: buyerLoc,
+        phone: buyerPhone || undefined,
         status: 'Quote Pending',
         lastMessageSnippet: notes ? `Notes: ${notes} | Items: ${leadProducts}` : `Order: ${leadProducts}`,
         humanHandoffRequired: true,
         notes: `Submitted via Storefront Requisition Modal (${channel === 'whatsapp_direct' ? 'WhatsApp' : 'Wholesale Bill Request'}).`
       });
+
+      // Also persist to backend B2B Leads CRM when buyer provided contact details
+      if (buyerPhone) {
+        void api.createLead({
+          business_name: buyerBiz,
+          contact_person: customerName.trim() || undefined,
+          phone: buyerPhone,
+          business_type: 'Hotel / Restaurant',
+          location: buyerLoc,
+          product_interest: leadProducts || 'Wholesale Catalogue Order',
+          status: 'NEW'
+        }).catch(() => {});
+      }
     } catch (e) {
       console.warn('Lead capture notice:', e);
     }

@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Settings, Save, Plus, CheckCircle2, AlertCircle, 
-  MapPin, Phone, Globe, Layers, ShieldCheck 
+  Settings, Save, CheckCircle2, AlertCircle, RefreshCw,
+  MapPin, Globe, Layers, ShieldCheck 
 } from 'lucide-react';
 import { api, BusinessProfile, CatalogSKU, ServiceArea } from '../../services/api';
+import { VERIFIED_BUSINESS_FACTS } from '../../data/gbpData';
+import { PRODUCTS, BUSINESS_INFO } from '../../data/catalogue';
 
 export const BusinessInfoManagerView: React.FC = () => {
   const [profile, setProfile] = useState<BusinessProfile | null>(null);
   const [skus, setSkus] = useState<CatalogSKU[]>([]);
   const [areas, setAreas] = useState<ServiceArea[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isOfflineSnapshot, setIsOfflineSnapshot] = useState(false);
   const [saveStatus, setSaveStatus] = useState<string | null>(null);
 
   useEffect(() => {
@@ -19,6 +22,7 @@ export const BusinessInfoManagerView: React.FC = () => {
   const loadData = async () => {
     try {
       setLoading(true);
+      setIsOfflineSnapshot(false);
       const [pData, skusData, areasData] = await Promise.all([
         api.getProfile(),
         api.listSkus(),
@@ -28,7 +32,46 @@ export const BusinessInfoManagerView: React.FC = () => {
       setSkus(skusData);
       setAreas(areasData);
     } catch (e) {
-      console.error(e);
+      console.error('Backend unreachable for BusinessInfoManagerView', e);
+      setIsOfflineSnapshot(true);
+      setProfile({
+        id: 0,
+        business_name: VERIFIED_BUSINESS_FACTS.businessName,
+        tagline: VERIFIED_BUSINESS_FACTS.tagline,
+        address: VERIFIED_BUSINESS_FACTS.address,
+        city: 'Rayachoty',
+        state: 'Andhra Pradesh',
+        pin_code: '516269',
+        primary_phone: VERIFIED_BUSINESS_FACTS.phone,
+        secondary_phone: '',
+        whatsapp_number: `91${VERIFIED_BUSINESS_FACTS.phone}`,
+        website_url: VERIFIED_BUSINESS_FACTS.websiteUrl,
+        catalogue_url: VERIFIED_BUSINESS_FACTS.catalogueUrl,
+        google_maps_url: VERIFIED_BUSINESS_FACTS.gmbUrl,
+        primary_category: VERIFIED_BUSINESS_FACTS.primaryCategory,
+        secondary_categories: VERIFIED_BUSINESS_FACTS.secondaryCategories.join(', '),
+        description: VERIFIED_BUSINESS_FACTS.tagline
+      });
+      setSkus(PRODUCTS.map((p, i) => ({
+        id: i + 1,
+        sku: p.sku,
+        name: p.name,
+        brand: p.brand,
+        category: p.categoryName,
+        pack_size: p.pack,
+        in_stock: true,
+        is_commercial_focus: Boolean(p.isFeatured),
+        description: p.description,
+        verification_status: 'VERIFIED'
+      })));
+      setAreas(BUSINESS_INFO.deliveryRoutes.map((routeName: string, i: number) => ({
+        id: i + 1,
+        area_name: routeName,
+        is_primary: i === 0,
+        delivery_frequency: i === 0 ? 'Daily Fulfillment' : 'Scheduled Route',
+        notes: 'Wholesale cold-chain delivery route',
+        verification_status: 'VERIFIED'
+      })));
     } finally {
       setLoading(false);
     }
@@ -36,7 +79,7 @@ export const BusinessInfoManagerView: React.FC = () => {
 
   const handleProfileSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!profile) return;
+    if (!profile || isOfflineSnapshot) return;
     try {
       setSaveStatus('Saving...');
       await api.updateProfile(profile);
@@ -48,6 +91,7 @@ export const BusinessInfoManagerView: React.FC = () => {
   };
 
   const toggleSkuStock = async (sku: CatalogSKU) => {
+    if (isOfflineSnapshot) return;
     try {
       const updated = await api.updateSku(sku.id, { in_stock: !sku.in_stock });
       setSkus(skus.map(s => s.id === sku.id ? updated : s));
@@ -57,21 +101,44 @@ export const BusinessInfoManagerView: React.FC = () => {
   };
 
   if (loading || !profile) {
-    return <div className="p-8 text-center text-slate-400">Loading Business Information...</div>;
+    return (
+      <div className="p-8 text-center text-slate-400 flex flex-col items-center gap-2">
+        <RefreshCw className="w-5 h-5 animate-spin text-amber-400" />
+        <span>Loading Business Information...</span>
+      </div>
+    );
   }
 
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div>
-        <h1 className="text-xl font-bold text-white flex items-center gap-2">
-          <Settings className="w-5 h-5 text-amber-400" />
-          <span>Editable Business Information & Catalog Manager</span>
-        </h1>
-        <p className="text-xs text-slate-400 mt-1">
-          Update verified business details, categories, live stock levels, and service routes without modifying source code.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h1 className="text-xl font-bold text-white flex items-center gap-2">
+            <Settings className="w-5 h-5 text-amber-400" />
+            <span>Editable Business Information & Catalog Manager</span>
+          </h1>
+          <p className="text-xs text-slate-400 mt-1">
+            Update verified business details, categories, live stock levels, and service routes without modifying source code.
+          </p>
+        </div>
+        <button
+          onClick={loadData}
+          className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg text-xs font-semibold flex items-center gap-1.5 self-start"
+        >
+          <RefreshCw className="w-3.5 h-3.5 text-amber-400" />
+          <span>Sync Backend</span>
+        </button>
       </div>
+
+      {isOfflineSnapshot && (
+        <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs flex items-center gap-2.5">
+          <AlertCircle className="w-4 h-4 flex-shrink-0 text-amber-400" />
+          <span>
+            <strong>Backend Unreachable (Read-Only Snapshot):</strong> Displaying verified catalogue &amp; business facts from static build. Editing stock or profile requires backend online.
+          </span>
+        </div>
+      )}
 
       {saveStatus && (
         <div className={`p-3 rounded-lg text-xs font-semibold flex items-center gap-2 ${
