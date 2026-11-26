@@ -1,133 +1,185 @@
-// Secure Authentication Service for RAIS Wholesale Hub Admin Portal
+// Backend-verified JWT Authentication Service for RAIS Growth Engine Portal
 
-const AUTH_STORAGE_KEY = 'rais_admin_session';
-const PASSKEY_STORAGE_KEY = 'rais_admin_passkey';
-const ATTEMPTS_KEY = 'rais_admin_attempts';
+const API_HOST =
+  (import.meta as any).env?.VITE_GROWTH_ENGINE_API_URL ||
+  'https://rais-growth-backend.onrender.com';
+const BASE_URL = `${API_HOST.replace(/\/$/, '')}/api/v1`;
 
-const DEFAULT_CREDENTIALS = {
-  username: 'admin',
-  passkey: 'RAIS@516269' // Default initial PIN based on Rayachoty PIN 516269
-};
+const TOKEN_STORAGE_KEY = 'rais_admin_jwt';
+const USER_STORAGE_KEY = 'rais_admin_user';
 
 export interface AdminSession {
   isAuthenticated: boolean;
   user: string;
-  loginTime: string;
   token: string;
 }
 
 export class AuthService {
   /**
-   * Retrieves the current stored passkey (or returns default).
+   * Returns stored Bearer JWT if present and not locally expired.
    */
-  static getStoredPasskey(): string {
-    return localStorage.getItem(PASSKEY_STORAGE_KEY) || DEFAULT_CREDENTIALS.passkey;
+  static getToken(): string | null {
+    try {
+      const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+      if (!token) return null;
+      const parts = token.split('.');
+      if (parts.length !== 3) {
+        this.logout();
+        return null;
+      }
+      const payload = JSON.parse(atob(parts[1].replace(/-/g, '+').replace(/_/g, '/')));
+      if (typeof payload.exp === 'number' && payload.exp * 1000 < Date.now()) {
+        this.logout();
+        return null;
+      }
+      return token;
+    } catch {
+      return null;
+    }
   }
 
   /**
-   * Changes the master admin passkey.
+   * Returns Authorization header object when logged in.
    */
-  static updatePasskey(currentPasskey: string, newPasskey: string): { success: boolean; message: string } {
-    if (currentPasskey !== this.getStoredPasskey()) {
-      return { success: false, message: 'Current password is incorrect.' };
-    }
-    if (!newPasskey || newPasskey.length < 6) {
-      return { success: false, message: 'New password must be at least 6 characters.' };
-    }
-    localStorage.setItem(PASSKEY_STORAGE_KEY, newPasskey);
-    return { success: true, message: 'Password successfully updated.' };
+  static getAuthHeaders(): Record<string, string> {
+    const token = this.getToken();
+    return token ? { Authorization: `Bearer ${token}` } : {};
   }
 
   /**
-   * Validates admin login credentials with lockout protection.
+   * Authenticates directly against FastAPI /api/v1/auth/login (Neon Postgres bcrypt hash).
    */
-  static login(username: string, passkey: string): { success: boolean; message: string; session?: AdminSession } {
-    // Check lockout
-    const attemptData = this.getAttemptData();
-    if (attemptData.lockedUntil && Date.now() < attemptData.lockedUntil) {
-      const waitSec = Math.ceil((attemptData.lockedUntil - Date.now()) / 1000);
-      return { success: false, message: `Account temporarily locked due to too many failed attempts. Please wait ${waitSec}s.` };
-    }
+  static async login(
+    username: string,
+    passkey: string
+  ): Promise<{ success: boolean; message: string; session?: AdminSession }> {
+    try {
+      const res = await fetch(`${BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: username.trim(),
+          passkey: passkey.trim(),
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        return {
+          success: false,
+          message:
+            data?.detail ||
+            `Authentication rejected (HTTP ${res.status}). Check username and passkey.`,
+        };
+      }
+      if (!data.access_token) {
+        return { success: false, message: 'Server did not return a session token.' };
+      }
 
-    const cleanUser = username.trim().toLowerCase();
-    const cleanPass = passkey.trim();
-    const validPass = this.getStoredPasskey();
+      localStorage.setItem(TOKEN_STORAGE_KEY, data.access_token);
+      localStorage.setItem(USER_STORAGE_KEY, data.user || 'admin');
+      // Purge any legacy client-side demo auth keys
+      localStorage.removeItem('rais_admin_passkey');
+      sessionStorage.removeItem('rais_admin_session');
 
-    const isUserValid = cleanUser === 'admin' || cleanUser === 'rais.frozenfoods@gmail.com' || cleanUser === 'rais';
-    const isPassValid = cleanPass === validPass;
-
-    if (isUserValid && isPassValid) {
-      // Reset attempts
-      localStorage.removeItem(ATTEMPTS_KEY);
-      
-      const session: AdminSession = {
-        isAuthenticated: true,
-        user: cleanUser,
-        loginTime: new Date().toISOString(),
-        token: `rais_auth_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`
+      return {
+        success: true,
+        message: 'Authenticated via RAIS Cloud Security.',
+        session: {
+          isAuthenticated: true,
+          user: data.user || 'admin',
+          token: data.access_token,
+        },
       };
-
-      sessionStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(session));
-      return { success: true, message: 'Authentication successful.', session };
+    } catch (err: any) {
+      return {
+        success: false,
+        message:
+          err?.message ||
+          'Backend server is waking up or unreachable. Please retry in a few seconds.',
+      };
     }
-
-    // Record failed attempt
-    const newCount = (attemptData.count || 0) + 1;
-    let lockedUntil = undefined;
-    if (newCount >= 5) {
-      lockedUntil = Date.now() + 60 * 1000; // 60s lock
-    }
-    localStorage.setItem(ATTEMPTS_KEY, JSON.stringify({ count: newCount, lockedUntil }));
-
-    if (lockedUntil) {
-      return { success: false, message: '5 failed login attempts. Locked for 60 seconds.' };
-    }
-
-    return { 
-      success: false, 
-      message: `Invalid username or password. (${5 - newCount} attempts remaining before temporary lockout)` 
-    };
   }
 
   /**
-   * Sets a verified admin session directly (e.g. after Google OAuth return).
+   * Verifies stored JWT against backend /api/v1/auth/verify.
+   * Logs out immediately on 401; preserves valid unexpired token only if network is temporarily unreachable.
    */
-  static setDirectSession(user: string = 'admin'): void {
-    const session: AdminSession = {
-      isAuthenticated: true,
-      user,
-      loginTime: new Date().toISOString(),
-      token: 'admin-token-' + Date.now()
+  static async verifySession(): Promise<{ authenticated: boolean; user?: string }> {
+    const token = this.getToken();
+    if (!token) return { authenticated: false };
+
+    try {
+      const res = await fetch(`${BASE_URL}/auth/verify`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.status === 401 || res.status === 403) {
+        this.logout();
+        return { authenticated: false };
+      }
+      if (res.ok) {
+        const data = await res.json().catch(() => ({}));
+        return {
+          authenticated: Boolean(data.authenticated),
+          user: data.user || localStorage.getItem(USER_STORAGE_KEY) || 'admin',
+        };
+      }
+    } catch {
+      // Backend cold-starting; keep locally non-expired JWT until next API call validates
+    }
+    return {
+      authenticated: true,
+      user: localStorage.getItem(USER_STORAGE_KEY) || 'admin',
     };
-    sessionStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(session));
   }
 
   /**
-   * Checks if user has an active authenticated session.
+   * Changes the admin passkey on the server (Neon Postgres bcrypt hash).
+   */
+  static async changePasskey(
+    currentPasskey: string,
+    newPasskey: string
+  ): Promise<{ success: boolean; message: string }> {
+    const token = this.getToken();
+    if (!token) {
+      return { success: false, message: 'Admin session required.' };
+    }
+    try {
+      const res = await fetch(`${BASE_URL}/auth/change-passkey`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          current_passkey: currentPasskey,
+          new_passkey: newPasskey,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        return { success: false, message: data?.detail || `HTTP ${res.status}: Failed to update passkey.` };
+      }
+      return { success: true, message: data?.message || 'Admin passkey updated in cloud database.' };
+    } catch (err: any) {
+      return { success: false, message: err?.message || 'Backend unreachable.' };
+    }
+  }
+
+  /**
+   * Quick synchronous check for unexpired JWT (validated asynchronously via verifySession).
    */
   static checkAuth(): boolean {
-    try {
-      const sessionStr = sessionStorage.getItem(AUTH_STORAGE_KEY);
-      if (!sessionStr) return false;
-      const session: AdminSession = JSON.parse(sessionStr);
-      return Boolean(session && session.isAuthenticated);
-    } catch {
-      return false;
-    }
+    return Boolean(this.getToken());
   }
 
   /**
-   * Logs out the current admin session.
+   * Clears all local & legacy admin credentials cleanly.
    */
   static logout(): void {
-    sessionStorage.removeItem(AUTH_STORAGE_KEY);
-  }
-
-  private static getAttemptData(): { count: number; lockedUntil?: number } {
-    try {
-      const str = localStorage.getItem(ATTEMPTS_KEY);
-      if (str) return JSON.parse(str);
-    } catch {}
-    return { count: 0 };
+    localStorage.removeItem(TOKEN_STORAGE_KEY);
+    localStorage.removeItem(USER_STORAGE_KEY);
+    localStorage.removeItem('rais_admin_passkey');
+    localStorage.removeItem('rais_admin_attempts');
+    sessionStorage.removeItem('rais_admin_session');
   }
 }

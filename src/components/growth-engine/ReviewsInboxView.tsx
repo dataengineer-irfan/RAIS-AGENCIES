@@ -11,6 +11,7 @@ export const ReviewsInboxView: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [syncing, setSyncing] = useState<boolean>(false);
   const [actionLoading, setActionLoading] = useState<number | null>(null);
+  const [regeneratingId, setRegeneratingId] = useState<number | null>(null);
   const [notification, setNotification] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
   const [replyTexts, setReplyTexts] = useState<Record<number, string>>({});
   const [approverName, setApproverName] = useState<string>('RAIS Admin');
@@ -161,6 +162,32 @@ export const ReviewsInboxView: React.FC = () => {
       });
     } finally {
       setActionLoading(null);
+      setTimeout(() => setNotification(null), 5000);
+    }
+  };
+
+  const handleRegenerateReply = async (draftId: number) => {
+    try {
+      setRegeneratingId(draftId);
+      const res = await api.regenerateReviewReply(draftId);
+      if (res.reply_english) {
+        setReplyTexts((prev) => ({ ...prev, [draftId]: res.reply_english }));
+      }
+      setNotification({
+        message:
+          res.generation_engine === 'gemini'
+            ? 'Reply regenerated with Gemini AI (English & Telugu). Review before approving!'
+            : 'Reply refreshed from compliant templates (add Gemini API key for bespoke AI copy).',
+        type: 'success',
+      });
+      await loadAll();
+    } catch (err: any) {
+      setNotification({
+        message: err.message || 'Failed to regenerate AI reply',
+        type: 'error',
+      });
+    } finally {
+      setRegeneratingId(null);
       setTimeout(() => setNotification(null), 5000);
     }
   };
@@ -572,7 +599,16 @@ export const ReviewsInboxView: React.FC = () => {
                     />
 
                     {!isApproved && (
-                      <div className="flex justify-end">
+                      <div className="flex flex-wrap items-center justify-end gap-2">
+                        <button
+                          type="button"
+                          onClick={() => handleRegenerateReply(latestDraft.id)}
+                          disabled={regeneratingId === latestDraft.id || actionLoading === latestDraft.id}
+                          className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-cyan-300 border border-slate-700 font-semibold text-xs rounded-lg transition-all flex items-center gap-1.5"
+                        >
+                          <Sparkles className={`w-3.5 h-3.5 ${regeneratingId === latestDraft.id ? 'animate-spin' : ''}`} />
+                          <span>{regeneratingId === latestDraft.id ? 'Writing with Gemini...' : 'Regenerate with Gemini AI'}</span>
+                        </button>
                         <button
                           type="button"
                           onClick={() => handleApproveReply(latestDraft.id)}

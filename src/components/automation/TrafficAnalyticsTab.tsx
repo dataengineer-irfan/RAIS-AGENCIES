@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { AnalyticsService, AnalyticsEvent, ReelPerformanceRecord } from '../../services/analyticsService';
-import { REELS_30_DAYS } from '../../data/reelsCalendar';
-import { 
-  Eye, TrendingUp, Globe, 
-  Instagram, MessageCircle, BarChart3, ArrowUpRight, 
-  Check, Save, RefreshCw, ShieldCheck
+import { AnalyticsService } from '../../services/analyticsService';
+import { api } from '../../services/api';
+import {
+  Eye, TrendingUp, Globe,
+  Instagram, MessageCircle, BarChart3, ArrowUpRight,
+  Check, Save, RefreshCw, ShieldCheck, Video, Facebook, ExternalLink
 } from 'lucide-react';
 
 export const TrafficAnalyticsTab: React.FC = () => {
-  const [events, setEvents] = useState<AnalyticsEvent[]>([]);
-  const [reelStats, setReelStats] = useState<Record<string, ReelPerformanceRecord>>({});
+  const [summary, setSummary] = useState<any>(null);
+  const [social, setSocial] = useState<any>(null);
   const [cloudHits, setCloudHits] = useState<{ totalHits: number; catalogueHits: number }>({ totalHits: 0, catalogueHits: 0 });
   const [ga4Input, setGa4Input] = useState<string>('');
   const [ga4Saved, setGa4Saved] = useState<boolean>(false);
-  const [editingReelId, setEditingReelId] = useState<string | null>(null);
-  const [editViews, setEditViews] = useState<number>(0);
-  const [editLikes, setEditLikes] = useState<number>(0);
-  const [editInquiries, setEditInquiries] = useState<number>(0);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
 
   useEffect(() => {
@@ -26,39 +22,35 @@ export const TrafficAnalyticsTab: React.FC = () => {
 
   const loadData = async () => {
     setIsRefreshing(true);
-    setEvents(AnalyticsService.getEvents());
-    setReelStats(AnalyticsService.getReelStats());
-    const hits = await AnalyticsService.fetchCloudHitCount();
-    setCloudHits(hits);
-    setIsRefreshing(false);
+    try {
+      const [dbSummary, socialRes, hits] = await Promise.all([
+        api.getAnalyticsSummary(30).catch(() => null),
+        api.getSocialAnalytics().catch(() => null),
+        AnalyticsService.fetchCloudHitCount().catch(() => ({ totalHits: 0, catalogueHits: 0 })),
+      ]);
+      setSummary(dbSummary);
+      setSocial(socialRes);
+      setCloudHits(hits);
+    } finally {
+      setIsRefreshing(false);
+    }
   };
 
-  // Calculations
-  const totalEvents = events.length;
-  const pageViewEvents = events.filter(e => e.type === 'PAGE_VIEW').length;
-  const whatsappClicks = events.filter(e => e.type === 'WHATSAPP_CLICK').length;
-  const catalogueOpens = events.filter(e => e.type === 'CATALOGUE_OPEN').length;
-
-  // Source breakdown
-  const sourceCounts = events.reduce((acc, e) => {
-    acc[e.source] = (acc[e.source] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
-
-  // Reel total views
-  const totalReelViews = Object.values(reelStats).reduce((sum, r) => sum + (r.views || 0), 0);
-  const totalReelInquiries = Object.values(reelStats).reduce((sum, r) => sum + (r.inquiries || 0), 0);
-
-  // Top products viewed
-  const productCounts = events.filter(e => e.productName).reduce((acc, e) => {
-    const name = e.productName!;
-    acc[name] = (acc[name] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
-
-  const sortedProducts = Object.entries(productCounts)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5);
+  const totalPageViews = summary?.page_views ?? 0;
+  const uniqueVisitors = summary?.unique_visitors ?? 0;
+  const catalogueOpens = summary?.catalogue_opens ?? 0;
+  const whatsappClicks = summary?.whatsapp_clicks ?? 0;
+  const sourceMap: Record<string, number> = summary?.sources || {};
+  const totalEvents = summary?.total_events || 0;
+  const topProducts: Array<{ name: string; count: number }> = summary?.top_products || [];
+  const socialSummary = social?.summary || {
+    published_videos: 0,
+    youtube_views: 0,
+    instagram_likes: 0,
+    instagram_comments: 0,
+    facebook_views: 0,
+  };
+  const socialVideos: any[] = social?.videos || [];
 
   const handleSaveGA4 = () => {
     AnalyticsService.setGA4MeasurementId(ga4Input);
@@ -66,43 +58,20 @@ export const TrafficAnalyticsTab: React.FC = () => {
     setTimeout(() => setGa4Saved(false), 2500);
   };
 
-  const startEditReel = (reelId: string) => {
-    const stat = reelStats[reelId];
-    setEditingReelId(reelId);
-    setEditViews(stat ? stat.views : 0);
-    setEditLikes(stat ? stat.likes : 0);
-    setEditInquiries(stat ? stat.inquiries : 0);
-  };
-
-  const saveReelMetric = (reelId: string, defaultTitle: string, lang: 'Telugu' | 'Hindi', day: number, prod: string) => {
-    AnalyticsService.updateReelMetric(reelId, {
-      title: defaultTitle,
-      language: lang,
-      dayNumber: day,
-      productName: prod,
-      views: editViews,
-      likes: editLikes,
-      inquiries: editInquiries
-    });
-    setEditingReelId(null);
-    setReelStats(AnalyticsService.getReelStats());
-  };
-
   return (
     <div className="space-y-8 animate-fadeIn">
-
       {/* TOP HEADER & ACTION */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-cyan-500/20">
         <div>
           <div className="inline-flex items-center gap-2 text-cyan-300 text-xs font-bold uppercase tracking-widest mb-1.5">
             <BarChart3 className="w-4 h-4 text-cyan-400" />
-            <span>Traffic, Views & Reach Intelligence</span>
+            <span>Neon Cloud Telemetry + Live YouTube &amp; Meta Graph Stats</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-serif font-black text-white tracking-tight">
-            Live Page Visits & Instagram Reel Performance
+            Multi-Device Storefront Traffic &amp; Published Video Performance
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            Real-time multi-device website traffic, catalogue engagement, and Instagram Reel views tracking for Rayachoty.
+            Aggregates real storefront visitor interactions persisted in Neon Postgres alongside live views, likes &amp; comments fetched directly from YouTube Data API v3 and Meta Graph API v21.0.
           </p>
         </div>
 
@@ -112,34 +81,28 @@ export const TrafficAnalyticsTab: React.FC = () => {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0f1c3f] border border-cyan-500/30 text-cyan-300 hover:text-white text-xs font-bold transition-all shadow-md active:scale-95 disabled:opacity-50"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin' : ''}`} />
-          <span>Refresh Traffic Counts</span>
+          <span>Sync Live API Metrics</span>
         </button>
       </div>
 
       {/* 4 PRIMARY METRIC CARDS */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        
-        {/* Total Page Hits */}
-        <div className="p-5 rounded-2xl bg-[#0f1c3f]/90 border border-cyan-500/30 shadow-xl relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl pointer-events-none group-hover:bg-cyan-500/20 transition-all" />
+        <div className="p-5 rounded-2xl bg-[#0f1c3f]/90 border border-cyan-500/30 shadow-xl">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Total Page Hits</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Page Views (30d DB)</span>
             <div className="w-8 h-8 rounded-lg bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300">
               <Globe className="w-4 h-4" />
             </div>
           </div>
           <div className="text-3xl font-black text-white tracking-tight">
-            {cloudHits.totalHits > 0 ? cloudHits.totalHits.toLocaleString() : (pageViewEvents > 0 ? pageViewEvents : 0)}
+            {totalPageViews.toLocaleString()}
           </div>
-          <p className="text-[11px] text-cyan-300/80 mt-1 flex items-center gap-1 font-semibold">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            Live Cloud Counter (Multi-Device)
+          <p className="text-[11px] text-cyan-300/80 mt-1 font-semibold">
+            {uniqueVisitors} unique visitor(s){cloudHits.totalHits > 0 ? ` · hits.sh: ${cloudHits.totalHits.toLocaleString()}` : ''}
           </p>
         </div>
 
-        {/* Catalogue HTML Views */}
-        <div className="p-5 rounded-2xl bg-[#0f1c3f]/90 border border-amber-500/30 shadow-xl relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-full blur-xl pointer-events-none group-hover:bg-amber-500/20 transition-all" />
+        <div className="p-5 rounded-2xl bg-[#0f1c3f]/90 border border-amber-500/30 shadow-xl">
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Catalogue Opens</span>
             <div className="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-300">
@@ -147,68 +110,61 @@ export const TrafficAnalyticsTab: React.FC = () => {
             </div>
           </div>
           <div className="text-3xl font-black text-white tracking-tight">
-            {cloudHits.catalogueHits > 0 ? cloudHits.catalogueHits.toLocaleString() : (catalogueOpens > 0 ? catalogueOpens : 0)}
+            {(catalogueOpens > 0 ? catalogueOpens : cloudHits.catalogueHits).toLocaleString()}
           </div>
           <p className="text-[11px] text-amber-300/80 mt-1 font-semibold">
-            90-SKU Digital Price List Views
+            Multi-device Neon event log
           </p>
         </div>
 
-        {/* Instagram Reel Total Views */}
-        <div className="p-5 rounded-2xl bg-[#0f1c3f]/90 border border-pink-500/30 shadow-xl relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-pink-500/10 rounded-full blur-xl pointer-events-none group-hover:bg-pink-500/20 transition-all" />
+        <div className="p-5 rounded-2xl bg-[#0f1c3f]/90 border border-pink-500/30 shadow-xl">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Total Reel Plays</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Live Video Engagement</span>
             <div className="w-8 h-8 rounded-lg bg-pink-500/20 border border-pink-500/40 flex items-center justify-center text-pink-300">
               <Instagram className="w-4 h-4" />
             </div>
           </div>
           <div className="text-3xl font-black text-white tracking-tight">
-            {totalReelViews > 0 ? totalReelViews.toLocaleString() : 0}
+            {(socialSummary.youtube_views + socialSummary.facebook_views).toLocaleString()} <span className="text-sm font-normal text-slate-400">views</span>
           </div>
           <p className="text-[11px] text-pink-300/80 mt-1 font-semibold">
-            {totalReelViews > 0 ? 'Across 30 Master Reels' : 'Log reel views below to track'}
+            IG Likes: {socialSummary.instagram_likes} · Comments: {socialSummary.instagram_comments}
           </p>
         </div>
 
-        {/* Inquiries & WhatsApp Clicks */}
-        <div className="p-5 rounded-2xl bg-[#0f1c3f]/90 border border-emerald-500/30 shadow-xl relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl pointer-events-none group-hover:bg-emerald-500/20 transition-all" />
+        <div className="p-5 rounded-2xl bg-[#0f1c3f]/90 border border-emerald-500/30 shadow-xl">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Wholesale Inquiries</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">WhatsApp &amp; Quote Clicks</span>
             <div className="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-300">
               <MessageCircle className="w-4 h-4" />
             </div>
           </div>
           <div className="text-3xl font-black text-white tracking-tight">
-            {(whatsappClicks + totalReelInquiries) > 0 ? (whatsappClicks + totalReelInquiries).toLocaleString() : 0}
+            {(whatsappClicks + (summary?.quote_adds || 0)).toLocaleString()}
           </div>
           <p className="text-[11px] text-emerald-300/80 mt-1 font-semibold">
-            WhatsApp Rate & Order Inquiries
+            {whatsappClicks} WA inquiries · {summary?.quote_adds || 0} quote adds
           </p>
         </div>
-
       </div>
 
       {/* TWO COLUMN GRID: TRAFFIC SOURCES & TOP PRODUCTS */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-        {/* Traffic Referral Breakdown */}
         <div className="p-6 rounded-2xl bg-[#0f1c3f]/90 border border-cyan-500/25 shadow-xl space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
               <TrendingUp className="w-4 h-4 text-cyan-400" />
-              <span>Visitor Acquisition Channel</span>
+              <span>Visitor Acquisition Channel (30d)</span>
             </h3>
-            <span className="text-[10px] text-slate-400 font-mono">UTM & HTTP Referrer</span>
+            <span className="text-[10px] text-slate-400 font-mono">Neon Postgres Log</span>
           </div>
 
           <div className="space-y-3 pt-2">
             {[
-              { label: 'Instagram Bio Link (@raisfrozenfoods)', count: sourceCounts['Instagram'] || 0, color: 'bg-pink-500', icon: '📸' },
-              { label: 'WhatsApp Broadcasts & Direct Shares', count: sourceCounts['WhatsApp'] || 0, color: 'bg-emerald-500', icon: '💬' },
-              { label: 'Catalogue HTML Backlinks', count: sourceCounts['Catalogue Link'] || 0, color: 'bg-amber-500', icon: '📄' },
-              { label: 'Direct Rayachoty Local Search / QR Codes', count: sourceCounts['Google / Direct'] || 0, color: 'bg-blue-500', icon: '🔍' },
+              { label: 'Instagram Bio / Reel Traffic', count: sourceMap['Instagram'] || 0, color: 'bg-pink-500', icon: '📸' },
+              { label: 'WhatsApp Broadcasts & Direct Shares', count: sourceMap['WhatsApp'] || 0, color: 'bg-emerald-500', icon: '💬' },
+              { label: 'Catalogue HTML Backlinks', count: sourceMap['Catalogue Link'] || 0, color: 'bg-amber-500', icon: '📄' },
+              { label: 'Direct Search / QR Codes', count: sourceMap['Google / Direct'] || 0, color: 'bg-blue-500', icon: '🔍' },
             ].map((src, i) => {
               const max = Math.max(totalEvents, 1);
               const pct = Math.min(100, Math.round((src.count / max) * 100));
@@ -219,7 +175,7 @@ export const TrafficAnalyticsTab: React.FC = () => {
                       <span>{src.icon}</span>
                       <span>{src.label}</span>
                     </span>
-                    <span className="text-white font-mono font-bold">{src.count} visits ({pct}%)</span>
+                    <span className="text-white font-mono font-bold">{src.count} events ({pct}%)</span>
                   </div>
                   <div className="w-full h-2 rounded-full bg-slate-900 overflow-hidden">
                     <div className={`h-full ${src.color} rounded-full transition-all duration-500`} style={{ width: `${src.count > 0 ? Math.max(pct, 4) : 0}%` }} />
@@ -230,163 +186,114 @@ export const TrafficAnalyticsTab: React.FC = () => {
           </div>
         </div>
 
-        {/* Top Product Views & Interest */}
         <div className="p-6 rounded-2xl bg-[#0f1c3f]/90 border border-cyan-500/25 shadow-xl space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
               <Eye className="w-4 h-4 text-amber-400" />
-              <span>Highest Viewed Wholesale SKUs</span>
+              <span>Highest Viewed Wholesale SKUs (30d)</span>
             </h3>
-            <span className="text-[10px] text-slate-400 font-mono">Top Demand</span>
+            <span className="text-[10px] text-slate-400 font-mono">Cross-Device Top Demand</span>
           </div>
 
           <div className="space-y-2.5 pt-2">
-            {sortedProducts.length > 0 ? (
-              sortedProducts.map(([name, count], i) => (
+            {topProducts.length > 0 ? (
+              topProducts.map((p, i) => (
                 <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-[#081026] border border-cyan-500/20 text-xs">
                   <div className="flex items-center gap-2.5">
                     <span className="w-5 h-5 rounded-md bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center font-mono font-bold text-[10px]">
                       #{i + 1}
                     </span>
-                    <span className="font-bold text-white">{name}</span>
+                    <span className="font-bold text-white">{p.name}</span>
                   </div>
-                  <span className="text-cyan-300 font-mono font-black">{count} views</span>
+                  <span className="text-cyan-300 font-mono font-black">{p.count} interactions</span>
                 </div>
               ))
             ) : (
               <div className="py-8 text-center space-y-2">
-                <div className="text-slate-500 text-sm font-semibold">No SKU views tracked yet</div>
-                <div className="text-slate-600 text-xs">Product views from your website will appear here as buyers browse the catalogue</div>
+                <div className="text-slate-500 text-sm font-semibold">No cross-device SKU clicks logged yet</div>
+                <div className="text-slate-600 text-xs">Real customer SKU views &amp; quote additions appear here automatically.</div>
               </div>
             )}
           </div>
         </div>
-
       </div>
 
-      {/* INSTAGRAM REELS VIEWS & AUDIENCE REACH TRACKER */}
+      {/* LIVE PUBLISHED SOCIAL TELEMETRY TABLE (AUTO-FETCHED FROM YT + IG + FB APIS) */}
       <div className="p-6 rounded-2xl bg-[#0f1c3f]/90 border border-pink-500/30 shadow-xl space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-pink-500/20">
           <div>
             <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <Instagram className="w-4 h-4 text-pink-400" />
-              <span>Instagram Reels Views & Inquiries Tracker</span>
+              <Video className="w-4 h-4 text-pink-400" />
+              <span>Live Multi-Platform Video Stats (YT Shorts + IG Reels + FB Page)</span>
             </h3>
             <p className="text-xs text-slate-400 mt-0.5">
-              Log or update view counts for each Reel to monitor viral reach and customer demand across Rayachoty.
+              Automatically fetched via YouTube Data API v3 and Meta Graph API v21.0 — zero manual entry.
+              {social?.yt_telemetry_note ? ` (${social.yt_telemetry_note})` : ''}
             </p>
           </div>
           <span className="text-xs text-pink-300 font-mono bg-pink-500/10 px-2.5 py-1 rounded-full border border-pink-500/30">
-            @raisfrozenfoods
+            @rais_agencies_frozen_foods
           </span>
         </div>
 
-        {/* Reels Table */}
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead>
-              <tr className="border-b border-slate-800 text-slate-400 font-mono uppercase text-[10px]">
-                <th className="py-2.5 px-3">Reel / Slot</th>
-                <th className="py-2.5 px-3">Language</th>
-                <th className="py-2.5 px-3">Featured Product</th>
-                <th className="py-2.5 px-3 text-right">Views / Plays</th>
-                <th className="py-2.5 px-3 text-right">Likes</th>
-                <th className="py-2.5 px-3 text-right">WhatsApp Leads</th>
-                <th className="py-2.5 px-3 text-center">Action</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-800/60">
-              {REELS_30_DAYS.slice(0, 10).map((reel) => {
-                const stat = reelStats[reel.id] || {
-                  views: 0,
-                  likes: 0,
-                  inquiries: 0
-                };
-                const isEditing = editingReelId === reel.id;
-                const isTelugu = reel.title.includes('Telugu');
-
-                return (
-                  <tr key={reel.id} className="hover:bg-slate-900/50 transition-colors">
-                    <td className="py-3 px-3 font-semibold text-white">
-                      <div className="font-bold text-slate-200">Day {reel.dayNumber} · Slot {reel.id.includes('slot-01') ? 1 : 2}</div>
-                      <div className="text-[10px] text-slate-400 truncate max-w-[200px]">{reel.title}</div>
+        {socialVideos.length === 0 ? (
+          <div className="py-8 text-center text-xs text-slate-400 border border-dashed border-slate-700 rounded-xl">
+            No published Drive videos found yet. Publish a clip in <strong>Drive -&gt; YT, IG &amp; FB</strong> to see live API view counts here.
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs">
+              <thead>
+                <tr className="border-b border-slate-800 text-slate-400 font-mono uppercase text-[10px]">
+                  <th className="py-2.5 px-3">Published Video</th>
+                  <th className="py-2.5 px-3">Product</th>
+                  <th className="py-2.5 px-3 text-right">YT Shorts</th>
+                  <th className="py-2.5 px-3 text-right">IG Reel</th>
+                  <th className="py-2.5 px-3 text-right">FB Reel</th>
+                  <th className="py-2.5 px-3 text-right">Links</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-800/60">
+                {socialVideos.map((v) => (
+                  <tr key={v.id} className="hover:bg-slate-900/50 transition-colors">
+                    <td className="py-3 px-3 font-bold text-slate-200 max-w-[240px] truncate">{v.video_title}</td>
+                    <td className="py-3 px-3 text-slate-400">{v.product_name || '—'}</td>
+                    <td className="py-3 px-3 text-right font-mono text-red-300">
+                      {v.youtube ? `${v.youtube.views} views · ${v.youtube.likes} ❤` : '—'}
                     </td>
-                    <td className="py-3 px-3">
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-black ${
-                        isTelugu ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' : 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
-                      }`}>
-                        {isTelugu ? 'Telugu' : 'Hindi'}
-                      </span>
+                    <td className="py-3 px-3 text-right font-mono text-pink-300">
+                      {v.instagram
+                        ? `${v.instagram.plays !== null ? `${v.instagram.plays} plays · ` : ''}${v.instagram.likes} ❤ · ${v.instagram.comments} 💬`
+                        : '—'}
                     </td>
-                    <td className="py-3 px-3 font-semibold text-slate-300">
-                      {reel.productName}
+                    <td className="py-3 px-3 text-right font-mono text-blue-300">
+                      {v.facebook ? `${v.facebook.views} views · ${v.facebook.likes} ❤` : '—'}
                     </td>
-                    <td className="py-3 px-3 text-right font-mono font-bold text-pink-300">
-                      {isEditing ? (
-                        <input
-                          type="number"
-                          value={editViews}
-                          onChange={(e) => setEditViews(parseInt(e.target.value, 10) || 0)}
-                          className="w-20 px-2 py-1 bg-slate-900 border border-pink-500/40 rounded text-right text-xs text-white"
-                        />
-                      ) : (
-                        stat.views.toLocaleString()
-                      )}
-                    </td>
-                    <td className="py-3 px-3 text-right font-mono text-slate-300">
-                      {isEditing ? (
-                        <input
-                          type="number"
-                          value={editLikes}
-                          onChange={(e) => setEditLikes(parseInt(e.target.value, 10) || 0)}
-                          className="w-16 px-2 py-1 bg-slate-900 border border-pink-500/40 rounded text-right text-xs text-white"
-                        />
-                      ) : (
-                        stat.likes.toLocaleString()
-                      )}
-                    </td>
-                    <td className="py-3 px-3 text-right font-mono font-bold text-emerald-400">
-                      {isEditing ? (
-                        <input
-                          type="number"
-                          value={editInquiries}
-                          onChange={(e) => setEditInquiries(parseInt(e.target.value, 10) || 0)}
-                          className="w-16 px-2 py-1 bg-slate-900 border border-pink-500/40 rounded text-right text-xs text-white"
-                        />
-                      ) : (
-                        stat.inquiries.toLocaleString()
-                      )}
-                    </td>
-                    <td className="py-3 px-3 text-center">
-                      {isEditing ? (
-                        <button
-                          onClick={() => saveReelMetric(
-                            reel.id, 
-                            reel.title, 
-                            isTelugu ? 'Telugu' : 'Hindi', 
-                            reel.dayNumber, 
-                            reel.productName
-                          )}
-                          className="px-2.5 py-1 rounded bg-pink-600 hover:bg-pink-500 text-white font-bold text-[11px] inline-flex items-center gap-1 shadow"
-                        >
-                          <Save className="w-3 h-3" />
-                          <span>Save</span>
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => startEditReel(reel.id)}
-                          className="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-semibold"
-                        >
-                          Update
-                        </button>
-                      )}
+                    <td className="py-3 px-3 text-right">
+                      <div className="inline-flex items-center gap-2">
+                        {v.youtube_url && (
+                          <a href={v.youtube_url} target="_blank" rel="noreferrer" className="text-red-300 hover:underline flex items-center gap-0.5">
+                            YT <ExternalLink className="w-2.5 h-2.5" />
+                          </a>
+                        )}
+                        {v.ig_url && (
+                          <a href={v.ig_url} target="_blank" rel="noreferrer" className="text-pink-300 hover:underline flex items-center gap-0.5">
+                            IG <ExternalLink className="w-2.5 h-2.5" />
+                          </a>
+                        )}
+                        {v.fb_url && (
+                          <a href={v.fb_url} target="_blank" rel="noreferrer" className="text-blue-300 hover:underline flex items-center gap-0.5">
+                            <Facebook className="w-3 h-3" /> <ExternalLink className="w-2.5 h-2.5" />
+                          </a>
+                        )}
+                      </div>
                     </td>
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
       {/* GOOGLE ANALYTICS 4 (GA4) INTEGRATION CARD */}
@@ -395,10 +302,10 @@ export const TrafficAnalyticsTab: React.FC = () => {
           <div>
             <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-cyan-400" />
-              <span>Official Google Analytics (GA4) Integration</span>
+              <span>Official Google Analytics (GA4) Tag</span>
             </h3>
             <p className="text-xs text-slate-400 mt-1">
-              Want detailed visitor reports by city (Rayachoty, Kadapa, Tirupati, Bengaluru) and device? Enter your free Google Analytics Measurement ID.
+              Connected GA4 stream for city-level (Rayachoty, Kadapa, Annamayya) and device breakdowns.
             </p>
           </div>
           <a
@@ -429,7 +336,6 @@ export const TrafficAnalyticsTab: React.FC = () => {
           </button>
         </div>
       </div>
-
     </div>
   );
 };

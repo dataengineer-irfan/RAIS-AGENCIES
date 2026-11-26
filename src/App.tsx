@@ -83,17 +83,31 @@ export const App: React.FC = () => {
   const [isQuoteOpen, setIsQuoteOpen] = useState<boolean>(false);
   const [quoteItems, setQuoteItems] = useState<{ [sku: string]: number }>({});
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('google_auth') === 'success') {
-      AuthService.setDirectSession('admin (Google Verified)');
-      return true;
-    }
     return AuthService.checkAuth();
   });
 
   useEffect(() => {
     AnalyticsService.init();
   }, []);
+
+  useEffect(() => {
+    const onAuthExpired = () => {
+      AuthService.logout();
+      setIsAdminAuthenticated(false);
+    };
+    window.addEventListener('rais:auth-expired', onAuthExpired);
+    return () => window.removeEventListener('rais:auth-expired', onAuthExpired);
+  }, []);
+
+  useEffect(() => {
+    if (currentPage === 'automation' && isAdminAuthenticated) {
+      AuthService.verifySession().then((res) => {
+        if (!res.authenticated) {
+          setIsAdminAuthenticated(false);
+        }
+      });
+    }
+  }, [currentPage, isAdminAuthenticated]);
 
   // Hash-based URL routing synchronization
   useEffect(() => {

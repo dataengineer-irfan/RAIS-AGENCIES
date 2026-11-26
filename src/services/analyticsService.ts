@@ -33,6 +33,11 @@ export interface ReelPerformanceRecord {
   lastUpdated: string;
 }
 
+const API_HOST =
+  (import.meta as any).env?.VITE_GROWTH_ENGINE_API_URL ||
+  'https://rais-growth-backend.onrender.com';
+const ANALYTICS_TRACK_URL = `${API_HOST.replace(/\/$/, '')}/api/v1/analytics/track`;
+
 const STORAGE_KEYS = {
   EVENTS: 'rais_analytics_events',
   REEL_STATS: 'rais_analytics_reel_stats',
@@ -240,6 +245,24 @@ export class AnalyticsService {
       // Keep last 300 events
       const trimmed = existing.slice(0, 300);
       localStorage.setItem(STORAGE_KEYS.EVENTS, JSON.stringify(trimmed));
+
+      // Stream live multi-device event to Neon Postgres backend when non-admin public storefront runs
+      const visitorId = localStorage.getItem(STORAGE_KEYS.VISITOR_ID) || undefined;
+      if (typeof fetch === 'function' && !String(event.path || '').includes('automation')) {
+        void fetch(ANALYTICS_TRACK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event_type: event.type,
+            path: event.path || '/',
+            source: event.source || 'Google / Direct',
+            sku: event.sku || undefined,
+            product_name: event.productName || undefined,
+            visitor_id: visitorId,
+          }),
+          keepalive: true,
+        }).catch(() => {});
+      }
     } catch (e) {
       console.warn('Could not record analytics event', e);
     }

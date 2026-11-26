@@ -11,6 +11,8 @@ interface SidebarProps {
   killSwitchActive: boolean;
   googleConnected?: boolean;
   totalReelsCount?: number;
+  metaUsername?: string;
+  metaConnected?: boolean;
   onBackToHome?: () => void;
   onLogout?: () => void;
 }
@@ -20,7 +22,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
   setCurrentTab, 
   killSwitchActive,
   googleConnected = false,
-  totalReelsCount = 30,
+  totalReelsCount = 0,
+  metaUsername = 'rais_agencies_frozen_foods',
+  metaConnected = false,
   onBackToHome,
   onLogout
 }) => {
@@ -34,17 +38,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
         { id: 'seo', label: 'Local SEO & Keywords', icon: Search },
         { id: 'competitors', label: 'Competitor Tracker', icon: Users },
         { id: 'analytics', label: 'GMB Maps Telemetry', icon: BarChart3 },
-        { id: 'ga4_traffic', label: 'Google Analytics (GA4)', icon: CheckCircle2, badge: 'G-LX7011WRHR' }
+        { id: 'ga4_traffic', label: 'Storefront & Social Metrics', icon: CheckCircle2, badge: 'Live DB' }
       ]
     },
     {
-      heading: 'VIDEO & OUTREACH TOOLS',
+      heading: 'AUTOMATION & OUTREACH',
       items: [
-        { id: 'reels', label: 'Reels Video Studio', icon: Film, badge: `${totalReelsCount} MP4s` },
-        { id: 'meta_publishing', label: 'Instagram & FB Dispatch', icon: Send, badge: '@raisfrozenfoods' },
-        { id: 'youtube_drive', label: 'Drive -> YT, IG & FB', icon: Video, badge: 'Multi-Post' },
-        { id: 'enquiries', label: 'WhatsApp B2B Outreach', icon: MessageSquare },
-        { id: 'content', label: 'Content Studio & Promos', icon: Sparkles }
+        { id: 'youtube_drive', label: 'Drive -> YT, IG & FB', icon: Video, badge: totalReelsCount > 0 ? `${totalReelsCount} Clips` : 'Auto-Pilot' },
+        { id: 'meta_publishing', label: 'Meta Graph Dispatch', icon: Send, badge: metaConnected ? `@${metaUsername}` : 'Setup' },
+        { id: 'content', label: 'Gemini Content Studio', icon: Sparkles },
+        { id: 'enquiries', label: 'WhatsApp B2B Outreach', icon: MessageSquare }
       ]
     },
     {

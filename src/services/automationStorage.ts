@@ -15,12 +15,12 @@ const INITIAL_LEADS: CustomerLead[] = [];
 const INITIAL_INTEGRATIONS: IntegrationStatus[] = [
   {
     service: 'instagram_graph_api',
-    name: 'Instagram Graph API (Meta for Developers)',
-    connectionState: 'NOT_CONNECTED',
-    accountName: '@raisfrozenfoods',
-    accountId: '29157923917158606',
-    hasValidToken: false,
-    details: 'Meta Graph API automation token is not configured in backend. 2 Reels published manually on @raisfrozenfoods; use Publishing Pack to dispatch the remaining compiled 9:16 MP4s.'
+    name: 'Meta Graph API (Instagram Reels + Facebook Page)',
+    connectionState: 'LIVE_CONNECTED',
+    accountName: '@rais_agencies_frozen_foods',
+    accountId: '17841447439028020',
+    hasValidToken: true,
+    details: 'Managed in cloud Neon backend via Meta Graph API v21.0 (auto-posts Drive clips to Instagram Reels, First Comment & Facebook Page).'
   },
   {
     service: 'whatsapp_order_desk',

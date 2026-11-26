@@ -1,7 +1,20 @@
 import { GBPStorage } from './gbpStorage';
+import { AuthService } from './authService';
 
 const API_HOST = (import.meta as any).env?.VITE_GROWTH_ENGINE_API_URL || 'https://rais-growth-backend.onrender.com';
 const BASE_URL = `${API_HOST.replace(/\/$/, '')}/api/v1`;
+
+async function authFetch(url: string, init: RequestInit = {}): Promise<Response> {
+  const headers: Record<string, string> = {
+    ...AuthService.getAuthHeaders(),
+    ...((init.headers as Record<string, string>) || {}),
+  };
+  const res = await fetch(url, { ...init, headers });
+  if (res.status === 401 && typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('rais:auth-expired'));
+  }
+  return res;
+}
 
 export interface BusinessProfile {
   id: number;
@@ -265,11 +278,11 @@ export const COMMERCIAL_TARGET_KEYWORDS: KeywordTarget[] = [
 // API methods
 export const api = {
   getProfile: async (): Promise<BusinessProfile> => {
-    const res = await fetch(`${BASE_URL}/business-info/profile`);
+    const res = await authFetch(`${BASE_URL}/business-info/profile`);
     return res.json();
   },
   updateProfile: async (data: Partial<BusinessProfile>): Promise<BusinessProfile> => {
-    const res = await fetch(`${BASE_URL}/business-info/profile`, {
+    const res = await authFetch(`${BASE_URL}/business-info/profile`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -277,11 +290,11 @@ export const api = {
     return res.json();
   },
   listSkus: async (): Promise<CatalogSKU[]> => {
-    const res = await fetch(`${BASE_URL}/business-info/skus`);
+    const res = await authFetch(`${BASE_URL}/business-info/skus`);
     return res.json();
   },
   updateSku: async (id: number, data: Partial<CatalogSKU>): Promise<CatalogSKU> => {
-    const res = await fetch(`${BASE_URL}/business-info/skus/${id}`, {
+    const res = await authFetch(`${BASE_URL}/business-info/skus/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -289,23 +302,23 @@ export const api = {
     return res.json();
   },
   listServiceAreas: async (): Promise<ServiceArea[]> => {
-    const res = await fetch(`${BASE_URL}/business-info/service-areas`);
+    const res = await authFetch(`${BASE_URL}/business-info/service-areas`);
     return res.json();
   },
   listCampaigns: async (): Promise<Campaign[]> => {
-    const res = await fetch(`${BASE_URL}/campaigns`);
+    const res = await authFetch(`${BASE_URL}/campaigns`);
     return res.json();
   },
   approveCampaign: async (id: number): Promise<any> => {
-    const res = await fetch(`${BASE_URL}/campaigns/${id}/approve`, { method: 'POST' });
+    const res = await authFetch(`${BASE_URL}/campaigns/${id}/approve`, { method: 'POST' });
     return res.json();
   },
   generatePost: async (theme: string, target_sku?: string, language_mode: string = 'bilingual'): Promise<any> => {
-    const res = await fetch(`${BASE_URL}/campaigns/generate-post?theme=${encodeURIComponent(theme)}&target_sku=${target_sku || ''}&language_mode=${language_mode}`, { method: 'POST' });
+    const res = await authFetch(`${BASE_URL}/campaigns/generate-post?theme=${encodeURIComponent(theme)}&target_sku=${target_sku || ''}&language_mode=${language_mode}`, { method: 'POST' });
     return res.json();
   },
   triggerPublishCycle: async (): Promise<PublishCycleResult> => {
-    const res = await fetch(`${BASE_URL}/campaigns/trigger-publish-cycle`, { method: 'POST' });
+    const res = await authFetch(`${BASE_URL}/campaigns/trigger-publish-cycle`, { method: 'POST' });
     return res.json();
   },
   listReviews: async (): Promise<Review[]> => {
@@ -313,7 +326,7 @@ export const api = {
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 2500);
-      const res = await fetch(`${BASE_URL}/reviews`, { signal: controller.signal });
+      const res = await authFetch(`${BASE_URL}/reviews`, { signal: controller.signal });
       clearTimeout(timeoutId);
       if (res.ok) {
         const data = await res.json();
@@ -365,7 +378,7 @@ export const api = {
     return remoteReviews;
   },
   syncReviews: async (): Promise<any> => {
-    const res = await fetch(`${BASE_URL}/reviews/sync`, { method: 'POST' });
+    const res = await authFetch(`${BASE_URL}/reviews/sync`, { method: 'POST' });
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
       throw new Error(err.detail || `HTTP ${res.status}: Failed to sync reviews with Google`);
@@ -377,7 +390,7 @@ export const api = {
     if (authorName) params.append('author_name', authorName);
     if (rating) params.append('rating', rating.toString());
     if (comment) params.append('comment', comment);
-    const res = await fetch(`${BASE_URL}/reviews/test-review?${params.toString()}`, { method: 'POST' });
+    const res = await authFetch(`${BASE_URL}/reviews/test-review?${params.toString()}`, { method: 'POST' });
     if (!res.ok) {
       throw new Error(`HTTP ${res.status}: Backend failed to create review draft`);
     }
@@ -386,7 +399,7 @@ export const api = {
   approveReviewReply: async (draftId: number, replyText: string, approverName: string = 'Admin'): Promise<any> => {
     GBPStorage.approveReviewReply(draftId, replyText, approverName);
     try {
-      const res = await fetch(`${BASE_URL}/reviews/reply/${draftId}/approve`, {
+      const res = await authFetch(`${BASE_URL}/reviews/reply/${draftId}/approve`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ reply_text: replyText, approver_name: approverName })
@@ -404,11 +417,19 @@ export const api = {
       };
     }
   },
+  regenerateReviewReply: async (draftId: number): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/reviews/reply/${draftId}/regenerate`, { method: 'POST' });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Failed to regenerate reply`);
+    }
+    return data;
+  },
   getGoogleStatus: async (): Promise<any> => {
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 3000);
-      const res = await fetch(`${BASE_URL}/google/status`, { signal: controller.signal });
+      const res = await authFetch(`${BASE_URL}/google/status`, { signal: controller.signal });
       clearTimeout(timeoutId);
       if (res.ok) {
         return await res.json();
@@ -430,7 +451,7 @@ export const api = {
   },
   getGoogleAuthorizeUrl: async (includeYoutube: boolean = false): Promise<{ authorization_url: string; state: string }> => {
     const query = includeYoutube ? '?include_youtube=true' : '';
-    const res = await fetch(`${BASE_URL}/google/authorize${query}`);
+    const res = await authFetch(`${BASE_URL}/google/authorize${query}`);
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
       throw new Error(err.detail || `HTTP ${res.status}: Failed to get Google authorization URL`);
@@ -440,7 +461,7 @@ export const api = {
   getGooglePerformance: async (forceState?: string): Promise<any> => {
     try {
       const query = forceState ? `?force_state=${encodeURIComponent(forceState)}` : '';
-      const res = await fetch(`${BASE_URL}/google/performance${query}`);
+      const res = await authFetch(`${BASE_URL}/google/performance${query}`);
       if (!res.ok) {
         return { status: 'API_ERROR', is_live: false, metrics: null, error_message: `HTTP ${res.status}: ${res.statusText}` };
       }
@@ -474,7 +495,7 @@ export const api = {
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 2500);
-      const res = await fetch(`${BASE_URL}/seo/keywords`, { signal: controller.signal });
+      const res = await authFetch(`${BASE_URL}/seo/keywords`, { signal: controller.signal });
       clearTimeout(timeoutId);
       if (res.ok) {
         const data = await res.json();
@@ -491,7 +512,7 @@ export const api = {
   },
   listCompetitors: async (): Promise<Competitor[]> => {
     try {
-      const res = await fetch(`${BASE_URL}/seo/competitors`);
+      const res = await authFetch(`${BASE_URL}/seo/competitors`);
       if (res.ok) return await res.json();
     } catch {}
     return [];
@@ -504,7 +525,7 @@ export const api = {
     review_count?: number;
     notes?: string;
   }): Promise<Competitor> => {
-    const res = await fetch(`${BASE_URL}/seo/competitors`, {
+    const res = await authFetch(`${BASE_URL}/seo/competitors`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -516,14 +537,14 @@ export const api = {
     return res.json();
   },
   deleteCompetitor: async (id: number): Promise<void> => {
-    const res = await fetch(`${BASE_URL}/seo/competitors/${id}`, { method: 'DELETE' });
+    const res = await authFetch(`${BASE_URL}/seo/competitors/${id}`, { method: 'DELETE' });
     if (!res.ok) {
       throw new Error(`HTTP ${res.status}: Failed to delete competitor`);
     }
   },
   getSeoAudit: async (): Promise<any> => {
     try {
-      const res = await fetch(`${BASE_URL}/seo/audit`);
+      const res = await authFetch(`${BASE_URL}/seo/audit`);
       if (res.ok) return await res.json();
     } catch {}
     return {
@@ -536,7 +557,7 @@ export const api = {
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 3000);
-      const res = await fetch(`${BASE_URL}/leads`, { signal: controller.signal });
+      const res = await authFetch(`${BASE_URL}/leads`, { signal: controller.signal });
       clearTimeout(timeoutId);
       if (res.ok) {
         const data = await res.json();
@@ -554,7 +575,7 @@ export const api = {
     return res.json();
   },
   updateLead: async (id: number, data: Partial<B2BLead>): Promise<B2BLead> => {
-    const res = await fetch(`${BASE_URL}/leads/${id}`, {
+    const res = await authFetch(`${BASE_URL}/leads/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
@@ -562,15 +583,15 @@ export const api = {
     return res.json();
   },
   getAutomationSettings: async (): Promise<AutomationSettings> => {
-    const res = await fetch(`${BASE_URL}/automation/settings`);
+    const res = await authFetch(`${BASE_URL}/automation/settings`);
     return res.json();
   },
   toggleKillSwitch: async (active: boolean): Promise<any> => {
-    const res = await fetch(`${BASE_URL}/automation/kill-switch?active=${active}`, { method: 'POST' });
+    const res = await authFetch(`${BASE_URL}/automation/kill-switch?active=${active}`, { method: 'POST' });
     return res.json();
   },
   getAuditLogs: async (): Promise<AuditLogItem[]> => {
-    const res = await fetch(`${BASE_URL}/automation/audit-logs`);
+    const res = await authFetch(`${BASE_URL}/automation/audit-logs`);
     return res.json();
   },
   generateReviewRequest: async (payload: {
@@ -580,7 +601,7 @@ export const api = {
     phone_number?: string;
     products?: string[];
   }): Promise<any> => {
-    const res = await fetch(`${BASE_URL}/reviews/generate-request`, {
+    const res = await authFetch(`${BASE_URL}/reviews/generate-request`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -588,19 +609,19 @@ export const api = {
     return res.json();
   },
   getReviewTemplates: async (): Promise<any[]> => {
-    const res = await fetch(`${BASE_URL}/reviews/request-templates`);
+    const res = await authFetch(`${BASE_URL}/reviews/request-templates`);
     return res.json();
   },
   getGoogleQnA: async (): Promise<any> => {
-    const res = await fetch(`${BASE_URL}/seo/qna`);
+    const res = await authFetch(`${BASE_URL}/seo/qna`);
     return res.json();
   },
   seedGoogleQnA: async (): Promise<any> => {
-    const res = await fetch(`${BASE_URL}/seo/qna/seed`, { method: 'POST' });
+    const res = await authFetch(`${BASE_URL}/seo/qna/seed`, { method: 'POST' });
     return res.json();
   },
   publishPostNow: async (postId: number): Promise<any> => {
-    const res = await fetch(`${BASE_URL}/campaigns/posts/${postId}/publish-now`, { method: 'POST' });
+    const res = await authFetch(`${BASE_URL}/campaigns/posts/${postId}/publish-now`, { method: 'POST' });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       throw new Error(data.detail || `HTTP ${res.status}: Failed to publish post to Google Business Profile`);
@@ -609,7 +630,7 @@ export const api = {
   },
   getYouTubeSettings: async (): Promise<YouTubeDriveSetting> => {
     try {
-      const res = await fetch(`${BASE_URL}/youtube/settings`);
+      const res = await authFetch(`${BASE_URL}/youtube/settings`);
       if (res.ok) return await res.json();
     } catch (e) {
       console.warn("YouTube settings fetch error", e);
@@ -625,7 +646,7 @@ export const api = {
     };
   },
   updateYouTubeSettings: async (payload: Partial<YouTubeDriveSetting>): Promise<YouTubeDriveSetting> => {
-    const res = await fetch(`${BASE_URL}/youtube/settings`, {
+    const res = await authFetch(`${BASE_URL}/youtube/settings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -638,15 +659,35 @@ export const api = {
   },
   listYouTubeQueue: async (): Promise<YouTubeQueueItem[]> => {
     try {
-      const res = await fetch(`${BASE_URL}/youtube/queue`);
+      const res = await authFetch(`${BASE_URL}/youtube/queue`);
       if (res.ok) return await res.json();
     } catch (e) {
       console.warn("YouTube queue fetch error", e);
     }
     return [];
   },
+  updateYouTubeQueueItem: async (itemId: number, payload: Partial<YouTubeQueueItem>): Promise<YouTubeQueueItem> => {
+    const res = await authFetch(`${BASE_URL}/youtube/queue/${itemId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Failed to update queued video`);
+    }
+    return data;
+  },
+  deleteYouTubeQueueItem: async (itemId: number): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/youtube/queue/${itemId}`, { method: 'DELETE' });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Failed to delete queued video`);
+    }
+    return data;
+  },
   syncGoogleDrive: async (): Promise<YouTubeSyncResult> => {
-    const res = await fetch(`${BASE_URL}/youtube/sync-drive`, { method: 'POST' });
+    const res = await authFetch(`${BASE_URL}/youtube/sync-drive`, { method: 'POST' });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       throw new Error(data.detail || `HTTP ${res.status}: Drive sync endpoint unavailable on backend`);
@@ -654,7 +695,7 @@ export const api = {
     return data;
   },
   publishNextYouTubeVideo: async (): Promise<YouTubePublishResult> => {
-    const res = await fetch(`${BASE_URL}/youtube/publish-next`, { method: 'POST' });
+    const res = await authFetch(`${BASE_URL}/youtube/publish-next`, { method: 'POST' });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       throw new Error(data.detail || `HTTP ${res.status}: Failed to publish video to YouTube`);
@@ -662,7 +703,7 @@ export const api = {
     return data;
   },
   publishYouTubeItem: async (itemId: number): Promise<YouTubePublishResult> => {
-    const res = await fetch(`${BASE_URL}/youtube/publish-item/${itemId}`, { method: 'POST' });
+    const res = await authFetch(`${BASE_URL}/youtube/publish-item/${itemId}`, { method: 'POST' });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       throw new Error(data.detail || `HTTP ${res.status}: Failed to publish queued video`);
@@ -670,7 +711,7 @@ export const api = {
     return data;
   },
   clearYouTubeQueue: async (): Promise<any> => {
-    const res = await fetch(`${BASE_URL}/youtube/queue/clear`, { method: 'DELETE' });
+    const res = await authFetch(`${BASE_URL}/youtube/queue/clear`, { method: 'DELETE' });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       throw new Error(data.detail || `HTTP ${res.status}: Failed to clear queue`);
@@ -678,7 +719,7 @@ export const api = {
     return data;
   },
   getYouTubeSetupGuide: async (): Promise<any> => {
-    const res = await fetch(`${BASE_URL}/youtube/setup-guide`);
+    const res = await authFetch(`${BASE_URL}/youtube/setup-guide`);
     if (!res.ok) {
       throw new Error(`HTTP ${res.status}: Failed to load setup guide`);
     }
@@ -686,7 +727,7 @@ export const api = {
   },
   getMetaStatus: async (): Promise<MetaStatus> => {
     try {
-      const res = await fetch(`${BASE_URL}/meta/status`);
+      const res = await authFetch(`${BASE_URL}/meta/status`);
       if (res.ok) return await res.json();
     } catch (e) {
       console.warn("Meta status fetch error", e);
@@ -704,7 +745,7 @@ export const api = {
     };
   },
   connectMeta: async (payload: { access_token: string; page_id?: string; ig_user_id?: string }): Promise<MetaStatus> => {
-    const res = await fetch(`${BASE_URL}/meta/connect`, {
+    const res = await authFetch(`${BASE_URL}/meta/connect`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
@@ -716,7 +757,7 @@ export const api = {
     return data;
   },
   disconnectMeta: async (): Promise<any> => {
-    const res = await fetch(`${BASE_URL}/meta/disconnect`, { method: 'DELETE' });
+    const res = await authFetch(`${BASE_URL}/meta/disconnect`, { method: 'DELETE' });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       throw new Error(data.detail || `HTTP ${res.status}: Failed to disconnect Meta account`);
@@ -724,7 +765,7 @@ export const api = {
     return data;
   },
   getMetaSetupGuide: async (): Promise<any> => {
-    const res = await fetch(`${BASE_URL}/meta/setup-guide`);
+    const res = await authFetch(`${BASE_URL}/meta/setup-guide`);
     if (!res.ok) {
       throw new Error(`HTTP ${res.status}: Failed to load Meta setup guide`);
     }
@@ -734,7 +775,7 @@ export const api = {
     itemId: number,
     platforms: string[] = ['instagram', 'facebook']
   ): Promise<MultiPublishResult> => {
-    const res = await fetch(`${BASE_URL}/meta/publish-item/${itemId}`, {
+    const res = await authFetch(`${BASE_URL}/meta/publish-item/${itemId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ platforms })
@@ -749,7 +790,7 @@ export const api = {
     itemId: number,
     platforms?: string[]
   ): Promise<MultiPublishResult> => {
-    const res = await fetch(`${BASE_URL}/youtube/publish-multi/${itemId}`, {
+    const res = await authFetch(`${BASE_URL}/youtube/publish-multi/${itemId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: platforms ? JSON.stringify({ platforms }) : JSON.stringify({ platforms: ['youtube', 'instagram', 'facebook'] })
@@ -763,8 +804,9 @@ export const api = {
   getDriveDownloadUrl: (driveFileId: string): string => {
     return `${BASE_URL}/youtube/download-drive/${encodeURIComponent(driveFileId)}`;
   },
+  getAuthHeaders: (): Record<string, string> => AuthService.getAuthHeaders(),
   runYouTubeAutoPilot: async (): Promise<any> => {
-    const res = await fetch(`${BASE_URL}/youtube/auto-run`, { method: 'POST' });
+    const res = await authFetch(`${BASE_URL}/youtube/auto-run`, { method: 'POST' });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       throw new Error(data.detail || `HTTP ${res.status}: Auto-Pilot run failed`);
@@ -772,12 +814,51 @@ export const api = {
     return data;
   },
   analyzeYouTubeQueueItem: async (itemId: number): Promise<YouTubeQueueItem> => {
-    const res = await fetch(`${BASE_URL}/youtube/queue/${itemId}/analyze`, { method: 'POST' });
+    const res = await authFetch(`${BASE_URL}/youtube/queue/${itemId}/analyze`, { method: 'POST' });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
       throw new Error(data.detail || `HTTP ${res.status}: Video analysis failed`);
     }
     return data;
+  },
+  listMediaAssets: async (): Promise<any[]> => {
+    const res = await authFetch(`${BASE_URL}/media`);
+    if (!res.ok) return [];
+    return res.json();
+  },
+  createMediaAsset: async (payload: {
+    title: string;
+    filename: string;
+    file_path: string;
+    category: string;
+    caption?: string;
+  }): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/media`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Failed to save media asset`);
+    }
+    return data;
+  },
+  deleteMediaAsset: async (assetId: number): Promise<void> => {
+    const res = await authFetch(`${BASE_URL}/media/${assetId}`, { method: 'DELETE' });
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}: Failed to delete media asset`);
+    }
+  },
+  getAnalyticsSummary: async (days: number = 30): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/analytics/summary?days=${days}`);
+    if (!res.ok) return null;
+    return res.json();
+  },
+  getSocialAnalytics: async (): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/analytics/social`);
+    if (!res.ok) return null;
+    return res.json();
   }
 };
 

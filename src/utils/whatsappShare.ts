@@ -12,6 +12,7 @@ export async function shareOrDownloadForWhatsAppStatus(options: {
   videoUrl: string;
   filename: string;
   captionText: string;
+  headers?: Record<string, string>;
 }): Promise<WhatsAppShareResult> {
   const safeName = (options.filename || 'rais_promo_video.mp4').endsWith('.mp4')
     ? options.filename
@@ -23,7 +24,9 @@ export async function shareOrDownloadForWhatsAppStatus(options: {
     // Clipboard unavailable in some contexts
   }
 
-  const response = await fetch(options.videoUrl);
+  const response = await fetch(options.videoUrl, {
+    headers: options.headers || undefined,
+  });
   if (!response.ok) {
     let errMsg = `HTTP ${response.status}: Failed to load MP4 video for WhatsApp Status share`;
     try {

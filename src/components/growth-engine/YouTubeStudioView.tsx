@@ -3,7 +3,7 @@ import {
   Video, FolderSync, Play, CheckCircle2, Clock, AlertCircle, 
   ExternalLink, Sparkles, HelpCircle, RefreshCw, Key, ShieldCheck,
   ChevronDown, ChevronUp, Copy, Check, Send, Trash2,
-  Instagram, Facebook, Share2
+  Instagram, Facebook, Share2, Pencil, Save, X
 } from 'lucide-react';
 import { growthEngineApi as api, MetaStatus, YouTubeDriveSetting, YouTubeQueueItem } from '../../services/api';
 import { shareOrDownloadForWhatsAppStatus } from '../../utils/whatsappShare';
@@ -39,6 +39,17 @@ export const YouTubeStudioView: React.FC = () => {
   const [showGuide, setShowGuide] = useState<boolean>(false);
   const [expandedDescId, setExpandedDescId] = useState<number | null>(null);
   const [copiedText, setCopiedText] = useState<string | null>(null);
+  const [editingItemId, setEditingItemId] = useState<number | null>(null);
+  const [editDraft, setEditDraft] = useState<{
+    video_title: string;
+    product_name: string;
+    product_sku: string;
+    description: string;
+    first_comment: string;
+    tags: string;
+  }>({ video_title: '', product_name: '', product_sku: '', description: '', first_comment: '', tags: '' });
+  const [savingEdit, setSavingEdit] = useState<boolean>(false);
+  const [deletingId, setDeletingId] = useState<number | null>(null);
 
   const showNotice = (text: string, type: 'success' | 'error' | 'info') => {
     setNotice({ text, type });
@@ -90,6 +101,7 @@ export const YouTubeStudioView: React.FC = () => {
         auto_publish_facebook: settings.auto_publish_facebook ?? true,
         auto_post_immediately: settings.auto_post_immediately ?? true,
         auto_first_comment: settings.auto_first_comment ?? true,
+        daily_publish_hour: settings.daily_publish_hour ?? 10,
         ...(geminiKeyInput.trim() ? { gemini_api_key: geminiKeyInput.trim() } : {})
       });
       setSettings(updated);
@@ -223,6 +235,7 @@ export const YouTubeStudioView: React.FC = () => {
         videoUrl: api.getDriveDownloadUrl(item.drive_file_id),
         filename: item.file_name,
         captionText: caption,
+        headers: api.getAuthHeaders(),
       });
       if (outcome.method !== 'cancelled') {
         showNotice(outcome.message, 'success');
@@ -231,6 +244,46 @@ export const YouTubeStudioView: React.FC = () => {
       showNotice(err?.message || 'Could not download MP4 for WhatsApp Status share.', 'error');
     } finally {
       setSharingId(null);
+    }
+  };
+
+  const startEditingItem = (item: YouTubeQueueItem) => {
+    setEditingItemId(item.id);
+    setEditDraft({
+      video_title: item.video_title || '',
+      product_name: item.product_name || '',
+      product_sku: item.product_sku || '',
+      description: item.description || '',
+      first_comment: item.first_comment || '',
+      tags: item.tags || '',
+    });
+  };
+
+  const handleSaveItemEdit = async (itemId: number) => {
+    setSavingEdit(true);
+    try {
+      const updated = await api.updateYouTubeQueueItem(itemId, editDraft);
+      setQueue((prev) => prev.map((q) => (q.id === itemId ? updated : q)));
+      setEditingItemId(null);
+      showNotice('Updated video title, caption & first comment in Neon Postgres!', 'success');
+    } catch (err: any) {
+      showNotice(err?.message || 'Failed to save changes.', 'error');
+    } finally {
+      setSavingEdit(false);
+    }
+  };
+
+  const handleDeleteItem = async (itemId: number) => {
+    setDeletingId(itemId);
+    try {
+      await api.deleteYouTubeQueueItem(itemId);
+      setQueue((prev) => prev.filter((q) => q.id !== itemId));
+      if (editingItemId === itemId) setEditingItemId(null);
+      showNotice('Removed video item from queue.', 'info');
+    } catch (err: any) {
+      showNotice(err?.message || 'Failed to delete queue item.', 'error');
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -267,7 +320,7 @@ export const YouTubeStudioView: React.FC = () => {
               Unified Video Distribution Pipeline (Drive to YT + IG + FB)
             </h1>
             <p className="text-slate-400 text-sm max-w-2xl leading-relaxed">
-              Upload one product MP4 into Google Drive. Publish cleanly to YouTube Shorts, Instagram Reels (<span className="text-pink-400 font-mono">@raisfrozenfoods</span>),
+              Upload one product MP4 into Google Drive. Publish cleanly to YouTube Shorts, Instagram Reels (<span className="text-pink-400 font-mono">@{metaStatus?.ig_username || 'rais_agencies_frozen_foods'}</span>),
               and your linked Facebook Page, or share safely to WhatsApp Status in 1 tap.
             </p>
           </div>
@@ -362,10 +415,15 @@ export const YouTubeStudioView: React.FC = () => {
           </div>
 
           <div className="bg-slate-900/80 border border-slate-800 rounded-xl p-3.5">
-            <div className="text-slate-400 text-xs font-medium">Daily Release Cadence</div>
-            <div className="text-white font-bold text-sm mt-1">1 Video / Day</div>
+            <div className="text-slate-400 text-xs font-medium">Automation Cadence</div>
+            <div className="text-white font-bold text-sm mt-1">
+              {(settings.auto_post_immediately ?? true) ? 'Instant Auto-Pilot' : '1 Video / Day (IST)'}
+            </div>
             <div className="text-[11px] text-slate-400 mt-1.5 flex items-center gap-1">
-              <Clock className="w-3 h-3 text-cyan-400" /> Auto-fires at 10:00 AM IST
+              <Clock className="w-3 h-3 text-cyan-400" />
+              {(settings.auto_post_immediately ?? true)
+                ? 'Checks Drive every 5m & posts immediately'
+                : `Fires daily after ${String(settings.daily_publish_hour ?? 10).padStart(2, '0')}:00 IST`}
             </div>
           </div>
 
@@ -616,6 +674,27 @@ export const YouTubeStudioView: React.FC = () => {
                   Auto First Comment (Location + WhatsApp + Hashtags)
                 </label>
               </div>
+              {!(settings.auto_post_immediately ?? true) && (
+                <div className="flex items-center gap-2">
+                  <label htmlFor="daily-hour-ist" className="text-xs text-cyan-300 font-semibold">
+                    Daily IST Hour:
+                  </label>
+                  <select
+                    id="daily-hour-ist"
+                    value={settings.daily_publish_hour ?? 10}
+                    onChange={(e) =>
+                      setSettings({ ...settings, daily_publish_hour: parseInt(e.target.value, 10) || 10 })
+                    }
+                    className="bg-slate-950 border border-slate-800 rounded-lg px-2 py-1 text-xs text-white font-mono"
+                  >
+                    {Array.from({ length: 24 }, (_, h) => (
+                      <option key={h} value={h}>
+                        {String(h).padStart(2, '0')}:00 IST
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
             </div>
 
             <div className="pt-2 space-y-1">
@@ -821,6 +900,24 @@ export const YouTubeStudioView: React.FC = () => {
                         <span>{analyzingId === item.id ? 'Analyzing...' : 'Refresh Hook'}</span>
                       </button>
 
+                      <button
+                        onClick={() => (editingItemId === item.id ? setEditingItemId(null) : startEditingItem(item))}
+                        title="Edit video title, caption, tags, or first comment"
+                        className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs font-semibold flex items-center gap-1 transition-all"
+                      >
+                        <Pencil className="w-3 h-3" />
+                        <span>{editingItemId === item.id ? 'Close Edit' : 'Edit'}</span>
+                      </button>
+
+                      <button
+                        onClick={() => handleDeleteItem(item.id)}
+                        disabled={deletingId === item.id}
+                        title="Remove this video from the queue"
+                        className="p-1.5 rounded-lg bg-slate-800 hover:bg-rose-950 text-rose-300 border border-transparent hover:border-rose-500/30 transition-all disabled:opacity-50"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+
                       {item.drive_file_id && (
                         <button
                           onClick={() => handleShareWhatsAppStatus(item)}
@@ -867,6 +964,78 @@ export const YouTubeStudioView: React.FC = () => {
                       )}
                     </div>
                   </div>
+
+                  {/* Inline Queue Item Editor */}
+                  {editingItemId === item.id && (
+                    <div className="mt-3 pt-3 border-t border-amber-500/30 space-y-3 text-xs bg-slate-900/70 p-3.5 rounded-xl">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-amber-300">Edit Queued Video Copy &amp; First Comment</span>
+                        <button
+                          type="button"
+                          onClick={() => setEditingItemId(null)}
+                          className="text-slate-400 hover:text-white"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+                        <div className="md:col-span-2">
+                          <label className="text-[11px] text-slate-400 block mb-1">Video Title (max 100 chars YT)</label>
+                          <input
+                            type="text"
+                            value={editDraft.video_title}
+                            onChange={(e) => setEditDraft({ ...editDraft, video_title: e.target.value })}
+                            className="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-xs"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-[11px] text-slate-400 block mb-1">Product / SKU</label>
+                          <input
+                            type="text"
+                            value={editDraft.product_name}
+                            onChange={(e) => setEditDraft({ ...editDraft, product_name: e.target.value })}
+                            className="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-white text-xs"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-[11px] text-slate-400 block mb-1">Caption / Description</label>
+                        <textarea
+                          rows={4}
+                          value={editDraft.description}
+                          onChange={(e) => setEditDraft({ ...editDraft, description: e.target.value })}
+                          className="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-slate-200 font-mono text-[11px]"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[11px] text-slate-400 block mb-1">Pinned First Comment</label>
+                        <textarea
+                          rows={3}
+                          value={editDraft.first_comment}
+                          onChange={(e) => setEditDraft({ ...editDraft, first_comment: e.target.value })}
+                          className="w-full px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-emerald-200 font-mono text-[11px]"
+                        />
+                      </div>
+                      <div className="flex justify-end gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setEditingItemId(null)}
+                          className="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 text-xs font-semibold"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleSaveItemEdit(item.id)}
+                          disabled={savingEdit}
+                          className="px-3.5 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold flex items-center gap-1 disabled:opacity-50"
+                        >
+                          <Save className="w-3.5 h-3.5" />
+                          <span>{savingEdit ? 'Saving...' : 'Save Changes'}</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Expandable Description & Auto First Comment Details */}
                   {isExpanded && (

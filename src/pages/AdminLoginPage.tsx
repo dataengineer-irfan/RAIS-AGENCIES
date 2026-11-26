@@ -15,21 +15,19 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onLoginSuccess, 
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
     setIsLoading(true);
 
-    setTimeout(() => {
-      const result = AuthService.login(username, password);
-      setIsLoading(false);
+    const result = await AuthService.login(username, password);
+    setIsLoading(false);
 
-      if (result.success) {
-        onLoginSuccess();
-      } else {
-        setErrorMessage(result.message);
-      }
-    }, 400);
+    if (result.success) {
+      onLoginSuccess();
+    } else {
+      setErrorMessage(result.message);
+    }
   };
 
   return (
@@ -141,10 +139,10 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({ onLoginSuccess, 
 
           </form>
 
-          {/* Security Credentials Tip */}
+          {/* Server-Side Security Notice (zero hardcoded PINs in client bundle) */}
           <div className="p-3.5 rounded-xl bg-[#081026] border border-cyan-500/15 text-[11px] text-slate-400 text-center leading-relaxed">
-            <span className="text-amber-400 font-bold">Initial Default PIN:</span> <code className="text-white bg-slate-900 px-1.5 py-0.5 rounded">RAIS@516269</code>
-            <div className="text-[10px] text-slate-500 mt-1">You can change this passkey anytime in the Settings tab.</div>
+            <span className="text-amber-400 font-bold">Server-Verified Access:</span> Validated against Neon Postgres with JWT Bearer sessions &amp; brute-force protection.
+            <div className="text-[10px] text-slate-500 mt-1">Passkey can be rotated anytime inside System Safety &amp; Logs.</div>
           </div>
 
           {/* Security Footer Badge */}

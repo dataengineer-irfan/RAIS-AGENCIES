@@ -4,6 +4,7 @@ import {
   Lock, RefreshCw, Activity, Clock, Shield
 } from 'lucide-react';
 import { api, AutomationSettings, AuditLogItem } from '../../services/api';
+import { AuthService } from '../../services/authService';
 
 interface AutomationProps {
   killSwitchActive: boolean;
@@ -18,6 +19,10 @@ export const AutomationControlView: React.FC<AutomationProps> = ({
   const [auditLogs, setAuditLogs] = useState<AuditLogItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [toggling, setToggling] = useState<boolean>(false);
+  const [curPasskey, setCurPasskey] = useState<string>('');
+  const [newPasskey, setNewPasskey] = useState<string>('');
+  const [passMsg, setPassMsg] = useState<{ text: string; ok: boolean } | null>(null);
+  const [savingPass, setSavingPass] = useState<boolean>(false);
 
   useEffect(() => {
     loadData();
@@ -57,6 +62,20 @@ export const AutomationControlView: React.FC<AutomationProps> = ({
       console.error('Failed to toggle kill switch', err);
     } finally {
       setToggling(false);
+    }
+  };
+
+  const handleUpdatePasskey = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSavingPass(true);
+    setPassMsg(null);
+    const res = await AuthService.changePasskey(curPasskey, newPasskey);
+    setSavingPass(false);
+    setPassMsg({ text: res.message, ok: res.success });
+    if (res.success) {
+      setCurPasskey('');
+      setNewPasskey('');
+      api.getAuditLogs().then(setAuditLogs).catch(() => {});
     }
   };
 
@@ -211,6 +230,53 @@ export const AutomationControlView: React.FC<AutomationProps> = ({
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Admin Passkey Rotation (Neon Postgres Server-Side) */}
+      <div className="bg-[#0f172a] border border-slate-800 rounded-xl p-5 space-y-3">
+        <h3 className="text-sm font-bold text-white flex items-center gap-2">
+          <Lock className="w-4 h-4 text-cyan-400" />
+          <span>Cloud Admin Passkey Rotation (Neon Postgres bcrypt)</span>
+        </h3>
+        <form onSubmit={handleUpdatePasskey} className="grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
+          <div>
+            <label className="text-[11px] text-slate-400 block mb-1">Current Passkey</label>
+            <input
+              type="password"
+              required
+              value={curPasskey}
+              onChange={(e) => setCurPasskey(e.target.value)}
+              placeholder="Current passkey"
+              className="w-full px-3 py-2 bg-[#070b14] border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-400"
+            />
+          </div>
+          <div>
+            <label className="text-[11px] text-slate-400 block mb-1">New Passkey (min 6 chars)</label>
+            <input
+              type="password"
+              required
+              minLength={6}
+              value={newPasskey}
+              onChange={(e) => setNewPasskey(e.target.value)}
+              placeholder="New strong passkey"
+              className="w-full px-3 py-2 bg-[#070b14] border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-cyan-400"
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={savingPass}
+            className="px-4 py-2 bg-cyan-500 hover:bg-cyan-400 disabled:opacity-50 text-slate-950 font-bold text-xs rounded-lg transition-all"
+          >
+            {savingPass ? 'Updating...' : 'Rotate Passkey in Neon'}
+          </button>
+        </form>
+        {passMsg && (
+          <div className={`text-xs font-medium px-3 py-2 rounded-lg border ${
+            passMsg.ok ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-300' : 'bg-rose-500/15 border-rose-500/30 text-rose-300'
+          }`}>
+            {passMsg.text}
+          </div>
+        )}
       </div>
 
       {/* Real-time Immutable Audit Log Table */}

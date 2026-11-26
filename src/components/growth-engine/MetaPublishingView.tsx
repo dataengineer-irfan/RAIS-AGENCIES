@@ -17,6 +17,10 @@ export const MetaPublishingView: React.FC = () => {
   const [manualPublishReel, setManualPublishReel] = useState<ReelCalendarItem | null>(null);
   const [manualReelUrl, setManualReelUrl] = useState<string>('');
   const [copiedCaption, setCopiedCaption] = useState(false);
+  const [showLegacyArchive, setShowLegacyArchive] = useState(false);
+
+  const igHandle = metaStatus?.ig_username || 'rais_agencies_frozen_foods';
+  const igProfileUrl = `https://www.instagram.com/${igHandle}/`;
 
   const showNotice = (text: string, type: 'success' | 'error' | 'info') => {
     setNotice({ text, type });
@@ -67,6 +71,7 @@ export const MetaPublishingView: React.FC = () => {
         videoUrl: api.getDriveDownloadUrl(item.drive_file_id),
         filename: item.file_name,
         captionText: `${item.video_title}\n\n${item.description}\n\nOrder WhatsApp: 9347453135`,
+        headers: api.getAuthHeaders(),
       });
       if (res.method !== 'cancelled') showNotice(res.message, 'success');
     } catch (err: any) {
@@ -140,19 +145,19 @@ export const MetaPublishingView: React.FC = () => {
               )}
             </div>
             <p className="text-xs text-slate-400 mt-0.5">
-              Download pre-rendered 9:16 MP4 masters &amp; captions for Instagram handle <span className="text-pink-400 font-semibold font-mono">@raisfrozenfoods</span>
+              Automated Meta Graph API v21.0 publishing for Instagram handle <span className="text-pink-400 font-semibold font-mono">@{igHandle}</span> &amp; your linked Facebook Page
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
           <a
-            href="https://www.instagram.com/raisfrozenfoods/"
+            href={igProfileUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:brightness-110 text-white font-bold text-xs shadow transition-all"
           >
-            <span>@raisfrozenfoods</span>
+            <span>@{igHandle}</span>
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
           <a
@@ -167,24 +172,24 @@ export const MetaPublishingView: React.FC = () => {
         </div>
       </div>
 
-      {/* Asset & Dispatch Summary Grid */}
+      {/* Asset & Dispatch Summary Grid (Live Neon + Graph API Counters) */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="p-4 rounded-xl bg-[#0a0f1d] border border-cyan-500/20">
           <div className="text-[11px] font-mono text-slate-400 uppercase">Target Handle</div>
-          <div className="text-base font-bold text-white mt-1">@raisfrozenfoods</div>
-          <div className="text-[11px] text-pink-400 font-mono mt-0.5">IG Account: 29157923917158606</div>
+          <div className="text-base font-bold text-white mt-1 truncate">@{igHandle}</div>
+          <div className="text-[11px] text-pink-400 font-mono mt-0.5 truncate">IG ID: {metaStatus?.ig_user_id || 'Pending Link'}</div>
         </div>
 
         <div className="p-4 rounded-xl bg-[#0a0f1d] border border-cyan-500/20">
-          <div className="text-[11px] font-mono text-slate-400 uppercase">Published Live</div>
-          <div className="text-base font-bold text-emerald-400 mt-1">{publishedCount} Reels</div>
-          <div className="text-[11px] text-slate-400 mt-0.5">Verified Instagram URLs</div>
+          <div className="text-[11px] font-mono text-slate-400 uppercase">IG Reels Auto-Posted</div>
+          <div className="text-base font-bold text-emerald-400 mt-1">{driveQueue.filter(d => d.ig_status === 'PUBLISHED').length} Live Reels</div>
+          <div className="text-[11px] text-slate-400 mt-0.5">Verified Graph API Permalinks</div>
         </div>
 
         <div className="p-4 rounded-xl bg-[#0a0f1d] border border-cyan-500/20">
-          <div className="text-[11px] font-mono text-slate-400 uppercase">Pending Manual Upload</div>
-          <div className="text-base font-bold text-amber-300 mt-1">{pendingCount} Compiled MP4s</div>
-          <div className="text-[11px] text-slate-400 mt-0.5">1080x1920 Vertical Ready</div>
+          <div className="text-[11px] font-mono text-slate-400 uppercase">FB Page Video Reels</div>
+          <div className="text-base font-bold text-blue-300 mt-1">{driveQueue.filter(d => d.fb_status === 'PUBLISHED').length} Live · {driveQueue.filter(d => d.ig_status !== 'PUBLISHED' || d.fb_status !== 'PUBLISHED').length} Pending</div>
+          <div className="text-[11px] text-slate-400 mt-0.5">{driveQueue.length} Total Drive Clips</div>
         </div>
 
         <div className="p-4 rounded-xl bg-[#0a0f1d] border border-cyan-500/20">
@@ -192,9 +197,9 @@ export const MetaPublishingView: React.FC = () => {
           <div className={`text-base font-bold mt-1 ${metaStatus?.connected ? 'text-emerald-400' : 'text-amber-300'}`}>
             {metaStatus?.connected ? 'Graph API v21.0 Live' : 'Token Required'}
           </div>
-          <div className="text-[11px] text-slate-400 mt-0.5">
+          <div className="text-[11px] text-slate-400 mt-0.5 truncate">
             {metaStatus?.connected
-              ? `FB Page + @${metaStatus.ig_username || 'raisfrozenfoods'} Linked`
+              ? `FB Page + @${igHandle} Linked`
               : 'Paste Meta Page Token below'}
           </div>
         </div>
@@ -315,89 +320,86 @@ export const MetaPublishingView: React.FC = () => {
         )}
       </div>
 
-      {/* Honest Workflow Notice */}
-      <div className="p-4 rounded-xl bg-amber-950/20 border border-amber-500/30 text-xs text-amber-200 leading-relaxed flex items-start gap-3">
-        <AlertCircle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
-        <div>
-          <strong className="text-amber-300 font-bold block mb-0.5">
-            {metaStatus?.connected ? 'Local 30-Day Reels Pack + Live Drive Auto-Post:' : 'Manual Publishing Mode for Local 30-Day Reels:'}
-          </strong>
-          Day 1 Reels (Telugu &amp; Hindi) are live on <strong className="text-white">@raisfrozenfoods</strong>. The {pendingCount} local master reels below can be downloaded / shared directly to WhatsApp Status via <strong>Publishing Pack</strong>, while Google Drive clips above auto-publish via Meta Graph API.
-        </div>
-      </div>
-
-      {/* 30-Day Publishing Queue Table */}
-      <div className="p-6 rounded-2xl bg-[#0a0f1d] border border-slate-800 space-y-4 shadow-xl">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      {/* Collapsible Optional Pre-Rendered Local Reels Templates (Legacy Archive) */}
+      <div className="p-4 rounded-2xl bg-[#0a0f1d] border border-slate-800 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
-            <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              <Film className="w-5 h-5 text-pink-400" />
-              <span>30-Day Reels Dispatch Schedule</span>
+            <h3 className="text-sm font-bold text-slate-200 flex items-center gap-2">
+              <Film className="w-4 h-4 text-slate-400" />
+              <span>Pre-Rendered Local MP4 Promo Archive ({reels.length} Templates)</span>
             </h3>
-            <p className="text-xs text-slate-400">Complete vertical video asset pipeline for Rayachoty B2B commercial outreach</p>
+            <p className="text-[11px] text-slate-400">
+              Optional offline template MP4 downloads for manual WhatsApp Status sharing (automated Drive clips above handle Graph API auto-posting).
+            </p>
           </div>
-          <span className="text-xs font-mono font-semibold px-3 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">
-            {reels.length} Total Master Reels
-          </span>
+          <button
+            type="button"
+            onClick={() => setShowLegacyArchive(!showLegacyArchive)}
+            className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold border border-slate-700 self-start sm:self-auto"
+          >
+            {showLegacyArchive ? 'Hide Local Archive' : `Show Local Archive (${pendingCount} Pending)`}
+          </button>
         </div>
 
-        <div className="overflow-x-auto rounded-xl border border-slate-800">
-          <table className="w-full text-left text-xs">
-            <thead className="bg-[#0f172a] text-slate-400 uppercase font-mono tracking-wider text-[11px]">
-              <tr>
-                <th className="py-3 px-4">Day</th>
-                <th className="py-3 px-4">Title &amp; Product</th>
-                <th className="py-3 px-4">Theme</th>
-                <th className="py-3 px-4">CTA Keyword</th>
-                <th className="py-3 px-4">Status</th>
-                <th className="py-3 px-4 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-800 text-slate-300 bg-[#070b14]/50">
-              {reels.map((reel) => (
-                <tr key={reel.id} className="hover:bg-slate-800/40 transition-colors">
-                  <td className="py-3 px-4 font-mono font-bold text-amber-400">Day {reel.dayNumber}</td>
-                  <td className="py-3 px-4">
-                    <div className="font-bold text-white">{reel.title}</div>
-                    <div className="text-[11px] text-slate-400">{reel.brand} · {reel.productName}</div>
-                  </td>
-                  <td className="py-3 px-4 uppercase text-[10px] font-mono text-cyan-300">{reel.theme}</td>
-                  <td className="py-3 px-4 font-mono font-bold text-amber-300">"{reel.ctaKeyword}"</td>
-                  <td className="py-3 px-4">
-                    <span className={`px-2.5 py-0.5 rounded text-[10px] font-bold uppercase inline-flex items-center gap-1 font-mono ${
-                      reel.status === 'published' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
-                      reel.status === 'approved' ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30' :
-                      'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                    }`}>
-                      {reel.status === 'published' && <Check className="w-3 h-3 inline" />}
-                      <span>{reel.status === 'published' ? 'Published Live' : reel.status}</span>
-                    </span>
-                  </td>
-                  <td className="py-3 px-4 text-right">
-                    {reel.instagramMediaUrl ? (
-                      <a
-                        href={reel.instagramMediaUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gradient-to-r from-pink-600 to-purple-600 hover:brightness-110 text-white font-bold text-[11px] transition-all shadow"
-                      >
-                        <span>View Live Reel</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                    ) : (
-                      <button
-                        onClick={() => openPublishPack(reel)}
-                        className="px-3 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-[11px] transition-all shadow hover:scale-[1.02]"
-                      >
-                        Publishing Pack
-                      </button>
-                    )}
-                  </td>
+        {showLegacyArchive && (
+          <div className="overflow-x-auto rounded-xl border border-slate-800">
+            <table className="w-full text-left text-xs">
+              <thead className="bg-[#0f172a] text-slate-400 uppercase font-mono tracking-wider text-[11px]">
+                <tr>
+                  <th className="py-3 px-4">Day</th>
+                  <th className="py-3 px-4">Title &amp; Product</th>
+                  <th className="py-3 px-4">Theme</th>
+                  <th className="py-3 px-4">CTA Keyword</th>
+                  <th className="py-3 px-4">Status</th>
+                  <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody className="divide-y divide-slate-800 text-slate-300 bg-[#070b14]/50">
+                {reels.map((reel) => (
+                  <tr key={reel.id} className="hover:bg-slate-800/40 transition-colors">
+                    <td className="py-3 px-4 font-mono font-bold text-amber-400">Day {reel.dayNumber}</td>
+                    <td className="py-3 px-4">
+                      <div className="font-bold text-white">{reel.title}</div>
+                      <div className="text-[11px] text-slate-400">{reel.brand} · {reel.productName}</div>
+                    </td>
+                    <td className="py-3 px-4 uppercase text-[10px] font-mono text-cyan-300">{reel.theme}</td>
+                    <td className="py-3 px-4 font-mono font-bold text-amber-300">"{reel.ctaKeyword}"</td>
+                    <td className="py-3 px-4">
+                      <span className={`px-2.5 py-0.5 rounded text-[10px] font-bold uppercase inline-flex items-center gap-1 font-mono ${
+                        reel.status === 'published' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
+                        reel.status === 'approved' ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30' :
+                        'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                      }`}>
+                        {reel.status === 'published' && <Check className="w-3 h-3 inline" />}
+                        <span>{reel.status === 'published' ? 'Published Live' : reel.status}</span>
+                      </span>
+                    </td>
+                    <td className="py-3 px-4 text-right">
+                      {reel.instagramMediaUrl ? (
+                        <a
+                          href={reel.instagramMediaUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gradient-to-r from-pink-600 to-purple-600 hover:brightness-110 text-white font-bold text-[11px] transition-all shadow"
+                        >
+                          <span>View Live Reel</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      ) : (
+                        <button
+                          onClick={() => openPublishPack(reel)}
+                          className="px-3 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-[11px] transition-all shadow hover:scale-[1.02]"
+                        >
+                          Download / Pack
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
 
       {/* MANUAL PUBLISHING WIZARD MODAL */}

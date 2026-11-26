@@ -101,7 +101,7 @@ export const MetaConnectCard: React.FC<MetaConnectCardProps> = ({
               )}
             </div>
             <p className="text-xs text-slate-400 mt-0.5">
-              Because your Facebook Page is already linked with Instagram (<span className="text-pink-400 font-mono">@raisfrozenfoods</span>), one Page Access Token posts Drive videos to both automatically.
+              Because your Facebook Page is linked with Instagram (<span className="text-pink-400 font-mono">@{metaStatus?.ig_username || 'rais_agencies_frozen_foods'}</span>), one Page Access Token posts Drive videos to both automatically.
             </p>
           </div>
         </div>
@@ -168,8 +168,8 @@ export const MetaConnectCard: React.FC<MetaConnectCardProps> = ({
           </div>
           <ol className="list-decimal list-inside space-y-1 text-slate-400">
             <li>Open <strong className="text-slate-200">Meta Graph API Explorer</strong> &amp; select your Business App (or create a Business App on <code className="text-amber-300">developers.facebook.com/apps</code>).</li>
-            <li>Click <strong className="text-slate-200">Get Token -&gt; Get Page Access Token</strong> and approve these 5 permissions: <code className="text-cyan-300">pages_show_list, pages_read_engagement, pages_manage_posts, instagram_basic, instagram_content_publish</code>.</li>
-            <li>Select your RAIS Agencies Facebook Page (already connected to <code className="text-pink-300">@raisfrozenfoods</code>).</li>
+            <li>Click <strong className="text-slate-200">Get Token -&gt; Get Page Access Token</strong> and approve these 6 permissions: <code className="text-cyan-300">pages_show_list, pages_read_engagement, pages_manage_posts, pages_manage_engagement, instagram_basic, instagram_content_publish</code>.</li>
+            <li>Select your RAIS Agencies Facebook Page (linked to <code className="text-pink-300">@{metaStatus?.ig_username || 'rais_agencies_frozen_foods'}</code>).</li>
             <li>Paste the token below — we validate it live against Meta and auto-detect both accounts. (Tip: extend it to 60 days in Meta Access Token Debugger.)</li>
           </ol>
         </div>

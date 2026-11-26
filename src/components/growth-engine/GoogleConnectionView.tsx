@@ -346,7 +346,7 @@ export const GoogleConnectionView: React.FC = () => {
               <span>Production Setup (Google Cloud Console)</span>
             </h2>
             <button
-              onClick={() => copyConfig('USE_MOCK_GBP=False\nGOOGLE_CLIENT_ID=\nGOOGLE_CLIENT_SECRET=\nGOOGLE_REDIRECT_URI=https://rais-growth-backend.onrender.com/api/v1/google/callback\nFRONTEND_URL=https://rais-growth-backend.onrender.com')}
+              onClick={() => copyConfig('USE_MOCK_GBP=False\nGOOGLE_CLIENT_ID=\nGOOGLE_CLIENT_SECRET=\nGOOGLE_REDIRECT_URI=https://rais-growth-backend.onrender.com/api/v1/google/callback\nFRONTEND_URL=https://dataengineer-irfan.github.io/RAIS-AGENCIES')}
               className="text-slate-400 hover:text-slate-200 text-xs flex items-center gap-1"
             >
               {copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}

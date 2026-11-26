@@ -12,13 +12,11 @@ import { MediaLibraryView } from '../components/growth-engine/MediaLibraryView';
 import { B2BLeadsView } from '../components/growth-engine/B2BLeadsView';
 import { AutomationControlView } from '../components/growth-engine/AutomationControlView';
 import { BusinessInfoManagerView } from '../components/growth-engine/BusinessInfoManagerView';
-import { ReelsStudioView } from '../components/growth-engine/ReelsStudioView';
 import { MetaPublishingView } from '../components/growth-engine/MetaPublishingView';
 import { InstagramEnquiriesView } from '../components/growth-engine/InstagramEnquiriesView';
 import { YouTubeStudioView } from '../components/growth-engine/YouTubeStudioView';
 import { TrafficAnalyticsTab } from '../components/automation/TrafficAnalyticsTab';
 import { api } from '../services/api';
-import { AutomationStorage } from '../services/automationStorage';
 
 interface AutomationDashboardPageProps {
   onLogout?: () => void;
@@ -31,7 +29,6 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
 }) => {
   const [currentTab, setCurrentTab] = useState<string>('overview');
   const [killSwitchActive, setKillSwitchActive] = useState<boolean>(false);
-  const initialReels = AutomationStorage.getReels();
   const [stats, setStats] = useState<OverviewStats>({
     totalCampaigns: 0,
     pendingReviews: 0,
@@ -40,27 +37,40 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
     killSwitchActive: false,
     googleConnected: false,
     googleStatusMode: 'CHECKING',
-    publishedReelsCount: initialReels.filter(r => r.status === 'published').length,
-    totalReelsCount: initialReels.length
+    publishedReelsCount: 0,
+    totalReelsCount: 0,
+    ytPublishedCount: 0,
+    igPublishedCount: 0,
+    fbPublishedCount: 0,
+    queuedVideosCount: 0,
+    metaConnected: false,
+    metaUsername: 'rais_agencies_frozen_foods',
+    autoPilotEnabled: true,
+    geminiConnected: false,
   });
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('google_auth')) {
       setCurrentTab('google');
+    } else if (window.location.hash.replace(/^#\/?/, '').toLowerCase() === 'reels') {
+      setCurrentTab('youtube_drive');
     }
     loadAppInitialState();
   }, []);
 
   const loadAppInitialState = async () => {
     try {
-      const [settings, leads, reviews, seo, campaigns, googleStatus] = await Promise.allSettled([
+      const [settings, leads, reviews, seo, campaigns, googleStatus, ytQueue, metaStatus, ytSettings] = await Promise.allSettled([
         api.getAutomationSettings(),
         api.listLeads(),
         api.listReviews(),
         api.getSeoAudit(),
         api.listCampaigns(),
-        api.getGoogleStatus()
+        api.getGoogleStatus(),
+        api.listYouTubeQueue(),
+        api.getMetaStatus(),
+        api.getYouTubeSettings(),
       ]);
 
       const isKillSwitch = settings.status === 'fulfilled' ? Boolean(settings.value?.emergency_kill_switch) : false;
@@ -75,7 +85,14 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
       const campaignsCount = campaigns.status === 'fulfilled' && Array.isArray(campaigns.value) ? campaigns.value.length : 0;
       const isGoogleConnected = googleStatus.status === 'fulfilled' ? Boolean(googleStatus.value?.connected) : false;
       const gMode = googleStatus.status === 'fulfilled' ? (googleStatus.value?.status || 'NOT_CONNECTED') : 'BACKEND_UNREACHABLE';
-      const currentReels = AutomationStorage.getReels();
+
+      const qItems = ytQueue.status === 'fulfilled' && Array.isArray(ytQueue.value) ? ytQueue.value : [];
+      const ytPub = qItems.filter(q => q.status === 'PUBLISHED').length;
+      const igPub = qItems.filter(q => q.ig_status === 'PUBLISHED').length;
+      const fbPub = qItems.filter(q => q.fb_status === 'PUBLISHED').length;
+      const queuedCnt = qItems.filter(q => q.status === 'QUEUED').length;
+      const metaVal = metaStatus.status === 'fulfilled' ? metaStatus.value : null;
+      const ytSetVal = ytSettings.status === 'fulfilled' ? ytSettings.value : null;
 
       setKillSwitchActive(isKillSwitch);
       setStats({
@@ -86,8 +103,16 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
         killSwitchActive: isKillSwitch,
         googleConnected: isGoogleConnected,
         googleStatusMode: gMode,
-        publishedReelsCount: currentReels.filter(r => r.status === 'published').length,
-        totalReelsCount: currentReels.length
+        publishedReelsCount: igPub,
+        totalReelsCount: qItems.length,
+        ytPublishedCount: ytPub,
+        igPublishedCount: igPub,
+        fbPublishedCount: fbPub,
+        queuedVideosCount: queuedCnt,
+        metaConnected: Boolean(metaVal?.connected),
+        metaUsername: metaVal?.ig_username || 'rais_agencies_frozen_foods',
+        autoPilotEnabled: Boolean(ytSetVal?.auto_post_immediately ?? true),
+        geminiConnected: Boolean(ytSetVal?.gemini_connected),
       });
     } catch (err) {
       console.warn('Backend offline or initializing', err);
@@ -103,6 +128,8 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
         killSwitchActive={killSwitchActive}
         googleConnected={stats.googleConnected}
         totalReelsCount={stats.totalReelsCount}
+        metaUsername={stats.metaUsername}
+        metaConnected={stats.metaConnected}
         onBackToHome={onBackToHome}
         onLogout={onLogout}
       />
@@ -123,8 +150,8 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
         {currentTab === 'analytics' && <AnalyticsView />}
         {currentTab === 'ga4_traffic' && <TrafficAnalyticsTab />}
 
-        {/* Meta & Instagram Automation Suite */}
-        {currentTab === 'reels' && <ReelsStudioView />}
+        {/* Meta & Video Automation Suite */}
+        {currentTab === 'reels' && <YouTubeStudioView />}
         {currentTab === 'meta_publishing' && <MetaPublishingView />}
         {currentTab === 'youtube_drive' && <YouTubeStudioView />}
         {currentTab === 'enquiries' && <InstagramEnquiriesView />}

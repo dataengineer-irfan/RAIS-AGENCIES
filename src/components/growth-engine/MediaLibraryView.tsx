@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   Image as ImageIcon, CheckCircle2, ShieldCheck, 
-  Upload, Eye, Download, Camera, Check, Copy, Sparkles
+  Upload, Eye, Download, Camera, Check, Copy, Sparkles, Trash2
 } from 'lucide-react';
 import { assetUrl } from '../../utils/assetUrl';
+import { api } from '../../services/api';
 
 interface MediaItem {
   id: number;
@@ -201,19 +202,37 @@ const INITIAL_MEDIA_ASSETS: MediaItem[] = [
 
 export const MediaLibraryView: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
-  const [mediaList, setMediaList] = useState<MediaItem[]>(() => {
-    try {
-      const stored = localStorage.getItem('rais_custom_media_assets');
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        const validCustom = parsed.filter((item: any) => item && item.id > 100 && (item.imageUrl?.startsWith('data:') || item.imageUrl?.startsWith('http')));
-        return [...validCustom, ...INITIAL_MEDIA_ASSETS];
-      }
-    } catch {}
-    return INITIAL_MEDIA_ASSETS;
-  });
+  const [mediaList, setMediaList] = useState<MediaItem[]>(INITIAL_MEDIA_ASSETS);
   const [copiedId, setCopiedId] = useState<number | null>(null);
+  const [uploading, setUploading] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    loadCloudMedia();
+  }, []);
+
+  const loadCloudMedia = async () => {
+    try {
+      const dbAssets = await api.listMediaAssets();
+      if (Array.isArray(dbAssets) && dbAssets.length > 0) {
+        const mapped: MediaItem[] = dbAssets.map((a: any) => ({
+          id: 10000 + Number(a.id),
+          title: a.title,
+          category: a.category || 'Cold Storage',
+          filename: a.filename,
+          imageUrl: a.file_path,
+          description: a.caption || 'Persisted in Neon Postgres Media Library.',
+          is_verified_genuine: Boolean(a.is_verified_real_shop_photo),
+          uploaded_to_gbp: false,
+        }));
+        setMediaList([...mapped, ...INITIAL_MEDIA_ASSETS]);
+      } else {
+        setMediaList(INITIAL_MEDIA_ASSETS);
+      }
+    } catch {
+      setMediaList(INITIAL_MEDIA_ASSETS);
+    }
+  };
 
   const categories = ['ALL', 'Cold Storage', 'Dairy Products', 'Frozen Foods', 'Sauces & Canned', 'Bakery', 'Packaging'];
 
@@ -226,26 +245,36 @@ export const MediaLibraryView: React.FC = () => {
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = () => {
-      const newAsset: MediaItem = {
-        id: Date.now(),
-        title: file.name.replace(/\.[^/.]+$/, '').replace(/_/g, ' '),
-        category: 'Cold Storage',
-        filename: file.name,
-        imageUrl: reader.result as string,
-        description: 'Uploaded depot photo ready for Google Maps & Instagram Reels publishing.',
-        is_verified_genuine: true,
-        uploaded_to_gbp: false
-      };
-
-      const updated = [newAsset, ...mediaList];
-      setMediaList(updated);
+    reader.onload = async () => {
+      const dataUrl = reader.result as string;
+      const title = file.name.replace(/\.[^/.]+$/, '').replace(/_/g, ' ');
+      setUploading(true);
       try {
-        const customOnly = updated.filter(a => a.id > 100);
-        localStorage.setItem('rais_custom_media_assets', JSON.stringify(customOnly));
-      } catch {}
+        await api.createMediaAsset({
+          title,
+          filename: file.name,
+          file_path: dataUrl,
+          category: 'Cold Storage',
+          caption: 'Uploaded depot photo synced in Neon Postgres.',
+        });
+        await loadCloudMedia();
+      } catch (err) {
+        console.error('Failed to persist media photo to cloud', err);
+      } finally {
+        setUploading(false);
+      }
     };
     reader.readAsDataURL(file);
+  };
+
+  const handleDeleteAsset = async (uiId: number) => {
+    if (uiId < 10000) return;
+    try {
+      await api.deleteMediaAsset(uiId - 10000);
+      setMediaList((prev) => prev.filter((item) => item.id !== uiId));
+    } catch (err) {
+      console.error('Delete failed', err);
+    }
   };
 
   const copyUrl = (id: number, url: string) => {
@@ -370,6 +399,15 @@ export const MediaLibraryView: React.FC = () => {
                 >
                   <Eye className="w-3.5 h-3.5" />
                 </a>
+                {asset.id >= 10000 && (
+                  <button
+                    onClick={() => handleDeleteAsset(asset.id)}
+                    className="p-1.5 bg-slate-800 hover:bg-rose-950 text-rose-300 rounded text-[11px] transition-all"
+                    title="Delete uploaded cloud asset"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                )}
               </div>
             </div>
           </div>
