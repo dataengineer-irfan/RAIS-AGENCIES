@@ -1,4 +1,3 @@
-import { GBPStorage } from './gbpStorage';
 import { AuthService } from './authService';
 
 const API_HOST = (import.meta as any).env?.VITE_GROWTH_ENGINE_API_URL || 'https://rais-growth-backend.onrender.com';
@@ -218,6 +217,11 @@ export interface Competitor {
   review_count: number;
   verified_status: string;
   notes?: string;
+  website_url?: string;
+  public_offers?: string;
+  last_checked_at?: string;
+  change_history_json?: string;
+  confidence?: string;
 }
 
 export interface B2BLead {
@@ -228,7 +232,13 @@ export interface B2BLead {
   business_type: string;
   location: string;
   product_interest?: string;
-  status: 'NEW' | 'CONTACTED' | 'QUOTED' | 'CONVERTED' | 'LOST';
+  status: 'NEW' | 'QUALIFIED' | 'CONTACTED' | 'INTERESTED' | 'QUOTATION_REQUESTED' | 'QUOTED' | 'CONVERTED' | 'NOT_INTERESTED' | 'FOLLOW_UP_REQUIRED' | 'LOST';
+  assigned_owner?: string;
+  lead_score?: number;
+  segment?: string;
+  last_interaction_at?: string;
+  next_followup_at?: string;
+  opted_out_whatsapp?: boolean;
   created_at: string;
 }
 
@@ -322,60 +332,12 @@ export const api = {
     return res.json();
   },
   listReviews: async (): Promise<Review[]> => {
-    let remoteReviews: Review[] = [];
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2500);
-      const res = await authFetch(`${BASE_URL}/reviews`, { signal: controller.signal });
-      clearTimeout(timeoutId);
-      if (res.ok) {
-        const data = await res.json();
-        if (Array.isArray(data)) remoteReviews = data;
-      }
-    } catch {}
-    
-    // Always load local authentic GBP storage containing all 5 verified Google Maps reviews
-    const localReviews = GBPStorage.getReviews();
-    const formattedLocal: Review[] = localReviews.map((r, i) => {
-      const uniqueId = (r.id || 0) + 100;
-      return {
-        id: uniqueId,
-        google_review_id: `gmb_${uniqueId}`,
-        author_name: r.reviewerName,
-        rating: r.rating,
-        comment: r.comment,
-        create_time: r.date || 'Recent',
-        sentiment: (r.sentiment as any) || 'POSITIVE',
-        is_complaint: false,
-        has_replied: r.hasReplied,
-        origin: 'GOOGLE_AUTHENTIC' as const,
-        reply_drafts: [
-          {
-            id: uniqueId,
-            reply_english: r.replyEnglish || '',
-            reply_telugu: r.replyTelugu || '',
-            is_approved: r.isApproved,
-            status: r.isApproved ? 'PUBLISHED_TO_GOOGLE' : 'PENDING_APPROVAL',
-            approved_by: r.approvedBy || 'RAIS Admin'
-          }
-        ]
-      };
-    });
-
-    if (remoteReviews.length === 0) return formattedLocal;
-
-    // Guarantee Hidayathullah H is ALWAYS present and placed at the top (index 0)
-    const hIdx = remoteReviews.findIndex(r => r.author_name.toLowerCase().includes('hidayathullah'));
-    if (hIdx > 0) {
-      const [hRev] = remoteReviews.splice(hIdx, 1);
-      return [hRev, ...remoteReviews];
-    } else if (hIdx === -1) {
-      const hidayathullah = formattedLocal.find(r => r.author_name.toLowerCase().includes('hidayathullah'));
-      if (hidayathullah) {
-        return [hidayathullah, ...remoteReviews];
-      }
+    const res = await authFetch(`${BASE_URL}/reviews`);
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}: Failed to load reviews from backend`);
     }
-    return remoteReviews;
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
   },
   syncReviews: async (): Promise<any> => {
     const res = await authFetch(`${BASE_URL}/reviews/sync`, { method: 'POST' });
@@ -397,25 +359,16 @@ export const api = {
     return await res.json();
   },
   approveReviewReply: async (draftId: number, replyText: string, approverName: string = 'Admin'): Promise<any> => {
-    GBPStorage.approveReviewReply(draftId, replyText, approverName);
-    try {
-      const res = await authFetch(`${BASE_URL}/reviews/reply/${draftId}/approve`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ reply_text: replyText, approver_name: approverName })
-      });
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.detail || `HTTP ${res.status}`);
-      }
-      return await res.json();
-    } catch {
-      return {
-        status: 'APPROVED_NOT_PUBLISHED',
-        is_published_to_google: false,
-        message: 'Saved local draft approval only. Backend unreachable — NOT published to Google Business Profile.'
-      };
+    const res = await authFetch(`${BASE_URL}/reviews/reply/${draftId}/approve`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ reply_text: replyText, approver_name: approverName })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `HTTP ${res.status}: Failed to approve/publish review reply`);
     }
+    return data;
   },
   regenerateReviewReply: async (draftId: number): Promise<any> => {
     const res = await authFetch(`${BASE_URL}/reviews/reply/${draftId}/regenerate`, { method: 'POST' });
@@ -523,6 +476,7 @@ export const api = {
     public_category?: string;
     rating?: number | null;
     review_count?: number;
+    website_url?: string;
     notes?: string;
   }): Promise<Competitor> => {
     const res = await authFetch(`${BASE_URL}/seo/competitors`, {
@@ -858,6 +812,298 @@ export const api = {
   getSocialAnalytics: async (): Promise<any> => {
     const res = await authFetch(`${BASE_URL}/analytics/social`);
     if (!res.ok) return null;
+    return res.json();
+  },
+  // ==================== Central Automation & Workflows ====================
+  getWorkflowTriggersMeta: async (): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/workflows/meta/triggers`);
+    if (!res.ok) return { triggers: [], actions: [] };
+    return res.json();
+  },
+  listWorkflows: async (): Promise<any[]> => {
+    const res = await authFetch(`${BASE_URL}/workflows`);
+    if (!res.ok) return [];
+    return res.json();
+  },
+  createWorkflow: async (payload: any): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/workflows`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || 'Failed to create workflow');
+    return data;
+  },
+  runWorkflow: async (workflowId: number, payload: any = {}): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/workflows/${workflowId}/run`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ payload })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || 'Failed to run workflow');
+    return data;
+  },
+  pauseWorkflow: async (workflowId: number): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/workflows/${workflowId}/pause`, { method: 'POST' });
+    return res.json();
+  },
+  resumeWorkflow: async (workflowId: number): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/workflows/${workflowId}/resume`, { method: 'POST' });
+    return res.json();
+  },
+  deleteWorkflow: async (workflowId: number): Promise<void> => {
+    await authFetch(`${BASE_URL}/workflows/${workflowId}`, { method: 'DELETE' });
+  },
+  listExecutions: async (limit: number = 50): Promise<any[]> => {
+    const res = await authFetch(`${BASE_URL}/workflows/executions?limit=${limit}`);
+    if (!res.ok) return [];
+    return res.json();
+  },
+  getExecutionDetail: async (executionId: number): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/workflows/executions/${executionId}`);
+    return res.json();
+  },
+  retryExecution: async (executionId: number): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/workflows/executions/${executionId}/retry`, { method: 'POST' });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || 'Retry failed');
+    return data;
+  },
+  cancelExecution: async (executionId: number): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/workflows/executions/${executionId}/cancel`, { method: 'POST' });
+    return res.json();
+  },
+  listApprovals: async (status: string = 'PENDING'): Promise<any[]> => {
+    const res = await authFetch(`${BASE_URL}/workflows/approvals?status=${encodeURIComponent(status)}`);
+    if (!res.ok) return [];
+    return res.json();
+  },
+  approveWorkflowStep: async (approvalId: number, notes?: string): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/workflows/approvals/${approvalId}/approve`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ notes })
+    });
+    return res.json();
+  },
+  rejectWorkflowStep: async (approvalId: number, notes?: string): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/workflows/approvals/${approvalId}/reject`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ notes })
+    });
+    return res.json();
+  },
+  // ==================== Persistent Reels Video Studio ====================
+  listReels: async (status: string = 'ALL'): Promise<any[]> => {
+    const res = await authFetch(`${BASE_URL}/reels?status=${encodeURIComponent(status)}`);
+    if (!res.ok) return [];
+    return res.json();
+  },
+  syncReelsFromDrive: async (): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/reels/sync-from-drive-queue`, { method: 'POST' });
+    return res.json();
+  },
+  createReel: async (payload: any): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/reels`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || 'Failed to create reel');
+    return data;
+  },
+  updateReel: async (reelId: number, payload: any): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/reels/${reelId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || 'Failed to update reel');
+    return data;
+  },
+  approveReel: async (reelId: number): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/reels/${reelId}/approve`, { method: 'POST' });
+    return res.json();
+  },
+  publishReel: async (reelId: number): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/reels/${reelId}/publish`, { method: 'POST' });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || 'Reel publish failed');
+    return data;
+  },
+  deleteReel: async (reelId: number): Promise<void> => {
+    await authFetch(`${BASE_URL}/reels/${reelId}`, { method: 'DELETE' });
+  },
+  // ==================== Lead Discovery (Google Places) ====================
+  listDiscoveries: async (): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/discovery`);
+    if (!res.ok) return { api_configured: false, results: [] };
+    return res.json();
+  },
+  searchGooglePlaces: async (category: string, location: string): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/discovery/search`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ category, location })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || 'Places search failed');
+    return data;
+  },
+  convertDiscoveryToCrm: async (discoveryId: number): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/discovery/${discoveryId}/convert-to-crm`, { method: 'POST' });
+    return res.json();
+  },
+  // ==================== Enhanced CRM & Enquiries ====================
+  listCrmLeads: async (params?: { segment?: string; status?: string; q?: string }): Promise<any[]> => {
+    const qs = new URLSearchParams();
+    if (params?.segment) qs.set('segment', params.segment);
+    if (params?.status) qs.set('status', params.status);
+    if (params?.q) qs.set('q', params.q);
+    const res = await authFetch(`${BASE_URL}/crm/leads?${qs.toString()}`);
+    if (!res.ok) return [];
+    return res.json();
+  },
+  listLeadInteractions: async (leadId: number): Promise<any[]> => {
+    const res = await authFetch(`${BASE_URL}/crm/leads/${leadId}/interactions`);
+    if (!res.ok) return [];
+    return res.json();
+  },
+  addLeadInteraction: async (leadId: number, summary: string, channel: string = 'CRM'): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/crm/leads/${leadId}/interactions`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ summary, channel, direction: 'OUTBOUND' })
+    });
+    return res.json();
+  },
+  listEnquiries: async (): Promise<any[]> => {
+    const res = await authFetch(`${BASE_URL}/crm/enquiries`);
+    if (!res.ok) return [];
+    return res.json();
+  },
+  createEnquiry: async (payload: any): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/crm/enquiries`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    return res.json();
+  },
+  buildQuotation: async (enquiryId: number): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/crm/enquiries/${enquiryId}/quotation`, { method: 'POST' });
+    return res.json();
+  },
+  // ==================== WhatsApp Cloud API ====================
+  getWhatsAppStatus: async (): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/whatsapp/status`);
+    if (!res.ok) return { connected: false, status: 'NOT_CONNECTED' };
+    return res.json();
+  },
+  connectWhatsApp: async (payload: { phone_number_id: string; access_token: string; waba_id?: string; verify_token?: string }): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/whatsapp/connect`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || 'WhatsApp connection failed');
+    return data;
+  },
+  listWhatsAppTemplates: async (): Promise<any[]> => {
+    const res = await authFetch(`${BASE_URL}/whatsapp/templates`);
+    if (!res.ok) return [];
+    return res.json();
+  },
+  listWhatsAppMessages: async (): Promise<any[]> => {
+    const res = await authFetch(`${BASE_URL}/whatsapp/messages`);
+    if (!res.ok) return [];
+    return res.json();
+  },
+  sendWhatsAppMessage: async (payload: { phone: string; body: string; lead_id?: number; template_name?: string }): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/whatsapp/send`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    return res.json();
+  },
+  // ==================== AI Assistant & Content Factory ====================
+  askBusinessIntelligence: async (question: string): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/ai/ask`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question })
+    });
+    return res.json();
+  },
+  generateContentFactory: async (payload: { channel: string; theme: string; target_sku?: string; language: string; variations?: number }): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/ai/content-factory`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    return res.json();
+  },
+  // ==================== Integrations & SEO ====================
+  getIntegrationsHealth: async (): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/integrations/health`);
+    if (!res.ok) return { integrations: [] };
+    return res.json();
+  },
+  getSearchConsoleData: async (): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/seo/search-console`);
+    if (!res.ok) return { status: 'NOT_CONNECTED', rows: [] };
+    return res.json();
+  },
+  checkCompetitorSite: async (compId: number): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/seo/competitors/${compId}/check`, { method: 'POST' });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.detail || 'Competitor check failed');
+    return data;
+  },
+  getGa4Analytics: async (days: number = 30): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/analytics/ga4?days=${days}`);
+    if (!res.ok) return { status: 'API_ERROR', metrics: null };
+    return res.json();
+  },
+  getReviewTrends: async (): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/reviews/trends`);
+    if (!res.ok) return null;
+    return res.json();
+  },
+  confirmEnquiry: async (enquiryId: number): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/crm/enquiries/${enquiryId}/confirm`, { method: 'POST' });
+    return res.json();
+  },
+  bulkImportLeads: async (items: any[]): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/crm/leads/bulk-import`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(items)
+    });
+    return res.json();
+  },
+  downloadLeadsCsv: async (): Promise<string> => {
+    const res = await authFetch(`${BASE_URL}/crm/leads/export.csv`);
+    if (!res.ok) throw new Error('Failed to export leads CSV');
+    return res.text();
+  },
+  handoverWhatsApp: async (phone: string, assigned_owner: string = 'Depot Sales Lead', notes?: string): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/whatsapp/handover`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone, assigned_owner, notes })
+    });
+    return res.json();
+  },
+  triggerSchedulerTick: async (): Promise<any> => {
+    const res = await authFetch(`${BASE_URL}/workflows/scheduler/tick`, { method: 'POST' });
     return res.json();
   }
 };

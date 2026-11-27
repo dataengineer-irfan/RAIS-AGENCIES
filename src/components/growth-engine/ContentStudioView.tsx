@@ -10,15 +10,18 @@ export const ContentStudioView: React.FC = () => {
   const [skus, setSkus] = useState<CatalogSKU[]>([]);
   const [selectedSku, setSelectedSku] = useState<string>('RAIS-MM-MOZZ');
   const [theme, setTheme] = useState<string>('Cafe Mozzarella Melt');
-  const [languageMode, setLanguageMode] = useState<string>('bilingual');
+  const [channel, setChannel] = useState<string>('gbp');
+  const [languageMode, setLanguageMode] = useState<string>('trilingual');
   const [loading, setLoading] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   
   // Generated content result
   const [generatedResult, setGeneratedResult] = useState<any>(null);
   const [editableHeadline, setEditableHeadline] = useState<string>('');
   const [editableEnglish, setEditableEnglish] = useState<string>('');
   const [editableTelugu, setEditableTelugu] = useState<string>('');
+  const [editableHindi, setEditableHindi] = useState<string>('');
 
   useEffect(() => {
     loadSkus();
@@ -73,72 +76,83 @@ export const ContentStudioView: React.FC = () => {
 
   const handleGenerate = async () => {
     setLoading(true);
+    setErrorMsg(null);
     try {
-      const res = await api.generatePost(theme, selectedSku, languageMode);
-      const content = res?.content || res || {};
-      const report = res?.validation || res?.validation_report || {};
-      const normalized = {
-        status: 'SUCCESS',
-        theme: res?.theme || theme,
-        generation_engine: res?.generation_engine || 'backend',
-        content: {
-          headline: content.headline || '',
-          content_english: content.content_english || '',
-          content_telugu: content.content_telugu || '',
-          call_to_action: content.call_to_action || 'WhatsApp Order: 9347453135'
-        },
-        validation: {
-          passed: typeof report.passed === 'boolean' ? report.passed : Boolean(report.is_valid),
-          target_sku: res?.target_product_sku || report.target_sku || selectedSku,
-          phone_verified: true,
-          price_leak_prevented: true,
-          flags: report.flags || report.errors || report.warnings || []
-        }
-      };
-      setGeneratedResult(normalized);
-      setEditableHeadline(normalized.content.headline);
-      setEditableEnglish(normalized.content.content_english);
-      setEditableTelugu(normalized.content.content_telugu);
-    } catch (err) {
-      console.warn('Backend generatePost failed, using verified local template generation', err);
-      const product = PRODUCTS.find(p => p.sku === selectedSku) || PRODUCTS[0];
-      const prodName = product ? `${product.brand} ${product.name}` : theme;
-      const pack = product ? product.pack : 'Wholesale Pack';
-      
-      const headline = `🔥 ${theme}: Fresh Wholesale Supply at RAIS Agencies Rayachoty`;
-      const english = `Looking for genuine ${prodName} (${pack}) for your cafe, restaurant, or fast food kitchen in Rayachoty or Annamayya District? RAIS Agencies provides direct depot inventory with strict sub-zero cold-chain guarantee. Direct B2B supply, verified stock, immediate dispatch beside Indel Money Bank, Sundupalli Road.`;
-      const telugu = `రాయచోటి మరియు అన్నమయ్య జిల్లాలోని హోటళ్ళు, కేఫ్‌ల కొరకు అసలైన ${prodName} (${pack}) హోల్‌సేల్ సప్లై. ఇండెల్ మనీ బ్యాంక్ పక్కన, సుండుపల్లి రోడ్, రాయచోటి డిపో నుండి నేరుగా ఆర్డర్ చేయండి. వాట్సాప్ ద్వారా సంప్రదించండి.`;
-
-      const fallbackResult = {
-        status: 'SUCCESS',
-        theme: theme,
-        generation_engine: 'offline_fallback',
-        content: {
-          headline,
-          content_english: english,
-          content_telugu: languageMode === 'english' ? '' : telugu,
-          call_to_action: 'WhatsApp Order: 9347453135'
-        },
-        validation: {
-          passed: true,
-          target_sku: product ? product.sku : selectedSku,
-          phone_verified: true,
-          price_leak_prevented: true,
-          flags: []
-        }
-      };
-
-      setGeneratedResult(fallbackResult);
-      setEditableHeadline(headline);
-      setEditableEnglish(english);
-      setEditableTelugu(languageMode === 'english' ? '' : telugu);
+      if (channel === 'gbp' && (languageMode === 'bilingual' || languageMode === 'english' || languageMode === 'telugu')) {
+        const res = await api.generatePost(theme, selectedSku, languageMode);
+        const content = res?.content || res || {};
+        const report = res?.validation || res?.validation_report || {};
+        const flags: string[] = report.flags || report.errors || report.warnings || [];
+        const passed = typeof report.passed === 'boolean' ? report.passed : Boolean(report.is_valid);
+        const normalized = {
+          status: 'SUCCESS',
+          theme: res?.theme || theme,
+          generation_engine: res?.generation_engine || 'template_fallback',
+          ai_status: res?.generation_engine === 'gemini' ? 'SUCCESS' : 'TEMPLATE_FALLBACK',
+          fallback_reason: res?.generation_engine === 'gemini' ? null : 'Gemini unavailable or rejected by deterministic validator',
+          content: {
+            headline: content.headline || '',
+            content_english: content.content_english || '',
+            content_telugu: content.content_telugu || '',
+            content_hindi: '',
+            call_to_action: content.call_to_action || 'WhatsApp Order: 9347453135'
+          },
+          validation: {
+            passed,
+            target_sku: res?.target_product_sku || report.target_sku || selectedSku,
+            flags
+          }
+        };
+        setGeneratedResult(normalized);
+        setEditableHeadline(normalized.content.headline);
+        setEditableEnglish(normalized.content.content_english);
+        setEditableTelugu(normalized.content.content_telugu);
+        setEditableHindi('');
+      } else {
+        const cfRes = await api.generateContentFactory({
+          channel,
+          theme,
+          target_sku: selectedSku || undefined,
+          language: languageMode,
+          variations: 1
+        });
+        const v0 = (cfRes?.variations || [])[0] || {};
+        setGeneratedResult({
+          status: 'SUCCESS',
+          theme,
+          generation_engine: cfRes?.generation_engine || 'template_engine',
+          ai_status: cfRes?.ai_status || 'TEMPLATE_FALLBACK',
+          fallback_reason: cfRes?.fallback_reason || null,
+          content: {
+            headline: v0.headline || '',
+            content_english: v0.english || '',
+            content_telugu: v0.telugu || '',
+            content_hindi: v0.hindi || '',
+            hashtags: v0.hashtags || '',
+            call_to_action: 'WhatsApp Order: 9347453135'
+          },
+          validation: {
+            passed: true,
+            target_sku: selectedSku || 'GENERAL',
+            flags: []
+          }
+        });
+        setEditableHeadline(v0.headline || '');
+        setEditableEnglish(languageMode === 'telugu' || languageMode === 'hindi' ? '' : (v0.english || ''));
+        setEditableTelugu(languageMode === 'english' || languageMode === 'hindi' ? '' : (v0.telugu || ''));
+        setEditableHindi(languageMode === 'hindi' || languageMode === 'trilingual' ? (v0.hindi || '') : '');
+      }
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Backend Content Factory unreachable. Refusing to fabricate local mock AI content.');
     } finally {
       setLoading(false);
     }
   };
 
   const handleCopy = () => {
-    const fullText = `${editableHeadline}\n\n${editableEnglish}\n\n${editableTelugu}\n\nWhatsApp: 9347453135`;
+    const fullText = [editableHeadline, editableEnglish, editableTelugu, editableHindi, 'WhatsApp: 9347453135']
+      .filter(Boolean)
+      .join('\n\n');
     navigator.clipboard.writeText(fullText);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -244,12 +258,29 @@ export const ContentStudioView: React.FC = () => {
           </div>
 
           <div>
+            <label className="text-xs font-medium text-slate-300 block mb-1">Target Platform Channel</label>
+            <select
+              value={channel}
+              onChange={(e) => setChannel(e.target.value)}
+              className="w-full bg-[#070b14] border border-slate-800 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-amber-400"
+            >
+              <option value="gbp">Google Business Profile Post</option>
+              <option value="whatsapp">WhatsApp Sales Draft</option>
+              <option value="meta">Instagram &amp; Facebook Reels Caption</option>
+              <option value="youtube">YouTube Shorts Description</option>
+              <option value="reel_script">Video Script &amp; Reel Hook</option>
+            </select>
+          </div>
+
+          <div>
             <label className="text-xs font-medium text-slate-300 block mb-1">Language Output Mode</label>
             <div className="grid grid-cols-3 gap-2">
               {[
-                { id: 'bilingual', label: 'Bilingual' },
+                { id: 'trilingual', label: 'EN+TE+HI' },
+                { id: 'bilingual', label: 'EN+TE' },
                 { id: 'english', label: 'English' },
-                { id: 'telugu', label: 'Telugu' }
+                { id: 'telugu', label: 'Telugu' },
+                { id: 'hindi', label: 'Hindi' },
               ].map((m) => (
                 <button
                   key={m.id}
@@ -266,6 +297,12 @@ export const ContentStudioView: React.FC = () => {
               ))}
             </div>
           </div>
+
+          {errorMsg && (
+            <div className="p-2.5 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs">
+              {errorMsg}
+            </div>
+          )}
 
           <button
             onClick={handleGenerate}
@@ -317,37 +354,40 @@ export const ContentStudioView: React.FC = () => {
             <div className="space-y-3">
               <div className="p-3 bg-[#070b14] rounded-lg border border-slate-800/80 space-y-2">
                 <div className="flex items-center justify-between text-xs">
+                  <span className="text-slate-400">Engine Provenance:</span>
+                  <span className={`font-mono font-semibold ${generatedResult.generation_engine === 'gemini' ? 'text-cyan-300' : 'text-amber-300'}`}>
+                    {generatedResult.generation_engine} ({generatedResult.ai_status})
+                  </span>
+                </div>
+                {generatedResult.fallback_reason && (
+                  <div className="text-[11px] text-amber-300 bg-amber-500/10 border border-amber-500/20 rounded p-2">
+                    Fallback reason: {generatedResult.fallback_reason}
+                  </div>
+                )}
+                <div className="flex items-center justify-between text-xs">
                   <span className="text-slate-400">SKU Reconciliation:</span>
-                  <span className="flex items-center gap-1 font-semibold text-emerald-400">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                    <span>Verified ({generatedResult.validation.target_sku})</span>
+                  <span className="font-semibold text-slate-200">
+                    {generatedResult.validation.target_sku}
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-400">Public Wholesale Price Leak:</span>
-                  <span className="flex items-center gap-1 font-semibold text-emerald-400">
+                  <span className="text-slate-400">Validation Result:</span>
+                  <span className={`flex items-center gap-1 font-semibold ${generatedResult.validation.passed ? 'text-emerald-400' : 'text-rose-400'}`}>
                     <CheckCircle2 className="w-3.5 h-3.5" />
-                    <span>Zero Leaks (Rate protected)</span>
+                    <span>{generatedResult.validation.passed ? 'Compliant' : 'Policy Flagged'}</span>
                   </span>
                 </div>
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-400">Unverified Claims Filter:</span>
-                  <span className="flex items-center gap-1 font-semibold text-emerald-400">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                    <span>Compliant (No fake claims)</span>
-                  </span>
-                </div>
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-400">Authorized Phone Routing:</span>
-                  <span className="flex items-center gap-1 font-semibold text-emerald-400">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                    <span>9347453135 (Enforced)</span>
-                  </span>
-                </div>
+                {generatedResult.validation.flags?.length > 0 && (
+                  <ul className="text-[11px] text-rose-300 list-disc pl-4 space-y-1">
+                    {generatedResult.validation.flags.map((f: string, idx: number) => (
+                      <li key={idx}>{f}</li>
+                    ))}
+                  </ul>
+                )}
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-slate-400">Character Count:</span>
                   <span className="text-slate-300 font-mono">
-                    {editableEnglish.length + editableTelugu.length} / 1500 limit
+                    {editableEnglish.length + editableTelugu.length + editableHindi.length} chars
                   </span>
                 </div>
               </div>
@@ -439,6 +479,16 @@ export const ContentStudioView: React.FC = () => {
                       onChange={(e) => setEditableTelugu(e.target.value)}
                       className="w-full bg-slate-900 border border-slate-700/60 rounded p-2 text-xs text-amber-200/90 font-medium focus:outline-none resize-none"
                       placeholder="Telugu content..."
+                    />
+                  )}
+
+                  {editableHindi && (
+                    <textarea
+                      rows={3}
+                      value={editableHindi}
+                      onChange={(e) => setEditableHindi(e.target.value)}
+                      className="w-full bg-slate-900 border border-slate-700/60 rounded p-2 text-xs text-cyan-200/90 font-medium focus:outline-none resize-none"
+                      placeholder="Hindi content..."
                     />
                   )}
                 </div>

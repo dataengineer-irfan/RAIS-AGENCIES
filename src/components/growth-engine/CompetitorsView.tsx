@@ -10,6 +10,7 @@ export const CompetitorsView: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [saving, setSaving] = useState<boolean>(false);
+  const [checkingId, setCheckingId] = useState<number | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [formState, setFormState] = useState({
     competitor_name: '',
@@ -17,6 +18,7 @@ export const CompetitorsView: React.FC = () => {
     public_category: 'Wholesale / Food Supplies',
     rating: '',
     review_count: '',
+    website_url: '',
     notes: ''
   });
 
@@ -50,15 +52,29 @@ export const CompetitorsView: React.FC = () => {
         public_category: formState.public_category.trim() || undefined,
         rating: formState.rating ? parseFloat(formState.rating) : null,
         review_count: formState.review_count ? parseInt(formState.review_count, 10) : 0,
+        website_url: formState.website_url.trim() || undefined,
         notes: formState.notes.trim() || undefined
       });
       setIsModalOpen(false);
-      setFormState({ competitor_name: '', location_area: 'Rayachoty', public_category: 'Wholesale / Food Supplies', rating: '', review_count: '', notes: '' });
+      setFormState({ competitor_name: '', location_area: 'Rayachoty', public_category: 'Wholesale / Food Supplies', rating: '', review_count: '', website_url: '', notes: '' });
       await loadCompetitors();
     } catch (err: any) {
       setErrorMsg(err?.message || 'Could not save competitor to backend.');
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleCheckSite = async (id: number) => {
+    setCheckingId(id);
+    setErrorMsg(null);
+    try {
+      await api.checkCompetitorSite(id);
+      await loadCompetitors();
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Public site check failed.');
+    } finally {
+      setCheckingId(null);
     }
   };
 
@@ -177,6 +193,12 @@ export const CompetitorsView: React.FC = () => {
                   </div>
                 </div>
 
+                {comp.public_offers && (
+                  <div className="mt-2 p-2 rounded bg-cyan-500/10 border border-cyan-500/20 text-[11px] text-cyan-200">
+                    <span className="font-bold">Observed Title/Offers:</span> {comp.public_offers}
+                  </div>
+                )}
+
                 {comp.notes && (
                   <div className="mt-3 text-[11px] text-slate-400 leading-relaxed italic">
                     &ldquo;{comp.notes}&rdquo;
@@ -184,20 +206,36 @@ export const CompetitorsView: React.FC = () => {
                 )}
               </div>
 
-              <div className="pt-3 border-t border-slate-800 text-[10px] text-slate-500 flex items-center justify-between gap-2">
+              <div className="pt-3 border-t border-slate-800 text-[10px] text-slate-500 flex flex-wrap items-center justify-between gap-2">
                 <span className="flex items-center gap-1">
                   <Info className="w-3 h-3" />
-                  <span>Manual search benchmark</span>
+                  <span>
+                    {comp.last_checked_at
+                      ? `Checked ${new Date(comp.last_checked_at).toLocaleDateString()} (${comp.confidence || 'MANUAL'})`
+                      : 'Periodic manual check'}
+                  </span>
                 </span>
-                <a
-                  href={`https://www.google.com/maps/search/${encodeURIComponent(`${comp.competitor_name} ${comp.location_area}`)}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-amber-400 hover:underline flex items-center gap-1 font-semibold"
-                >
-                  <span>Verify on Maps</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
+                <div className="flex items-center gap-2">
+                  {comp.website_url && (
+                    <button
+                      type="button"
+                      onClick={() => handleCheckSite(comp.id)}
+                      disabled={checkingId === comp.id}
+                      className="px-2 py-0.5 rounded bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 font-semibold"
+                    >
+                      {checkingId === comp.id ? 'Checking...' : 'Check Public Site'}
+                    </button>
+                  )}
+                  <a
+                    href={`https://www.google.com/maps/search/${encodeURIComponent(`${comp.competitor_name} ${comp.location_area}`)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-amber-400 hover:underline flex items-center gap-1 font-semibold"
+                  >
+                    <span>Verify on Maps</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
               </div>
             </div>
           ))
@@ -272,6 +310,16 @@ export const CompetitorsView: React.FC = () => {
                     className="w-full bg-[#070b14] border border-slate-800 rounded-lg p-2 text-white"
                   />
                 </div>
+              </div>
+              <div>
+                <label className="text-slate-300 font-medium block mb-1">Public Website URL (for HTTP monitoring)</label>
+                <input
+                  type="url"
+                  value={formState.website_url}
+                  onChange={(e) => setFormState({ ...formState, website_url: e.target.value })}
+                  placeholder="https://example.com"
+                  className="w-full bg-[#070b14] border border-slate-800 rounded-lg p-2 text-white"
+                />
               </div>
               <div>
                 <label className="text-slate-300 font-medium block mb-1">Notes</label>

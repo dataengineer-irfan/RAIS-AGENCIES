@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { X, Trash2, Plus, Minus, MessageSquare, CheckCircle, FileText, Send, Sparkles, Star, MapPin } from 'lucide-react';
 import { PRODUCTS, BUSINESS_INFO, ProductItem } from '../data/catalogue';
-import { AutomationStorage } from '../services/automationStorage';
 import { api } from '../services/api';
 
 const REGIONAL_ROUTES = [
@@ -52,29 +51,13 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
 
   const totalUnits = itemsInQuote.reduce((acc, curr) => acc + curr.qty, 0);
 
-  const captureLeadInCRM = (channel: 'whatsapp_direct' | 'website_quote') => {
+  const captureLeadInCRM = (_channel: 'whatsapp_direct' | 'website_quote') => {
     try {
       const leadProducts = itemsInQuote.map(i => `${i.product.name} (${i.product.brand}) x ${i.qty}`).join('; ');
       const buyerPhone = phone.trim();
       const buyerBiz = businessName.trim() || 'Direct Storefront Buyer';
       const buyerLoc = deliveryArea.trim() || 'Rayachoty (516269)';
 
-      AutomationStorage.addLead({
-        source: channel,
-        customerName: customerName.trim() || 'Storefront Buyer',
-        businessName: buyerBiz,
-        businessType: 'Hotel / Restaurant',
-        productInterest: leadProducts || 'Wholesale Catalogue Order',
-        requiredQuantity: `${totalUnits} Units (${itemsInQuote.length} Items)`,
-        deliveryLocation: buyerLoc,
-        phone: buyerPhone || undefined,
-        status: 'Quote Pending',
-        lastMessageSnippet: notes ? `Notes: ${notes} | Items: ${leadProducts}` : `Order: ${leadProducts}`,
-        humanHandoffRequired: true,
-        notes: `Submitted via Storefront Requisition Modal (${channel === 'whatsapp_direct' ? 'WhatsApp' : 'Wholesale Bill Request'}).`
-      });
-
-      // Also persist to backend B2B Leads CRM when buyer provided contact details
       if (buyerPhone) {
         void api.createLead({
           business_name: buyerBiz,

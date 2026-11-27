@@ -47,8 +47,9 @@ export const LocalSEOView: React.FC = () => {
   const [keywords, setKeywords] = useState<KeywordTarget[]>(COMMERCIAL_TARGET_KEYWORDS);
   const [audit, setAudit] = useState<any>(null);
   const [qnaData, setQnaData] = useState<any>(null);
+  const [gscData, setGscData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [activeTab, setActiveTab] = useState<'keywords' | 'audit' | 'guidelines' | 'qna'>('keywords');
+  const [activeTab, setActiveTab] = useState<'keywords' | 'gsc' | 'audit' | 'guidelines' | 'qna'>('keywords');
   const [copiedId, setCopiedId] = useState<number | null>(null);
 
   const qnaList = qnaData?.qna_list && Array.isArray(qnaData.qna_list) && qnaData.qna_list.length > 0
@@ -62,14 +63,16 @@ export const LocalSEOView: React.FC = () => {
   const loadData = async () => {
     try {
       setLoading(true);
-      const [kwData, auditData, qnaRes] = await Promise.all([
+      const [kwData, auditData, qnaRes, gscRes] = await Promise.all([
         api.listKeywords(),
         api.getSeoAudit(),
-        api.getGoogleQnA().catch(() => null)
+        api.getGoogleQnA().catch(() => null),
+        api.getSearchConsoleData().catch(() => null)
       ]);
       setKeywords(kwData);
       setAudit(auditData);
       setQnaData(qnaRes);
+      setGscData(gscRes);
     } catch (err) {
       console.error('Failed to load SEO data', err);
     } finally {
@@ -93,7 +96,7 @@ export const LocalSEOView: React.FC = () => {
 
         <div className="flex items-center gap-3">
           <div className="px-3 py-1.5 bg-[#070b14] border border-slate-800 rounded-lg text-xs flex items-center gap-2">
-            <span className="text-slate-400">SEO Completeness:</span>
+            <span className="text-slate-400">Internal DB Check:</span>
             <span className={`font-bold ${typeof audit?.completeness_score === 'number' ? 'text-emerald-400' : 'text-amber-400'}`}>
               {typeof audit?.completeness_score === 'number' ? `${audit.completeness_score}%` : 'Unavailable'}
             </span>
@@ -113,8 +116,9 @@ export const LocalSEOView: React.FC = () => {
       <div className="flex items-center gap-2 border-b border-slate-800 pb-2 flex-wrap">
         {[
           { id: 'keywords', label: `Target Keywords (${keywords.length})` },
-          { id: 'audit', label: 'GBP Profile Audit' },
-          { id: 'qna', label: `Google Q&A / Ask Maps AI (${qnaList.length})` },
+          { id: 'gsc', label: 'Google Search Console (Live)' },
+          { id: 'audit', label: 'Internal Readiness Check' },
+          { id: 'qna', label: `Website Schema FAQPage (${qnaList.length})` },
           { id: 'guidelines', label: 'Documented Ranking Factors vs Myths' }
         ].map((t) => (
           <button
@@ -302,10 +306,10 @@ export const LocalSEOView: React.FC = () => {
                 Google's Gemini and "Ask Maps" AI index GBP Questions &amp; Answers and website Schema.org <code>FAQPage</code> to answer voice and conversational queries from cafe owners.
               </p>
             </div>
-            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2">
               <span className="text-[11px] font-mono px-2.5 py-1 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 font-semibold flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Schema FAQPage Active</span>
+                <span>Website Schema FAQPage Only (Maps Q&amp;A API Separate)</span>
               </span>
             </div>
           </div>
@@ -348,6 +352,52 @@ export const LocalSEOView: React.FC = () => {
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {/* Tab 5: Google Search Console Live Data */}
+      {activeTab === 'gsc' && (
+        <div className="bg-[#0f172a] border border-slate-800 rounded-xl p-5 space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-sm font-bold text-white">Google Search Console Performance (28d)</h2>
+              <p className="text-xs text-slate-400 mt-0.5">Site: {gscData?.site_url || 'https://dataengineer-irfan.github.io/RAIS-AGENCIES/'}</p>
+            </div>
+            <span className="text-[10px] font-mono px-2.5 py-1 rounded bg-slate-900 border border-slate-700 text-cyan-300">
+              {gscData?.status || 'UNAVAILABLE'}
+            </span>
+          </div>
+
+          {gscData?.rows?.length > 0 ? (
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-[#0a0f1d] text-slate-400 border-b border-slate-800">
+                  <tr>
+                    <th className="py-2.5 px-3">Query</th>
+                    <th className="py-2.5 px-3 text-right">Clicks</th>
+                    <th className="py-2.5 px-3 text-right">Impressions</th>
+                    <th className="py-2.5 px-3 text-right">CTR</th>
+                    <th className="py-2.5 px-3 text-right">Avg Pos</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800/60">
+                  {gscData.rows.map((r: any, idx: number) => (
+                    <tr key={idx}>
+                      <td className="py-2.5 px-3 text-white font-semibold">{(r.keys || []).join(' ')}</td>
+                      <td className="py-2.5 px-3 text-right font-mono text-emerald-300">{r.clicks}</td>
+                      <td className="py-2.5 px-3 text-right font-mono text-cyan-300">{r.impressions}</td>
+                      <td className="py-2.5 px-3 text-right font-mono text-amber-300">{((r.ctr || 0) * 100).toFixed(1)}%</td>
+                      <td className="py-2.5 px-3 text-right font-mono text-slate-300">{Number(r.position || 0).toFixed(1)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="p-4 rounded-lg bg-[#070b14] border border-amber-500/30 text-xs text-amber-300">
+              Search Console query data unavailable ({gscData?.message || 'Grant webmasters.readonly OAuth scope to stream Search Console impressions & clicks'}).
+            </div>
+          )}
         </div>
       )}
     </div>

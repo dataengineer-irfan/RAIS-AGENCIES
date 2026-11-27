@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   LayoutDashboard, Globe, Sparkles, MessageSquare, 
   Search, Users, BarChart3, Image, UserCheck, ShieldAlert, Settings, AlertTriangle,
-  ArrowLeft, LogOut, Film, Send, CheckCircle2, Video
+  ArrowLeft, LogOut, Film, Send, CheckCircle2, Video, Activity, GitBranch, Bot, Compass, Plug, Calendar
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -30,33 +30,50 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const sections = [
     {
-      heading: 'GOOGLE BUSINESS SUITE',
+      heading: 'AUTOMATION & AI CORE',
       items: [
         { id: 'overview', label: 'Overview', icon: LayoutDashboard },
-        { id: 'google', label: 'Google Business Profile', icon: Globe, badge: googleConnected ? 'Connected' : 'Setup' },
-        { id: 'reviews', label: 'Google Reviews Inbox', icon: MessageSquare },
-        { id: 'seo', label: 'Local SEO & Keywords', icon: Search },
-        { id: 'competitors', label: 'Competitor Tracker', icon: Users },
-        { id: 'analytics', label: 'GMB Maps Telemetry', icon: BarChart3 },
-        { id: 'ga4_traffic', label: 'Storefront & Social Metrics', icon: CheckCircle2, badge: 'Live DB' }
+        { id: 'workflows', label: 'Automation Control Centre', icon: Activity, badge: 'Engine' },
+        { id: 'workflow_builder', label: 'Workflow Builder', icon: GitBranch },
+        { id: 'ai_assistant', label: 'AI Assistant', icon: Bot, badge: 'Live DB' },
       ]
     },
     {
-      heading: 'AUTOMATION & OUTREACH',
+      heading: 'LEADS, CRM & WHATSAPP',
       items: [
+        { id: 'discovery', label: 'Lead Discovery', icon: Compass },
+        { id: 'leads', label: 'B2B CRM & Enquiries', icon: UserCheck },
+        { id: 'enquiries', label: 'WhatsApp Sales', icon: MessageSquare },
+      ]
+    },
+    {
+      heading: 'CONTENT & PUBLISHING',
+      items: [
+        { id: 'content', label: 'Content Factory', icon: Sparkles },
+        { id: 'reels', label: 'Reels Studio', icon: Film },
         { id: 'youtube_drive', label: 'Drive -> YT, IG & FB', icon: Video, badge: totalReelsCount > 0 ? `${totalReelsCount} Clips` : 'Auto-Pilot' },
         { id: 'meta_publishing', label: 'Meta Graph Dispatch', icon: Send, badge: metaConnected ? `@${metaUsername}` : 'Setup' },
-        { id: 'content', label: 'Gemini Content Studio', icon: Sparkles },
-        { id: 'enquiries', label: 'WhatsApp B2B Outreach', icon: MessageSquare }
+        { id: 'calendar', label: 'Publishing Calendar', icon: Calendar },
       ]
     },
     {
-      heading: 'B2B DEPOT MANAGEMENT',
+      heading: 'GOOGLE, SEO & ANALYTICS',
       items: [
-        { id: 'leads', label: 'B2B Leads CRM', icon: UserCheck },
+        { id: 'google', label: 'Google Business Profile', icon: Globe, badge: googleConnected ? 'Connected' : 'Setup' },
+        { id: 'reviews', label: 'Reviews Inbox', icon: MessageSquare },
+        { id: 'seo', label: 'Local SEO', icon: Search },
+        { id: 'competitors', label: 'Competitor Intelligence', icon: Users },
+        { id: 'ga4_traffic', label: 'Analytics & Telemetry', icon: BarChart3, badge: 'Live DB' },
+        { id: 'analytics', label: 'GMB Maps Telemetry', icon: CheckCircle2 },
+      ]
+    },
+    {
+      heading: 'ASSETS & GOVERNANCE',
+      items: [
         { id: 'media', label: 'Media Library', icon: Image },
-        { id: 'business_info', label: 'Store Info & 90 SKUs', icon: Settings },
-        { id: 'automation', label: 'System Safety & Logs', icon: ShieldAlert }
+        { id: 'business_info', label: 'Product Catalogue', icon: Settings },
+        { id: 'integrations', label: 'Integrations', icon: Plug },
+        { id: 'automation', label: 'System Safety', icon: ShieldAlert }
       ]
     }
   ];

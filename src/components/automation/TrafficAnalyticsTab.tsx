@@ -10,7 +10,9 @@ import {
 export const TrafficAnalyticsTab: React.FC = () => {
   const [summary, setSummary] = useState<any>(null);
   const [social, setSocial] = useState<any>(null);
-  const [cloudHits, setCloudHits] = useState<{ totalHits: number; catalogueHits: number }>({ totalHits: 0, catalogueHits: 0 });
+  const [ga4Data, setGa4Data] = useState<any>(null);
+  const [gscData, setGscData] = useState<any>(null);
+  const [cloudHits, setCloudHits] = useState<{ totalHits: number; catalogueHits: number } | null>(null);
   const [ga4Input, setGa4Input] = useState<string>('');
   const [ga4Saved, setGa4Saved] = useState<boolean>(false);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
@@ -23,33 +25,32 @@ export const TrafficAnalyticsTab: React.FC = () => {
   const loadData = async () => {
     setIsRefreshing(true);
     try {
-      const [dbSummary, socialRes, hits] = await Promise.all([
+      const [dbSummary, socialRes, ga4Res, gscRes, hits] = await Promise.all([
         api.getAnalyticsSummary(30).catch(() => null),
         api.getSocialAnalytics().catch(() => null),
-        AnalyticsService.fetchCloudHitCount().catch(() => ({ totalHits: 0, catalogueHits: 0 })),
+        api.getGa4Analytics(30).catch(() => null),
+        api.getSearchConsoleData().catch(() => null),
+        AnalyticsService.fetchCloudHitCount().catch(() => null),
       ]);
       setSummary(dbSummary);
       setSocial(socialRes);
+      setGa4Data(ga4Res);
+      setGscData(gscRes);
       setCloudHits(hits);
     } finally {
       setIsRefreshing(false);
     }
   };
 
-  const totalPageViews = summary?.page_views ?? 0;
-  const uniqueVisitors = summary?.unique_visitors ?? 0;
-  const catalogueOpens = summary?.catalogue_opens ?? 0;
-  const whatsappClicks = summary?.whatsapp_clicks ?? 0;
+  const totalPageViews: number | null = summary ? (summary.page_views ?? 0) : null;
+  const uniqueVisitors: number | null = summary ? (summary.unique_visitors ?? 0) : null;
+  const catalogueOpens: number | null = summary ? (summary.catalogue_opens ?? 0) : null;
+  const whatsappClicks: number | null = summary ? (summary.whatsapp_clicks ?? 0) : null;
+  const quoteAdds: number | null = summary ? (summary.quote_adds ?? 0) : null;
   const sourceMap: Record<string, number> = summary?.sources || {};
   const totalEvents = summary?.total_events || 0;
   const topProducts: Array<{ name: string; count: number }> = summary?.top_products || [];
-  const socialSummary = social?.summary || {
-    published_videos: 0,
-    youtube_views: 0,
-    instagram_likes: 0,
-    instagram_comments: 0,
-    facebook_views: 0,
-  };
+  const socialSummary = social?.summary || null;
   const socialVideos: any[] = social?.videos || [];
 
   const handleSaveGA4 = () => {
@@ -95,10 +96,11 @@ export const TrafficAnalyticsTab: React.FC = () => {
             </div>
           </div>
           <div className="text-3xl font-black text-white tracking-tight">
-            {totalPageViews.toLocaleString()}
+            {totalPageViews !== null ? totalPageViews.toLocaleString() : '—'}
           </div>
           <p className="text-[11px] text-cyan-300/80 mt-1 font-semibold">
-            {uniqueVisitors} unique visitor(s){cloudHits.totalHits > 0 ? ` · hits.sh: ${cloudHits.totalHits.toLocaleString()}` : ''}
+            {uniqueVisitors !== null ? `${uniqueVisitors} unique visitor(s)` : 'Backend summary unavailable'}
+            {cloudHits && cloudHits.totalHits > 0 ? ` · hits.sh: ${cloudHits.totalHits.toLocaleString()}` : ''}
           </p>
         </div>
 
@@ -110,10 +112,12 @@ export const TrafficAnalyticsTab: React.FC = () => {
             </div>
           </div>
           <div className="text-3xl font-black text-white tracking-tight">
-            {(catalogueOpens > 0 ? catalogueOpens : cloudHits.catalogueHits).toLocaleString()}
+            {catalogueOpens !== null
+              ? (catalogueOpens > 0 ? catalogueOpens : (cloudHits?.catalogueHits || 0)).toLocaleString()
+              : '—'}
           </div>
           <p className="text-[11px] text-amber-300/80 mt-1 font-semibold">
-            Multi-device Neon event log
+            {summary ? 'Multi-device Neon event log' : 'Backend unavailable'}
           </p>
         </div>
 
@@ -125,10 +129,17 @@ export const TrafficAnalyticsTab: React.FC = () => {
             </div>
           </div>
           <div className="text-3xl font-black text-white tracking-tight">
-            {(socialSummary.youtube_views + socialSummary.facebook_views).toLocaleString()} <span className="text-sm font-normal text-slate-400">views</span>
+            {socialSummary ? (
+              <>
+                {(socialSummary.youtube_views + socialSummary.facebook_views).toLocaleString()}{' '}
+                <span className="text-sm font-normal text-slate-400">views</span>
+              </>
+            ) : '—'}
           </div>
           <p className="text-[11px] text-pink-300/80 mt-1 font-semibold">
-            IG Likes: {socialSummary.instagram_likes} · Comments: {socialSummary.instagram_comments}
+            {socialSummary
+              ? `IG Likes: ${socialSummary.instagram_likes} · Comments: ${socialSummary.instagram_comments}`
+              : 'YouTube & Meta API unavailable'}
           </p>
         </div>
 
@@ -140,11 +151,53 @@ export const TrafficAnalyticsTab: React.FC = () => {
             </div>
           </div>
           <div className="text-3xl font-black text-white tracking-tight">
-            {(whatsappClicks + (summary?.quote_adds || 0)).toLocaleString()}
+            {whatsappClicks !== null && quoteAdds !== null ? (whatsappClicks + quoteAdds).toLocaleString() : '—'}
           </div>
           <p className="text-[11px] text-emerald-300/80 mt-1 font-semibold">
-            {whatsappClicks} WA inquiries · {summary?.quote_adds || 0} quote adds
+            {whatsappClicks !== null ? `${whatsappClicks} WA inquiries · ${quoteAdds || 0} quote adds` : 'Backend unavailable'}
           </p>
+        </div>
+      </div>
+
+      {/* GA4 & SEARCH CONSOLE API STATUS PROVENANCE */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="p-4 rounded-xl bg-[#0f1c3f]/80 border border-slate-800 space-y-2 text-xs">
+          <div className="flex items-center justify-between">
+            <span className="font-bold text-white">Google Analytics 4 (Data API v1beta)</span>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 text-cyan-300 border border-slate-700">
+              {ga4Data?.status || 'UNAVAILABLE'}
+            </span>
+          </div>
+          {ga4Data?.metrics ? (
+            <div className="grid grid-cols-4 gap-2 pt-1 font-mono text-white">
+              <div><div className="text-[10px] text-slate-400">Sessions</div>{ga4Data.metrics.sessions}</div>
+              <div><div className="text-[10px] text-slate-400">Users</div>{ga4Data.metrics.users}</div>
+              <div><div className="text-[10px] text-slate-400">Views</div>{ga4Data.metrics.page_views}</div>
+              <div><div className="text-[10px] text-slate-400">Conv</div>{ga4Data.metrics.conversions}</div>
+            </div>
+          ) : (
+            <p className="text-[11px] text-amber-300">
+              Metrics: — ({ga4Data?.message || 'GA4 Data API awaiting property ID / OAuth authorization.'})
+            </p>
+          )}
+        </div>
+
+        <div className="p-4 rounded-xl bg-[#0f1c3f]/80 border border-slate-800 space-y-2 text-xs">
+          <div className="flex items-center justify-between">
+            <span className="font-bold text-white">Google Search Console (Search Analytics)</span>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 text-cyan-300 border border-slate-700">
+              {gscData?.status || 'UNAVAILABLE'}
+            </span>
+          </div>
+          {gscData?.rows?.length > 0 ? (
+            <div className="text-[11px] text-emerald-300">
+              {gscData.rows.length} search queries indexed from Search Console.
+            </div>
+          ) : (
+            <p className="text-[11px] text-amber-300">
+              Metrics: — ({gscData?.message || 'Search Console webmasters.readonly OAuth scope required.'})
+            </p>
+          )}
         </div>
       </div>
 
@@ -175,7 +228,9 @@ export const TrafficAnalyticsTab: React.FC = () => {
                       <span>{src.icon}</span>
                       <span>{src.label}</span>
                     </span>
-                    <span className="text-white font-mono font-bold">{src.count} events ({pct}%)</span>
+                    <span className="text-white font-mono font-bold">
+                      {summary ? `${src.count} events (${pct}%)` : '—'}
+                    </span>
                   </div>
                   <div className="w-full h-2 rounded-full bg-slate-900 overflow-hidden">
                     <div className={`h-full ${src.color} rounded-full transition-all duration-500`} style={{ width: `${src.count > 0 ? Math.max(pct, 4) : 0}%` }} />

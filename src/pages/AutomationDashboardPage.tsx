@@ -13,9 +13,15 @@ import { B2BLeadsView } from '../components/growth-engine/B2BLeadsView';
 import { AutomationControlView } from '../components/growth-engine/AutomationControlView';
 import { BusinessInfoManagerView } from '../components/growth-engine/BusinessInfoManagerView';
 import { MetaPublishingView } from '../components/growth-engine/MetaPublishingView';
-import { InstagramEnquiriesView } from '../components/growth-engine/InstagramEnquiriesView';
 import { YouTubeStudioView } from '../components/growth-engine/YouTubeStudioView';
 import { TrafficAnalyticsTab } from '../components/automation/TrafficAnalyticsTab';
+import { WorkflowsCenterView } from '../components/growth-engine/WorkflowsCenterView';
+import { WorkflowBuilderView } from '../components/growth-engine/WorkflowBuilderView';
+import { AIAssistantView } from '../components/growth-engine/AIAssistantView';
+import { LeadDiscoveryView } from '../components/growth-engine/LeadDiscoveryView';
+import { WhatsAppSalesView } from '../components/growth-engine/WhatsAppSalesView';
+import { IntegrationsHealthView } from '../components/growth-engine/IntegrationsHealthView';
+import { ReelsStudioView } from '../components/growth-engine/ReelsStudioView';
 import { api } from '../services/api';
 
 interface AutomationDashboardPageProps {
@@ -150,11 +156,18 @@ export const AutomationDashboardPage: React.FC<AutomationDashboardPageProps> = (
         {currentTab === 'analytics' && <AnalyticsView />}
         {currentTab === 'ga4_traffic' && <TrafficAnalyticsTab />}
 
+        {/* Automation & AI Core */}
+        {currentTab === 'workflows' && <WorkflowsCenterView />}
+        {currentTab === 'workflow_builder' && <WorkflowBuilderView />}
+        {currentTab === 'ai_assistant' && <AIAssistantView />}
+        {currentTab === 'discovery' && <LeadDiscoveryView />}
+        {currentTab === 'integrations' && <IntegrationsHealthView />}
+
         {/* Meta & Video Automation Suite */}
-        {currentTab === 'reels' && <YouTubeStudioView />}
+        {currentTab === 'reels' && <ReelsStudioView />}
         {currentTab === 'meta_publishing' && <MetaPublishingView />}
         {currentTab === 'youtube_drive' && <YouTubeStudioView />}
-        {currentTab === 'enquiries' && <InstagramEnquiriesView />}
+        {currentTab === 'enquiries' && <WhatsAppSalesView />}
         {currentTab === 'content' && <ContentStudioView />}
         {currentTab === 'calendar' && <PublishingCalendarView />}
 

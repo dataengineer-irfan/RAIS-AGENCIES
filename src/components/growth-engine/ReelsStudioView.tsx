@@ -1,163 +1,188 @@
-import React, { useState } from 'react';
-import { ReelCalendarItem } from '../../data/automationTypes';
-import { AutomationStorage } from '../../services/automationStorage';
-import { ReelVideoPreview } from '../automation/ReelVideoPreview';
-import { InstagramPublisher } from '../../services/instagramPublisher';
-import { Film, Check } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { CheckCircle2, ExternalLink, Film, FolderSync, RefreshCw, Send, Trash2 } from 'lucide-react';
+import { api } from '../../services/api';
+
+const STATUS_FILTERS = ['ALL', 'DRAFT', 'AWAITING_APPROVAL', 'SCHEDULED', 'PUBLISHING', 'PUBLISHED', 'FAILED'];
 
 export const ReelsStudioView: React.FC = () => {
-  const [reels, setReels] = useState<ReelCalendarItem[]>(() => AutomationStorage.getReels());
-  const [selectedReelId, setSelectedReelId] = useState<string>('reel-slot-01');
-  const [themeFilter, setThemeFilter] = useState<string>('ALL');
-  const [publishNotice, setPublishNotice] = useState<string | null>(null);
+  const [reels, setReels] = useState<any[]>([]);
+  const [statusFilter, setStatusFilter] = useState<string>('ALL');
+  const [loading, setLoading] = useState(true);
+  const [syncing, setSyncing] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
 
-  const selectedReel = reels.find(r => r.id === selectedReelId) || reels[0];
-
-  const handleApproveReel = (reel: ReelCalendarItem) => {
-    const updated: ReelCalendarItem = {
-      ...reel,
-      status: 'approved',
-      approvedBy: 'Wholesale Depot Lead',
-      approvedAt: new Date().toISOString().replace('T', ' ').substring(0, 19)
-    };
-    AutomationStorage.updateReel(updated);
-    setReels(AutomationStorage.getReels());
+  const loadReels = async (st: string = statusFilter) => {
+    setLoading(true);
+    try {
+      const data = await api.listReels(st);
+      setReels(data);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handlePublishReel = async (reel: ReelCalendarItem) => {
-    const res = await InstagramPublisher.publishReel(reel);
-    setPublishNotice(res.errorMessage || res.auditMessage);
-    setTimeout(() => setPublishNotice(null), 5000);
-    setReels(AutomationStorage.getReels());
+  useEffect(() => {
+    loadReels(statusFilter);
+  }, [statusFilter]);
+
+  const handleSyncDrive = async () => {
+    setSyncing(true);
+    setNotice(null);
+    try {
+      const res = await api.syncReelsFromDrive();
+      setNotice(`Synced from Drive Queue: ${res.imported} imported, ${res.updated} updated in Neon Postgres.`);
+      await loadReels(statusFilter);
+    } finally {
+      setSyncing(false);
+    }
   };
 
-  const filteredReels = themeFilter === 'ALL'
-    ? reels
-    : reels.filter(r => r.theme === themeFilter);
+  const handleApprove = async (id: number) => {
+    await api.approveReel(id);
+    setNotice(`Reel #${id} approved.`);
+    await loadReels(statusFilter);
+  };
 
-  const publishedCount = reels.filter(r => r.status === 'published').length;
-  const pendingCount = reels.length - publishedCount;
+  const handlePublish = async (id: number) => {
+    setNotice(null);
+    try {
+      const res = await api.publishReel(id);
+      setNotice(`Reel #${id} processed: status=${res.reel?.status}`);
+      await loadReels(statusFilter);
+    } catch (err: any) {
+      setNotice(`Publish failed: ${err.message}`);
+      await loadReels(statusFilter);
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    await api.deleteReel(id);
+    await loadReels(statusFilter);
+  };
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="p-6 rounded-2xl bg-[#0f1c3f]/90 border border-cyan-500/25 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-[#0f172a] border border-slate-800 rounded-xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+          <h1 className="text-xl font-bold text-white flex items-center gap-2">
             <Film className="w-5 h-5 text-amber-400" />
-            <span>Reels Video Studio ({reels.length} Compiled MP4s)</span>
-          </h2>
+            <span>Reels Video Studio (PostgreSQL Backed)</span>
+          </h1>
           <p className="text-xs text-slate-400 mt-1">
-            9:16 vertical commercial MP4 assets compiled in Telugu &amp; Hindi for @raisfrozenfoods. Download any MP4 below to upload via Meta Business Suite.
+            Persistent Drive-synced video records with real Meta/YouTube publication URLs, aspect ratio metadata, and human approval workflow.
           </p>
         </div>
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="px-3 py-1 rounded-full text-xs font-bold bg-pink-500/15 text-pink-300 border border-pink-500/30 font-mono">
-            {reels.length} Compiled MP4s
-          </span>
-          <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-mono">
-            {publishedCount} Published Live
-          </span>
-          <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30 font-mono">
-            {pendingCount} Pending Dispatch
-          </span>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handleSyncDrive}
+            disabled={syncing}
+            className="px-3.5 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center gap-1.5"
+          >
+            <FolderSync className="w-3.5 h-3.5" />
+            <span>{syncing ? 'Syncing...' : 'Import from Drive Queue'}</span>
+          </button>
+          <button
+            onClick={() => loadReels(statusFilter)}
+            className="p-2 rounded-lg bg-slate-800 text-slate-200 border border-slate-700"
+          >
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-amber-400' : ''}`} />
+          </button>
         </div>
       </div>
 
-      {publishNotice && (
-        <div className="p-3.5 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-200 text-xs font-medium">
-          {publishNotice}
-        </div>
+      {notice && (
+        <div className="p-3 rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-cyan-200 text-xs">{notice}</div>
       )}
 
-      {/* Theme Filter Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-xl bg-[#0f1c3f]/80 border border-cyan-500/20">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mr-1">Theme:</span>
-          {[
-            { id: 'ALL', label: 'All 30 Days' },
-            { id: 'frozen_products', label: 'Frozen Snacks' },
-            { id: 'packaging_supplies', label: 'Packaging' },
-            { id: 'product_education', label: 'Education' },
-            { id: 'storage_guidance', label: '-18°C Storage' },
-            { id: 'wholesale_enquiries', label: 'Wholesale Trade' },
-            { id: 'business_intro', label: 'Depot Intro' }
-          ].map(t => (
-            <button
-              key={t.id}
-              onClick={() => setThemeFilter(t.id)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                themeFilter === t.id
-                  ? 'bg-amber-400 text-slate-950 font-bold shadow'
-                  : 'bg-[#081026] text-slate-300 hover:text-white border border-cyan-500/20'
-              }`}
-            >
-              {t.label}
-            </button>
+      <div className="flex flex-wrap gap-2">
+        {STATUS_FILTERS.map((st) => (
+          <button
+            key={st}
+            onClick={() => setStatusFilter(st)}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold ${
+              statusFilter === st
+                ? 'bg-amber-500 text-slate-950 font-bold'
+                : 'bg-[#0f172a] text-slate-300 border border-slate-800'
+            }`}
+          >
+            {st.replace('_', ' ')}
+          </button>
+        ))}
+      </div>
+
+      {loading ? (
+        <div className="py-10 text-center text-slate-500 text-xs">Loading reels from Neon Postgres...</div>
+      ) : reels.length === 0 ? (
+        <div className="py-12 text-center text-slate-400 text-xs bg-[#0f172a] border border-slate-800 rounded-xl">
+          No reels in this status. Click <strong>Import from Drive Queue</strong> to sync real Google Drive video assets.
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {reels.map((r) => (
+            <div key={r.id} className="bg-[#0f172a] border border-slate-800 rounded-xl p-5 space-y-3">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <h3 className="text-sm font-bold text-white">{r.title}</h3>
+                  <div className="text-[11px] text-slate-400 font-mono mt-0.5">
+                    {r.resolution} · {r.aspect_ratio} · SKU: {r.product_sku || 'General'}
+                  </div>
+                </div>
+                <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold ${
+                  r.status === 'PUBLISHED' ? 'bg-emerald-500/20 text-emerald-300' :
+                  r.status === 'FAILED' ? 'bg-rose-500/20 text-rose-300' :
+                  'bg-amber-500/20 text-amber-300'
+                }`}>
+                  {r.status}
+                </span>
+              </div>
+
+              {r.caption_english && (
+                <p className="text-xs text-slate-300 line-clamp-3 bg-[#070b14] p-2.5 rounded border border-slate-800">
+                  {r.caption_english}
+                </p>
+              )}
+
+              <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-800">
+                {r.status !== 'PUBLISHED' && (
+                  <>
+                    <button
+                      onClick={() => handleApprove(r.id)}
+                      className="px-3 py-1.5 rounded bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 text-xs font-semibold flex items-center gap-1"
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      <span>Approve</span>
+                    </button>
+                    <button
+                      onClick={() => handlePublish(r.id)}
+                      className="px-3 py-1.5 rounded bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold flex items-center gap-1"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                      <span>Publish</span>
+                    </button>
+                  </>
+                )}
+                {r.published_url && (
+                  <a
+                    href={r.published_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-3 py-1.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-semibold flex items-center gap-1"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span>View Published</span>
+                  </a>
+                )}
+                <button
+                  onClick={() => handleDelete(r.id)}
+                  className="ml-auto p-1.5 rounded bg-rose-500/15 text-rose-300 hover:bg-rose-500/25"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
           ))}
         </div>
-
-        <div className="text-xs text-slate-400 font-mono">
-          Showing {filteredReels.length} Reels
-        </div>
-      </div>
-
-      {/* Main Studio: Reel Preview + Day List Selector */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Left Column: 30-Day Calendar Rail */}
-        <div className="lg:col-span-5 max-h-[750px] overflow-y-auto space-y-2.5 pr-2 custom-scrollbar">
-          {filteredReels.map((reel) => {
-            const isSelected = selectedReel ? reel.id === selectedReel.id : false;
-            return (
-              <div
-                key={reel.id}
-                onClick={() => setSelectedReelId(reel.id)}
-                className={`p-4 rounded-xl border cursor-pointer transition-all ${
-                  isSelected
-                    ? 'bg-[#0f1c3f] border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.15)]'
-                    : 'bg-[#0f1c3f]/50 border-cyan-500/15 hover:border-cyan-400/40'
-                }`}
-              >
-                <div className="flex items-center justify-between text-[11px] mb-1.5">
-                  <span className="font-mono font-bold text-amber-300">DAY {reel.dayNumber} · {reel.scheduledDate}</span>
-                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                    reel.status === 'published' ? 'bg-emerald-500/20 text-emerald-400' :
-                    reel.status === 'approved' ? 'bg-cyan-500/20 text-cyan-300' :
-                    'bg-amber-500/20 text-amber-300'
-                  }`}>
-                    {reel.status}
-                  </span>
-                </div>
-
-                <h4 className="text-sm font-bold text-white leading-tight">
-                  {reel.title}
-                </h4>
-
-                <div className="flex items-center gap-2 mt-2 text-xs text-slate-300">
-                  <span className="font-semibold text-cyan-300">{reel.brand}</span>
-                  <span className="text-slate-500">·</span>
-                  <span className="truncate">{reel.productName}</span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Right Column: Active Reel 9:16 Previewer & Script Details */}
-        <div className="lg:col-span-7">
-          {selectedReel ? (
-            <ReelVideoPreview
-              reel={selectedReel}
-              onApprove={handleApproveReel}
-              onSchedule={handlePublishReel}
-            />
-          ) : (
-            <div className="p-8 rounded-2xl bg-[#0f1c3f]/50 border border-cyan-500/20 text-center text-slate-400">
-              Select a Reel from the calendar to preview.
-            </div>
-          )}
-        </div>
-      </div>
+      )}
     </div>
   );
 };
