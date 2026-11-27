@@ -12,7 +12,6 @@ export const TrafficAnalyticsTab: React.FC = () => {
   const [social, setSocial] = useState<any>(null);
   const [ga4Data, setGa4Data] = useState<any>(null);
   const [gscData, setGscData] = useState<any>(null);
-  const [cloudHits, setCloudHits] = useState<{ totalHits: number; catalogueHits: number } | null>(null);
   const [ga4Input, setGa4Input] = useState<string>('');
   const [ga4Saved, setGa4Saved] = useState<boolean>(false);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
@@ -25,18 +24,16 @@ export const TrafficAnalyticsTab: React.FC = () => {
   const loadData = async () => {
     setIsRefreshing(true);
     try {
-      const [dbSummary, socialRes, ga4Res, gscRes, hits] = await Promise.all([
+      const [dbSummary, socialRes, ga4Res, gscRes] = await Promise.all([
         api.getAnalyticsSummary(30).catch(() => null),
         api.getSocialAnalytics().catch(() => null),
         api.getGa4Analytics(30).catch(() => null),
         api.getSearchConsoleData().catch(() => null),
-        AnalyticsService.fetchCloudHitCount().catch(() => null),
       ]);
       setSummary(dbSummary);
       setSocial(socialRes);
       setGa4Data(ga4Res);
       setGscData(gscRes);
-      setCloudHits(hits);
     } finally {
       setIsRefreshing(false);
     }
@@ -100,7 +97,6 @@ export const TrafficAnalyticsTab: React.FC = () => {
           </div>
           <p className="text-[11px] text-cyan-300/80 mt-1 font-semibold">
             {uniqueVisitors !== null ? `${uniqueVisitors} unique visitor(s)` : 'Backend summary unavailable'}
-            {cloudHits && cloudHits.totalHits > 0 ? ` · hits.sh: ${cloudHits.totalHits.toLocaleString()}` : ''}
           </p>
         </div>
 
@@ -112,9 +108,7 @@ export const TrafficAnalyticsTab: React.FC = () => {
             </div>
           </div>
           <div className="text-3xl font-black text-white tracking-tight">
-            {catalogueOpens !== null
-              ? (catalogueOpens > 0 ? catalogueOpens : (cloudHits?.catalogueHits || 0)).toLocaleString()
-              : '—'}
+            {catalogueOpens !== null ? catalogueOpens.toLocaleString() : '—'}
           </div>
           <p className="text-[11px] text-amber-300/80 mt-1 font-semibold">
             {summary ? 'Multi-device Neon event log' : 'Backend unavailable'}
